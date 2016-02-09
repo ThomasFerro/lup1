@@ -1,6 +1,8 @@
 -- Creation des tables
 
-CREATE SCHEMA IF NOT EXISTS lup1;
+DROP SCHEMA IF EXISTS lup1 CASCADE;
+
+CREATE SCHEMA lup1;
 
 ------------------------------------------------------------
 -- Table: role
