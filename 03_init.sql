@@ -106,9 +106,9 @@ INSERT INTO lup1.formation VALUES(2, 'LPRéseau');
 
 -- Insertion de promotions
 
-INSERT INTO lup1.promotion VALUES(1, 2015, 1, 1);
-INSERT INTO lup1.promotion VALUES(2, 2014, 1, 5);
-INSERT INTO lup1.promotion VALUES(3, 2015, 2, 5);
+INSERT INTO lup1.promotion VALUES(2015, 1, 1);
+INSERT INTO lup1.promotion VALUES(2014, 1, 5);
+INSERT INTO lup1.promotion VALUES(2015, 2, 5);
 
 -- Fin Insertion de promotions
 
@@ -117,9 +117,9 @@ INSERT INTO lup1.promotion VALUES(3, 2015, 2, 5);
 
 -- Insertion de listes UE/Promotion
 
-INSERT INTO lup1.ue_promotion VALUES(5, 3.0, 1, 1);
-INSERT INTO lup1.ue_promotion VALUES(6, 3.0, 2, 2);
-INSERT INTO lup1.ue_promotion VALUES(5, 3.0, 3, 3);
+INSERT INTO lup1.ue_promotion VALUES(5, 3.0, 2015, 1, 1);
+INSERT INTO lup1.ue_promotion VALUES(6, 3.0, 2014, 1, 2);
+INSERT INTO lup1.ue_promotion VALUES(5, 3.0, 2015, 2, 3);
 
 -- Fin Insertion de listes UE/Promotion
 
@@ -140,18 +140,10 @@ INSERT INTO lup1.flag VALUES(4, 'Conventions prêtes');
 
 -- Insertion d'interventions
 
--- CREATE TABLE lup1.intervention(
--- 	intervention_id   INTEGER,
--- 	quote             TEXT   ,
--- 	date_intervention DATE   ,
--- 	member_id         INTEGER   ,
--- 	promotion_id      INTEGER   ,
--- 	CONSTRAINT prk_constraint_intervention PRIMARY KEY (intervention_id)
--- )WITHOUT OIDS;
-
-INSERT INTO lup1.intervention VALUES(1, 'Intervention1', '10-12-2015', 6, 1);
-INSERT INTO lup1.intervention VALUES(2, 'Intervention2', '17-12-2015', 6, 1);
-INSERT INTO lup1.intervention VALUES(3, 'Intervention3', '17-12-2015', 5, 3);
+INSERT INTO lup1.intervention VALUES(1, 'Intervention1', '10-12-2015', 6, 2015, 1);
+INSERT INTO lup1.intervention VALUES(2, 'Intervention2', '17-12-2015', 6, 2015, 1);
+INSERT INTO lup1.intervention VALUES(3, 'Intervention3', '17-12-2015', 5, 2015, 2);
+INSERT INTO lup1.intervention VALUES(4, 'Intervention4', '10-12-2015', 6, 2015, 2);
 
 -- Fin Insertion d'interventions
 
@@ -160,9 +152,9 @@ INSERT INTO lup1.intervention VALUES(3, 'Intervention3', '17-12-2015', 5, 3);
 
 -- Insertion d'inscription dans une promo
 
-INSERT INTO lup1.is_register_in VALUES(2, 1);
-INSERT INTO lup1.is_register_in VALUES(3, 1);
-INSERT INTO lup1.is_register_in VALUES(4, 1);
+INSERT INTO lup1.is_register_in VALUES(2, 2015, 1);
+INSERT INTO lup1.is_register_in VALUES(3, 2015, 1);
+INSERT INTO lup1.is_register_in VALUES(4, 2015, 1);
 
 -- Fin Insertion d'inscription dans une promo
 
