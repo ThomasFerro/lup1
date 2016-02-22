@@ -1,7 +1,7 @@
 # Flags pour la recherche de stage
 
 | Flags | Description |
-| - | - |
+| --- | --- |
 | **CONTACT** | Prise de contact avec l'entreprise |
 | **APPOINTMENT** | Prise de RDV avec l'entreprise |
 | **INTERVIEW** | Entretien d'embauche |
