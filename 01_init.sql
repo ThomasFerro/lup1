@@ -1,249 +1,385 @@
--- Creation des tables
-
-DROP SCHEMA IF EXISTS lup1 CASCADE;
-
-CREATE SCHEMA lup1;
-
-------------------------------------------------------------
--- Table: role
-------------------------------------------------------------
-CREATE TABLE lup1.role(
-	rno TEXT ,
-	CONSTRAINT prk_constraint_role PRIMARY KEY (rno)
-)WITHOUT OIDS;
+/*==============================================================*/
+/* Nom de SGBD :  PostgreSQL 8                                  */
+/* Date de création :  22/02/2016 17:28:06                      */
+/*==============================================================*/
 
 
-------------------------------------------------------------
--- Table: credential
-------------------------------------------------------------
-CREATE TABLE lup1.credential(
-	login    TEXT ,
-	password TEXT   ,
-	CONSTRAINT prk_constraint_credential PRIMARY KEY (login)
-)WITHOUT OIDS;
+drop table if exists CREDENTIAL cascade;
 
+drop table if exists DO_EVAL cascade;
 
-------------------------------------------------------------
--- Table: member
-------------------------------------------------------------
-CREATE TABLE lup1.member(
-	member_id  INTEGER ,
-	first_name TEXT   ,
-	last_name  TEXT   ,
-	email      TEXT   ,
-	birthday   DATE   ,
-	rno        TEXT   ,
-	login      TEXT   ,
-	siret      TEXT   ,
-	CONSTRAINT prk_constraint_member PRIMARY KEY (member_id)
-)WITHOUT OIDS;
+drop table if exists EVALUATION cascade;
 
+drop table if exists FLAG cascade;
 
-------------------------------------------------------------
--- Table: evaluation
-------------------------------------------------------------
-CREATE TABLE lup1.evaluation(
-	evaluation_id INTEGER ,
-	name          TEXT   ,
-	coeff         FLOAT   ,
-	teacher_id     INTEGER   ,
-	subject_id    INTEGER   ,
-	date_eval     DATE,
-	CONSTRAINT prk_constraint_evaluation PRIMARY KEY (evaluation_id)
-)WITHOUT OIDS;
+drop table if exists FORMATION cascade;
 
+drop table if exists INTERNSHIP cascade;
 
-------------------------------------------------------------
--- Table: subject
-------------------------------------------------------------
-CREATE TABLE lup1.subject(
-	subject_id INTEGER ,
-	name       TEXT   ,
-	coeff      FLOAT   ,
-	ue_id      INTEGER   ,
-	CONSTRAINT prk_constraint_subject PRIMARY KEY (subject_id)
-)WITHOUT OIDS;
+drop table if exists INTERNSHIP_LOG cascade;
 
+drop table if exists INTERVENTION cascade;
 
-------------------------------------------------------------
--- Table: ue
-------------------------------------------------------------
-CREATE TABLE lup1.ue(
-	ue_id INTEGER ,
-	name  TEXT   ,
-	CONSTRAINT prk_constraint_ue PRIMARY KEY (ue_id)
-)WITHOUT OIDS;
+drop table if exists IS_ABSENT_DURING cascade;
 
+drop table if exists IS_ALLOWED_TO cascade;
 
-------------------------------------------------------------
--- Table: formation
-------------------------------------------------------------
-CREATE TABLE lup1.formation(
-	formation_id INTEGER ,
-	name         TEXT   ,
-	CONSTRAINT prk_cstudentaint_formation PRIMARY KEY (formation_id)
-)WITHOUT OIDS;
+drop table if exists IS_REGISTER_IN cascade;
 
+drop table if exists MANAGE_INTERNSHIP cascade;
 
-------------------------------------------------------------
--- Table: organization
-------------------------------------------------------------
-CREATE TABLE lup1.organization(
-	siret   TEXT   ,
-	name    TEXT   ,
-	address TEXT   ,
-	phone   TEXT   ,
-	email   TEXT   ,
-	CONSTRAINT prk_constraint_organization PRIMARY KEY (siret)
-)WITHOUT OIDS;
+drop table if exists MEMBER cascade;
 
+drop table if exists ORGANIZATION cascade;
 
-------------------------------------------------------------
--- Table: internship
-------------------------------------------------------------
-CREATE TABLE lup1.internship(
-	internship_id INTEGER,
-	title         TEXT   ,
-	missions      TEXT   ,
-	description   TEXT   ,
-	duration      INTEGER   ,
-	year          INTEGER   ,
-	siret         TEXT   ,
-	CONSTRAINT prk_constraint_internship PRIMARY KEY (internship_id)
-)WITHOUT OIDS;
+drop table if exists PROMOTION cascade;
 
+drop table if exists REGISTER_TO_INTERNSHIP cascade;
 
-------------------------------------------------------------
--- Table: flag
-------------------------------------------------------------
-CREATE TABLE lup1.flag(
-	flag_id INTEGER,
-	label   TEXT   ,
-	CONSTRAINT prk_constraint_flag PRIMARY KEY (flag_id)
-)WITHOUT OIDS;
+drop table if exists ROLE cascade;
 
+drop table if exists SUBJECT cascade;
 
-------------------------------------------------------------
--- Table: intervention
-------------------------------------------------------------
-CREATE TABLE lup1.intervention(
-	intervention_id   INTEGER,
-	quote             TEXT   ,
-	date_intervention DATE   ,
-	intervenant_id         INTEGER   ,
-	-- promotion_id INTEGER,
-	year         INTEGER   ,
-	formation_id INTEGER   ,
-	CONSTRAINT prk_constraint_intervention PRIMARY KEY (intervention_id)
-)WITHOUT OIDS;
+drop table if exists UE cascade;
 
+drop table if exists UE_PROMOTION cascade;
 
-------------------------------------------------------------
--- Table: internship_log
-------------------------------------------------------------
-CREATE TABLE lup1.internship_log(
-	internship_log_id INTEGER   ,
-	date_log          TIMESTAMP   ,
-	quote             TEXT   ,
-	flag_id           INTEGER   ,
-	member_id         INTEGER   ,
-	internship_id     INTEGER   ,
-	CONSTRAINT prk_constraint_internship_log PRIMARY KEY (internship_log_id)
-)WITHOUT OIDS;
+/*==============================================================*/
+/* Table : CREDENTIAL                                           */
+/*==============================================================*/
+create table CREDENTIAL (
+   LOGIN                TEXT                 not null,
+   PASSWORD             TEXT                 null,
+   constraint PK_CREDENTIAL primary key (LOGIN)
+);
 
+/*==============================================================*/
+/* Table : DO_EVAL                                              */
+/*==============================================================*/
+create table DO_EVAL (
+   MARK                 FLOAT                   DEFAULT 0,
+   STUDENT_ID            INTEGER                 not null,
+   EVALUATION_ID        INTEGER                 not null,
+   constraint PK_DO_EVAL primary key (STUDENT_ID,EVALUATION_ID)
+);
 
-------------------------------------------------------------
--- Table: promotion
-------------------------------------------------------------
-CREATE TABLE lup1.promotion(
-	-- promotion_id INTEGER   ,
-	year         INTEGER   ,
-	formation_id INTEGER   ,
-	responsable_id    INTEGER   ,
-	CONSTRAINT prk_constraint_promotion PRIMARY KEY (year, formation_id)
-)WITHOUT OIDS;
+/*==============================================================*/
+/* Table : EVALUATION                                           */
+/*==============================================================*/
+create table EVALUATION (
+   EVALUATION_ID        INTEGER                 not null,
+   NAME                 TEXT                    not null,
+   COEFF                FLOAT                   DEFAULT 1,
+   TEACHER_ID           INTEGER                 not null,
+   SUBJECT_ID           INTEGER                 not null,
+ 	 DATE_EVAL            DATE,
+   constraint PK_EVALUATION primary key (EVALUATION_ID)
+);
 
+/*==============================================================*/
+/* Table : FLAG                                                 */
+/*==============================================================*/
+create table FLAG (
+   FLAG_ID              INTEGER                 not null,
+   LABEL                TEXT                 null,
+   constraint PK_FLAG primary key (FLAG_ID)
+);
 
-------------------------------------------------------------
--- Table: ue_promotion
-------------------------------------------------------------
-CREATE TABLE lup1.ue_promotion(
-	semester     INTEGER  NOT NULL ,
-	coeff        FLOAT  NOT NULL ,
-	-- promotion_id INTEGER  NOT NULL ,
-	year         INTEGER   ,
-	formation_id INTEGER   ,
-	ue_id        INTEGER  NOT NULL ,
-	-- CONSTRAINT prk_constraint_ue_promotion PRIMARY KEY (promotion_id,ue_id)
-	CONSTRAINT prk_constraint_ue_promotion PRIMARY KEY (year, formation_id ,ue_id)
-)WITHOUT OIDS;
+/*==============================================================*/
+/* Table : FORMATION                                            */
+/*==============================================================*/
+create table FORMATION (
+   FORMATION_ID         INTEGER                 not null,
+   NAME                 TEXT                 null,
+   constraint PK_FORMATION primary key (FORMATION_ID)
+);
 
+/*==============================================================*/
+/* Table : INTERNSHIP                                           */
+/*==============================================================*/
+create table INTERNSHIP (
+   INTERNSHIP_ID        INTEGER                 not null,
+   TITLE                TEXT                 null,
+   MISSIONS             TEXT                 null,
+   DESCRIPTION          TEXT                 null,
+   DURATION             FLOAT                 null,
+   YEAR                 INTEGER                 null,
+   SIRET                TEXT                 not null,
+   constraint PK_INTERNSHIP primary key (INTERNSHIP_ID)
+);
 
-------------------------------------------------------------
--- Table: is_register_in
-------------------------------------------------------------
-CREATE TABLE lup1.is_register_in(
-	student_id    INTEGER,
-	-- promotion_id INTEGER,
-	year         INTEGER   ,
-	formation_id INTEGER   ,
-	CONSTRAINT prk_constraint_is_register_in PRIMARY KEY (student_id,year,formation_id)
-)WITHOUT OIDS;
+/*==============================================================*/
+/* Table : INTERNSHIP_LOG                                       */
+/*==============================================================*/
+create table INTERNSHIP_LOG (
+   INTERNSHIP_LOG_ID    INTEGER                 not null,
+   DATE_LOG             TIMESTAMP               DEFAULT CURRENT_TIMESTAMP,
+   QUOTE                TEXT                    null,
+   FLAG_ID              INTEGER                 not null,
+   MEMBER_ID            INTEGER                 not null,
+   INTERNSHIP_ID        INTEGER                 not null,
+   constraint PK_INTERNSHIP_LOG primary key (INTERNSHIP_LOG_ID)
+);
 
+/*==============================================================*/
+/* Table : INTERVENTION                                         */
+/*==============================================================*/
+create table INTERVENTION (
+   INTERVENTION_ID      INTEGER                 not null,
+   QUOTE                TEXT                 null,
+   DATE_INTERVENTION    DATE                 null,
+   INTERVENANT_ID       INTEGER                 not null,
+   PROMOTION_ID         INTEGER                 not null,
+   constraint PK_INTERVENTION primary key (INTERVENTION_ID)
+);
 
-------------------------------------------------------------
--- Table: do_eval
-------------------------------------------------------------
-CREATE TABLE lup1.do_eval(
-	mark          FLOAT   ,
-	student_id     INTEGER,
-	evaluation_id INTEGER,
-	CONSTRAINT prk_constraint_do_eval PRIMARY KEY (student_id,evaluation_id)
-)WITHOUT OIDS;
+/*==============================================================*/
+/* Table : IS_ABSENT_DURING                                     */
+/*==============================================================*/
+create table IS_ABSENT_DURING (
+   STUDENT_ID           INTEGER                 not null,
+   SUBJECT_ID           INTEGER                 not null,
+   DATE_ABSENT          DATE                 null
+);
 
+/*==============================================================*/
+/* Table : IS_ALLOWED_TO                                        */
+/*==============================================================*/
+create table IS_ALLOWED_TO (
+   ROLE                 TEXT                 not null,
+   MEMBER_ID            INTEGER                 not null
+);
 
-------------------------------------------------------------
--- Table: manage_internship
-------------------------------------------------------------
-CREATE TABLE lup1.manage_internship(
-	member_id     INTEGER,
-	internship_id INTEGER,
-	CONSTRAINT prk_constraint_manage_internship PRIMARY KEY (member_id,internship_id)
-)WITHOUT OIDS;
+/*==============================================================*/
+/* Table : IS_REGISTER_IN                                       */
+/*==============================================================*/
+create table IS_REGISTER_IN (
+   STUDENT_ID            INTEGER                 not null,
+   PROMOTION_ID         INTEGER                 not null
+);
 
+/*==============================================================*/
+/* Table : MANAGE_INTERNSHIP                                    */
+/*==============================================================*/
+create table MANAGE_INTERNSHIP (
+   MEMBER_ID            INTEGER                 not null,
+   INTERNSHIP_ID        INTEGER                 not null
+);
 
-------------------------------------------------------------
--- Table: register_to_internship
-------------------------------------------------------------
-CREATE TABLE lup1.register_to_internship(
-	internship_id INTEGER,
-	member_id     INTEGER,
-	CONSTRAINT prk_constraint_register_to_internship PRIMARY KEY (internship_id,member_id)
-)WITHOUT OIDS;
+/*==============================================================*/
+/* Table : MEMBER                                               */
+/*==============================================================*/
+create table MEMBER (
+   MEMBER_ID            INTEGER                 not null,
+   FIRST_NAME           TEXT                 null,
+   LAST_NAME            TEXT                 null,
+   EMAIL                TEXT                 null,
+   BIRTHDAY             DATE                 null,
+   LOGIN                TEXT                 null,
+   SIRET                TEXT                 null,
+   constraint PK_MEMBER primary key (MEMBER_ID)
+);
 
+/*==============================================================*/
+/* Table : ORGANIZATION                                         */
+/*==============================================================*/
+create table ORGANIZATION (
+   SIRET                TEXT              not null,
+   NAME                 TEXT                 null,
+   ADDRESS              TEXT                 null,
+   PHONE                TEXT                 null,
+   EMAIL                TEXT                 null,
+   constraint PK_ORGANIZATION primary key (SIRET)
+);
 
+/*==============================================================*/
+/* Table : PROMOTION                                            */
+/*==============================================================*/
+create table PROMOTION (
+   PROMOTION_ID         INTEGER                 not null,
+   YEAR                 INTEGER                 null,
+   FORMATION_ID         INTEGER                 not null,
+   RESPONSABLE_ID       INTEGER                 not null,
+   constraint PK_PROMOTION primary key (PROMOTION_ID)
+);
 
-ALTER TABLE lup1.member ADD CONSTRAINT FK_member_rno FOREIGN KEY (rno) REFERENCES lup1.role(rno);
-ALTER TABLE lup1.member ADD CONSTRAINT FK_member_login FOREIGN KEY (login) REFERENCES lup1.credential(login);
-ALTER TABLE lup1.member ADD CONSTRAINT FK_member_siret FOREIGN KEY (siret) REFERENCES lup1.organization(siret);
-ALTER TABLE lup1.evaluation ADD CONSTRAINT FK_evaluation_teacher_id FOREIGN KEY (teacher_id) REFERENCES lup1.member(member_id);
-ALTER TABLE lup1.evaluation ADD CONSTRAINT FK_evaluation_subject_id FOREIGN KEY (subject_id) REFERENCES lup1.subject(subject_id);
-ALTER TABLE lup1.subject ADD CONSTRAINT FK_subject_ue_id FOREIGN KEY (ue_id) REFERENCES lup1.ue(ue_id);
-ALTER TABLE lup1.internship ADD CONSTRAINT FK_internship_siret FOREIGN KEY (siret) REFERENCES lup1.organization(siret);
-ALTER TABLE lup1.intervention ADD CONSTRAINT FK_intervention_intervenant_id FOREIGN KEY (intervenant_id) REFERENCES lup1.member(member_id);
-ALTER TABLE lup1.intervention ADD CONSTRAINT FK_intervention_year_formation_id FOREIGN KEY (year, formation_id) REFERENCES lup1.promotion(year, formation_id);
-ALTER TABLE lup1.internship_log ADD CONSTRAINT FK_internship_log_flag_id FOREIGN KEY (flag_id) REFERENCES lup1.flag(flag_id);
-ALTER TABLE lup1.internship_log ADD CONSTRAINT FK_internship_log_member_id FOREIGN KEY (member_id) REFERENCES lup1.member(member_id);
-ALTER TABLE lup1.internship_log ADD CONSTRAINT FK_internship_log_internship_id FOREIGN KEY (internship_id) REFERENCES lup1.internship(internship_id);
-ALTER TABLE lup1.promotion ADD CONSTRAINT FK_promotion_formation_id FOREIGN KEY (formation_id) REFERENCES lup1.formation(formation_id);
-ALTER TABLE lup1.promotion ADD CONSTRAINT FK_promotion_responsable_id FOREIGN KEY (responsable_id) REFERENCES lup1.member(member_id);
-ALTER TABLE lup1.ue_promotion ADD CONSTRAINT FK_ue_promotion_year_formation_id FOREIGN KEY (year, formation_id) REFERENCES lup1.promotion(year, formation_id);
-ALTER TABLE lup1.ue_promotion ADD CONSTRAINT FK_ue_promotion_ue_id FOREIGN KEY (ue_id) REFERENCES lup1.ue(ue_id);
-ALTER TABLE lup1.is_register_in ADD CONSTRAINT FK_is_register_in_student_id FOREIGN KEY (student_id) REFERENCES lup1.member(member_id);
-ALTER TABLE lup1.is_register_in ADD CONSTRAINT FK_is_register_in_year_formation_id FOREIGN KEY (year, formation_id) REFERENCES lup1.promotion(year, formation_id);
-ALTER TABLE lup1.do_eval ADD CONSTRAINT FK_do_eval_student_id FOREIGN KEY (student_id) REFERENCES lup1.member(member_id);
-ALTER TABLE lup1.do_eval ADD CONSTRAINT FK_do_eval_evaluation_id FOREIGN KEY (evaluation_id) REFERENCES lup1.evaluation(evaluation_id);
-ALTER TABLE lup1.manage_internship ADD CONSTRAINT FK_manage_internship_member_id FOREIGN KEY (member_id) REFERENCES lup1.member(member_id);
-ALTER TABLE lup1.manage_internship ADD CONSTRAINT FK_manage_internship_internship_id FOREIGN KEY (internship_id) REFERENCES lup1.internship(internship_id);
-ALTER TABLE lup1.register_to_internship ADD CONSTRAINT FK_register_to_internship_internship_id FOREIGN KEY (internship_id) REFERENCES lup1.internship(internship_id);
-ALTER TABLE lup1.register_to_internship ADD CONSTRAINT FK_register_to_internship_member_id FOREIGN KEY (member_id) REFERENCES lup1.member(member_id);
+/*==============================================================*/
+/* Table : REGISTER_TO_INTERNSHIP                               */
+/*==============================================================*/
+create table REGISTER_TO_INTERNSHIP (
+   INTERNSHIP_ID        INTEGER                 not null,
+   STUDENT_ID            INTEGER                 not null
+);
+
+/*==============================================================*/
+/* Table : ROLE                                                 */
+/*==============================================================*/
+create table ROLE (
+   ROLE                  TEXT                 not null,
+   constraint PK_ROLE primary key (ROLE)
+);
+
+/*==============================================================*/
+/* Table : SUBJECT                                              */
+/*==============================================================*/
+create table SUBJECT (
+   SUBJECT_ID           INTEGER                 not null,
+   NAME                 TEXT                    null,
+   COEFF                FLOAT                   null,
+   UE_ID                INTEGER                 not null,
+   constraint PK_SUBJECT primary key (SUBJECT_ID)
+);
+
+/*==============================================================*/
+/* Table : UE                                                   */
+/*==============================================================*/
+create table UE (
+   UE_ID                INTEGER                 not null,
+   NAME                 TEXT                 null,
+   constraint PK_UE primary key (UE_ID)
+);
+
+/*==============================================================*/
+/* Table : UE_PROMOTION                                         */
+/*==============================================================*/
+create table UE_PROMOTION (
+   PROMOTION_ID         INTEGER                 not null,
+   SEMESTRE             INTEGER                 null,
+   COEFF                FLOAT              null,
+   UE_ID                INTEGER                 not null
+);
+
+alter table DO_EVAL
+   add constraint FK_DO_EVAL_DO_EVAL_EVALUATI foreign key (EVALUATION_ID)
+      references EVALUATION (EVALUATION_ID)
+      on delete restrict on update cascade;
+
+alter table DO_EVAL
+   add constraint FK_DO_EVAL_DO_EVAL2_MEMBER foreign key (STUDENT_ID)
+      references MEMBER (MEMBER_ID)
+      on delete restrict on update cascade;
+
+alter table EVALUATION
+   add constraint FK_EVALUATI_CREATE_EV_MEMBER foreign key (TEACHER_ID)
+      references MEMBER (MEMBER_ID)
+      on delete restrict on update cascade;
+
+alter table EVALUATION
+   add constraint FK_EVALUATI_EVAL_SUBJ_SUBJECT foreign key (SUBJECT_ID)
+      references SUBJECT (SUBJECT_ID)
+      on delete restrict on update cascade;
+
+alter table INTERNSHIP
+   add constraint FK_INTERNSH_CREATE_ORGANIZA foreign key (SIRET)
+      references ORGANIZATION (SIRET)
+      on delete restrict on update cascade;
+
+alter table INTERNSHIP_LOG
+   add constraint FK_INTERNSH_IS_FLAGGE_FLAG foreign key (FLAG_ID)
+      references FLAG (FLAG_ID)
+      on delete restrict on update cascade;
+
+alter table INTERNSHIP_LOG
+   add constraint FK_INTERNSH_REFERENCE_INTERNSH foreign key (INTERNSHIP_ID)
+      references INTERNSHIP (INTERNSHIP_ID)
+      on delete restrict on update cascade;
+
+alter table INTERNSHIP_LOG
+   add constraint FK_INTERNSH_UPDATE_IN_MEMBER foreign key (MEMBER_ID)
+      references MEMBER (MEMBER_ID)
+      on delete restrict on update cascade;
+
+alter table INTERVENTION
+   add constraint FK_INTERVEN_INTERVENA_MEMBER foreign key (INTERVENANT_ID)
+      references MEMBER (MEMBER_ID)
+      on delete restrict on update cascade;
+
+alter table INTERVENTION
+   add constraint FK_INTERVEN_INTERVENE_PROMOTIO foreign key (PROMOTION_ID)
+      references PROMOTION (PROMOTION_ID)
+      on delete restrict on update cascade;
+
+alter table IS_ABSENT_DURING
+   add constraint FK_IS_ABSEN_IS_ABSENT_SUBJECT foreign key (SUBJECT_ID)
+      references SUBJECT (SUBJECT_ID)
+      on delete restrict on update cascade;
+
+alter table IS_ABSENT_DURING
+   add constraint FK_IS_ABSEN_IS_ABSENT_MEMBER foreign key (STUDENT_ID)
+      references MEMBER (MEMBER_ID)
+      on delete restrict on update cascade;
+
+alter table IS_ALLOWED_TO
+   add constraint FK_IS_ALLOW_IS_ALLOWE_MEMBER foreign key (MEMBER_ID)
+      references MEMBER (MEMBER_ID)
+      on delete restrict on update cascade;
+
+alter table IS_ALLOWED_TO
+   add constraint FK_IS_ALLOW_IS_ALLOWE_ROLE foreign key (ROLE)
+      references ROLE (ROLE)
+      on delete restrict on update cascade;
+
+alter table IS_REGISTER_IN
+   add constraint FK_IS_REGIS_IS_REGIST_PROMOTIO foreign key (PROMOTION_ID)
+      references PROMOTION (PROMOTION_ID)
+      on delete restrict on update cascade;
+
+alter table IS_REGISTER_IN
+   add constraint FK_IS_REGIS_IS_REGIST_MEMBER foreign key (STUDENT_ID)
+      references MEMBER (MEMBER_ID)
+      on delete restrict on update cascade;
+
+alter table MANAGE_INTERNSHIP
+   add constraint FK_MANAGE_I_MANAGE_IN_MEMBER foreign key (MEMBER_ID)
+      references MEMBER (MEMBER_ID)
+      on delete restrict on update cascade;
+
+alter table MANAGE_INTERNSHIP
+   add constraint FK_MANAGE_I_MANAGE_IN_INTERNSH foreign key (INTERNSHIP_ID)
+      references INTERNSHIP (INTERNSHIP_ID)
+      on delete restrict on update cascade;
+
+alter table MEMBER
+   add constraint FK_MEMBER_LOGS_WITH_CREDENTI foreign key (LOGIN)
+      references CREDENTIAL (LOGIN)
+      on delete restrict on update cascade;
+
+alter table MEMBER
+   add constraint FK_MEMBER_WORK_IN_ORGANIZA foreign key (SIRET)
+      references ORGANIZATION (SIRET)
+      on delete restrict on update cascade;
+
+alter table PROMOTION
+   add constraint FK_PROMOTIO_INHERITS_FORMATIO foreign key (FORMATION_ID)
+      references FORMATION (FORMATION_ID)
+      on delete restrict on update cascade;
+
+alter table PROMOTION
+   add constraint FK_PROMOTIO_MANAGE_MEMBER foreign key (RESPONSABLE_ID)
+      references MEMBER (MEMBER_ID)
+      on delete restrict on update cascade;
+
+alter table REGISTER_TO_INTERNSHIP
+   add constraint FK_REGISTER_REGISTER__MEMBER foreign key (STUDENT_ID)
+      references MEMBER (MEMBER_ID)
+      on delete restrict on update cascade;
+
+alter table REGISTER_TO_INTERNSHIP
+   add constraint FK_REGISTER_REGISTER__INTERNSH foreign key (INTERNSHIP_ID)
+      references INTERNSHIP (INTERNSHIP_ID)
+      on delete restrict on update cascade;
+
+alter table SUBJECT
+   add constraint FK_SUBJECT_BELONG_TO_UE foreign key (UE_ID)
+      references UE (UE_ID)
+      on delete restrict on update cascade;
+
+alter table UE_PROMOTION
+   add constraint FK_UE_PROMO_UE_PROMOT_UE foreign key (UE_ID)
+      references UE (UE_ID)
+      on delete restrict on update cascade;
+
+alter table UE_PROMOTION
+   add constraint FK_UE_PROMO_UE_PROMOT_PROMOTIO foreign key (PROMOTION_ID)
+      references PROMOTION (PROMOTION_ID)
+      on delete restrict on update cascade;

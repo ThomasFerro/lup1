@@ -1,8 +1,3 @@
-DROP VIEW IF EXISTS mark_by_student;
-DROP VIEW IF EXISTS intervenions_by_intervenant_by_promotion;
-DROP VIEW IF EXISTS done_internship;
-
-
 -- Creation des vues
 
 -- Fin Création des vues
@@ -28,10 +23,10 @@ CREATE VIEW mark_by_student AS
          s.coeff AS coeff_subject,
          uep.coeff AS coeff_ue
   FROM
-         subject AS s,
-         evaluation AS e,
-         do_eval AS de,
-         ue_promotion AS uep
+         lup1.subject AS s,
+         lup1.evaluation AS e,
+         lup1.do_eval AS de,
+         lup1.ue_promotion AS uep
   WHERE
          uep.ue_id = s.ue_id
     AND
@@ -68,14 +63,15 @@ CREATE VIEW mark_by_student AS
 CREATE VIEW intervenions_by_intervenant_by_promotion AS
   SELECT
           intervention_id,
-          promotion_id,
+          year,
+          formation_id,
           date_intervention,
           quote
   FROM
-          member
+          lup1.member
 
   INNER JOIN
-          intervention ON member_id = intervenant_id;
+          lup1.intervention ON member_id = intervenant_id;
 
 
 -- Fin Intervenants --
@@ -94,11 +90,11 @@ CREATE VIEW done_internship AS
           o.phone,
           o.email
   FROM
-          internship AS i,
-          internship_log AS log,
-          organization AS o,
-          member AS m,
-          is_register_in AS reg
+          lup1.internship AS i,
+          lup1.internship_log AS log,
+          lup1.organization AS o,
+          lup1.member AS m,
+          lup1.is_register_in AS reg
   WHERE
           i.siret = o.siret
     AND
