@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr" data-ng-app="lup1">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tests Angular.js</title>
+
+    <link href="css/design.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <!-- Navbar -->
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href>Lup1</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#/notes">Notes</a></li>
+              <li><a href="#/interventions">Interventions</a></li>
+              <li class="dropdown">
+                <a href class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Stages <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#/stages">Offres de stage</a></li>
+                  <li><a href="#/stages/">Mon suivi</a></li>
+                </ul>
+              </li>
+              <li><a href>Déconnexion</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- Fin navbar -->
+    </header>
+
+
+    <!-- Contenu courant -->
+    <div class="main-wrapper container-fluid special">
+      <div data-ng-view></div>
+    </div>
+    <!-- Fin contenu courant -->
+
+    <!-- Footer -->
+    <!-- <footer>
+      <div class="container">
+        <p>
+          Lup1 - Licence Pro DA2I 2015/2016 - IUT A - Lille 1
+        </p>
+      </div>
+    </footer> -->
+    <!-- Fin footer -->
+
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/angular-route.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="javascript/app.js"></script>
+    <script type="text/javascript" src="javascript/routes.js"></script>
+    <script type="text/javascript" src="javascript/controllers/lup1Controller.js"></script>
+    <script type="text/javascript" src="javascript/controllers/stages/stagesController.js"></script>
+    <script type="text/javascript" src="javascript/controllers/stages/offresController.js"></script>
+    <script type="text/javascript" src="javascript/directives/stagesDirectives.js"></script>
+  </body>
+</html>

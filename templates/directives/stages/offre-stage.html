@@ -1,0 +1,24 @@
+<h3>{{offre.title}}</h3>
+<section>
+  <ul class="nav nav-tabs nav-justified">
+    <li data-ng-class="{active:offreCtrl.isSelected(1)}"> <a href data-ng-click="offreCtrl.setSelected(1)">Informations</a></li>
+    <li data-ng-class="{active:offreCtrl.isSelected(2)}"> <a href data-ng-click="offreCtrl.setSelected(2)">Entreprise</a></li>
+  </ul>
+
+  <div class="panel informations_stage" data-ng-show="offreCtrl.isSelected(1)">
+    <h4>Informations</h4><br>
+    <h5>Mission</h5>
+    <p>{{offre.mission}}</p><br>
+    <h6>Description</h6>
+    <p>{{offre.description}}</p><br>
+    <p>Année : {{offre.year}}, pour une durée de {{offre.duration}} (mois ? Jours ? secondes ?)</p>
+  </div>
+
+  <div class="panel" data-ng-show="offreCtrl.isSelected(2)">
+    <h4>Entreprise</h4>
+    <p>{{offre.siret}}</p>
+    <p>A rajouter une fois le JSON complet</p>
+
+  </div>
+</section>
+<button type="button" class="btn btn-default center" name="Postuler à {{offre.title}}">Postuler !</button>
