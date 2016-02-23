@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="lup1">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/menu.css" type="text/css">
+<link rel="stylesheet" href="lib/bootstrap-3.3.6/css/bootstrap.css" >
+</head>
+<body>
+    <div class="row">
+      <div class="col-lg-1 col-xs-3 col-menu">
+        <div class="menu-wrapper" ng-controller="MenuController as menuCtrl">
+          <div class="list-group" ng-repeat="item in menuCtrl.menuItems">
+            <menu-item></menu-item>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-11 col-xs-9">
+        <div class="row">
+          <div class="header-site">
+            Promotion DA2I - 2016
+          </div>
+        </div>
+        <div class="row main-wrapper">
+          <div ng-view></div>
+        </div>
+      </div>
+    </div>
+  <script src="lib/jquery-1.12.0.min.js"></script>
+  <script src="lib/angular.min.js"></script>
+  <script src="lib/angular-route.min.js"></script>
+  <script src="javascript/app.js"></script>
+  <script src="javascript/routes.js"></script>
+  <script src="javascript/controllers/menu/menu-controller.js"></script>
+  <script src="javascript/directives/menu/menu-item-directive.js"></script>
+  <script>
+    $(document).ready(function(){
+      var height = $(window).height();
+      $('.menu-wrapper').css('height', height);
+    });
+  </script>
+</body>
+</html>

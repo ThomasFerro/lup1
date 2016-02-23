@@ -1,0 +1,48 @@
+body{
+  overflow: hidden;
+}
+
+.menu-wrapper .list-group button{
+  width:100%;
+  height: 100%;
+  margin:20% auto 0 auto;
+  border-radius: 15%;
+  padding: 15%;
+}
+
+button.home{
+  background: #FF8C00;
+  border-color:black;
+}
+
+button:hover{
+  background-color:#C0C0C0 !important;
+  border:1px solid black;
+}
+
+button.home:hover{
+  background-color:#FF8C00 !important;
+}
+
+
+button.active{
+  background-color: #008080 !important;
+  border-color:#008080 !important;
+}
+
+.menu-wrapper{
+  background-color: #1e2124;
+  padding: 15%;
+}
+
+.header-site{
+  background-color:#2e3136;
+  color: #FF8C00;
+  text-align:center;
+  font-weight: bold;
+  font-size:1.5em;
+}
+
+.col-menu{
+  padding-right: 0 !important;
+}
