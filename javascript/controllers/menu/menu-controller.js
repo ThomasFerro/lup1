@@ -1,7 +1,7 @@
 (function(){
   angular.module('lup1')
   .controller('MenuController', function(){
-    this.selectedMenuItem = 0;
+    this.selectedMenuItem = 1;
     this.menuItems = menuItems;
 
     this.selectMenuItem = function(setItemIndex) {

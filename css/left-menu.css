@@ -10,22 +10,21 @@ body{
   padding: 15%;
 }
 
-button.home{
+.menu-wrapper .list-group a.home{
   background: #FF8C00;
   border-color:black;
 }
 
-button:hover{
+.menu-wrapper .list-group a:hover{
   background-color:#C0C0C0 !important;
   border:1px solid black;
 }
 
-button.home:hover{
+.menu-wrapper .list-group a.home:hover{
   background-color:#FF8C00 !important;
 }
 
-
-button.active{
+.menu-wrapper .list-group a.active{
   background-color: #008080 !important;
   border-color:#008080 !important;
 }
