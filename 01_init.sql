@@ -180,7 +180,7 @@ create table MEMBER (
    PHONE                TEXT                 null,
    SIRET                TEXT                 null,
    PICTURE              TEXT                 null,
-   ADRESS               TEXT                 null,
+   ADDRESS               TEXT                 null,
    constraint PK_MEMBER primary key (MEMBER_ID)
 );
 
