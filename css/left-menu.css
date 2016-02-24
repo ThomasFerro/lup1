@@ -29,6 +29,11 @@ body{
   border-color:#008080 !important;
 }
 
+.menu-wrapper .list-group a{
+  padding: 20%!important;
+}
+
+
 .menu-wrapper{
   background-color: #1e2124;
   padding: 15%;

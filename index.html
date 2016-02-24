@@ -5,6 +5,7 @@
   <title></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="css/top-menu.css" type="text/css">
+<link rel="stylesheet" href="css/panel-filter.css" type="text/css">
 <link rel="stylesheet" href="css/left-menu.css" type="text/css">
 <link rel="stylesheet" href="lib/bootstrap-3.3.6/css/bootstrap.css" >
 </head>
@@ -30,6 +31,7 @@
           </div>
         </div>
       </div>
+    
       <div class="col-lg-11 col-xs-9">
         <div class="row main-wrapper">
           <div ng-view></div>
@@ -47,6 +49,7 @@
     $(document).ready(function(){
       var height = $(window).height();
       $('.menu-wrapper').css('height', height);
+      $('.panel-filter-wrapper').css('height', height);
     });
   </script>
 </body>
