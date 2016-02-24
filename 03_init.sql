@@ -3,8 +3,7 @@
 -- Insertion de rôles
 
 INSERT INTO role VALUES('etudiant');
-INSERT INTO role VALUES('intervenant');
-INSERT INTO role VALUES('responsable_promo');
+-- INSERT INTO role VALUES('responsable_promo');
 INSERT INTO role VALUES('responsable_formation');
 INSERT INTO role VALUES('responsable_stage');
 INSERT INTO role VALUES('responsable_cours');
@@ -40,12 +39,12 @@ INSERT INTO organization VALUES('SIRET-OPQUAST', 'Opquast', 'adresse Opquast', '
 
 -- Insertion de membres
 
-INSERT INTO member VALUES(1, 'Michael', 'Hauspie', 'hauspiem@univ-lille1.fr', '12/05/1985', 'hauspiem', null);
-INSERT INTO member VALUES(2, 'Thomas', 'Ferro', 'thomas.ferro@univ-lille1.fr', '19/10/1995', 'ferrot', null);
-INSERT INTO member VALUES(3, 'Édouard', 'Cattez', 'edouard.cattez@univ-lille1.fr', '12/10/1994', 'catteze', null);
-INSERT INTO member VALUES(4, 'Rémy', 'Fevre', 'remy.fevre@univ-lille1.fr', '05/03/1995', 'fevrer', null);
-INSERT INTO member VALUES(5, 'Phillipe', 'Mathieu', 'phillipe.mathieu@univ-lille1.fr', '12/11/1967', 'mathieup', null);
-INSERT INTO member VALUES(6, 'Fanny', 'Oui', 'fanny.oui@smile.fr', '12/03/1989', 'fannySmile', 'SIRET-SMILE');
+INSERT INTO member VALUES(1, 'Michael', 'Hauspie', 'responsable_formation', 'hauspiem@univ-lille1.fr', '12/05/1985', 'hauspiem', null);
+INSERT INTO member VALUES(2, 'Thomas', 'Ferro', 'etudiant', 'thomas.ferro@univ-lille1.fr', '19/10/1995', 'ferrot', null);
+INSERT INTO member VALUES(3, 'Édouard', 'Cattez', 'etudiant', 'edouard.cattez@univ-lille1.fr', '12/10/1994', 'catteze', null);
+INSERT INTO member VALUES(4, 'Rémy', 'Fevre', 'etudiant', 'remy.fevre@univ-lille1.fr', '05/03/1995', 'fevrer', null);
+INSERT INTO member VALUES(5, 'Phillipe', 'Mathieu', 'responsable_cours', 'phillipe.mathieu@univ-lille1.fr', '12/11/1967', 'mathieup', null);
+INSERT INTO member VALUES(6, 'Fanny', 'Oui', 'responsable_cours', 'fanny.oui@smile.fr', '12/03/1989', 'fannySmile', 'SIRET-SMILE');
 
 -- Fin Insertion de membres
 
@@ -53,13 +52,12 @@ INSERT INTO member VALUES(6, 'Fanny', 'Oui', 'fanny.oui@smile.fr', '12/03/1989',
 
 -- Insertion de l'allocation des rôles
 
-INSERT INTO is_allowed_to VALUES('responsable_formation', 1);
-INSERT INTO is_allowed_to VALUES('responsable_cours', 1);
-INSERT INTO is_allowed_to VALUES('etudiant', 2);
-INSERT INTO is_allowed_to VALUES('etudiant', 3);
-INSERT INTO is_allowed_to VALUES('etudiant', 4);
-INSERT INTO is_allowed_to VALUES('responsable_cours', 5);
-INSERT INTO is_allowed_to VALUES('intervenant', 6);
+-- INSERT INTO is_allowed_to VALUES('responsable_formation', 1);
+-- INSERT INTO is_allowed_to VALUES('etudiant', 2);
+-- INSERT INTO is_allowed_to VALUES('etudiant', 3);
+-- INSERT INTO is_allowed_to VALUES('etudiant', 4);
+-- INSERT INTO is_allowed_to VALUES('responsable_cours', 5);
+-- INSERT INTO is_allowed_to VALUES('responsable_cours', 6);
 
 
 -- Fin Insertion l'allocation des rôles
@@ -143,10 +141,15 @@ INSERT INTO ue_promotion VALUES(3, 5, 3.0,  3);
 
 -- Insertion de flags
 
-INSERT INTO flag VALUES(1, 'Inscription à l offre');
-INSERT INTO flag VALUES(2, 'Entretien à venir');
-INSERT INTO flag VALUES(3, 'Conventions à remplir');
-INSERT INTO flag VALUES(4, 'Conventions prêtes');
+INSERT INTO flag VALUES(1, 'CONTACT');
+INSERT INTO flag VALUES(2, 'APPOINTMENT');
+INSERT INTO flag VALUES(3, 'INTERVIEW');
+INSERT INTO flag VALUES(4, 'CALLBACK');
+INSERT INTO flag VALUES(5, 'MAKING');
+INSERT INTO flag VALUES(6, 'CHECKING');
+INSERT INTO flag VALUES(7, 'VALIDATING');
+INSERT INTO flag VALUES(8, 'SIGNING');
+INSERT INTO flag VALUES(9, 'DONE');
 
 -- Fin Insertion de flags
 
@@ -212,8 +215,8 @@ INSERT INTO manage_internship VALUES(1, 3);
 
 
 -- Insertion d'inscription à une offre de stage
-
 -- Devenu un log type "Inscrit à cette offre"
+
 -- INSERT INTO register_to_internship VALUES(1, 2);
 -- INSERT INTO register_to_internship VALUES(2, 2);
 -- INSERT INTO register_to_internship VALUES(3, 3);

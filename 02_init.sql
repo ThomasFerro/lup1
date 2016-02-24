@@ -65,7 +65,7 @@ CREATE VIEW mark_by_student AS
 
 -- 6. Liste des interventions par intervenant par promotion
 
-CREATE VIEW intervenions_by_intervenant_by_promotion AS
+CREATE VIEW interventions_by_intervenant_by_promotion AS
   SELECT
           intervention_id,
           promotion_id,

@@ -145,10 +145,10 @@ create table IS_ABSENT_DURING (
 /*==============================================================*/
 /* Table : IS_ALLOWED_TO                                        */
 /*==============================================================*/
-create table IS_ALLOWED_TO (
-   ROLE                 TEXT                 not null,
-   MEMBER_ID            INTEGER                 not null
-);
+-- create table IS_ALLOWED_TO (
+--    ROLE                 TEXT                 not null,
+--    MEMBER_ID            INTEGER                 not null
+-- );
 
 /*==============================================================*/
 /* Table : IS_REGISTER_IN                                       */
@@ -173,6 +173,7 @@ create table MEMBER (
    MEMBER_ID            INTEGER                 not null,
    FIRST_NAME           TEXT                 null,
    LAST_NAME            TEXT                 null,
+   ROLE                 TEXT                 not null,
    EMAIL                TEXT                 null,
    BIRTHDAY             DATE                 null,
    LOGIN                TEXT                 null,
@@ -206,10 +207,12 @@ create table PROMOTION (
 /*==============================================================*/
 /* Table : REGISTER_TO_INTERNSHIP                               */
 /*==============================================================*/
-create table REGISTER_TO_INTERNSHIP (
-   INTERNSHIP_ID        INTEGER                 not null,
-   STUDENT_ID            INTEGER                 not null
-);
+-- Devenu un log type "Inscrit à cette offre"
+
+-- create table REGISTER_TO_INTERNSHIP (
+--    INTERNSHIP_ID        INTEGER                 not null,
+--    STUDENT_ID            INTEGER                 not null
+-- );
 
 /*==============================================================*/
 /* Table : ROLE                                                 */
@@ -309,15 +312,15 @@ alter table IS_ABSENT_DURING
       references MEMBER (MEMBER_ID)
       on delete restrict on update cascade;
 
-alter table IS_ALLOWED_TO
-   add constraint FK_IS_ALLOW_IS_ALLOWE_MEMBER foreign key (MEMBER_ID)
-      references MEMBER (MEMBER_ID)
-      on delete restrict on update cascade;
-
-alter table IS_ALLOWED_TO
-   add constraint FK_IS_ALLOW_IS_ALLOWE_ROLE foreign key (ROLE)
-      references ROLE (ROLE)
-      on delete restrict on update cascade;
+-- alter table IS_ALLOWED_TO
+--    add constraint FK_IS_ALLOW_IS_ALLOWE_MEMBER foreign key (MEMBER_ID)
+--       references MEMBER (MEMBER_ID)
+--       on delete restrict on update cascade;
+--
+-- alter table IS_ALLOWED_TO
+--    add constraint FK_IS_ALLOW_IS_ALLOWE_ROLE foreign key (ROLE)
+--       references ROLE (ROLE)
+--       on delete restrict on update cascade;
 
 alter table IS_REGISTER_IN
    add constraint FK_IS_REGIS_IS_REGIST_PROMOTIO foreign key (PROMOTION_ID)
@@ -349,6 +352,11 @@ alter table MEMBER
       references ORGANIZATION (SIRET)
       on delete restrict on update cascade;
 
+alter table MEMBER
+   add constraint FK_MEMBER_ROLE foreign key (ROLE)
+      references ROLE (ROLE)
+      on delete restrict on update cascade;
+
 alter table PROMOTION
    add constraint FK_PROMOTIO_INHERITS_FORMATIO foreign key (FORMATION_ID)
       references FORMATION (FORMATION_ID)
@@ -359,15 +367,15 @@ alter table PROMOTION
       references MEMBER (MEMBER_ID)
       on delete restrict on update cascade;
 
-alter table REGISTER_TO_INTERNSHIP
-   add constraint FK_REGISTER_REGISTER__MEMBER foreign key (STUDENT_ID)
-      references MEMBER (MEMBER_ID)
-      on delete restrict on update cascade;
+-- alter table REGISTER_TO_INTERNSHIP
+--    add constraint FK_REGISTER_REGISTER__MEMBER foreign key (STUDENT_ID)
+--       references MEMBER (MEMBER_ID)
+--       on delete restrict on update cascade;
 
-alter table REGISTER_TO_INTERNSHIP
-   add constraint FK_REGISTER_REGISTER__INTERNSH foreign key (INTERNSHIP_ID)
-      references INTERNSHIP (INTERNSHIP_ID)
-      on delete restrict on update cascade;
+-- alter table REGISTER_TO_INTERNSHIP
+--    add constraint FK_REGISTER_REGISTER__INTERNSH foreign key (INTERNSHIP_ID)
+--       references INTERNSHIP (INTERNSHIP_ID)
+--       on delete restrict on update cascade;
 
 alter table SUBJECT
    add constraint FK_SUBJECT_BELONG_TO_UE foreign key (UE_ID)
