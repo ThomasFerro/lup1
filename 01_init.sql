@@ -177,7 +177,10 @@ create table MEMBER (
    EMAIL                TEXT                 null,
    BIRTHDAY             DATE                 null,
    LOGIN                TEXT                 null,
+   PHONE                TEXT                 null,
    SIRET                TEXT                 null,
+   PICTURE              TEXT                 null,
+   ADRESS               TEXT                 null,
    constraint PK_MEMBER primary key (MEMBER_ID)
 );
 

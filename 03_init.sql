@@ -95,7 +95,7 @@ INSERT INTO subject VALUES(8, 'TE', 1.0, 4);
 -- Insertion d'évaluations
 
 INSERT INTO evaluation VALUES(1, 'DS1', 3.0, 1, 9);
-INSERT INTO evaluation VALUES(2, 'DS2', 2.0, 1, '9');
+INSERT INTO evaluation VALUES(2, 'DS2', 2.0, 1, 9);
 INSERT INTO evaluation VALUES(3, 'DS1', 2.0, 5, 2);
 INSERT INTO evaluation VALUES(4, 'CV', 1.0, 6, 8);
 INSERT INTO evaluation VALUES(5, 'Projet final', 5.0, 1, 5);
