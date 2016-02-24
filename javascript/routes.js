@@ -14,8 +14,11 @@
     .when('/parametres', {
       templateUrl: 'templates/pages/parametres/index.html'
     })
-    .when('/', {
+    .when('/home', {
       templateUrl: 'templates/pages/home/index.html'
+    })
+    .when('/', {
+      redirectTo: '/home'
     })
     .otherwise({
       redirectTo: '/'

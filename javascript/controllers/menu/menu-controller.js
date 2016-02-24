@@ -28,7 +28,7 @@
     {
       index:0,
       name:"home",
-      url:".",
+      url:"home",
       img_active:"img/menu/home.png",
       img_passive:"img/menu/home-black.png"
     },
