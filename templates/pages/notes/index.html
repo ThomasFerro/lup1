@@ -1,51 +1,56 @@
-<div class="col-lg-3 col-xs-12 panel-filter">
-  <div class="panel-filter-wrapper">
-    <div class="filter-header">
-      <h3>Gestions des matières</h3>
-      <div class="list-group">
-        <a href="#" class="list-group-item">Ajouter une matière</a>
-      </div>
-    </div>
-    <div class="filter-body">
-      <fieldset>
-        <legend>Filtres:</legend>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon label-filter">Nom :</div>
-            <input type="text" name="name" id="name-matiere" class="form-control" placeholder="Nom de la matiere" autofocus>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon label-filter">UE :</div>
-            <input type="text" name="ue" id="ue-matiere"class="form-control" placeholder="UE de la matiere" >
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon label-filter">Coeff :</div>
-            <input type="text"  name="coeff" id="coeff-matiere" class="form-control" placeholder="Coeff de la matiere" >
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon label-filter">Responsable :</div>
-            <input type="text" name="responsable" id="responsable-matiere" class="form-control" placeholder="Responsable de la matiere">
-          </div>
-        </div>
-      </fieldset>
-    </div>
-  </div>
+<div class="col-lg-3 hidden-xs panel-filter" ng-controller="PanelFilterController as panelFilterCtrl">
+  {{panelFilterCtrl.selectFilter(0)}}
+  <panel-filter></panel-filter>
 </div>
 <div class="col-lg-9 col-xs-9">
   <h3>Notes</h3>
-  <p>
-    Contenu Lorem Ipsum Oui oui oui
-  </p>
+			<table id="mytable" class="table table-bordred table-striped table-hover table-list-search">
+				<thead>
+					<tr>
+            <th>Nom</th>
+  					<th class="hidden-xs">Responsable</th>
+  					<th class="hidden-xs">UE</th>
+            <th>Semestre</th>
+  					<th class="hidden-xs">Coeff</th>
+            <th class="hidden-xs">Moyenne</th>
+  					<th>Voir</th>
+  					<th>Supprimer</th>
+				  </tr>
+        </thead>
+				<tbody>
+						<tr>
+              <td>Reseau</td>
+              <td class="hidden-xs">Peter</td>
+              <td class="hidden-xs">Informatique</td>
+              <td>1</td>
+              <td class="hidden-xs">9</td>
+              <td class="hidden-xs">2</td>
+              <td><button class="btn btn-success btn-sm editButton center-block"><span class="glyphicon glyphicon-log-in"></span></button></td>
+              <td><button class="btn btn-danger btn-sm deleteButton center-block"><span class="glyphicon glyphicon-trash"></span></button></td>
+            </tr>
+            <tr>
+              <td>Bdd</td>
+              <td class="hidden-xs">Mathieu Philippe</td>
+              <td class="hidden-xs">Informatique</td>
+              <td>1</td>
+              <td class="hidden-xs">2</td>
+              <td class="hidden-xs">14</td>
+              <td><button class="btn btn-success btn-sm editButton center-block"><span class="glyphicon glyphicon-log-in"></span></button></td>
+              <td><button class="btn btn-danger btn-sm deleteButton center-block"><span class="glyphicon glyphicon-trash"></span></button></td>
+
+            </tr>
+            <tr>
+              <td>Anglais</td>
+              <td class="hidden-xs">Sylvestre Vanuxem</td>
+              <td class="hidden-xs">Générale</td>
+              <td>1</td>
+
+              <td class="hidden-xs">1</td>
+              <td class="hidden-xs">10</td>
+              <td><button class="btn btn-success btn-sm editButton center-block"><span class="glyphicon glyphicon-log-in"></span></button></td>
+              <td><button class="btn btn-danger btn-sm deleteButton center-block"><span class="glyphicon glyphicon-trash"></span></button></td>
+
+            </tr>
+          	</tbody>
+			</table>
 </div>
-<script>
-  $(document).ready(function(){
-    var height = $(window).height();
-    $('.panel-filter-wrapper').css('height', height);
-  });
-</script>
