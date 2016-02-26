@@ -24,6 +24,7 @@ import java.nio.file.Paths;
 import java.util.Properties;
 
 import org.skife.jdbi.v2.DBI;
+import org.skife.jdbi.v2.Handle;
 
 import com.google.common.io.Resources;
 
@@ -52,6 +53,14 @@ public class DaoProvider {
 			daoProvider = new DaoProvider();
 		}
 		return daoProvider;
+	}
+	
+	public static synchronized DBI getDBI() {
+		return getInstance().dbi;
+	}
+	
+	public static synchronized Handle openHandle() {
+		return getDBI().open();
 	}
 	
 	public static synchronized <T> T getDao(Class<T> daoObject) {

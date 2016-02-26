@@ -23,6 +23,8 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
+import org.skife.jdbi.v2.Handle;
+
 public class AbstractDao<ID extends Serializable, T> implements Dao<ID, T> {
 	
 	protected String keyName;
@@ -35,7 +37,9 @@ public class AbstractDao<ID extends Serializable, T> implements Dao<ID, T> {
 	
 	@Override
 	public void clear() {
-		throw new UnsupportedOperationException();
+		Handle h = DaoProvider.openHandle();
+		System.out.println(h.update("DELETE FROM " + this.table));
+		h.close();
 	}
 
 	@Override

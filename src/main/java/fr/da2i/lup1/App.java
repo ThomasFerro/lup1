@@ -38,5 +38,4 @@ public class App extends ResourceConfig {
 //		register(GZIPWriterInterceptor.class);
 		packages("fr.da2i.lup1.resource");
 	}
-	
 }
