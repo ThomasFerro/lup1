@@ -2,16 +2,11 @@
   padding-left: 0!important;
 }
 
-.panel-filter-wrapper{
-  background-color: #444444;
-  color:white;
-}
-
 .panel-filter-wrapper h3{
   margin:0;
   padding-top: 5px;
   text-align: center;
-  font-size: 20px!important;
+  font-size: 1.2em!important;
 }
 
 .panel-filter-wrapper .filter-header .list-group a{
@@ -21,11 +16,6 @@
 .filter-body{
   margin: 10px;
 }
-
-.filter-body legend{
-  color:white;
-}
-
 
 .label-filter{
   text-align: left!important;

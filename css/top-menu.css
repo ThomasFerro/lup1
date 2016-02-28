@@ -1,17 +1,39 @@
 .top-menu{
   margin-bottom:0!important;
-}
-
-
-.top-menu .container{
-  width: 100%!important;
+  border-radius: 0!important;
 }
 
 .logo{
   margin-left: 0!important;
-  color:#FF8C00!important;
+  padding-left: 2%!important;
 }
 
-.connexion{
-  margin-right: 0!important;
+.log-x{
+  margin-right: 5%!important;
+  text-align: right;
+}
+.log-x a{
+  margin-left: 5%!important;
+}
+
+.responsive-menu{
+  margin-top:0!important;
+  margin-bottom:0!important;
+}
+
+.responsive-menu-wrapper ul li{
+  max-width: 15%;
+}
+
+.responsive-menu-wrapper{
+  margin-top: 2%;
+  margin-left: 1%;
+}
+
+.responsive-menu-wrapper .menu{
+  margin-left: 0!important;
+}
+
+.label-glyphicon{
+  display: inline-block !important;
 }
