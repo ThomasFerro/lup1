@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Member {
 	
-	private String id;
+	private int id;
 	private String firstName;
 	private String lastName;
 	private String role;
@@ -17,7 +17,7 @@ public class Member {
 	private String picture;
 	private String address;
 	
-	public Member(String id, String firstName, String lastName, String role, String email, String birthday, String login, String phone, String siret, String picture, String address) {
+	public Member(int id, String firstName, String lastName, String role, String email, String birthday, String login, String phone, String siret, String picture, String address) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -33,11 +33,11 @@ public class Member {
 		
 	public Member() { }
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

@@ -100,7 +100,12 @@ public class AbstractDao<ID extends Serializable, T> implements Dao<ID, T> {
 
 	@Override
 	public int size() {
-		return select("SELECT 1 FROM " + this.table).size();
+		// A corriger après avoir corrigé select()
+		//return Integer.parseInt((String) select("SELECT COUNT(*) FROM " + this.table).get(0).get("count"));
+		Handle h = DaoProvider.openHandle();
+		int ret = Integer.parseInt(	h.select("SELECT COUNT(*) FROM " + this.table).get(0).get("count").toString());
+		h.close();
+		return ret;
 	}
 
 	@Override
@@ -116,7 +121,8 @@ public class AbstractDao<ID extends Serializable, T> implements Dao<ID, T> {
 		Handle h = DaoProvider.openHandle();
 		List<Map<String, Object>> ret = h.select(query);
 		h.close();
-		return ret;
+		//return ret;
+		return null;
 	}
 
 }

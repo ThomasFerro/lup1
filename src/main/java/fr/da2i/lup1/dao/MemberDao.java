@@ -56,12 +56,6 @@ public class MemberDao extends AbstractDao<Integer, Member>{
 	}
 
 	@Override
-	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public Collection<Member> values() {
 		// TODO Auto-generated method stub
 		return null;
