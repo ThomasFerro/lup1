@@ -10,20 +10,9 @@ import fr.da2i.lup1.util.AbstractDao;
 public class MemberDao extends AbstractDao<Integer, Member>{
 
 	public MemberDao() { 
-		super("member_id", "member");
+		super("member_id", "integer", "member");
 	}
-
-	@Override
-	public boolean containsKey(Object arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean containsValue(Object value) {
-		return false;
-	}
-
+	
 	@Override
 	public Set<java.util.Map.Entry<Integer, Member>> entrySet() {
 		// TODO Auto-generated method stub

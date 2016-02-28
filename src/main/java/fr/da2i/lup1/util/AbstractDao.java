@@ -20,6 +20,7 @@ package fr.da2i.lup1.util;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -28,28 +29,37 @@ import org.skife.jdbi.v2.Handle;
 public class AbstractDao<ID extends Serializable, T> implements Dao<ID, T> {
 	
 	protected String keyName;
+	protected String keyType;
 	protected String table;
 	
-	public AbstractDao(String keyName, String table) {
+	/**
+	 * Constructeur des DAO avec une seule clef primaire
+	 * 
+	 * @param keyName	Le nom de la clef primaire
+	 * @param keyType	Le type de la clef primaire
+	 * @param table		Le nom de la table
+	 */
+	public AbstractDao(String keyName, String keyType, String table) {
 		this.keyName = keyName;
+		this.keyType = keyType;
 		this.table = table;
 	}
 	
 	@Override
 	public void clear() {
 		Handle h = DaoProvider.openHandle();
-		System.out.println(h.update("DELETE FROM " + this.table));
+		h.update("DELETE FROM " + this.table);
 		h.close();
 	}
 
 	@Override
 	public boolean containsKey(Object key) {
-		throw new UnsupportedOperationException();
+		return !select("SELECT * FROM " + this.table + " WHERE " + this.keyName + " = '" + key + "'").isEmpty();
 	}
 
 	@Override
 	public boolean containsValue(Object value) {
-		throw new UnsupportedOperationException();
+		return select("SELECT * FROM " + this.table).contains(value);
 	}
 
 	@Override
@@ -59,17 +69,18 @@ public class AbstractDao<ID extends Serializable, T> implements Dao<ID, T> {
 
 	@Override
 	public T get(Object key) {
-		throw new UnsupportedOperationException();
+		return select("SELECT * FROM " + this.table + " WHERE " + this.keyName + " = '" + key + "'").get(0).get(key);
 	}
 
 	@Override
 	public boolean isEmpty() {
-		throw new UnsupportedOperationException();
+		return select("SELECT 1 FROM " + this.table).isEmpty();
 	}
 
 	@Override
 	public Set<ID> keySet() {
 		throw new UnsupportedOperationException();
+		//return select("SELECT " + this.keyName + " FROM " + this.table);
 	}
 
 	@Override
@@ -89,15 +100,23 @@ public class AbstractDao<ID extends Serializable, T> implements Dao<ID, T> {
 
 	@Override
 	public int size() {
-		throw new UnsupportedOperationException();
+		return select("SELECT 1 FROM " + this.table).size();
 	}
 
 	@Override
 	public Collection<T> values() {
-		throw new UnsupportedOperationException();
+		//return select("SELECT * FROM " + this.table);
+		return null;
 	}
 
 	@Override
 	public void close() throws Exception {}
+	
+	private List<Map<ID, T>> select(String query) {
+		Handle h = DaoProvider.openHandle();
+		List<Map<String, Object>> ret = h.select(query);
+		h.close();
+		return ret;
+	}
 
 }
