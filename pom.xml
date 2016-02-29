@@ -14,7 +14,7 @@
 		<jackson.version>2.6.0</jackson.version>
 		<jersey.version>2.19</jersey.version>
 		<jetty.version>9.3.1.v20150714</jetty.version>
-		<jdbi.version>2.71</jdbi.version>
+		<ormlite.version>4.48</ormlite.version>
 		<psql.version>9.4.1208.jre7</psql.version>
 		<guava.version>19.0</guava.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -119,11 +119,11 @@
 			<artifactId>postgresql</artifactId>
 			<version>${psql.version}</version>
 		</dependency>
-		<!-- JDBI -->
+		<!-- ORM Lite -->
 		<dependency>
-			<groupId>org.jdbi</groupId>
-			<artifactId>jdbi</artifactId>
-			<version>${jdbi.version}</version>
+			<groupId>com.j256.ormlite</groupId>
+			<artifactId>ormlite-jdbc</artifactId>
+			<version>${ormlite.version}</version>
 		</dependency>
 		<!-- Google Guava -->
 		<dependency>

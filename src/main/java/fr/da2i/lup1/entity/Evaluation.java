@@ -2,32 +2,43 @@ package fr.da2i.lup1.entity;
 
 import java.sql.Date;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
-@XmlRootElement
-public class Evaluation {
+import fr.da2i.lup1.util.Identifiable;
+
+@DatabaseTable(tableName = "evaluation")
+public class Evaluation implements Identifiable<Integer> {
 	
+	@DatabaseField(columnName = "evaluation_id", id = true)
 	private int evaluationId;
+	@DatabaseField(columnName = "name")
 	private String name;
+	@DatabaseField(columnName = "name")
 	private double coeff;
+	@DatabaseField(columnName = "teacher_id", foreign = true)
 	private int teacherId;
+	@DatabaseField(columnName = "subject_id", foreign = true)
 	private int subjectId;
+	@DatabaseField(columnName = "date_eval")
 	private Date dateEval;
 	
-	public Evaluation(int e, String n, double c, int t, int s, Date d) {
-		this.evaluationId = e;
-		this.name = n;
-		this.coeff = c;
-		this.teacherId = t;
-		this.subjectId = s;
-		this.dateEval = d;
+	public Evaluation(int evaluationId, String name, double coeff, int teacherId, int subjectId, Date dateEval) {
+		this.evaluationId = evaluationId;
+		this.name = name;
+		this.coeff = coeff;
+		this.teacherId = teacherId;
+		this.subjectId = subjectId;
+		this.dateEval = dateEval;
 	}
+	
+	public Evaluation() {}
 
-	public int getEvaluationId() {
+	public Integer getId() {
 		return evaluationId;
 	}
 
-	public void setEvaluationId(int evaluationId) {
+	public void setId(Integer evaluationId) {
 		this.evaluationId = evaluationId;
 	}
 

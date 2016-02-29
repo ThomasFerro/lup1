@@ -10,11 +10,11 @@ public class Promotion {
 	private int formationId;
 	private int responsableId;
 	
-	public Promotion(int p, int y, int f, int r) {
-		this.promotionId = p;
-		this.year = y;
-		this.formationId = f;
-		this.responsableId = r;
+	public Promotion(int promotionId, int year, int formationId, int responsableId) {
+		this.promotionId = promotionId;
+		this.year = year;
+		this.formationId = formationId;
+		this.responsableId = responsableId;
 	}
 
 	public int getPromotionId() {

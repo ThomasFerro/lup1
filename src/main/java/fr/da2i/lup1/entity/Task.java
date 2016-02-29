@@ -18,25 +18,53 @@
  */
 package fr.da2i.lup1.entity;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
-@XmlRootElement
-public class Task {
+import fr.da2i.lup1.util.Identifiable;
+
+@DatabaseTable(tableName = "task")
+public class Task implements Identifiable<Integer> {
 	
+	public static int NB_INSTANCES;
+	
+	@DatabaseField(columnName = "id", id = true)
+	private Integer id;
+	@DatabaseField(columnName = "description")
 	private String description;
 	
-	public Task(String description) {
+	public Task(Integer id, String description) {
+		this.id = id;
 		this.description = description;
+	}
+	
+	public Task(String description) {
+		this(++NB_INSTANCES, description);
 	}
 	
 	public Task() {}
 
+	@Override
+	public Integer getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
 	public String getDescription() {
 		return description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	@Override
+	public String toString() {
+		return "Task[id=" + id + ", description=" + description + "]";
 	}
 
 }

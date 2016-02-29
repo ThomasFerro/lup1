@@ -18,17 +18,19 @@
  */
 package fr.da2i.lup1.util;
 
-import java.io.Serializable;
-import java.util.Map;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Système de Dao
  * 
- * @param	<ID>
- * 			le type de l'identifiant
- * @param	<T>
- * 			le type de l'objet associé
+ * @author Edouard
+ *
+ * @param <ID>
  */
-public interface Dao<ID extends Serializable, T> extends Map<ID, T>, AutoCloseable {
+@XmlRootElement
+public interface Identifiable<ID> {
 	
+	public ID getId();
+	
+	public void setId(ID id);
+
 }

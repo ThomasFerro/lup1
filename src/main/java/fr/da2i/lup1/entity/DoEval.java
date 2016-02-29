@@ -9,11 +9,13 @@ public class DoEval {
 	private int studentId;
 	private int evaluationId;
 	
-	public DoEval(double m, int s, int e) {
-		this.mark = m;
-		this.studentId = s;
-		this.evaluationId = e;
+	public DoEval(double mark, int studentId, int evaluationId) {
+		this.mark = mark;
+		this.studentId = studentId;
+		this.evaluationId = evaluationId;
 	}
+	
+	public DoEval() {}
 
 	public double getMark() {
 		return mark;

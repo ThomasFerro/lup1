@@ -21,12 +21,14 @@ package fr.da2i.lup1.util;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.Properties;
 
-import org.skife.jdbi.v2.DBI;
-import org.skife.jdbi.v2.Handle;
-
 import com.google.common.io.Resources;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
+import com.j256.ormlite.support.ConnectionSource;
 
 /**
  * Fournit l'accès aux différents DAOs.
@@ -35,15 +37,15 @@ public class DaoProvider {
 	
 	private static DaoProvider daoProvider;
 	
-	private DBI dbi;
+	private ConnectionSource conSource;
 	
 	private DaoProvider() {
 		try {
 			URL url = Resources.getResource("config.properties");
 			Properties props = IO.loadProperties(Paths.get(url.toURI()));
 			Class.forName(props.getProperty("db.driver"));
-			dbi = new DBI(props.getProperty("db.uri"), props.getProperty("db.username"), props.getProperty("db.password"));
-		} catch (ClassNotFoundException | URISyntaxException e) {
+			conSource = new JdbcPooledConnectionSource(props.getProperty("db.uri"), props.getProperty("db.username"), props.getProperty("db.password"));
+		} catch (ClassNotFoundException | URISyntaxException | SQLException e) {
 			throw new DaoException(e);
 		}
 	}
@@ -55,18 +57,15 @@ public class DaoProvider {
 		return daoProvider;
 	}
 	
-	public static synchronized DBI getDBI() {
-		return getInstance().dbi;
+	public static ConnectionSource getConnectionSource() {
+		return getInstance().conSource;
 	}
 	
-	public static synchronized Handle openHandle() {
-		return getDBI().open();
-	}
-	
-	public static synchronized <T> T getDao(Class<T> daoObject) {
+	public static synchronized <D extends Dao<T, ?>, T> D getDao(Class<T> daoObject) {
 		try {
-			return getInstance().dbi.onDemand(daoObject);
-		} catch (Exception e) {
+			D dao = DaoManager.createDao(getInstance().conSource, daoObject);
+			return dao;
+		} catch (SQLException e) {
 			throw new DaoException("No dao found for " + daoObject);
 		}
 	}

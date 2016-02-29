@@ -21,8 +21,10 @@ package fr.da2i.lup1;
 import javax.ws.rs.ApplicationPath;
 
 import org.glassfish.jersey.filter.LoggingFilter;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
+import fr.da2i.lup1.util.AuthenticationFilter;
 import fr.da2i.lup1.util.CORSReponseFilter;
 
 /**
@@ -34,6 +36,8 @@ public class App extends ResourceConfig {
 	public App() {
 		register(LoggingFilter.class);
 		register(CORSReponseFilter.class);
+		register(AuthenticationFilter.class);
+		register(MultiPartFeature.class);
 //		register(GZIPReaderInterceptor.class);
 //		register(GZIPWriterInterceptor.class);
 		packages("fr.da2i.lup1.resource");

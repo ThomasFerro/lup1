@@ -1,27 +1,36 @@
 package fr.da2i.lup1.entity;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
-@XmlRootElement
-public class Subject {
+import fr.da2i.lup1.util.Identifiable;
+
+@DatabaseTable(tableName = "subject")
+public class Subject implements Identifiable<Integer> {
 	
+	@DatabaseField(columnName = "subject_id", id = true)
 	private int subjectId;
+	@DatabaseField(columnName = "name")
 	private String name;
+	@DatabaseField(columnName = "coeff")
 	private double coeff;
+	@DatabaseField(columnName = "ue_id", foreign = true)
 	private int ueId;
 	
-	public Subject(int s, String n, double c, int u) {
-		this.subjectId = s;
-		this.name = n;
-		this.coeff = c;
-		this.ueId = u;
+	public Subject(int subjectId, String name, double coeff, int user) {
+		this.subjectId = subjectId;
+		this.name = name;
+		this.coeff = coeff;
+		this.ueId = user;
 	}
+	
+	public Subject() {}
 
-	public int getSubjectId() {
+	public Integer getId() {
 		return subjectId;
 	}
 
-	public void setSubjectId(int subjectId) {
+	public void setId(Integer subjectId) {
 		this.subjectId = subjectId;
 	}
 

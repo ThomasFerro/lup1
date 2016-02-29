@@ -10,12 +10,14 @@ public class UePromotion {
 	private double coeff;
 	private int ueId;
 	
-	public UePromotion(int p, int s, double c, int u) {
-		this.promotionId = p;
-		this.semester = s;
-		this.coeff = c;
-		this.ueId = u;
+	public UePromotion(int promotionId, int semester, double coeff, int ueId) {
+		this.promotionId = promotionId;
+		this.semester = semester;
+		this.coeff = coeff;
+		this.ueId = ueId;
 	}
+	
+	public UePromotion() {}
 
 	public int getPromotionId() {
 		return promotionId;

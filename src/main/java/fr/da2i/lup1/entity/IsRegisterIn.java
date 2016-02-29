@@ -8,9 +8,9 @@ public class IsRegisterIn {
 	private int studentId;
 	private int promotionId;
 	
-	public IsRegisterIn(int s, int p) {
-		this.studentId = s;
-		this.promotionId = p;
+	public IsRegisterIn(int studentId, int promotionId) {
+		this.studentId = studentId;
+		this.promotionId = promotionId;
 	}
 
 	public int getStudentId() {

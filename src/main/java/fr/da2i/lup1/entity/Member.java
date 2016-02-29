@@ -1,20 +1,34 @@
 package fr.da2i.lup1.entity;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
-@XmlRootElement
-public class Member {
+import fr.da2i.lup1.util.Identifiable;
+
+@DatabaseTable(tableName = "member")
+public class Member implements Identifiable<Integer> {
 	
+	@DatabaseField(columnName = "id", id = true)
 	private int id;
+	@DatabaseField(columnName = "first_name")
 	private String firstName;
+	@DatabaseField(columnName = "last_name")
 	private String lastName;
+	@DatabaseField(columnName = "role", foreign = true)
 	private String role;
+	@DatabaseField(columnName = "email")
 	private String email;
+	@DatabaseField(columnName = "birthday")
 	private String birthday;
+	@DatabaseField(columnName = "login", foreign = true)
 	private String login;
+	@DatabaseField(columnName = "phone")
 	private String phone;
+	@DatabaseField(columnName = "siret", foreign = true)
 	private String siret;
+	@DatabaseField(columnName = "picture")
 	private String picture;
+	@DatabaseField(columnName = "address")
 	private String address;
 	
 	public Member(int id, String firstName, String lastName, String role, String email, String birthday, String login, String phone, String siret, String picture, String address) {
@@ -31,13 +45,13 @@ public class Member {
 		this.address = address;
 	}
 		
-	public Member() { }
+	public Member() {}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

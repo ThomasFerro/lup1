@@ -1,23 +1,30 @@
 package fr.da2i.lup1.entity;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
-@XmlRootElement
-public class Formation {
+import fr.da2i.lup1.util.Identifiable;
+
+@DatabaseTable(tableName = "formation")
+public class Formation implements Identifiable<Integer> {
 	
+	@DatabaseField(columnName = "formation_id", id = true)
 	private int formationId;
+	@DatabaseField(columnName = "name")
 	private String name;
 	
 	public Formation(int f, String n) {
 		this.formationId = f;
 		this.name = n;
 	}
+	
+	public Formation() {}
 
-	public int getFormationId() {
+	public Integer getId() {
 		return formationId;
 	}
 
-	public void setFormationId(int formationId) {
+	public void setId(Integer formationId) {
 		this.formationId = formationId;
 	}
 

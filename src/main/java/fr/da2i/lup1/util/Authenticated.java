@@ -16,18 +16,21 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.da2i.lup1.resource;
+package fr.da2i.lup1.util;
 
-import javax.ws.rs.Path;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-import fr.da2i.lup1.entity.Task;
-import fr.da2i.lup1.util.AbstractRestlet;
+import javax.ws.rs.NameBinding;
 
-@Path("tasks")
-public class TaskResource extends AbstractRestlet<Integer, Task> {
-	
-	public TaskResource() {
-		super(Task.class);
-	}
+/**
+ * Cette annotation permet de sécuriser certains web services de l'application.
+ */
+@Target({ ElementType.TYPE, ElementType.METHOD })
+@Retention(value = RetentionPolicy.RUNTIME)
+@NameBinding
+public @interface Authenticated {
 
 }
