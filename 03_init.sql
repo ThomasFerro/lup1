@@ -44,7 +44,7 @@ INSERT INTO member VALUES(2, 'Thomas', 'Ferro', 'etudiant', 'thomas.ferro@univ-l
 INSERT INTO member VALUES(3, 'Édouard', 'Cattez', 'etudiant', 'edouard.cattez@univ-lille1.fr', '12/10/1994', 'catteze', null);
 INSERT INTO member VALUES(4, 'Rémy', 'Fevre', 'etudiant', 'remy.fevre@univ-lille1.fr', '05/03/1995', 'fevrer', null);
 INSERT INTO member VALUES(5, 'Phillipe', 'Mathieu', 'responsable_cours', 'phillipe.mathieu@univ-lille1.fr', '12/11/1967', 'mathieup', null);
-INSERT INTO member VALUES(6, 'Fanny', 'Oui', 'responsable_cours', 'fanny.oui@smile.fr', '12/03/1989', 'fannySmile', 'SIRET-SMILE');
+INSERT INTO member VALUES(6, 'Fanny', 'Oui', 'responsable_cours', 'fanny.oui@smile.fr', '12/03/1989', 'fannySmile', null);
 
 -- Fin Insertion de membres
 
@@ -132,7 +132,8 @@ INSERT INTO promotion VALUES(3, 2015, 2, 5);
 
 INSERT INTO ue_promotion VALUES(1, 5, 3.0, 1);
 INSERT INTO ue_promotion VALUES(2, 6, 3.0, 2);
-INSERT INTO ue_promotion VALUES(3, 5, 3.0,  3);
+INSERT INTO ue_promotion VALUES(3, 7, 3.0,  3);
+INSERT INTO ue_promotion VALUES(1, 8, 3.0,  4);
 
 -- Fin Insertion de listes UE/Promotion
 
@@ -184,8 +185,10 @@ INSERT INTO is_register_in VALUES(4, 1);
 INSERT INTO do_eval VALUES(5.0, 3, 1);
 INSERT INTO do_eval VALUES(2.0, 3, 2);
 INSERT INTO do_eval VALUES(10.0, 3, 3);
+INSERT INTO do_eval VALUES(12.0, 3, 4);
 INSERT INTO do_eval VALUES(19.9, 2, 1);
 INSERT INTO do_eval VALUES(15, 4, 1);
+INSERT INTO do_eval VALUES(16, 3, 6);
 
 -- Fin Insertion de notes d'évaluations
 
