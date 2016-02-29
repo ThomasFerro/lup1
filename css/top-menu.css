@@ -22,12 +22,11 @@
 }
 
 .responsive-menu-wrapper ul li{
-  max-width: 15%;
+  max-width: 20%;
 }
 
 .responsive-menu-wrapper{
-  margin-top: 2%;
-  margin-left: 1%;
+  margin-top: 4%;
 }
 
 .responsive-menu-wrapper .menu{

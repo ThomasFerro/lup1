@@ -8,14 +8,12 @@
   <div class="filter-body">
     <fieldset>
       <legend>Filtres:</legend>
-      <div ng-repeat="filter in panelFilterCtrl.filterSelected.filters">
-        <div class="form-group">
+        <div class="form-group" ng-repeat="filter in panelFilterCtrl.filterSelected.filters">
           <div class="input-group">
             <div class="input-group-addon label-filter">{{filter.label}} :</div>
             <input type="{{filter.type}}" name="{{filter.name}}" id="{{filter.id}}" class="form-control" placeholder="{{filter.placeholder}}" autofocus>
           </div>
         </div>
-      </div>
     </fieldset>
   </div>
 </div>
