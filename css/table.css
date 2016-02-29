@@ -1,7 +1,9 @@
-table{
-  text-align: center;
-}
+@media print {
+  .collapse {
+      display: table-row!important;
+  }
 
-table th{
-  text-align: center;
+  .collapse-button{
+    display:none!important;
+  }
 }

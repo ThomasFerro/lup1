@@ -5,6 +5,9 @@
     .when('/notes', {
       templateUrl: 'templates/pages/notes/index.html'
     })
+    .when('/notes/bulletin', {
+      templateUrl: 'templates/pages/notes/bulletin/index.html'
+    })
     .when('/stages', {
       templateUrl: 'templates/pages/stages/index.html'
     })
