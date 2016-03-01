@@ -27,10 +27,12 @@
 
 .responsive-menu-wrapper{
   margin-top: 4%;
+  overflow-x: scroll;
 }
 
 .responsive-menu-wrapper .menu{
   margin-left: 0!important;
+  white-space: nowrap;
 }
 
 .label-glyphicon{

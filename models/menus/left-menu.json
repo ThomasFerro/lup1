@@ -7,8 +7,8 @@
 },
 {
   "index":1,
-  "name":"gestion des notes",
-  "url":"notes",
+  "name":"gestion des formations",
+  "url":"formations",
   "img_active":"img/menu/note.png",
   "img_passive":"img/menu/note-black.png"
 },

@@ -2,11 +2,11 @@
   angular.module('lup1')
   .config(function($routeProvider){
     $routeProvider
-    .when('/notes', {
-      templateUrl: 'templates/pages/notes/index.html'
+    .when('/formations', {
+      templateUrl: 'templates/pages/formations/index.html'
     })
-    .when('/notes/bulletin', {
-      templateUrl: 'templates/pages/notes/bulletin/index.html'
+    .when('/formations/bulletin', {
+      templateUrl: 'templates/pages/formations/bulletin/index.html'
     })
     .when('/stages', {
       templateUrl: 'templates/pages/stages/index.html'

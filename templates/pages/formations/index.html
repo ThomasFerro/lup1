@@ -1,0 +1,116 @@
+<div class="col-md-4 col-lg-3 hidden-xs hidden-sm col-without-padding panel-filter" ng-controller="PanelFilterController as panelFilterCtrl">
+  {{panelFilterCtrl.selectFilter(0)}}
+  <panel-filter></panel-filter>
+</div>
+<div class="col-lg-9 col-xs-12 col-sm-12 col-md-8">
+  <h3>Formations : </h3>
+  <div class="col-lg-6 col-xs-12">
+
+    <div class="panel panel-default">
+      <div class="panel-heading" data-toggle="collapse" data-target="#da2i">
+        <div class="btn-group pull-right">
+          <a class="btn btn-default pull-right" data-toggle="collapse" data-target="#da2i">
+            <span class="glyphicon glyphicon-menu-down"></span>
+          </a>
+        </div>
+        <h4>DA2I</h4>
+      </div>
+      <div id="da2i" class="panel-collapse collapse">
+        <div class="panel-body">
+          <table id="mytable" class="table table-bordred table-striped table-hover table-list-search">
+            <thead>
+            <tr>
+              <th>Responsable</th>
+              <th>Année</th>
+              <th>Moy.</th>
+              <th>Modif.</th>
+              <th>Voir</th>
+              <th>Sup.</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>M.Hauspie</td>
+              <td>2015-2016</td>
+              <td>13</td>
+              <td><button class="btn btn-warning btn-sm editButton"><span class="glyphicon glyphicon glyphicon-pencil"></span></button></td>
+              <td><button class="btn btn-success btn-sm editButton"><span class="glyphicon glyphicon-log-in"></span></button></td>
+              <td><button class="btn btn-danger btn-sm deleteButton"><span class="glyphicon glyphicon-trash"></span></button></td>
+            </tr>
+            <tr>
+              <td>B.Beaufils</td>
+              <td>2014-2015</td>
+              <td>8</td>
+              <td><button class="btn btn-warning btn-sm editButton"><span class="glyphicon glyphicon glyphicon-pencil"></span></button></td>
+              <td><button class="btn btn-success btn-sm editButton"><span class="glyphicon glyphicon-log-in"></span></button></td>
+              <td><button class="btn btn-danger btn-sm deleteButton"><span class="glyphicon glyphicon-trash"></span></button></td>
+            </tr>
+            <tr>
+              <td>B.Beaufils</td>
+              <td>2013-2014</td>
+              <td>11</td>
+              <td><button class="btn btn-warning btn-sm editButton"><span class="glyphicon glyphicon glyphicon-pencil"></span></button></td>
+              <td><button class="btn btn-success btn-sm editButton"><span class="glyphicon glyphicon-log-in"></span></button></td>
+              <td><button class="btn btn-danger btn-sm deleteButton"><span class="glyphicon glyphicon-trash"></span></button></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading" data-toggle="collapse" data-target="#cgir">
+        <div class="btn-group pull-right">
+          <a class="btn btn-default pull-right" data-toggle="collapse" data-target="#cgir">
+            <span class="glyphicon glyphicon-menu-down"></span>
+          </a>
+        </div>
+        <h4>CGIR</h4>
+      </div>
+      <div id="cgir" class="panel-collapse collapse">
+        <div class="panel-body">
+          <table class="table table-bordred table-striped table-hover">
+            <thead>
+            <tr>
+              <th>Responsable</th>
+              <th>Année</th>
+              <th>Moy.</th>
+              <th class="hidden-xs">Modif.</th>
+              <th>Voir</th>
+              <th class="hidden-xs">Sup.</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>Y.Peter</td>
+              <td>2015-2016</td>
+              <td>13</td>
+              <td class="hidden-xs"><button class="btn btn-warning btn-sm editButton"><span class="glyphicon glyphicon glyphicon-pencil"></span></button></td>
+              <td><button class="btn btn-success btn-sm editButton"><span class="glyphicon glyphicon-log-in"></span></button></td>
+              <td class="hidden-xs"><button class="btn btn-danger btn-sm deleteButton"><span class="glyphicon glyphicon-trash"></span></button></td>
+            </tr>
+            <tr>
+              <td>Y.Peter</td>
+              <td>2014-2015</td>
+              <td>8</td>
+              <td class="hidden-xs"><button class="btn btn-warning btn-sm editButton"><span class="glyphicon glyphicon glyphicon-pencil"></span></button></td>
+              <td><button class="btn btn-success btn-sm editButton"><span class="glyphicon glyphicon-log-in"></span></button></td>
+              <td class="hidden-xs"><button class="btn btn-danger btn-sm deleteButton"><span class="glyphicon glyphicon-trash"></span></button></td>
+            </tr>
+            <tr>
+              <td>Y.Peter</td>
+              <td>2013-2014</td>
+              <td>11</td>
+              <td class="hidden-xs"><button class="btn btn-warning btn-sm editButton"><span class="glyphicon glyphicon glyphicon-pencil"></span></button></td>
+              <td><button class="btn btn-success btn-sm editButton"><span class="glyphicon glyphicon-log-in"></span></button></td>
+              <td class="hidden-xs"><button class="btn btn-danger btn-sm deleteButton"><span class="glyphicon glyphicon-trash"></span></button></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
