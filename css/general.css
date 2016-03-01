@@ -1,0 +1,8 @@
+body{
+  overflow-x: hidden;
+}
+
+.col-without-padding{
+  padding-left: 0!important;
+  padding-right: 0!important;
+}

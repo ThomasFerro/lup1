@@ -1,0 +1,20 @@
+h5{
+  padding: 0;
+  margin:0;
+}
+
+.bulletin-body tr td{
+  text-align: left;
+}
+
+.subject{
+  width:80%;
+}
+
+.bulletin-header{
+  text-align: left;
+}
+
+.bulletin-header thead tr th{
+  text-align: left;
+}

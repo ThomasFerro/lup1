@@ -1,0 +1,44 @@
+/*top menu*/
+
+.logo{
+  color:#FF8C00!important;
+}
+
+.log-x, .log-x a{
+  color: white;
+}
+
+.left-menu{
+  background-color: #1e2124;
+}
+/*menu decoration*/
+
+.menu a.home{
+  background: #FF8C00;
+  border-color:black;
+}
+
+.menu a:hover{
+  background-color:#C0C0C0 !important;
+  border:1px solid black;
+}
+
+.menu a.home:hover{
+  background-color:#FF8C00 !important;
+}
+
+.menu a.active{
+  background-color: #008080 !important;
+  border-color:#008080 !important;
+}
+
+/*panel filter*/
+
+.panel-filter-wrapper{
+  background-color: #444444;
+  color:white;
+}
+
+.filter-body legend{
+  color:white;
+}

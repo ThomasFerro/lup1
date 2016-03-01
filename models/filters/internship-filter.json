@@ -1,0 +1,48 @@
+[
+  {
+    "title":"Gestion des stages",
+    "buttons":[
+      {
+        "name":"Ajouter une offre de stage",
+        "href":"#"
+      }
+    ],
+    "filters":[
+      {
+        "label":"Intitulé",
+        "name":"intitule",
+        "type":"text",
+        "id":"name-subject",
+        "placeholder":"Intitulé"
+      },
+      {
+        "label":"localisation",
+        "name":"localisation",
+        "type":"text",
+        "id":"ue-subject",
+        "placeholder":"Localisation"
+      },
+      {
+        "label":"Date début",
+        "name":"datedebut",
+        "type":"text",
+        "id":"semester-subject",
+        "placeholder":"Date début"
+      },
+      {
+        "label":"Durée",
+        "name":"duree",
+        "type":"text",
+        "id":"coeff-subject",
+        "placeholder":"Durée"
+      },
+      {
+        "label":"Technologies",
+        "name":"technologies",
+        "type":"text",
+        "id":"manager-subject",
+        "placeholder":"Technologies"
+      }
+    ]
+  }
+]

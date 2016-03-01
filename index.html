@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html ng-app="lup1">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/template.css" type="text/css">
+  <link rel="stylesheet" href="css/top-menu.css" type="text/css">
+  <link rel="stylesheet" href="css/panel-filter.css" type="text/css">
+  <link rel="stylesheet" href="css/left-menu.css" type="text/css">
+  <link rel="stylesheet" href="css/general.css" type="text/css">
+  <link rel="stylesheet" href="css/table.css" type="text/css">
+  <link rel="stylesheet" href="lib/bootstrap-3.3.6/css/bootstrap.css" >
+  <style>
+
+h5{
+  padding: 0;
+  margin:0;
+}
+
+table tr th, table tr td{
+  text-align: left;
+}
+
+.subject{
+  width:80%;
+}
+
+
+</style>
+</head>
+<body>
+
+  <nav class="navbar navbar-inverse top-menu" >
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <a class="navbar-brand logo" href="#">Lup1</a>
+        <p class="navbar-text navbar-right log-x hidden-lg hidden-md  hidden-sm">
+            Connecté en tant que : Roberto<a href="#"><span class="glyphicon glyphicon-log-out" ></span></a>
+        <p>
+      </div>
+
+        <ul class="nav navbar-nav hidden-sm hidden-md hidden-lg responsive-menu">
+          <li class="active"><a href="#">Menu <span class="sr-only">(current)</span></a></li>
+          <li>
+             <div class="responsive-menu-wrapper" ng-controller="MenuController as menuCtrl">
+               <ul class="list-inline menu" >
+                 <li ng-repeat="item in menuCtrl.menuItems"><menu-item></menu-item></li>
+               </ul>
+            </div>
+          </li>
+        </ul>
+        <!-- <p class="navbar-text navbar-right log-x-2">Connecté en tant que : Roberto<a href="#"><span class="glyphicon glyphicon-log-out" ></span></a> -->
+        <ul class="nav navbar-nav navbar-right hidden-xs hidden-sm">
+            <li><a>Connecté en tant que : Roberto</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-log-out" ></span>&nbsp;Log out</a></li>
+        </ul>
+
+
+    </div><!-- /.container-fluid -->
+  </nav>
+  <div class="row">
+    <div class="col-lg-1 col-md-1 col-xs-1 col-without-padding hidden-xs ">
+      <div class="menu-wrapper left-menu" ng-controller="MenuController as menuCtrl">
+        <div class="list-group menu">
+          <menu-item  ng-repeat="item in menuCtrl.menuItems"></menu-item>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-11 col-xs-12 col-sm-11 col-without-padding">
+      <div class="row main-wrapper">
+        <div ng-view></div>
+      </div>
+    </div>
+  </div>
+  <script src="lib/jquery-1.12.0.min.js"></script>
+  <script src="lib/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+  <script src="lib/angular.min.js"></script>
+  <script src="lib/angular-route.min.js"></script>
+  <script src="javascript/app.js"></script>
+  <script src="javascript/routes.js"></script>
+  <script src="javascript/controllers/menu/menu-controller.js"></script>
+  <script src="javascript/directives/menu/menu-item-directive.js"></script>
+  <script src="javascript/controllers/panelFilter/panel-filter-controller.js"></script>
+  <script src="javascript/directives/panelFilter/panel-filter-directive.js"></script>
+  <script>
+  $(document).ready(function(){
+    var height = $(window).height();
+    $('.menu-wrapper').css('height', height);
+    $('.panel-filter-wrapper').css('height', height);
+  });
+  </script>
+</body>
+</html>

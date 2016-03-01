@@ -1,0 +1,23 @@
+.panel-filter{
+  padding-left: 0!important;
+}
+
+.panel-filter-wrapper h3{
+  margin:0;
+  padding-top: 5px;
+  text-align: center;
+  font-size: 1.2em!important;
+}
+
+.panel-filter-wrapper .filter-header .list-group a{
+  margin: 10px!important;
+}
+
+.filter-body{
+  margin: 10px;
+}
+
+.label-filter{
+  text-align: left!important;
+  min-width: 115px;
+}
