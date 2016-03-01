@@ -16,27 +16,28 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.da2i.lup1.util;
+package fr.da2i.lup1.io;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.zip.GZIPInputStream;
+import java.io.OutputStream;
+import java.util.zip.GZIPOutputStream;
 
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.ext.ReaderInterceptor;
-import javax.ws.rs.ext.ReaderInterceptorContext;
+import javax.ws.rs.ext.WriterInterceptor;
+import javax.ws.rs.ext.WriterInterceptorContext;
 
 /**
  * @author Edouard
  *
  */
-public class GZIPReaderInterceptor implements ReaderInterceptor {
- 
+@Compress
+public class GZIPWriterInterceptor implements WriterInterceptor {
+	
 	@Override
-	public Object aroundReadFrom(ReaderInterceptorContext context) throws IOException, WebApplicationException {
-		final InputStream originalInputStream = context.getInputStream();
-		context.setInputStream(new GZIPInputStream(originalInputStream));
-		return context.proceed();
+	public void aroundWriteTo(WriterInterceptorContext context) throws IOException, WebApplicationException {
+		final OutputStream outputStream = context.getOutputStream();
+		context.setOutputStream(new GZIPOutputStream(outputStream));
+		context.proceed();
 	}
 
 }

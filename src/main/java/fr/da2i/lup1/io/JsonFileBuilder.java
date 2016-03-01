@@ -16,7 +16,7 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.da2i.lup1.util;
+package fr.da2i.lup1.io;
 
 import java.io.IOException;
 import java.nio.file.Files;

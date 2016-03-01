@@ -16,28 +16,30 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.da2i.lup1.util;
+package fr.da2i.lup1.io;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.util.zip.GZIPOutputStream;
-
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.ext.WriterInterceptor;
-import javax.ws.rs.ext.WriterInterceptorContext;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 
 /**
- * @author Edouard
- *
+ * Aide à la suppression de fichiers notamment utilisée pour la suppression récursive de répertoires.
  */
-@Compress
-public class GZIPWriterInterceptor implements WriterInterceptor {
+public class DeleteFileVisitor extends SimpleFileVisitor<Path> {
 	
 	@Override
-	public void aroundWriteTo(WriterInterceptorContext context) throws IOException, WebApplicationException {
-		final OutputStream outputStream = context.getOutputStream();
-		context.setOutputStream(new GZIPOutputStream(outputStream));
-		context.proceed();
+	public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+		Files.delete(file);
+		return FileVisitResult.CONTINUE;
+	}
+	
+	@Override
+	public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+		Files.delete(dir);
+		return FileVisitResult.CONTINUE;
 	}
 
 }

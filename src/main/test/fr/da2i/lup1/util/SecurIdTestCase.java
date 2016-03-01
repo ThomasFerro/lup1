@@ -6,6 +6,8 @@ import java.sql.Timestamp;
 
 import org.junit.Test;
 
+import fr.da2i.lup1.security.SecurId;
+
 public class SecurIdTestCase {
 
 	@Test

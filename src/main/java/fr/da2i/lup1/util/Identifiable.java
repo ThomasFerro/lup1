@@ -27,10 +27,18 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @param <ID>
  */
 @XmlRootElement
-public interface Identifiable<ID> {
+public abstract class Identifiable<ID> {
 	
-	public ID getId();
+	public abstract ID getId();
 	
-	public void setId(ID id);
+	public abstract void setId(ID id);
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o == this) {
+			return true;
+		}
+		return getId().equals(((Identifiable<?>) o).getId());
+	}
 
 }

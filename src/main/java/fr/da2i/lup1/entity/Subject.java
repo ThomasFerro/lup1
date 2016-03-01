@@ -6,7 +6,7 @@ import com.j256.ormlite.table.DatabaseTable;
 import fr.da2i.lup1.util.Identifiable;
 
 @DatabaseTable(tableName = "subject")
-public class Subject implements Identifiable<Integer> {
+public class Subject extends Identifiable<Integer> {
 	
 	@DatabaseField(columnName = "subject_id", id = true)
 	private int subjectId;

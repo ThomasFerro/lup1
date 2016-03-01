@@ -16,7 +16,7 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.da2i.lup1.util;
+package fr.da2i.lup1.security;
 
 import java.sql.Timestamp;
 import java.util.UUID;
@@ -24,14 +24,14 @@ import java.util.UUID;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import fr.da2i.lup1.util.Identifiable;
 
 @DatabaseTable(tableName = "securid")
-public class SecurId implements Identifiable<String> {
+public class SecurId extends Identifiable<String> {
 	
-	public static final String CLIENT_TOKEN_KEY = "Authentication";
 	public static final long NEXT_EXPIRATION_MILLIS = 600000L;
 	
-	@DatabaseField(columnName = "login", id = true, foreign = true)
+	@DatabaseField(columnName = "login", id = true)
 	private String login;
 	@DatabaseField(columnName = "token")
 	private String token;

@@ -16,17 +16,27 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.da2i.lup1.util;
+package fr.da2i.lup1.io;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.zip.GZIPInputStream;
 
-import javax.ws.rs.NameBinding;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.ext.ReaderInterceptor;
+import javax.ws.rs.ext.ReaderInterceptorContext;
 
 /**
  * @author Edouard
  *
  */
-@NameBinding
-@Retention(RetentionPolicy.RUNTIME)
-public @interface Compress {}
+public class GZIPReaderInterceptor implements ReaderInterceptor {
+ 
+	@Override
+	public Object aroundReadFrom(ReaderInterceptorContext context) throws IOException, WebApplicationException {
+		final InputStream originalInputStream = context.getInputStream();
+		context.setInputStream(new GZIPInputStream(originalInputStream));
+		return context.proceed();
+	}
+
+}

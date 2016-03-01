@@ -20,8 +20,8 @@ package fr.da2i.lup1.util;
 
 import java.io.Serializable;
 import java.net.URI;
+import java.security.Principal;
 import java.sql.SQLException;
-import java.util.Collection;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -34,6 +34,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
 import com.j256.ormlite.dao.Dao;
@@ -41,12 +42,23 @@ import com.j256.ormlite.dao.Dao;
 public abstract class AbstractRestlet<ID extends Serializable, T extends Identifiable<ID>> implements Restlet<ID, T> {
 	
 	@Context
-	private UriInfo uriInfo;
+	protected UriInfo uriInfo;
 	
-	private Dao<T,ID> dao;
+	@Context
+	protected SecurityContext securityContext;
+	
+	protected Dao<T,ID> dao;
 	
 	public AbstractRestlet(Class<T> clazz) {
 		this.dao = DaoProvider.getDao(clazz);
+	}
+	
+	protected String getAuthenticatedLogin() {
+		Principal principal = securityContext.getUserPrincipal();
+		if (principal == null) {
+			return "";
+		}
+		return principal.getName();
 	}
 	
 	@Override
@@ -59,13 +71,6 @@ public abstract class AbstractRestlet<ID extends Serializable, T extends Identif
 		dao.create(entity);
 		URI instanceURI = uriInfo.getAbsolutePathBuilder().path(entity.getId().toString()).build();
 		return Response.created(instanceURI).build();
-	}
-	
-	@Override
-	@GET
-	@Produces("application/json")
-	public Collection<T> list() throws SQLException {
-		return dao.queryForAll();
 	}
 
 	@Override

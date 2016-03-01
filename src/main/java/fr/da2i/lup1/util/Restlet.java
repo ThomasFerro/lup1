@@ -20,7 +20,6 @@ package fr.da2i.lup1.util;
 
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.Collection;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -45,10 +44,6 @@ public interface Restlet<ID extends Serializable, T extends Identifiable<ID>> {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	Response create(T entity) throws SQLException;
-	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	Collection<T> list() throws SQLException;
 	
 	@GET
 	@Path("{id}")

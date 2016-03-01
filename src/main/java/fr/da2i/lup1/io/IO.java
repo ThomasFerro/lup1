@@ -16,7 +16,7 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.da2i.lup1.util;
+package fr.da2i.lup1.io;
 
 import java.io.IOException;
 import java.net.URI;
@@ -30,6 +30,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+
 
 /**
  * Offre des fonctionnalités pour manipuler les fichiers via leurs chemins d'accès.

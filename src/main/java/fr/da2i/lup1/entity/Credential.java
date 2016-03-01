@@ -6,7 +6,7 @@ import com.j256.ormlite.table.DatabaseTable;
 import fr.da2i.lup1.util.Identifiable;
 
 @DatabaseTable(tableName = "credential")
-public class Credential implements Identifiable<String> {
+public class Credential extends Identifiable<String> {
 
 	@DatabaseField(columnName = "login", id = true)
 	private String login;

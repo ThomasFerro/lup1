@@ -21,9 +21,11 @@ package fr.da2i.lup1.resource;
 import javax.ws.rs.Path;
 
 import fr.da2i.lup1.entity.Task;
+import fr.da2i.lup1.security.Authenticated;
 import fr.da2i.lup1.util.AbstractRestlet;
 
 @Path("tasks")
+@Authenticated
 public class TaskResource extends AbstractRestlet<Integer, Task> {
 	
 	public TaskResource() {

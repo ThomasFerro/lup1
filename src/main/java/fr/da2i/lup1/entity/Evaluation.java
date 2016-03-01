@@ -8,7 +8,7 @@ import com.j256.ormlite.table.DatabaseTable;
 import fr.da2i.lup1.util.Identifiable;
 
 @DatabaseTable(tableName = "evaluation")
-public class Evaluation implements Identifiable<Integer> {
+public class Evaluation extends Identifiable<Integer> {
 	
 	@DatabaseField(columnName = "evaluation_id", id = true)
 	private int evaluationId;

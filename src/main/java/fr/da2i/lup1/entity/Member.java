@@ -1,30 +1,32 @@
 package fr.da2i.lup1.entity;
 
+import java.security.Principal;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import fr.da2i.lup1.util.Identifiable;
 
 @DatabaseTable(tableName = "member")
-public class Member implements Identifiable<Integer> {
+public class Member extends Identifiable<Integer> implements Principal {
 	
-	@DatabaseField(columnName = "id", id = true)
+	@DatabaseField(columnName = "member_id", id = true)
 	private int id;
 	@DatabaseField(columnName = "first_name")
 	private String firstName;
 	@DatabaseField(columnName = "last_name")
 	private String lastName;
-	@DatabaseField(columnName = "role", foreign = true)
+	@DatabaseField(columnName = "role")
 	private String role;
 	@DatabaseField(columnName = "email")
 	private String email;
 	@DatabaseField(columnName = "birthday")
 	private String birthday;
-	@DatabaseField(columnName = "login", foreign = true)
+	@DatabaseField(columnName = "login")
 	private String login;
 	@DatabaseField(columnName = "phone")
 	private String phone;
-	@DatabaseField(columnName = "siret", foreign = true)
+	@DatabaseField(columnName = "siret")
 	private String siret;
 	@DatabaseField(columnName = "picture")
 	private String picture;
@@ -46,6 +48,11 @@ public class Member implements Identifiable<Integer> {
 	}
 		
 	public Member() {}
+	
+	@Override
+	public String getName() {
+		return login;
+	}
 
 	public Integer getId() {
 		return id;
@@ -134,4 +141,16 @@ public class Member implements Identifiable<Integer> {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
+	@Override
+	public String toString() {
+		return "Member [id=" + id + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", role=" + role + ", email=" + email
+				+ ", birthday=" + birthday + ", login=" + login + ", phone="
+				+ phone + ", siret=" + siret + ", picture=" + picture
+				+ ", address=" + address + "]";
+	}
+	
+	
+	
 }

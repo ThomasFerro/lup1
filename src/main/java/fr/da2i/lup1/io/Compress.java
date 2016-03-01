@@ -16,30 +16,17 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.da2i.lup1.util;
+package fr.da2i.lup1.io;
 
-import java.io.IOException;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.SimpleFileVisitor;
-import java.nio.file.attribute.BasicFileAttributes;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+import javax.ws.rs.NameBinding;
 
 /**
- * Aide à la suppression de fichiers notamment utilisée pour la suppression récursive de répertoires.
+ * @author Edouard
+ *
  */
-public class DeleteFileVisitor extends SimpleFileVisitor<Path> {
-	
-	@Override
-	public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-		Files.delete(file);
-		return FileVisitResult.CONTINUE;
-	}
-	
-	@Override
-	public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
-		Files.delete(dir);
-		return FileVisitResult.CONTINUE;
-	}
-
-}
+@NameBinding
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Compress {}

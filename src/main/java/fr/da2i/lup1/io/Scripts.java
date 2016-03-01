@@ -16,7 +16,7 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (la 7 Production)
  */
-package fr.da2i.lup1.util;
+package fr.da2i.lup1.io;
 
 import java.io.IOException;
 import java.io.LineNumberReader;

@@ -16,7 +16,7 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.da2i.lup1.util;
+package fr.da2i.lup1.security;
 
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
@@ -84,10 +84,14 @@ public final class Passwords {
 	 * @throws	NoSuchAlgorithmException
 	 * @throws	InvalidKeySpecException
 	 */
-	public static String hash(char[] password) throws NoSuchAlgorithmException, InvalidKeySpecException {
-		byte[] salt = salt(password);
-		byte[] hash = pbkdf2(password, salt, PBKDF2_ITERATIONS, HASH_BYTE_SIZE);
-		return PBKDF2_ITERATIONS + SEPARATOR + toHex(salt) + SEPARATOR +  toHex(hash);
+	public static String hash(char[] password) {
+		try {
+			byte[] salt = salt(password);
+			byte[] hash = pbkdf2(password, salt, PBKDF2_ITERATIONS, HASH_BYTE_SIZE);
+			return PBKDF2_ITERATIONS + SEPARATOR + toHex(salt) + SEPARATOR +  toHex(hash);
+		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+			return "";
+		}
 	}
 	
 	/**
@@ -101,7 +105,7 @@ public final class Passwords {
 	 * @throws	NoSuchAlgorithmException
 	 * @throws	InvalidKeySpecException
 	 */
-	public static String hash(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+	public static String hash(String password) {
 		return hash(password.toCharArray());
 	}
 	
@@ -118,8 +122,17 @@ public final class Passwords {
 	 * @throws	NoSuchAlgorithmException
 	 * @throws	InvalidKeySpecException
 	 */
-	public static boolean check(String password, String checkedHash) throws NoSuchAlgorithmException, InvalidKeySpecException {
-		return check(password.toCharArray(), checkedHash);
+	public static boolean check(char[] password, String checkedHash) {
+		try {
+			String[] params = checkedHash.split(":");
+			int iterations = Integer.parseInt(params[ITERATION_INDEX]);
+			byte[] salt = fromHex(params[SALT_INDEX]);
+			byte[] hash = fromHex(params[PBKDF2_INDEX]);
+			byte[] testHash = pbkdf2(password, salt, iterations, hash.length);
+			return equals(hash, testHash);
+		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+			return false;
+		}
 	}
 	
 	/**
@@ -135,13 +148,8 @@ public final class Passwords {
 	 * @throws	NoSuchAlgorithmException
 	 * @throws	InvalidKeySpecException
 	 */
-	public static boolean check(char[] password, String checkedHash) throws NoSuchAlgorithmException, InvalidKeySpecException {
-		String[] params = checkedHash.split(":");
-		int iterations = Integer.parseInt(params[ITERATION_INDEX]);
-		byte[] salt = fromHex(params[SALT_INDEX]);
-		byte[] hash = fromHex(params[PBKDF2_INDEX]);
-		byte[] testHash = pbkdf2(password, salt, iterations, hash.length);
-		return equals(hash, testHash);
+	public static boolean check(String password, String checkedHash) {
+		return check(password.toCharArray(), checkedHash);
 	}
 	
 	/**

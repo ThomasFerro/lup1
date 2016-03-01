@@ -30,6 +30,8 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 
+import fr.da2i.lup1.io.IO;
+
 /**
  * Fournit l'accès aux différents DAOs.
  */

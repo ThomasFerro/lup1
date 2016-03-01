@@ -24,7 +24,7 @@ import com.j256.ormlite.table.DatabaseTable;
 import fr.da2i.lup1.util.Identifiable;
 
 @DatabaseTable(tableName = "task")
-public class Task implements Identifiable<Integer> {
+public class Task extends Identifiable<Integer> {
 	
 	public static int NB_INSTANCES;
 	
