@@ -18,17 +18,27 @@
  */
 package fr.da2i.lup1.security;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import javax.inject.Singleton;
+import javax.ws.rs.core.Feature;
+import javax.ws.rs.core.FeatureContext;
 
-import javax.ws.rs.NameBinding;
+import org.glassfish.hk2.utilities.binding.AbstractBinder;
 
-/**
- * Cette annotation permet de sécuriser certains web services de l'application.
- */
-@Target({ ElementType.TYPE, ElementType.METHOD })
-@Retention(value = RetentionPolicy.RUNTIME)
-@NameBinding
-public @interface Authenticated {}
+public class AuthenticationServiceFeature implements Feature {
+
+	@Override
+	public boolean configure(FeatureContext context) {
+		context.register(new AuthenticationServiceBinder());
+		return true;
+	}
+	
+	private final class AuthenticationServiceBinder extends AbstractBinder {
+
+		@Override
+		protected void configure() {
+			bindAsContract(AuthenticationService.class).in(Singleton.class);		
+		}
+
+	}
+
+}

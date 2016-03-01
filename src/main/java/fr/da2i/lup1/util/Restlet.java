@@ -21,14 +21,6 @@ package fr.da2i.lup1.util;
 import java.io.Serializable;
 import java.sql.SQLException;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
@@ -41,22 +33,58 @@ import javax.ws.rs.core.Response;
  */
 public interface Restlet<ID extends Serializable, T extends Identifiable<ID>> {
 	
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
+	/**
+	 * Crée une ressource
+	 * 
+	 * @param	entity
+	 * 			l'entité à créer
+	 * 
+	 * @return	la réponse HTTP adéquate selon la réussite ou non de la création
+	 * 
+	 * @throws	SQLException
+	 * 			erreur pouvant se produire lors de l'ajout en base de données
+	 */
 	Response create(T entity) throws SQLException;
 	
-	@GET
-	@Path("{id}")
-	@Produces(MediaType.APPLICATION_JSON)
+	/**
+	 * Récupère une ressource
+	 * 
+	 * @param	id
+	 * 			l'identifiant de la ressource
+	 * 
+	 * @return	OK avec la ressource récupérée ou NOT_FOUND si la ressource n'existe pas
+	 * 
+	 * @throws	SQLException
+	 * 			erreur pouvant se produire lors de la récupération d'un objet en base
+	 */
 	Response get(ID id) throws SQLException;
 	
-	@PUT
-	@Path("{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
+	/**
+	 * Met à jour une ressource
+	 * 
+	 * @param	id
+	 * 			l'identifiant de la ressource
+	 * @param	entity
+	 * 			la version modifiée de la ressource
+	 * 
+	 * @return	NO_CONTENT en cas de succès, NOT_FOUND sinon
+	 * 
+	 * @throws	SQLException
+	 * 			erreur pouvant se produire lors de la mise à jour de l'objet en base
+	 */
 	Response update(ID id, T entity) throws SQLException;
 	
-	@DELETE
-	@Path("{id}")
+	/**
+	 * Supprime une ressource
+	 * 
+	 * @param	id
+	 * 			l'identifiant de la ressource
+	 * 
+	 * @return	NO_CONTENT en cas de succès, NOT_FOUND sinon
+	 * 
+	 * @throws	SQLException
+	 * 			erreur pouvant se produire lors de la suppression de l'objet en base
+	 */
 	Response delete(ID id) throws SQLException;
 
 }

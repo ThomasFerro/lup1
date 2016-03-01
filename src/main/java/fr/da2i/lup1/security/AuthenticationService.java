@@ -21,6 +21,7 @@ package fr.da2i.lup1.security;
 import java.security.Principal;
 import java.sql.SQLException;
 
+import javax.inject.Singleton;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
@@ -36,14 +37,13 @@ import fr.da2i.lup1.util.DaoProvider;
  * @author Edouard
  *
  */
+@Singleton
 public class AuthenticationService {
 	
 	public static final String HEADER_KEY = "Authorization";
 	
 	private Dao<SecurId, String> securidDao;
 	private Dao<Member, Integer> memberDao;
-	private Member principal;
-	private boolean secured;
 	
 	public AuthenticationService() {
 		this.securidDao = DaoProvider.getDao(SecurId.class);
@@ -64,17 +64,23 @@ public class AuthenticationService {
 					securId.regenerate();
 					securidDao.update(securId);
 				}
-				principal = memberDao.queryBuilder().where().eq("login", securId.getId()).queryForFirst();
-				secured = requestContext.getSecurityContext().isSecure();
+				Member principal = memberDao.queryBuilder().where().eq("login", securId.getId()).queryForFirst();
+				boolean secured = requestContext.getSecurityContext().isSecure();
 				requestContext.getHeaders().putSingle(HEADER_KEY, securId.getToken());
-				requestContext.setSecurityContext(new RoleSecurityContext());
+				requestContext.setSecurityContext(new RoleSecurityContext(principal, secured));
 			}
 		}
 	}
 	
 	private final class RoleSecurityContext implements SecurityContext {
 		
-		public RoleSecurityContext() {}
+		private Member principal;
+		private boolean secured;
+		
+		public RoleSecurityContext(Member principal, boolean secured) {
+			this.principal = principal;
+			this.secured = secured;
+		}
 
 		@Override
 		public String getAuthenticationScheme() {

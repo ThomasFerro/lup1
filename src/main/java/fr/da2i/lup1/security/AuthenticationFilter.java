@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.annotation.Priority;
+import javax.inject.Inject;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
@@ -37,11 +38,10 @@ import javax.ws.rs.ext.Provider;
 @Authenticated
 public class AuthenticationFilter implements ContainerRequestFilter, ContainerResponseFilter {
 	
+	@Inject
 	private AuthenticationService authenticationService;
 	
-	public AuthenticationFilter() {
-		this.authenticationService = new AuthenticationService();
-	}
+	public AuthenticationFilter() {}
 
 	@Override
 	public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {

@@ -65,8 +65,7 @@ public class DaoProvider {
 	
 	public static synchronized <D extends Dao<T, ?>, T> D getDao(Class<T> daoObject) {
 		try {
-			D dao = DaoManager.createDao(getInstance().conSource, daoObject);
-			return dao;
+			return DaoManager.createDao(getConnectionSource(), daoObject);
 		} catch (SQLException e) {
 			throw new DaoException("No dao found for " + daoObject);
 		}
