@@ -1,9 +1,16 @@
 (function() {
   angular.module('lup1')
-  .config(function($routeProvider){
+  .config(function($locationProvider,$routeProvider){
+    $locationProvider.html5Mode({
+      enabled: true,
+      requireBase: false
+    });
     $routeProvider
     .when('/formations', {
       templateUrl: 'templates/pages/formations/index.html'
+    })
+    .when('/formations/:formation/semestres', {
+      templateUrl:'templates/pages/formations/notes/index.html'
     })
     .when('/formations/bulletin', {
       templateUrl: 'templates/pages/formations/bulletin/index.html'

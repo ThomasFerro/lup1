@@ -27,7 +27,7 @@
 
 .responsive-menu-wrapper{
   margin-top: 4%;
-  overflow-x: scroll;
+  overflow-x: overlay;
 }
 
 .responsive-menu-wrapper .menu{
