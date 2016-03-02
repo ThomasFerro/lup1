@@ -182,6 +182,7 @@ CREATE VIEW student_by_promotion_with_moy AS
         semestre,
         moyenne
   ORDER BY
+        promotion_id ASC,
         semestre ASC,
         moyenne DESC;
 
@@ -201,7 +202,6 @@ CREATE VIEW interventions_by_intervenant_by_promotion AS
           quote
   FROM
           member
-
   INNER JOIN
           intervention ON member_id = intervenant_id;
 
