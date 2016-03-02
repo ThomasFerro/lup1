@@ -20,6 +20,7 @@ package fr.da2i.lup1.security;
 
 import java.security.Principal;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 import javax.inject.Singleton;
 import javax.ws.rs.container.ContainerRequestContext;
@@ -28,6 +29,9 @@ import javax.ws.rs.core.SecurityContext;
 
 import com.google.common.base.Strings;
 import com.j256.ormlite.dao.Dao;
+import com.nimbusds.jose.JOSEException;
+import com.nimbusds.jwt.JWTClaimsSet;
+import com.nimbusds.jwt.SignedJWT;
 
 import fr.da2i.lup1.entity.Member;
 import fr.da2i.lup1.util.DaoProvider;
@@ -42,31 +46,37 @@ public class AuthenticationService {
 	
 	public static final String HEADER_KEY = "Authorization";
 	
-	private Dao<SecurId, String> securidDao;
+	private Dao<SecureKey, String> secureKeyDao;
 	private Dao<Member, Integer> memberDao;
 	
 	public AuthenticationService() {
-		this.securidDao = DaoProvider.getDao(SecurId.class);
+		this.secureKeyDao = DaoProvider.getDao(SecureKey.class);
 		this.memberDao = DaoProvider.getDao(Member.class);
 	}
 	
-	public void authenticate(ContainerRequestContext requestContext, String authentication) throws SQLException {
-		if (Strings.isNullOrEmpty(authentication)) {
-			requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
+	private void abort(ContainerRequestContext requestContext) {
+		requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
+	}
+	
+	public void authenticate(ContainerRequestContext requestContext, String authentication) throws SQLException, ParseException, JOSEException {
+		SignedJWT signedJWT;
+		if (Strings.isNullOrEmpty(authentication) || (signedJWT = SecureKey.parse(authentication)) == null) {
+			abort(requestContext);
 		}
 		else {
-			SecurId securId = securidDao.queryBuilder().where().eq("token", authentication).queryForFirst();
-			if (securId == null) {
-				requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
+			JWTClaimsSet claimsSet = signedJWT.getJWTClaimsSet();
+			SecureKey secureKey = secureKeyDao.queryForId(claimsSet.getIssuer());
+			if (secureKey == null || !secureKey.verify(signedJWT)) {
+				abort(requestContext);
 			}
 			else {
-				if (securId.hasExpire()) {
-					securId.regenerate();
-					securidDao.update(securId);
+				if (secureKey.hasExpire(signedJWT)) {
+					signedJWT = secureKey.regenerate();
+					secureKeyDao.update(secureKey);
 				}
-				Member principal = memberDao.queryBuilder().where().eq("login", securId.getId()).queryForFirst();
+				Member principal = memberDao.queryBuilder().where().eq("login", secureKey.getId()).queryForFirst();
 				boolean secured = requestContext.getSecurityContext().isSecure();
-				requestContext.getHeaders().putSingle(HEADER_KEY, securId.getToken());
+				requestContext.getHeaders().putSingle(HEADER_KEY, signedJWT.serialize());
 				requestContext.setSecurityContext(new RoleSecurityContext(principal, secured));
 			}
 		}

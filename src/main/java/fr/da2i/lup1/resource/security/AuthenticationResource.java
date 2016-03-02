@@ -16,73 +16,76 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.da2i.lup1.resource;
+package fr.da2i.lup1.resource.security;
 
+import java.net.URI;
 import java.sql.SQLException;
 
-import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.ForbiddenException;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotAllowedException;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+
+import com.j256.ormlite.dao.Dao;
+import com.nimbusds.jwt.SignedJWT;
 
 import fr.da2i.lup1.entity.Credential;
 import fr.da2i.lup1.security.Authenticated;
+import fr.da2i.lup1.security.AuthenticationService;
 import fr.da2i.lup1.security.Passwords;
+import fr.da2i.lup1.security.SecureKey;
 import fr.da2i.lup1.util.AbstractRestlet;
+import fr.da2i.lup1.util.DaoProvider;
 
-@Path("credentials")
-public class CredentialResource extends AbstractRestlet<String, Credential> {
+@Path("authentication")
+public class AuthenticationResource extends AbstractRestlet<String, Credential> {
+	
+	private Dao<SecureKey, String> secureKeyDao;
 
-	public CredentialResource() {
+	public AuthenticationResource() {
 		super(Credential.class);
+		this.secureKeyDao = DaoProvider.getDao(SecureKey.class);
 	}
 	
 	@Override
 	@POST
 	@Consumes("application/json")
 	public Response create(Credential entity) throws SQLException {
-		String password = Passwords.hash(entity.getPassword());
-		if (password.length() == 0) {
-			throw new BadRequestException();
+		String id = entity.getId();
+		if (dao.idExists(id)) {
+			Credential fromDb = dao.queryForId(id);
+			if (Passwords.check(entity.getPassword(), fromDb.getPassword())) {
+				SecureKey secureKey = new SecureKey(id);
+				secureKey.setRoles(new String[] { "default" });
+				SignedJWT signedJWT = secureKey.regenerate();
+				secureKeyDao.createOrUpdate(secureKey);
+				URI instanceURI = uriInfo.getAbsolutePathBuilder().path(id).build();
+				return Response.created(instanceURI).header(AuthenticationService.HEADER_KEY, signedJWT.serialize()).build();
+			}
 		}
-		entity.setPassword(password);
-		return super.create(entity);
+		throw new NotFoundException();
 	}
 	
 	@Override
 	@GET
 	@Path("{id}")
-	@Produces("application/json")
 	@Authenticated
 	public Response get(@PathParam("id") String id) throws SQLException {
-		if (getAuthenticatedLogin().equals(id)) {
-			return super.get(id);
-		}
-		throw new ForbiddenException();
+		throw new NotAllowedException(Response.noContent().build());
 	}
-	
+
 	@Override
 	@PUT
 	@Path("{id}")
 	@Consumes("application/json")
-	@Authenticated
 	public Response update(@PathParam("id") String id, Credential entity) throws SQLException {
-		if (getAuthenticatedLogin().equals(id)) {
-			String password = Passwords.hash(entity.getPassword());
-			if (password.length() == 0) {
-				throw new BadRequestException();
-			}
-			entity.setPassword(password);
-			return super.update(id, entity);
-		}
-		throw new ForbiddenException();
+		throw new NotAllowedException(Response.noContent().build());
 	}
 	
 	@Override
@@ -90,10 +93,11 @@ public class CredentialResource extends AbstractRestlet<String, Credential> {
 	@Path("{id}")
 	@Authenticated
 	public Response delete(@PathParam("id") String id) throws SQLException {
-		if (getAuthenticatedLogin().equals(id)) {
-			return super.delete(id);
+		if (getAuthenticatedLogin().equals(id) && secureKeyDao.idExists(id)) {
+			secureKeyDao.deleteById(id);
+			return Response.noContent().build();
 		}
-		throw new ForbiddenException();
+		throw new NotFoundException();
 	}
 
 }

@@ -1,13 +1,20 @@
 package fr.da2i.lup1.entity;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
-@XmlRootElement
-public class Promotion {
+import fr.da2i.lup1.util.Identifiable;
+
+@DatabaseTable(tableName = "promotion")
+public class Promotion extends Identifiable<Integer> {
 	
+	@DatabaseField(columnName = "promotion_id", id = true)
 	private int promotionId;
+	@DatabaseField(columnName = "year")
 	private int year;
+	@DatabaseField(columnName = "formation_id")
 	private int formationId;
+	@DatabaseField(columnName = "responsable_id")
 	private int responsableId;
 	
 	public Promotion(int promotionId, int year, int formationId, int responsableId) {
@@ -17,11 +24,11 @@ public class Promotion {
 		this.responsableId = responsableId;
 	}
 
-	public int getPromotionId() {
+	public Integer getId() {
 		return promotionId;
 	}
 
-	public void setPromotionId(int promotionId) {
+	public void setId(Integer promotionId) {
 		this.promotionId = promotionId;
 	}
 

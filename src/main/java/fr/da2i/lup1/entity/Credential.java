@@ -3,6 +3,7 @@ package fr.da2i.lup1.entity;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import fr.da2i.lup1.security.Passwords;
 import fr.da2i.lup1.util.Identifiable;
 
 @DatabaseTable(tableName = "credential")
@@ -47,5 +48,9 @@ public class Credential extends Identifiable<String> {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public void encrypt() {
+		this.password = Passwords.hash(password);
 	}
 }

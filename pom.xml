@@ -113,6 +113,12 @@
 			<artifactId>jackson-annotations</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
+		<!-- JSON Web Token -->
+		<dependency>
+			<groupId>com.nimbusds</groupId>
+			<artifactId>nimbus-jose-jwt</artifactId>
+			<version>4.12</version>
+		</dependency>
 		<!-- Postgresql -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
