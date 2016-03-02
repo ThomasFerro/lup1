@@ -58,7 +58,7 @@ create table CREDENTIAL (
 /*==============================================================*/
 create table DO_EVAL (
    MARK                 FLOAT                   DEFAULT 0,
-   STUDENT_ID            INTEGER                 not null,
+   STUDENT_ID           INTEGER                 not null,
    EVALUATION_ID        INTEGER                 not null,
    constraint PK_DO_EVAL primary key (STUDENT_ID,EVALUATION_ID)
 );
@@ -67,12 +67,12 @@ create table DO_EVAL (
 /* Table : EVALUATION                                           */
 /*==============================================================*/
 create table EVALUATION (
-   EVALUATION_ID        INTEGER                 not null,
+   EVALUATION_ID        SERIAL                  not null,
    NAME                 TEXT                    not null,
    COEFF                FLOAT                   DEFAULT 1,
    TEACHER_ID           INTEGER                 not null,
    SUBJECT_ID           INTEGER                 not null,
- 	 DATE_EVAL            DATE,
+ 	 DATE_EVAL            DATE ,
    constraint PK_EVALUATION primary key (EVALUATION_ID)
 );
 
@@ -80,7 +80,7 @@ create table EVALUATION (
 /* Table : FLAG                                                 */
 /*==============================================================*/
 create table FLAG (
-   FLAG_ID              INTEGER                 not null,
+   FLAG_ID              SERIAL                 not null,
    LABEL                TEXT                 null,
    constraint PK_FLAG primary key (FLAG_ID)
 );
@@ -89,7 +89,7 @@ create table FLAG (
 /* Table : FORMATION                                            */
 /*==============================================================*/
 create table FORMATION (
-   FORMATION_ID         INTEGER                 not null,
+   FORMATION_ID         SERIAL                 not null,
    NAME                 TEXT                 null,
    constraint PK_FORMATION primary key (FORMATION_ID)
 );
@@ -98,7 +98,7 @@ create table FORMATION (
 /* Table : INTERNSHIP                                           */
 /*==============================================================*/
 create table INTERNSHIP (
-   INTERNSHIP_ID        INTEGER                 not null,
+   INTERNSHIP_ID        SERIAL                 not null,
    TITLE                TEXT                 null,
    MISSIONS             TEXT                 null,
    DESCRIPTION          TEXT                 null,
@@ -112,7 +112,7 @@ create table INTERNSHIP (
 /* Table : INTERNSHIP_LOG                                       */
 /*==============================================================*/
 create table INTERNSHIP_LOG (
-   INTERNSHIP_LOG_ID    INTEGER                 not null,
+   INTERNSHIP_LOG_ID    SERIAL                 not null,
    DATE_LOG             TIMESTAMP               DEFAULT CURRENT_TIMESTAMP,
    QUOTE                TEXT                    null,
    FLAG_ID              INTEGER                 not null,
@@ -125,11 +125,11 @@ create table INTERNSHIP_LOG (
 /* Table : INTERVENTION                                         */
 /*==============================================================*/
 create table INTERVENTION (
-   INTERVENTION_ID      INTEGER                 not null,
-   QUOTE                TEXT                 null,
-   DATE_INTERVENTION    DATE                 null,
-   INTERVENANT_ID       INTEGER                 not null,
-   PROMOTION_ID         INTEGER                 not null,
+   INTERVENTION_ID      SERIAL                 not null,
+   QUOTE                TEXT                   null,
+   DATE_INTERVENTION    DATE                   null,
+   INTERVENANT_ID       INTEGER                not null,
+   PROMOTION_ID         INTEGER                not null,
    constraint PK_INTERVENTION primary key (INTERVENTION_ID)
 );
 
@@ -154,7 +154,7 @@ create table IS_ABSENT_DURING (
 /* Table : IS_REGISTER_IN                                       */
 /*==============================================================*/
 create table IS_REGISTER_IN (
-   STUDENT_ID            INTEGER                 not null,
+   STUDENT_ID           INTEGER                 not null,
    PROMOTION_ID         INTEGER                 not null
 );
 
@@ -170,7 +170,7 @@ create table MANAGE_INTERNSHIP (
 /* Table : MEMBER                                               */
 /*==============================================================*/
 create table MEMBER (
-   MEMBER_ID            INTEGER                 not null,
+   MEMBER_ID            SERIAL               not null,
    FIRST_NAME           TEXT                 null,
    LAST_NAME            TEXT                 null,
    ROLE                 TEXT                 not null,
@@ -180,7 +180,7 @@ create table MEMBER (
    PHONE                TEXT                 null,
    SIRET                TEXT                 null,
    PICTURE              TEXT                 null,
-   ADDRESS               TEXT                 null,
+   ADDRESS              TEXT                 null,
    constraint PK_MEMBER primary key (MEMBER_ID)
 );
 
@@ -200,7 +200,7 @@ create table ORGANIZATION (
 /* Table : PROMOTION                                            */
 /*==============================================================*/
 create table PROMOTION (
-   PROMOTION_ID         INTEGER                 not null,
+   PROMOTION_ID         SERIAL                  not null,
    YEAR                 INTEGER                 null,
    FORMATION_ID         INTEGER                 not null,
    RESPONSABLE_ID       INTEGER                 not null,
@@ -229,7 +229,7 @@ create table ROLE (
 /* Table : SUBJECT                                              */
 /*==============================================================*/
 create table SUBJECT (
-   SUBJECT_ID           INTEGER                 not null,
+   SUBJECT_ID           SERIAL                  not null,
    NAME                 TEXT                    null,
    COEFF                FLOAT                   null,
    UE_ID                INTEGER                 not null,
@@ -240,7 +240,7 @@ create table SUBJECT (
 /* Table : UE                                                   */
 /*==============================================================*/
 create table UE (
-   UE_ID                INTEGER                 not null,
+   UE_ID                SERIAL               not null,
    NAME                 TEXT                 null,
    constraint PK_UE primary key (UE_ID)
 );

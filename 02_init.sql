@@ -233,7 +233,7 @@ CREATE VIEW done_internship AS
     AND
           log.member_id = m.member_id
     AND
-          reg.student_id = m.member_id
+          reg.student_id = m.member_id;
 
 -- 8. Stats sur le suivi des stages (??)
 
