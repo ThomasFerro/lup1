@@ -42,3 +42,14 @@
 .filter-body legend{
   color:white;
 }
+
+/*panel stages*/
+
+.moduleContainer .panel-heading {
+    background-color: #444444 !important;/*#BDBDBD !important;*/
+    color: white !important;
+}
+
+.moduleContainer .panel-body {
+    background-color: #E4DFDF !important;
+}

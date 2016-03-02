@@ -13,15 +13,6 @@
   text-overflow: ellipsis !important;
 }
 
-.moduleContainer .panel-heading {
-    background-color: #BDBDBD !important;
-    color: white !important;
-}
-
-.moduleContainer .panel-body {
-    background-color: #E4DFDF !important;
-}
-
 .details-intership li {
   white-space: nowrap !important;
   overflow: hidden !important;

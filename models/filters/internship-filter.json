@@ -9,38 +9,45 @@
     ],
     "filters":[
       {
+        "label":"Entreprise",
+        "name":"entreprise",
+        "type":"text",
+        "id":"company-internship",
+        "placeholder":"Entreprise"
+      },
+      {
         "label":"Intitulé",
         "name":"intitule",
         "type":"text",
-        "id":"name-subject",
+        "id":"title-internship",
         "placeholder":"Intitulé"
       },
       {
         "label":"localisation",
         "name":"localisation",
         "type":"text",
-        "id":"ue-subject",
+        "id":"localisation-internship",
         "placeholder":"Localisation"
       },
       {
         "label":"Date début",
         "name":"datedebut",
         "type":"text",
-        "id":"semester-subject",
+        "id":"begin-internship",
         "placeholder":"Date début"
       },
       {
         "label":"Durée",
         "name":"duree",
         "type":"text",
-        "id":"coeff-subject",
+        "id":"duration-internship",
         "placeholder":"Durée"
       },
       {
         "label":"Technologies",
         "name":"technologies",
         "type":"text",
-        "id":"manager-subject",
+        "id":"technologies-internship",
         "placeholder":"Technologies"
       }
     ]

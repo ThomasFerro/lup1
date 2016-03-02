@@ -3,11 +3,11 @@
   <panel-filter></panel-filter>
 </div>
 <div class="col-lg-9 col-xs-12 col-sm-12 col-md-8 container-fluid">
-  <div class="btn-group vue row">
-    <button type="button" class="btn btn-default" aria-strong="Left Align">
+  <div class="btn-group vue row hidden-sm hidden-xs" ng-controller="ModuleController as controller">
+    <button type="button" class="btn btn-default" ng-class="{ active : controller.isActive('list') }" ng-click="controller.setActive('list')">
       <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
     </button>
-    <button type="button" class="btn btn-default" aria-strong="Justify">
+    <button type="button" class="btn btn-default" ng-model="mosaic" ng-class="{ active : controller.isActive('module')}" ng-click="controller.setActive('module')">
       <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
     </button>
   </div>
@@ -17,16 +17,17 @@
       <div class="col-lg-5">
         <div class="panel panel-default ">
           <div class="panel-heading">
-            <span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;&nbsp;Application web de gestion de notes
+            <span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;&nbsp;Système mash-up multimédia
           </div>
           <div class="panel-body">
             <ul class="list-group details-intership">
-              <li class="list-group-item"><span class="glyphicon glyphicon-map-marker"/>&nbsp;Villeneuve d'Ascq</li>
-              <li class="list-group-item"><span class="glyphicon glyphicon-user"/>&nbsp;RH: J. Coulon</li>
-              <li class="list-group-item"><span class="glyphicon glyphicon-calendar"/>&nbsp;21/04/2016</li>
-              <li class="list-group-item"><span class="glyphicon glyphicon-time"/>&nbsp;3 mois</li>
-              <li class="list-group-item"><span class="glyphicon glyphicon-console"/>&nbsp;PHP, jQuery, Python</li>
-              <li class="list-group-item"><span class="glyphicon glyphicon-tags"/>&nbsp;Bulletin, Notes, Stage, Bulletin, Notes, Stage, Bulletin, Notes, Stage, Bulletin, Notes, Stage</li>
+              <li class="list-group-item">&nbsp;<strong>Archimed</strong></li>
+              <li class="list-group-item" data-toggle="tooltip" data-placement="bottom" title="Lille"><span class="glyphicon glyphicon-map-marker"/>&nbsp;Lille</li>
+              <li class="list-group-item" data-toggle="tooltip" data-placement="bottom" title="RH: Aurélie Vanpoulle"><span class="glyphicon glyphicon-user"/>&nbsp;RH: Aurélie Vanpoulle</li>
+              <li class="list-group-item" data-toggle="tooltip" data-placement="bottom" title="21/04/2016"><span class="glyphicon glyphicon-calendar"/>&nbsp;21/04/2016</li>
+              <li class="list-group-item" data-toggle="tooltip" data-placement="bottom" title="3 mois"><span class="glyphicon glyphicon-time"/>&nbsp;3 mois</li>
+              <li class="list-group-item" data-toggle="tooltip" data-placement="bottom" title=".NET, jQuery, CSS/BootStrap"><span class="glyphicon glyphicon-console"/>&nbsp;.NET, jQuery, CSS/BootStrap</li>
+              <li class="list-group-item" data-toggle="tooltip" data-placement="bottom" title="Bibdoc, GED, Archimed, mash-up, multimédia"><span class="glyphicon glyphicon-tags"/>&nbsp;Bibdoc, GED, Archimed, mash-up, multimédia</li>
             </ul>
             <a class="btn btn-warning btn-block" href="#">Voir cette annonce</a>
           </div>
@@ -35,16 +36,17 @@
       <div class="col-lg-5">
         <div class="panel panel-default ">
           <div class="panel-heading">
-            <span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;&nbsp;Application web de gestion de notes
+            <span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;&nbsp;Application androïd
           </div>
           <div class="panel-body">
             <ul class="list-group details-intership">
+              <li class="list-group-item">&nbsp;<strong>Norsys</strong></li>
               <li class="list-group-item"><span class="glyphicon glyphicon-map-marker"/>&nbsp;Villeneuve d'Ascq</li>
               <li class="list-group-item"><span class="glyphicon glyphicon-user"/>&nbsp;RH: J. Coulon</li>
               <li class="list-group-item"><span class="glyphicon glyphicon-calendar"/>&nbsp;21/04/2016</li>
-              <li class="list-group-item"><span class="glyphicon glyphicon-time"/>&nbsp;3 mois</li>
-              <li class="list-group-item"><span class="glyphicon glyphicon-console"/>&nbsp;PHP, jQuery, Python</li>
-              <li class="list-group-item"><span class="glyphicon glyphicon-tags"/>&nbsp;Bulletin, Notes, Stage, Bulletin, Notes, Stage, Bulletin, Notes, Stage, Bulletin, Notes, Stage</li>
+              <li class="list-group-item"><span class="glyphicon glyphicon-time"/>&nbsp;6 mois</li>
+              <li class="list-group-item"><span class="glyphicon glyphicon-console"/>&nbsp;Java : Androïd studio</li>
+              <li class="list-group-item"><span class="glyphicon glyphicon-tags"/>&nbsp;Combinaison verte, centre aéré, vacances</li>
             </ul>
             <a class="btn btn-warning btn-block" href="#">Voir cette annonce</a>
           </div>
@@ -55,16 +57,17 @@
       <div class="col-lg-5">
         <div class="panel panel-default ">
           <div class="panel-heading">
-            <span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;&nbsp;Application web de gestion de notes
+            <span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;&nbsp;Application sous magento
           </div>
           <div class="panel-body">
             <ul class="list-group details-intership">
+              <li class="list-group-item">&nbsp;<strong>Smile</strong></li>
               <li class="list-group-item"><span class="glyphicon glyphicon-map-marker"/>&nbsp;Villeneuve d'Ascq</li>
-              <li class="list-group-item"><span class="glyphicon glyphicon-user"/>&nbsp;RH: J. Coulon</li>
-              <li class="list-group-item"><span class="glyphicon glyphicon-calendar"/>&nbsp;21/04/2016</li>
-              <li class="list-group-item"><span class="glyphicon glyphicon-time"/>&nbsp;3 mois</li>
-              <li class="list-group-item"><span class="glyphicon glyphicon-console"/>&nbsp;PHP, jQuery, Python</li>
-              <li class="list-group-item"><span class="glyphicon glyphicon-tags"/>&nbsp;Bulletin, Notes, Stage, Bulletin, Notes, Stage, Bulletin, Notes, Stage, Bulletin, Notes, Stage</li>
+              <li class="list-group-item"><span class="glyphicon glyphicon-user"/>&nbsp;RH: Fanny Charnière</li>
+              <li class="list-group-item"><span class="glyphicon glyphicon-calendar"/>&nbsp;21/05/2016</li>
+              <li class="list-group-item"><span class="glyphicon glyphicon-time"/>&nbsp;5 mois</li>
+              <li class="list-group-item"><span class="glyphicon glyphicon-console"/>&nbsp;PHP, jQuery</li>
+              <li class="list-group-item"><span class="glyphicon glyphicon-tags"/>&nbsp;Formation magento</li>
             </ul>
             <a class="btn btn-warning btn-block" href="#">Voir cette annonce</a>
           </div>
@@ -77,6 +80,7 @@
           </div>
           <div class="panel-body">
             <ul class="list-group details-intership">
+              <li class="list-group-item">&nbsp;<strong>Pictime</strong></li>
               <li class="list-group-item"><span class="glyphicon glyphicon-map-marker"/>&nbsp;Villeneuve d'Ascq</li>
               <li class="list-group-item"><span class="glyphicon glyphicon-user"/>&nbsp;RH: J. Coulon</li>
               <li class="list-group-item"><span class="glyphicon glyphicon-calendar"/>&nbsp;21/04/2016</li>
