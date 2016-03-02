@@ -13,9 +13,9 @@ public class Formation extends Identifiable<Integer> {
 	@DatabaseField(columnName = "name")
 	private String name;
 	
-	public Formation(int f, String n) {
-		this.formationId = f;
-		this.name = n;
+	public Formation(int formationId, String name) {
+		this.formationId = formationId;
+		this.name = name;
 	}
 	
 	public Formation() {}
