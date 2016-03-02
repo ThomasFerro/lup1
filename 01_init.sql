@@ -38,6 +38,8 @@ drop table if exists REGISTER_TO_INTERNSHIP cascade;
 
 drop table if exists ROLE cascade;
 
+drop table if exists AS_ROLE cascade;
+
 drop table if exists SUBJECT cascade;
 
 drop table if exists UE cascade;
@@ -139,7 +141,7 @@ create table INTERVENTION (
 create table IS_ABSENT_DURING (
    STUDENT_ID           INTEGER                 not null,
    SUBJECT_ID           INTEGER                 not null,
-   DATE_ABSENT          DATE                 null
+   DATE_ABSENT          DATE                    null
 );
 
 /*==============================================================*/
@@ -173,7 +175,6 @@ create table MEMBER (
    MEMBER_ID            SERIAL               not null,
    FIRST_NAME           TEXT                 null,
    LAST_NAME            TEXT                 null,
-   ROLE                 TEXT                 not null,
    EMAIL                TEXT                 null,
    BIRTHDAY             DATE                 null,
    LOGIN                TEXT                 null,
@@ -188,7 +189,7 @@ create table MEMBER (
 /* Table : ORGANIZATION                                         */
 /*==============================================================*/
 create table ORGANIZATION (
-   SIRET                TEXT              not null,
+   SIRET                TEXT                 not null,
    NAME                 TEXT                 null,
    ADDRESS              TEXT                 null,
    PHONE                TEXT                 null,
@@ -221,8 +222,18 @@ create table PROMOTION (
 /* Table : ROLE                                                 */
 /*==============================================================*/
 create table ROLE (
+   ROLE_ID               SERIAL               not null,
    ROLE                  TEXT                 not null,
-   constraint PK_ROLE primary key (ROLE)
+   constraint PK_ROLE primary key (ROLE_ID)
+);
+
+/*==============================================================*/
+/* Table : AS_ROLE                                                 */
+/*==============================================================*/
+create table AS_ROLE (
+   MEMBER_ID             INTEGER              not null,
+   ROLE_ID               INTEGER              not null,
+   constraint PK_AS_ROLE primary key (MEMBER_ID,ROLE_ID)
 );
 
 /*==============================================================*/
@@ -355,9 +366,14 @@ alter table MEMBER
       references ORGANIZATION (SIRET)
       on delete restrict on update cascade;
 
-alter table MEMBER
-   add constraint FK_MEMBER_ROLE foreign key (ROLE)
-      references ROLE (ROLE)
+alter table AS_ROLE
+   add constraint FK_AS_ROLE_MEMBER foreign key (MEMBER_ID)
+      references MEMBER (MEMBER_ID)
+      on delete restrict on update cascade;
+
+alter table AS_ROLE
+   add constraint FK_AS_ROLE_ROLE foreign key (ROLE_ID)
+      references ROLE (ROLE_ID)
       on delete restrict on update cascade;
 
 alter table PROMOTION
