@@ -2,8 +2,8 @@
   {{panelFilterCtrl.selectFilter(0)}}
   <panel-filter></panel-filter>
 </div>
-<div class="col-lg-9 col-xs-12 col-sm-12 col-md-8 container-fluid">
-  <div class="btn-group vue row hidden-sm hidden-xs" ng-controller="ModuleController as controller">
+<div class="col-lg-9 col-xs-12 col-sm-12 col-md-8 container-fluid" ng-controller="ModuleController as controller">
+  <div class="btn-group vue row hidden-sm hidden-xs">
     <button type="button" class="btn btn-default" ng-class="{ active : controller.isActive('list') }" ng-click="controller.setActive('list')">
       <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
     </button>
@@ -14,7 +14,7 @@
   <!-- Modules contenant les sujets de stage -->
   <div class="moduleContainer">
     <div class="row">
-      <div class="col-lg-5">
+      <div class="col-lg-5" ng-class="col-lg-5">
         <div class="panel panel-default ">
           <div class="panel-heading">
             <span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;&nbsp;Système mash-up multimédia
