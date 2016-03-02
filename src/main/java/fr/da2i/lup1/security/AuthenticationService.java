@@ -18,10 +18,15 @@
  */
 package fr.da2i.lup1.security;
 
+import io.jsonwebtoken.Claims;
+
 import java.security.Principal;
 import java.sql.SQLException;
-import java.text.ParseException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.Response;
@@ -29,9 +34,6 @@ import javax.ws.rs.core.SecurityContext;
 
 import com.google.common.base.Strings;
 import com.j256.ormlite.dao.Dao;
-import com.nimbusds.jose.JOSEException;
-import com.nimbusds.jwt.JWTClaimsSet;
-import com.nimbusds.jwt.SignedJWT;
 
 import fr.da2i.lup1.entity.Member;
 import fr.da2i.lup1.util.DaoProvider;
@@ -46,11 +48,12 @@ public class AuthenticationService {
 	
 	public static final String HEADER_KEY = "Authorization";
 	
-	private Dao<SecureKey, String> secureKeyDao;
+	@Inject
+	private JwtFactory jwtFactory;
+	
 	private Dao<Member, Integer> memberDao;
 	
 	public AuthenticationService() {
-		this.secureKeyDao = DaoProvider.getDao(SecureKey.class);
 		this.memberDao = DaoProvider.getDao(Member.class);
 	}
 	
@@ -58,27 +61,21 @@ public class AuthenticationService {
 		requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
 	}
 	
-	public void authenticate(ContainerRequestContext requestContext, String authentication) throws SQLException, ParseException, JOSEException {
-		SignedJWT signedJWT;
-		if (Strings.isNullOrEmpty(authentication) || (signedJWT = SecureKey.parse(authentication)) == null) {
+	public void authenticate(ContainerRequestContext requestContext, String authentication) throws SQLException {
+		if (Strings.isNullOrEmpty(authentication) || !jwtFactory.check(authentication)) {
 			abort(requestContext);
 		}
 		else {
-			JWTClaimsSet claimsSet = signedJWT.getJWTClaimsSet();
-			SecureKey secureKey = secureKeyDao.queryForId(claimsSet.getIssuer());
-			if (secureKey == null || !secureKey.verify(signedJWT)) {
-				abort(requestContext);
+			Claims claims = jwtFactory.parse(authentication);
+			if (claims.getExpiration().before(new Date())) {
+				Map<String, Object> map = new HashMap<>();
+				map.put("roles", claims.get("roles"));
+				authentication = jwtFactory.build(claims.getIssuer(), map);
 			}
-			else {
-				if (secureKey.hasExpire(signedJWT)) {
-					signedJWT = secureKey.regenerate();
-					secureKeyDao.update(secureKey);
-				}
-				Member principal = memberDao.queryBuilder().where().eq("login", secureKey.getId()).queryForFirst();
-				boolean secured = requestContext.getSecurityContext().isSecure();
-				requestContext.getHeaders().putSingle(HEADER_KEY, signedJWT.serialize());
-				requestContext.setSecurityContext(new RoleSecurityContext(principal, secured));
-			}
+			Member principal = memberDao.queryBuilder().where().eq("login", claims.getIssuer()).queryForFirst();
+			boolean secured = requestContext.getSecurityContext().isSecure();
+			requestContext.getHeaders().putSingle(HEADER_KEY, authentication);
+			requestContext.setSecurityContext(new RoleSecurityContext(principal, secured));
 		}
 	}
 	
