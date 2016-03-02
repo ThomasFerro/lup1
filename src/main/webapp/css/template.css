@@ -42,3 +42,17 @@
 .filter-body legend{
   color:white;
 }
+
+/* table buttons */
+
+.btn-success {
+    color: #fff!important;
+    background-color: #038181!important;
+    border-color: #008080!important;
+}
+
+.btn-warning {
+    color: #fff!important;
+    background-color: #FF8C00!important;
+    border-color: #FF8C00!important;
+}

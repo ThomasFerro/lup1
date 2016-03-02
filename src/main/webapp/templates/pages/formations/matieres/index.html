@@ -1,51 +1,123 @@
-<div class="col-lg-3 col-xs-12 panel-filter">
-  <div class="panel-filter-wrapper">
-    <div class="filter-header">
-      <h3>Gestions des matières</h3>
-      <ul class="list-group">
-        <a href="#" class="list-group-item">Ajouter une matière</a>
-      </ul>
+<div class="col-md-4 col-lg-3 hidden-xs hidden-sm col-without-padding panel-filter" ng-controller="PanelFilterController as panelFilterCtrl">
+  {{panelFilterCtrl.selectFilter(0)}}
+  <panel-filter></panel-filter>
+</div>
+<div class="col-lg-9 col-xs-12 col-sm-12 col-md-8">
+  <h3>DA2I: </h3>
+  <div class="panel panel-default">
+    <div class="panel-heading" data-toggle="collapse" data-target="#s5">
+      <div class="btn-group pull-right">
+        <a class="btn btn-default pull-right" data-toggle="collapse" data-target="#s5">
+          <span class="glyphicon glyphicon-menu-down"></span>
+        </a>
+      </div>
+      <h4>Semestre 5</h4>
     </div>
-    <div class="filter-body">
-      <fieldset>
-        <legend>Filtres:</legend>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon label-filter">Nom :</div>
-            <input type="text" name="name" id="name-matiere" class="form-control" placeholder="Nom de la matiere" autofocus>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon label-filter">UE :</div>
-            <input type="text" name="ue" id="ue-matiere"class="form-control" placeholder="UE de la matiere" >
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon label-filter">Coeff :</div>
-            <input type="text"  name="coeff" id="coeff-matiere" class="form-control" placeholder="Coeff de la matiere" >
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon label-filter">Responsable :</div>
-            <input type="text" name="responsable" id="responsable-matiere" class="form-control" placeholder="Responsable de la matiere">
-          </div>
-        </div>
-      </fieldset>
+    <div id="s5" class="panel-collapse collapse">
+      <div class="panel-body">
+        <table id="mytable" class="table table-bordred table-striped table-hover table-list-search">
+          <thead>
+          <tr>
+            <th>Nom</th>
+            <th class="hidden-xs">Responsable</th>
+            <th class="hidden-xs">UE</th>
+            <th class="hidden-xs">Coeff</th>
+            <th >Moyenne</th>
+            <th>Voir</th>
+            <th>Sup.</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>Reseau</td>
+            <td class="hidden-xs">Peter</td>
+            <td class="hidden-xs">Informatique</td>
+            <td class="hidden-xs">2</td>
+            <td>9</td>
+            <td><button class="btn btn-success btn-sm editButton"><span class="glyphicon glyphicon-log-in"></span></button></td>
+            <td><button class="btn btn-danger btn-sm deleteButton"><span class="glyphicon glyphicon-trash"></span></button></td>
+          </tr>
+          <tr>
+            <td>Bdd</td>
+            <td class="hidden-xs">Mathieu Philippe</td>
+            <td class="hidden-xs">Informatique</td>
+            <td class="hidden-xs">2</td>
+            <td>14</td>
+            <td><button class="btn btn-success btn-sm editButton"><span class="glyphicon glyphicon-log-in"></span></button></td>
+            <td><button class="btn btn-danger btn-sm deleteButton"><span class="glyphicon glyphicon-trash"></span></button></td>
+
+          </tr>
+          <tr>
+            <td>Anglais</td>
+            <td class="hidden-xs">Sylvestre Vanuxem</td>
+            <td class="hidden-xs">Générale</td>
+            <td class="hidden-xs">1</td>
+            <td>10</td>
+            <td><button class="btn btn-success btn-sm editButton"><span class="glyphicon glyphicon-log-in"></span></button></td>
+            <td><button class="btn btn-danger btn-sm deleteButton"><span class="glyphicon glyphicon-trash"></span></button></td>
+
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" data-toggle="collapse" data-target="#s6">
+      <div class="btn-group pull-right">
+        <a class="btn btn-default pull-right" data-toggle="collapse" data-target="#s6">
+          <span class="glyphicon glyphicon-menu-down"></span>
+        </a>
+      </div>
+      <h4>Semestre 6</h4>
+    </div>
+    <div id="s6" class="panel-collapse collapse">
+      <div class="panel-body">
+        <table id="mytable" class="table table-bordred table-striped table-hover table-list-search">
+          <thead>
+          <tr>
+            <th>Nom</th>
+            <th class="hidden-xs">Responsable</th>
+            <th class="hidden-xs">UE</th>
+            <th class="hidden-xs">Coeff</th>
+            <th class="hidden-xs">Moyenne</th>
+            <th>Voir</th>
+            <th>Sup.</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>Reseau</td>
+            <td class="hidden-xs">Peter</td>
+            <td class="hidden-xs">Informatique</td>
+            <td class="hidden-xs">9</td>
+            <td class="hidden-xs">2</td>
+            <td><button class="btn btn-success btn-sm editButton"><span class="glyphicon glyphicon-log-in"></span></button></td>
+            <td><button class="btn btn-danger btn-sm deleteButton"><span class="glyphicon glyphicon-trash"></span></button></td>
+          </tr>
+          <tr>
+            <td>Bdd</td>
+            <td class="hidden-xs">Mathieu Philippe</td>
+            <td class="hidden-xs">Informatique</td>
+            <td class="hidden-xs">2</td>
+            <td class="hidden-xs">14</td>
+            <td><button class="btn btn-success btn-sm editButton"><span class="glyphicon glyphicon-log-in"></span></button></td>
+            <td><button class="btn btn-danger btn-sm deleteButton"><span class="glyphicon glyphicon-trash"></span></button></td>
+
+          </tr>
+          <tr>
+            <td>Anglais</td>
+            <td class="hidden-xs">Sylvestre Vanuxem</td>
+            <td class="hidden-xs">Générale</td>
+            <td class="hidden-xs">1</td>
+            <td class="hidden-xs">10</td>
+            <td><button class="btn btn-success btn-sm editButton"><span class="glyphicon glyphicon-log-in"></span></button></td>
+            <td><button class="btn btn-danger btn-sm deleteButton"><span class="glyphicon glyphicon-trash"></span></button></td>
+
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
-<div class="col-lg-9 col-xs-9">
-  <h3>Notes</h3>
-  <p>
-    Contenu Lorem Ipsum Oui oui oui
-  </p>
-</div>
-<script>
-  $(document).ready(function(){
-    var height = $(window).height();
-    $('.panel-filter-wrapper').css('height', height);
-  });
-</script>

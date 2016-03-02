@@ -1,51 +1,171 @@
-<div class="col-lg-3 col-xs-12 panel-filter">
-  <div class="panel-filter-wrapper">
-    <div class="filter-header">
-      <h3>Gestions des matières</h3>
-      <ul class="list-group">
-        <a href="#" class="list-group-item">Ajouter une matière</a>
-      </ul>
+<div class="col-md-4 col-lg-3 hidden-xs hidden-sm col-without-padding panel-filter" ng-controller="PanelFilterController as panelFilterCtrl">
+  {{panelFilterCtrl.selectFilter(0)}}
+  <panel-filter></panel-filter>
+</div>
+<div class="col-lg-9 col-xs-12 col-sm-12 col-md-8">
+  <h3>DA2I - 2015-2016 : Evaluations </h3>
+  <div class="panel panel-default panel-ue">
+    <div class="panel-heading">
+      UE : Générale
     </div>
-    <div class="filter-body">
-      <fieldset>
-        <legend>Filtres:</legend>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon label-filter">Nom :</div>
-            <input type="text" name="name" id="name-matiere" class="form-control" placeholder="Nom de la matiere" autofocus>
+    <div class="panel-body">
+      <div class="panel panel-default panel-subject">
+        <div class="panel-heading" data-toggle="collapse" data-target="#anglais">
+          <div class="btn-group pull-right">
+            <a class="btn btn-default btn-xs pull-right" data-toggle="collapse" data-target="#anglais">
+              <span class="glyphicon glyphicon-menu-down"></span>
+            </a>
+          </div>
+          Anglais
+        </div>
+        <div id="anglais" class="panel-collapse collapse">
+          <div class="panel-body">
+            <table id="mytable" class="table table-bordred table-striped table-hover table-list-search">
+              <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th class="hidden-xs">Créateur</th>
+                  <th>Date</th>
+                  <th class="hidden-xs">Coeff</th>
+                  <th>Moyenne</th>
+                  <th>Noter</th>
+                  <th class="hidden-xs">Editer</th>
+                  <th class="hidden-xs">Sup.</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>DS1</td>
+                  <td class="hidden-xs">Vanuxem</td>
+                  <td>25/04/2016</td>
+                  <td class="hidden-xs">2</td>
+                  <td>9</td>
+                  <td><button class="btn btn-success btn-sm editButton"><span class="fa fa-gavel"></span></button></td>
+                  <td class="hidden-xs"><button class="btn btn-warning btn-sm editButton"><span class="glyphicon glyphicon-pencil"></span></button></td>
+                  <td class="hidden-xs"><button class="btn btn-danger btn-sm deleteButton"><span class="glyphicon glyphicon-trash"></span></button></td>
+                </tr>
+                <tr>
+                  <td>DS2</td>
+                  <td class="hidden-xs">Vanuxem</td>
+                  <td>25/05/2016</td>
+                  <td class="hidden-xs">2</td>
+                  <td>12</td>
+                  <td><button class="btn btn-success btn-sm editButton"><span class="fa fa-gavel"></span></button></td>
+                  <td class="hidden-xs"><button class="btn btn-warning btn-sm editButton"><span class="glyphicon glyphicon-pencil"></span></button></td>
+                  <td class="hidden-xs"><button class="btn btn-danger btn-sm deleteButton"><span class="glyphicon glyphicon-trash"></span></button></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon label-filter">UE :</div>
-            <input type="text" name="ue" id="ue-matiere"class="form-control" placeholder="UE de la matiere" >
+      </div>
+      <div class="panel panel-default panel-subject">
+        <div class="panel-heading" data-toggle="collapse" data-target="#mathematiques">
+          <div class="btn-group pull-right">
+            <a class="btn btn-default btn-xs pull-right" data-toggle="collapse" data-target="#mathematiques">
+              <span class="glyphicon glyphicon-menu-down"></span>
+            </a>
+          </div>
+          Mathématiques
+        </div>
+        <div id="mathematiques" class="panel-collapse collapse">
+          <div class="panel-body">
+            <table id="mytable" class="table table-bordred table-striped table-hover table-list-search">
+              <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th class="hidden-xs">Créateur</th>
+                  <th>Date</th>
+                  <th class="hidden-xs">Coeff</th>
+                  <th>Moyenne</th>
+                  <th>Noter</th>
+                  <th class="hidden-xs">Editer</th>
+                  <th class="hidden-xs">Sup.</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>DS1</td>
+                  <td class="hidden-xs">Chlebowski</td>
+                  <td>25/04/2016</td>
+                  <td class="hidden-xs">2</td>
+                  <td>9</td>
+                  <td><button class="btn btn-success btn-sm editButton"><span class="fa fa-gavel"></span></button></td>
+                  <td class="hidden-xs"><button class="btn btn-warning btn-sm editButton"><span class="glyphicon glyphicon-pencil"></span></button></td>
+                  <td class="hidden-xs"><button class="btn btn-danger btn-sm deleteButton"><span class="glyphicon glyphicon-trash"></span></button></td>
+                </tr>
+                <tr>
+                  <td>DS2</td>
+                  <td class="hidden-xs">Chlebowski</td>
+                  <td>25/05/2016</td>
+                  <td class="hidden-xs">2</td>
+                  <td>12</td>
+                  <td><button class="btn btn-success btn-sm editButton"><span class="fa fa-gavel"></span></button></td>
+                  <td class="hidden-xs"><button class="btn btn-warning btn-sm editButton"><span class="glyphicon glyphicon-pencil"></span></button></td>
+                  <td class="hidden-xs"><button class="btn btn-danger btn-sm deleteButton"><span class="glyphicon glyphicon-trash"></span></button></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon label-filter">Coeff :</div>
-            <input type="text"  name="coeff" id="coeff-matiere" class="form-control" placeholder="Coeff de la matiere" >
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon label-filter">Responsable :</div>
-            <input type="text" name="responsable" id="responsable-matiere" class="form-control" placeholder="Responsable de la matiere">
-          </div>
-        </div>
-      </fieldset>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default panel-ue">
+    <div class="panel-heading">
+      UE : Informatique
+    </div>
+    <div class="panel-body">
+  <div class="panel panel-default panel-subject">
+    <div class="panel-heading" data-toggle="collapse" data-target="#bdd">
+      <div class="btn-group pull-right">
+        <a class="btn btn-default  btn-xs pull-right" data-toggle="collapse" data-target="#bdd">
+          <span class="glyphicon glyphicon-menu-down"></span>
+        </a>
+      </div>
+      Administration base de donnée et web
+    </div>
+    <div id="bdd" class="panel-collapse collapse">
+      <div class="panel-body">
+        <table id="mytable" class="table table-bordred table-striped table-hover table-list-search">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th class="hidden-xs">Créateur</th>
+              <th>Date</th>
+              <th class="hidden-xs">Coeff</th>
+              <th>Moyenne</th>
+              <th>Noter</th>
+              <th class="hidden-xs">Editer</th>
+              <th class="hidden-xs">Sup.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>DS1</td>
+              <td class="hidden-xs">P.Mathieu</td>
+              <td>18/02/2016</td>
+              <td class="hidden-xs">2</td>
+              <td>16</td>
+              <td><button class="btn btn-success btn-sm editButton"><span class="fa fa-gavel"></span></button></td>
+              <td class="hidden-xs"><button class="btn btn-success btn-sm editButton"><span class="glyphicon glyphicon-log-in"></span></button></td>
+              <td class="hidden-xs"><button class="btn btn-danger btn-sm deleteButton"><span class="glyphicon glyphicon-trash"></span></button></td>
+            </tr>
+            <tr>
+              <td>TP1</td>
+              <td class="hidden-xs">P.Mathieu</td>
+              <td>9/03/2016</td>
+              <td class="hidden-xs">2</td>
+              <td>12</td>
+              <td><button class="btn btn-success btn-sm editButton"><span class="fa fa-gavel"></span></button></td>
+              <td class="hidden-xs"><button class="btn btn-success btn-sm editButton"><span class="glyphicon glyphicon-log-in"></span></button></td>
+              <td class="hidden-xs"><button class="btn btn-danger btn-sm deleteButton"><span class="glyphicon glyphicon-trash"></span></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
     </div>
   </div>
 </div>
-<div class="col-lg-9 col-xs-9">
-  <h3>Notes</h3>
-  <p>
-    Contenu Lorem Ipsum Oui oui oui
-  </p>
-</div>
-<script>
-  $(document).ready(function(){
-    var height = $(window).height();
-    $('.panel-filter-wrapper').css('height', height);
-  });
-</script>

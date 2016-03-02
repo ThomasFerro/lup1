@@ -9,8 +9,8 @@
     .when('/formations', {
       templateUrl: 'templates/pages/formations/index.html'
     })
-    .when('/formations/:formation/semestres', {
-      templateUrl:'templates/pages/formations/notes/index.html'
+    .when('/formations/:formation/:date/', {
+      templateUrl:'templates/pages/formations/evaluations/index.html'
     })
     .when('/formations/bulletin', {
       templateUrl: 'templates/pages/formations/bulletin/index.html'

@@ -1,0 +1,20 @@
+.panel-subject .panel-heading{
+  white-space: nowrap;
+  cursor:  pointer;
+  background-color: #F1F1F1;
+  border-top: 1px solid #cdcdcd;
+}
+
+.panel-subject{
+  margin-bottom: 0!important;
+  border:none!important;
+}
+
+.panel-ue .panel-body{
+  padding: 0!important;
+}
+
+.panel-ue > .panel-heading{
+  background-color: rgb(68, 68, 68)!important;
+  color: white!important;
+}

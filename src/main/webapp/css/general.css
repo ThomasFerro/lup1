@@ -6,3 +6,13 @@ body{
   padding-left: 0!important;
   padding-right: 0!important;
 }
+
+.panel-body{
+  padding: 0!important;
+}
+
+.table{
+  margin: 0!important;
+  table-layout: fixed!important;
+  word-wrap: break-word!important;
+}
