@@ -20,7 +20,10 @@ package fr.da2i.lup1.resource.security;
 
 import java.net.URI;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -32,25 +35,21 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
-import com.j256.ormlite.dao.Dao;
-import com.nimbusds.jwt.SignedJWT;
-
 import fr.da2i.lup1.entity.Credential;
 import fr.da2i.lup1.security.Authenticated;
 import fr.da2i.lup1.security.AuthenticationService;
+import fr.da2i.lup1.security.JwtFactory;
 import fr.da2i.lup1.security.Passwords;
-import fr.da2i.lup1.security.SecureKey;
 import fr.da2i.lup1.util.AbstractRestlet;
-import fr.da2i.lup1.util.DaoProvider;
 
 @Path("authentication")
 public class AuthenticationResource extends AbstractRestlet<String, Credential> {
 	
-	private Dao<SecureKey, String> secureKeyDao;
+	@Inject
+	private JwtFactory jwtFactory;
 
 	public AuthenticationResource() {
 		super(Credential.class);
-		this.secureKeyDao = DaoProvider.getDao(SecureKey.class);
 	}
 	
 	@Override
@@ -61,12 +60,11 @@ public class AuthenticationResource extends AbstractRestlet<String, Credential> 
 		if (dao.idExists(id)) {
 			Credential fromDb = dao.queryForId(id);
 			if (Passwords.check(entity.getPassword(), fromDb.getPassword())) {
-				SecureKey secureKey = new SecureKey(id);
-				secureKey.setRoles(new String[] { "default" });
-				SignedJWT signedJWT = secureKey.regenerate();
-				secureKeyDao.createOrUpdate(secureKey);
+				Map<String, Object> map = new HashMap<>();
+				map.put("roles", new String[] { "default" });
+				String jwt = jwtFactory.build(id, map);
 				URI instanceURI = uriInfo.getAbsolutePathBuilder().path(id).build();
-				return Response.created(instanceURI).header(AuthenticationService.HEADER_KEY, signedJWT.serialize()).build();
+				return Response.created(instanceURI).header(AuthenticationService.HEADER_KEY, jwt).build();
 			}
 		}
 		throw new NotFoundException();
@@ -93,9 +91,8 @@ public class AuthenticationResource extends AbstractRestlet<String, Credential> 
 	@Path("{id}")
 	@Authenticated
 	public Response delete(@PathParam("id") String id) throws SQLException {
-		if (getAuthenticatedLogin().equals(id) && secureKeyDao.idExists(id)) {
-			secureKeyDao.deleteById(id);
-			return Response.noContent().build();
+		if (getAuthenticatedLogin().equals(id)) {
+			return Response.noContent().header(AuthenticationService.HEADER_KEY, "").build();
 		}
 		throw new NotFoundException();
 	}

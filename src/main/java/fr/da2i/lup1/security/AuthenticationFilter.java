@@ -22,7 +22,6 @@ import static fr.da2i.lup1.security.AuthenticationService.HEADER_KEY;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.ParseException;
 
 import javax.annotation.Priority;
 import javax.inject.Inject;
@@ -32,8 +31,6 @@ import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.container.ContainerResponseContext;
 import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.core.Response;
-
-import com.nimbusds.jose.JOSEException;
 
 @Priority(Priorities.AUTHENTICATION)
 @Authenticated
@@ -54,7 +51,7 @@ public class AuthenticationFilter implements ContainerRequestFilter, ContainerRe
 		final String authentication = requestContext.getHeaderString(HEADER_KEY);
 		try {
 			authenticationService.authenticate(requestContext, authentication);
-		} catch (SQLException | ParseException | JOSEException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			requestContext.abortWith(Response.serverError().build());
 		}
