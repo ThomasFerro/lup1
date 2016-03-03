@@ -1,4 +1,4 @@
-package fr.da2i.lup1.entity;
+package fr.da2i.lup1.entity.formation;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

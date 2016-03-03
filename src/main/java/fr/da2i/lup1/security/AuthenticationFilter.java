@@ -21,7 +21,6 @@ package fr.da2i.lup1.security;
 import static fr.da2i.lup1.security.AuthenticationService.HEADER_KEY;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.annotation.Priority;
 import javax.inject.Inject;
@@ -51,7 +50,7 @@ public class AuthenticationFilter implements ContainerRequestFilter, ContainerRe
 		final String authentication = requestContext.getHeaderString(HEADER_KEY);
 		try {
 			authenticationService.authenticate(requestContext, authentication);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			requestContext.abortWith(Response.serverError().build());
 		}

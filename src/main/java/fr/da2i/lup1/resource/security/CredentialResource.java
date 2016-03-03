@@ -32,7 +32,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-import fr.da2i.lup1.entity.Credential;
+import fr.da2i.lup1.entity.security.Credential;
 import fr.da2i.lup1.security.Authenticated;
 import fr.da2i.lup1.util.AbstractRestlet;
 

@@ -1,4 +1,4 @@
-package fr.da2i.lup1.entity;
+package fr.da2i.lup1.entity.note;
 
 import java.sql.Date;
 
