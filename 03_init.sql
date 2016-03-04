@@ -52,13 +52,13 @@ INSERT INTO member (FIRST_NAME,LAST_NAME,EMAIL,BIRTHDAY,LOGIN,PHONE,SIRET,PICTUR
 
 -- Insertion des roles de chaque membre
 
-INSERT INTO as_role VALUES (1,2);
-INSERT INTO as_role VALUES (1,4);
-INSERT INTO as_role VALUES (2,1);
-INSERT INTO as_role VALUES (3,1);
-INSERT INTO as_role VALUES (4,1);
-INSERT INTO as_role VALUES (5,4);
-INSERT INTO as_role VALUES (6,4);
+INSERT INTO as_role VALUES ('hauspiem','responsable_formation');
+INSERT INTO as_role VALUES ('hauspiem','responsable_cours');
+INSERT INTO as_role VALUES ('ferrot','etudiant');
+INSERT INTO as_role VALUES ('catteze','etudiant');
+INSERT INTO as_role VALUES ('fevrer','etudiant');
+INSERT INTO as_role VALUES ('mathieup','responsable_cours');
+INSERT INTO as_role VALUES ('fannySmile','responsable_cours');
 
 -- Fin insertion des roles de chaque membre
 

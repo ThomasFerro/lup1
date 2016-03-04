@@ -222,18 +222,17 @@ create table PROMOTION (
 /* Table : ROLE                                                 */
 /*==============================================================*/
 create table ROLE (
-   ROLE_ID               SERIAL               not null,
    ROLE                  TEXT                 not null,
-   constraint PK_ROLE primary key (ROLE_ID)
+   constraint PK_ROLE primary key (ROLE)
 );
 
 /*==============================================================*/
 /* Table : AS_ROLE                                                 */
 /*==============================================================*/
 create table AS_ROLE (
-   MEMBER_ID             INTEGER              not null,
-   ROLE_ID               INTEGER              not null,
-   constraint PK_AS_ROLE primary key (MEMBER_ID,ROLE_ID)
+   LOGIN                 TEXT                 not null,
+   ROLE                  TEXT                 not null,
+   constraint PK_AS_ROLE primary key (LOGIN,ROLE)
 );
 
 /*==============================================================*/
@@ -367,13 +366,13 @@ alter table MEMBER
       on delete restrict on update cascade;
 
 alter table AS_ROLE
-   add constraint FK_AS_ROLE_MEMBER foreign key (MEMBER_ID)
-      references MEMBER (MEMBER_ID)
+   add constraint FK_AS_ROLE_LOGIN foreign key (LOGIN)
+      references CREDENTIAL (LOGIN)
       on delete restrict on update cascade;
 
 alter table AS_ROLE
-   add constraint FK_AS_ROLE_ROLE foreign key (ROLE_ID)
-      references ROLE (ROLE_ID)
+   add constraint FK_AS_ROLE_ROLE foreign key (ROLE)
+      references ROLE (ROLE)
       on delete restrict on update cascade;
 
 alter table PROMOTION
