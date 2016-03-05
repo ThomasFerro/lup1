@@ -14,6 +14,7 @@
 		<jackson.version>2.6.0</jackson.version>
 		<jersey.version>2.19</jersey.version>
 		<jetty.version>9.3.1.v20150714</jetty.version>
+		<jwt.version>0.6.0</jwt.version>
 		<ormlite.version>4.48</ormlite.version>
 		<psql.version>9.4.1208.jre7</psql.version>
 		<guava.version>19.0</guava.version>
@@ -115,9 +116,9 @@
 		</dependency>
 		<!-- JSON Web Token -->
 		<dependency>
-			<groupId>com.nimbusds</groupId>
-			<artifactId>nimbus-jose-jwt</artifactId>
-			<version>4.12</version>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>${jwt.version}</version>
 		</dependency>
 		<!-- Postgresql -->
 		<dependency>

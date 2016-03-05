@@ -16,33 +16,44 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.da2i.lup1.security;
+package fr.da2i.lup1.entity.note;
 
-import javax.inject.Singleton;
-import javax.ws.rs.core.Feature;
-import javax.ws.rs.core.FeatureContext;
+import java.util.List;
 
-import org.glassfish.hk2.utilities.binding.AbstractBinder;
+import fr.da2i.lup1.entity.formation.Member;
+import fr.da2i.lup1.util.Identifiable;
 
-/**
- * @author Edouard
- *
- */
-public class AuthenticationServiceFeature implements Feature {
+public class Bulletin extends Identifiable<String> {
+	
+	private Member student;
+	private List<Mark> marks;
+	
+	public Bulletin() {}
 
-	@Override
-	public boolean configure(FeatureContext context) {
-		context.register(new AuthenticationServiceBinder());
-		return true;
+	public Member getStudent() {
+		return student;
+	}
+
+	public void setStudent(Member student) {
+		this.student = student;
 	}
 	
-	private final class AuthenticationServiceBinder extends AbstractBinder {
+	public List<Mark> getMarks() {
+		return marks;
+	}
+	
+	public void setMarks(List<Mark> marks) {
+		this.marks = marks;
+	}
 
-		@Override
-		protected void configure() {
-			bindAsContract(AuthenticationService.class).in(Singleton.class);		
-		}
+	@Override
+	public String getId() {
+		return student.getLogin();
+	}
 
+	@Override
+	public void setId(String id) {
+		// Nothing to do
 	}
 
 }

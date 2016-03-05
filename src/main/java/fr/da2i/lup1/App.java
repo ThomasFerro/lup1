@@ -28,6 +28,7 @@ import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import fr.da2i.lup1.io.GZIPWriterInterceptor;
 import fr.da2i.lup1.security.AuthenticationFilter;
 import fr.da2i.lup1.security.AuthenticationServiceFeature;
+import fr.da2i.lup1.security.JwtManagerFeature;
 import fr.da2i.lup1.util.CORSReponseFilter;
 
 /**
@@ -40,6 +41,7 @@ public class App extends ResourceConfig {
 		register(LoggingFilter.class);
 		register(RolesAllowedDynamicFeature.class);
 		register(CORSReponseFilter.class);
+		register(JwtManagerFeature.class);
 		register(AuthenticationServiceFeature.class);
 		register(AuthenticationFilter.class);
 		register(MultiPartFeature.class);

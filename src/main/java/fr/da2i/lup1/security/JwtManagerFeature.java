@@ -28,19 +28,19 @@ import org.glassfish.hk2.utilities.binding.AbstractBinder;
  * @author Edouard
  *
  */
-public class AuthenticationServiceFeature implements Feature {
+public class JwtManagerFeature implements Feature {
 
 	@Override
 	public boolean configure(FeatureContext context) {
-		context.register(new AuthenticationServiceBinder());
+		context.register(new JwtManagerBinder());
 		return true;
 	}
 	
-	private final class AuthenticationServiceBinder extends AbstractBinder {
+	private final class JwtManagerBinder extends AbstractBinder {
 
 		@Override
 		protected void configure() {
-			bindAsContract(AuthenticationService.class).in(Singleton.class);		
+			bindAsContract(JwtManager.class).in(Singleton.class);		
 		}
 
 	}
