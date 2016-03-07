@@ -1,12 +1,12 @@
 DROP VIEW IF EXISTS mark_by_student CASCADE;
-DROP VIEW IF EXISTS moy_by_subject_by_student CASCADE;
-DROP VIEW IF EXISTS moy_by_ue_by_student CASCADE;
-DROP VIEW IF EXISTS moy_by_semester_by_student CASCADE;
-DROP VIEW IF EXISTS moy_by_subject CASCADE;
-DROP VIEW IF EXISTS moy_by_ue CASCADE;
-DROP VIEW IF EXISTS moy_by_semester CASCADE;
-DROP VIEW IF EXISTS mark_by_student_by_subject_with_moy_min_max CASCADE;
-DROP VIEW IF EXISTS student_by_promotion_with_moy CASCADE;
+DROP VIEW IF EXISTS avg_by_subject_by_student CASCADE;
+DROP VIEW IF EXISTS avg_by_ue_by_student CASCADE;
+DROP VIEW IF EXISTS avg_by_semester_by_student CASCADE;
+DROP VIEW IF EXISTS avg_by_subject CASCADE;
+DROP VIEW IF EXISTS avg_by_ue CASCADE;
+DROP VIEW IF EXISTS avg_by_semester CASCADE;
+DROP VIEW IF EXISTS mark_by_student_by_subject_with_avg_min_max CASCADE;
+DROP VIEW IF EXISTS student_by_promotion_with_avg CASCADE;
 DROP VIEW IF EXISTS interventions_by_intervenant_by_promotion CASCADE;
 DROP VIEW IF EXISTS done_internship CASCADE;
 
@@ -51,20 +51,22 @@ CREATE VIEW mark_by_student AS
 
 -- Liste des moyennes des matieres par etudiant :
 
-CREATE VIEW moy_by_subject_by_student AS
+CREATE VIEW avg_by_subject_by_student AS
   SELECT
         student_id,
         subject_id,
         coeff_subject,
         ue_id,
-        (SUM(mark * coeff_eval) / SUM(coeff_eval)) AS moyenne
+        promotion_id,
+        (SUM(mark * coeff_eval) / SUM(coeff_eval)) AS average
   FROM
         mark_by_student
   GROUP BY
         subject_id,
         student_id,
         coeff_subject,
-        ue_id
+        ue_id,
+        promotion_id
   ORDER BY
         ue_id ASC,
         subject_id ASC,
@@ -74,20 +76,22 @@ CREATE VIEW moy_by_subject_by_student AS
 
 -- Liste des moyennes des UE par etudiant :
 
-CREATE VIEW moy_by_ue_by_student AS
+CREATE VIEW avg_by_ue_by_student AS
   SELECT
         student_id,
         ue_id,
         coeff_ue,
         semester,
-        ((SELECT SUM(moyenne*coeff_subject) FROM moy_by_subject_by_student WHERE student_id=mark.student_id AND ue_id = mark.ue_id) / (SELECT SUM(coeff_subject) FROM moy_by_subject_by_student WHERE student_id=mark.student_id AND ue_id = mark.ue_id)) AS moyenne
+        promotion_id,
+        ((SELECT SUM(average*coeff_subject) FROM avg_by_subject_by_student WHERE student_id=mark.student_id AND ue_id = mark.ue_id) / (SELECT SUM(coeff_subject) FROM avg_by_subject_by_student WHERE student_id=mark.student_id AND ue_id = mark.ue_id)) AS average
   FROM
         mark_by_student AS mark
   GROUP BY
         student_id,
         ue_id,
         coeff_ue,
-        semester
+        semester,
+        promotion_id
   ORDER BY
         semester ASC,
         ue_id ASC,
@@ -97,16 +101,18 @@ CREATE VIEW moy_by_ue_by_student AS
 
 -- Liste des moyennes des semesters par etudiant :
 
-CREATE VIEW moy_by_semester_by_student AS
+CREATE VIEW avg_by_semester_by_student AS
   SELECT
         student_id,
         semester,
-        ((SELECT SUM(moyenne*coeff_ue) FROM moy_by_ue_by_student WHERE student_id=mark.student_id AND semester=mark.semester) / (SELECT SUM(coeff_ue) FROM moy_by_ue_by_student WHERE student_id=mark.student_id AND semester=mark.semester)) AS moyenne
+        promotion_id,
+        ((SELECT SUM(average*coeff_ue) FROM avg_by_ue_by_student WHERE student_id=mark.student_id AND semester=mark.semester) / (SELECT SUM(coeff_ue) FROM avg_by_ue_by_student WHERE student_id=mark.student_id AND semester=mark.semester)) AS average
   FROM
         mark_by_student AS mark
   GROUP BY
         student_id,
-        semester
+        semester,
+        promotion_id
   ORDER BY
         semester ASC,
         student_id ASC;
@@ -115,46 +121,46 @@ CREATE VIEW moy_by_semester_by_student AS
 
 -- Liste des matières avec moyenne :
 
-CREATE VIEW moy_by_subject AS
+CREATE VIEW avg_by_subject AS
   SELECT
         subject_id,
-        AVG(moyenne) AS moyenne
+        AVG(average) AS average
   FROM
-        moy_by_subject_by_student
+        avg_by_subject_by_student
   GROUP BY
         subject_id;
 
 -- Liste des UE avec moyenne :
 
-CREATE VIEW moy_by_ue AS
+CREATE VIEW avg_by_ue AS
   SELECT
         ue_id,
-        AVG(moyenne) AS moyenne
+        AVG(average) AS average
   FROM
-        moy_by_ue_by_student
+        avg_by_ue_by_student
   GROUP BY
         ue_id;
 
--- Liste des semesters avec moyenne :
+-- Liste des semesters avec avg_byenne :
 
-CREATE VIEW moy_by_semester AS
+CREATE VIEW avg_by_semester AS
   SELECT
         semester,
-        AVG(moyenne) AS moyenne
+        AVG(average) AS average
   FROM
-        moy_by_semester_by_student
+        avg_by_semester_by_student
   GROUP BY
         semester;
 
 -- 4. Liste des notes des étudiants par matière avec moyenne générale, min, max
 
-CREATE VIEW mark_by_student_by_subject_with_moy_min_max AS
+CREATE VIEW mark_by_student_by_subject_with_avg_min_max AS
   SELECT
         student_id,
         subject_id,
         evaluation_id,
         mark,
-        (SELECT AVG(mark) FROM mark_by_student WHERE subject_id=mark.subject_id AND evaluation_id=mark.evaluation_id) AS moyenne,
+        (SELECT AVG(mark) FROM mark_by_student WHERE subject_id=mark.subject_id AND evaluation_id=mark.evaluation_id) AS average,
         (SELECT MAX(mark) FROM mark_by_student WHERE subject_id=mark.subject_id AND evaluation_id=mark.evaluation_id) AS max,
         (SELECT MIN(mark) FROM mark_by_student WHERE subject_id=mark.subject_id AND evaluation_id=mark.evaluation_id) AS min
   FROM
@@ -170,23 +176,23 @@ CREATE VIEW mark_by_student_by_subject_with_moy_min_max AS
 
 -- 5. Liste des étudiants par promo triée dans l'ordre décroissant de moyennes des étudiants
 
-CREATE VIEW student_by_promotion_with_moy AS
+CREATE VIEW student_by_promotion_with_avg AS
   SELECT
         promotion_id,
         student_id,
         semester,
-        (SELECT moyenne FROM moy_by_semester_by_student WHERE student_id=mark.student_id AND semester=mark.semester) AS moyenne
+        (SELECT average FROM avg_by_semester_by_student WHERE student_id=mark.student_id AND semester=mark.semester) AS average
   FROM
         mark_by_student AS mark
   GROUP BY
         promotion_id,
         student_id,
         semester,
-        moyenne
+        average
   ORDER BY
         promotion_id ASC,
         semester ASC,
-        moyenne DESC;
+        average DESC;
 
 -- Fin Notes --
 
