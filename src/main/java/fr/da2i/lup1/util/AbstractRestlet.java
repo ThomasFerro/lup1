@@ -39,7 +39,7 @@ import javax.ws.rs.core.UriInfo;
 
 import com.j256.ormlite.dao.Dao;
 
-public abstract class AbstractRestlet<ID extends Serializable, T extends Identifiable<ID>> implements Restlet<ID, T> {
+public abstract class AbstractRestlet<ID extends Serializable, T extends Identifiable<ID>> extends SimpleResource implements Restlet<ID, T> {
 	
 	@Context
 	protected UriInfo uriInfo;

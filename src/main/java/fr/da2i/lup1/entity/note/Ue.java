@@ -9,7 +9,7 @@ import fr.da2i.lup1.util.Identifiable;
 public class Ue extends Identifiable<Integer> {
 	
 	@DatabaseField(columnName = "ue", id = true)
-	private int ueId;
+	private Integer ueId;
 	@DatabaseField(columnName = "name")
 	private String name;
 	
