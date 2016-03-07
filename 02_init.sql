@@ -53,11 +53,11 @@ CREATE VIEW mark_by_student AS
 
 CREATE VIEW moy_by_subject_by_student AS
   SELECT
-        (SUM(mark * coeff_eval) / SUM(coeff_eval)) AS moyenne,
         student_id,
         subject_id,
         coeff_subject,
-        ue_id
+        ue_id,
+        (SUM(mark * coeff_eval) / SUM(coeff_eval)) AS moyenne
   FROM
         mark_by_student
   GROUP BY
@@ -76,11 +76,11 @@ CREATE VIEW moy_by_subject_by_student AS
 
 CREATE VIEW moy_by_ue_by_student AS
   SELECT
-        ((SELECT SUM(moyenne*coeff_subject) FROM moy_by_subject_by_student WHERE student_id=mark.student_id AND ue_id = mark.ue_id) / (SELECT SUM(coeff_subject) FROM moy_by_subject_by_student WHERE student_id=mark.student_id AND ue_id = mark.ue_id)) AS moyenne,
         student_id,
         ue_id,
         coeff_ue,
-        semester
+        semester,
+        ((SELECT SUM(moyenne*coeff_subject) FROM moy_by_subject_by_student WHERE student_id=mark.student_id AND ue_id = mark.ue_id) / (SELECT SUM(coeff_subject) FROM moy_by_subject_by_student WHERE student_id=mark.student_id AND ue_id = mark.ue_id)) AS moyenne
   FROM
         mark_by_student AS mark
   GROUP BY
@@ -99,9 +99,9 @@ CREATE VIEW moy_by_ue_by_student AS
 
 CREATE VIEW moy_by_semester_by_student AS
   SELECT
-        ((SELECT SUM(moyenne*coeff_ue) FROM moy_by_ue_by_student WHERE student_id=mark.student_id AND semester=mark.semester) / (SELECT SUM(coeff_ue) FROM moy_by_ue_by_student WHERE student_id=mark.student_id AND semester=mark.semester)) AS moyenne,
         student_id,
-        semester
+        semester,
+        ((SELECT SUM(moyenne*coeff_ue) FROM moy_by_ue_by_student WHERE student_id=mark.student_id AND semester=mark.semester) / (SELECT SUM(coeff_ue) FROM moy_by_ue_by_student WHERE student_id=mark.student_id AND semester=mark.semester)) AS moyenne
   FROM
         mark_by_student AS mark
   GROUP BY
@@ -117,8 +117,8 @@ CREATE VIEW moy_by_semester_by_student AS
 
 CREATE VIEW moy_by_subject AS
   SELECT
-        AVG(moyenne) AS moyenne,
-        subject_id
+        subject_id,
+        AVG(moyenne) AS moyenne
   FROM
         moy_by_subject_by_student
   GROUP BY
@@ -128,8 +128,8 @@ CREATE VIEW moy_by_subject AS
 
 CREATE VIEW moy_by_ue AS
   SELECT
-        AVG(moyenne) AS moyenne,
-        ue_id
+        ue_id,
+        AVG(moyenne) AS moyenne
   FROM
         moy_by_ue_by_student
   GROUP BY
@@ -139,8 +139,8 @@ CREATE VIEW moy_by_ue AS
 
 CREATE VIEW moy_by_semester AS
   SELECT
-        AVG(moyenne) AS moyenne,
-        semester
+        semester,
+        AVG(moyenne) AS moyenne
   FROM
         moy_by_semester_by_student
   GROUP BY
@@ -152,14 +152,16 @@ CREATE VIEW mark_by_student_by_subject_with_moy_min_max AS
   SELECT
         student_id,
         subject_id,
+        evaluation_id,
         mark,
-        (SELECT AVG(mark) FROM mark_by_student WHERE subject_id=mark.subject_id) AS moyenne,
-        (SELECT MAX(mark) FROM mark_by_student WHERE subject_id=mark.subject_id)AS max,
-        (SELECT MIN(mark) FROM mark_by_student WHERE subject_id=mark.subject_id) AS min
+        (SELECT AVG(mark) FROM mark_by_student WHERE subject_id=mark.subject_id AND evaluation_id=mark.evaluation_id) AS moyenne,
+        (SELECT MAX(mark) FROM mark_by_student WHERE subject_id=mark.subject_id AND evaluation_id=mark.evaluation_id) AS max,
+        (SELECT MIN(mark) FROM mark_by_student WHERE subject_id=mark.subject_id AND evaluation_id=mark.evaluation_id) AS min
   FROM
         mark_by_student AS mark
   GROUP BY
         subject_id,
+        evaluation_id,
         mark,
         student_id
   ORDER BY
