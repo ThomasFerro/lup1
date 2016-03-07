@@ -1,10 +1,10 @@
 DROP VIEW IF EXISTS mark_by_student CASCADE;
 DROP VIEW IF EXISTS moy_by_subject_by_student CASCADE;
 DROP VIEW IF EXISTS moy_by_ue_by_student CASCADE;
-DROP VIEW IF EXISTS moy_by_semestre_by_student CASCADE;
+DROP VIEW IF EXISTS moy_by_semester_by_student CASCADE;
 DROP VIEW IF EXISTS moy_by_subject CASCADE;
 DROP VIEW IF EXISTS moy_by_ue CASCADE;
-DROP VIEW IF EXISTS moy_by_semestre CASCADE;
+DROP VIEW IF EXISTS moy_by_semester CASCADE;
 DROP VIEW IF EXISTS mark_by_student_by_subject_with_moy_min_max CASCADE;
 DROP VIEW IF EXISTS student_by_promotion_with_moy CASCADE;
 DROP VIEW IF EXISTS interventions_by_intervenant_by_promotion CASCADE;
@@ -26,7 +26,7 @@ CREATE VIEW mark_by_student AS
          e.coeff AS coeff_eval,
          s.coeff AS coeff_subject,
          uep.coeff AS coeff_ue,
-         uep.semestre,
+         uep.semester,
          uep.promotion_id
   FROM
          subject AS s,
@@ -40,7 +40,7 @@ CREATE VIEW mark_by_student AS
     AND
          de.evaluation_id = e.evaluation_id
   ORDER BY
-         semestre ASC,
+         semester ASC,
          s.ue_id ASC,
          subject_id ASC,
          evaluation_id ASC;
@@ -80,38 +80,38 @@ CREATE VIEW moy_by_ue_by_student AS
         student_id,
         ue_id,
         coeff_ue,
-        semestre
+        semester
   FROM
         mark_by_student AS mark
   GROUP BY
         student_id,
         ue_id,
         coeff_ue,
-        semestre
+        semester
   ORDER BY
-        semestre ASC,
+        semester ASC,
         ue_id ASC,
         student_id ASC;
 
--- 2.3 Par Semestre :
+-- 2.3 Par semester :
 
--- Liste des moyennes des Semestres par etudiant :
+-- Liste des moyennes des semesters par etudiant :
 
-CREATE VIEW moy_by_semestre_by_student AS
+CREATE VIEW moy_by_semester_by_student AS
   SELECT
-        ((SELECT SUM(moyenne*coeff_ue) FROM moy_by_ue_by_student WHERE student_id=mark.student_id AND semestre=mark.semestre) / (SELECT SUM(coeff_ue) FROM moy_by_ue_by_student WHERE student_id=mark.student_id AND semestre=mark.semestre)) AS moyenne,
+        ((SELECT SUM(moyenne*coeff_ue) FROM moy_by_ue_by_student WHERE student_id=mark.student_id AND semester=mark.semester) / (SELECT SUM(coeff_ue) FROM moy_by_ue_by_student WHERE student_id=mark.student_id AND semester=mark.semester)) AS moyenne,
         student_id,
-        semestre
+        semester
   FROM
         mark_by_student AS mark
   GROUP BY
         student_id,
-        semestre
+        semester
   ORDER BY
-        semestre ASC,
+        semester ASC,
         student_id ASC;
 
--- 3. Liste des matières / UE / semestre avec moyenne
+-- 3. Liste des matières / UE / semester avec moyenne
 
 -- Liste des matières avec moyenne :
 
@@ -135,16 +135,16 @@ CREATE VIEW moy_by_ue AS
   GROUP BY
         ue_id;
 
--- Liste des semestres avec moyenne :
+-- Liste des semesters avec moyenne :
 
-CREATE VIEW moy_by_semestre AS
+CREATE VIEW moy_by_semester AS
   SELECT
         AVG(moyenne) AS moyenne,
-        semestre
+        semester
   FROM
-        moy_by_semestre_by_student
+        moy_by_semester_by_student
   GROUP BY
-        semestre;
+        semester;
 
 -- 4. Liste des notes des étudiants par matière avec moyenne générale, min, max
 
@@ -172,18 +172,18 @@ CREATE VIEW student_by_promotion_with_moy AS
   SELECT
         promotion_id,
         student_id,
-        semestre,
-        (SELECT moyenne FROM moy_by_semestre_by_student WHERE student_id=mark.student_id AND semestre=mark.semestre) AS moyenne
+        semester,
+        (SELECT moyenne FROM moy_by_semester_by_student WHERE student_id=mark.student_id AND semester=mark.semester) AS moyenne
   FROM
         mark_by_student AS mark
   GROUP BY
         promotion_id,
         student_id,
-        semestre,
+        semester,
         moyenne
   ORDER BY
         promotion_id ASC,
-        semestre ASC,
+        semester ASC,
         moyenne DESC;
 
 -- Fin Notes --
@@ -244,6 +244,8 @@ CREATE VIEW done_internship AS
 -- ----- --
 
 -- Fonctions d'insertion --
+
+
 
 -- Fin Fonctions d'insertion --
 

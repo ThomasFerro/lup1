@@ -114,7 +114,7 @@ create table INTERNSHIP (
 /* Table : INTERNSHIP_LOG                                       */
 /*==============================================================*/
 create table INTERNSHIP_LOG (
-   INTERNSHIP_LOG_ID    SERIAL                 not null,
+   INTERNSHIP_LOG_ID    SERIAL                  not null,
    DATE_LOG             TIMESTAMP               DEFAULT CURRENT_TIMESTAMP,
    QUOTE                TEXT                    null,
    FLAG_ID              INTEGER                 not null,
@@ -157,7 +157,8 @@ create table IS_ABSENT_DURING (
 /*==============================================================*/
 create table IS_REGISTER_IN (
    STUDENT_ID           INTEGER                 not null,
-   PROMOTION_ID         INTEGER                 not null
+   PROMOTION_ID         INTEGER                 not null,
+   constraint PK_IS_REGISTER_IN primary key (STUDENT_ID,PROMOTION_ID)
 );
 
 /*==============================================================*/
@@ -165,7 +166,8 @@ create table IS_REGISTER_IN (
 /*==============================================================*/
 create table MANAGE_INTERNSHIP (
    MEMBER_ID            INTEGER                 not null,
-   INTERNSHIP_ID        INTEGER                 not null
+   INTERNSHIP_ID        INTEGER                 not null,
+   constraint PK_MANAGE_INTERNSHIP primary key (MEMBER_ID,INTERNSHIP_ID)
 );
 
 /*==============================================================*/
@@ -260,9 +262,10 @@ create table UE (
 /*==============================================================*/
 create table UE_PROMOTION (
    PROMOTION_ID         INTEGER                 not null,
-   SEMESTRE             INTEGER                 null,
-   COEFF                FLOAT              null,
-   UE_ID                INTEGER                 not null
+   SEMESTER             INTEGER                 null,
+   COEFF                FLOAT                   null,
+   UE_ID                INTEGER                 not null,
+   constraint PK_PROMOTION_ID primary key (PROMOTION_ID,SEMESTER,UE_ID)
 );
 
 alter table DO_EVAL
