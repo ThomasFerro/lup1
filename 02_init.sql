@@ -227,7 +227,7 @@ CREATE VIEW done_internship AS
           o.name,
           o.address,
           o.phone,
-          o.email
+          o.fax
   FROM
           internship AS i,
           internship_log AS log,

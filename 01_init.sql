@@ -74,7 +74,7 @@ create table EVALUATION (
    COEFF                FLOAT                   DEFAULT 1,
    TEACHER_ID           INTEGER                 not null,
    SUBJECT_ID           INTEGER                 not null,
- 	 DATE_EVAL            DATE ,
+   DATE_EVAL            DATE,
    constraint PK_EVALUATION primary key (EVALUATION_ID)
 );
 
@@ -100,12 +100,12 @@ create table FORMATION (
 /* Table : INTERNSHIP                                           */
 /*==============================================================*/
 create table INTERNSHIP (
-   INTERNSHIP_ID        SERIAL                 not null,
+   INTERNSHIP_ID        SERIAL               not null,
    TITLE                TEXT                 null,
    MISSIONS             TEXT                 null,
    DESCRIPTION          TEXT                 null,
-   DURATION             FLOAT                 null,
-   YEAR                 INTEGER                 null,
+   DURATION             FLOAT                null,
+   BEGIN_DATE           DATE                 null,
    SIRET                TEXT                 not null,
    constraint PK_INTERNSHIP primary key (INTERNSHIP_ID)
 );
@@ -195,7 +195,7 @@ create table ORGANIZATION (
    NAME                 TEXT                 null,
    ADDRESS              TEXT                 null,
    PHONE                TEXT                 null,
-   EMAIL                TEXT                 null,
+   FAX                  TEXT                 null,
    constraint PK_ORGANIZATION primary key (SIRET)
 );
 

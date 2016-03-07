@@ -28,9 +28,9 @@ INSERT INTO credential VALUES('fannySmile', 'fannySmile');
 
 -- Insertion d'entreprises
 
-INSERT INTO organization VALUES('SIRET-SMILE', 'Smile', 'adresse Smile', 'phoneSmile', 'mail@smile.fr');
-INSERT INTO organization VALUES('SIRET-OVH', 'OVH', 'adresse OVH', 'phoneOVH', 'mail@ovh.fr');
-INSERT INTO organization VALUES('SIRET-OPQUAST', 'Opquast', 'adresse Opquast', 'phoneOpquast', 'mail@opquast.fr');
+INSERT INTO organization VALUES('SIRET-SMILE', 'Smile', 'adresse Smile', 'phoneSmile', 'fax_smile');
+INSERT INTO organization VALUES('SIRET-OVH', 'OVH', 'adresse OVH', 'phoneOVH', 'fax_ovh');
+INSERT INTO organization VALUES('SIRET-OPQUAST', 'Opquast', 'adresse Opquast', 'phoneOpquast', 'fax_opquast');
 
 
 -- Fin Insertion d'entreprises
@@ -211,9 +211,9 @@ INSERT INTO do_eval VALUES(16, 3, 6);
 
 -- Insertion d'offres de stage
 
-INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,DURATION,YEAR,SIRET) VALUES('Stage 1', 'Missions stage 1', 'Description stage 1', 20 ,2015, 'SIRET-SMILE');
-INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,DURATION,YEAR,SIRET) VALUES('Stage 2', 'Missions stage 2', 'Description stage 2', 30 ,2015, 'SIRET-OVH');
-INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,DURATION,YEAR,SIRET) VALUES('Stage 3', 'Missions stage 3', 'Description stage 3', 15 ,2015, 'SIRET-OPQUAST');
+INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,DURATION,BEGIN_DATE,SIRET) VALUES('Stage 1', 'Missions stage 1', 'Description stage 1', 20 ,'05-10-2015', 'SIRET-SMILE');
+INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,DURATION,BEGIN_DATE,SIRET) VALUES('Stage 2', 'Missions stage 2', 'Description stage 2', 30 ,'07-04-2015', 'SIRET-OVH');
+INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,DURATION,BEGIN_DATE,SIRET) VALUES('Stage 3', 'Missions stage 3', 'Description stage 3', 15 ,'03-06-2015', 'SIRET-OPQUAST');
 
 -- Fin Insertion d'offres de stage
 
