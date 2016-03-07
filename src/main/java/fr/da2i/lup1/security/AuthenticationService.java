@@ -22,9 +22,6 @@ import io.jsonwebtoken.Claims;
 
 import java.security.Principal;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -35,7 +32,7 @@ import javax.ws.rs.core.SecurityContext;
 import com.google.common.base.Strings;
 import com.j256.ormlite.dao.Dao;
 
-import fr.da2i.lup1.entity.Member;
+import fr.da2i.lup1.entity.formation.Member;
 import fr.da2i.lup1.util.DaoProvider;
 
 /**
@@ -49,7 +46,7 @@ public class AuthenticationService {
 	public static final String HEADER_KEY = "Authorization";
 	
 	@Inject
-	private JwtFactory jwtFactory;
+	private JwtManager jwtManager;
 	
 	private Dao<Member, Integer> memberDao;
 	
@@ -57,22 +54,16 @@ public class AuthenticationService {
 		this.memberDao = DaoProvider.getDao(Member.class);
 	}
 	
-	private void abort(ContainerRequestContext requestContext) {
-		requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
-	}
-	
 	public void authenticate(ContainerRequestContext requestContext, String authentication) throws SQLException {
-		if (Strings.isNullOrEmpty(authentication) || !jwtFactory.check(authentication)) {
-			abort(requestContext);
+		Claims claims;
+		if (Strings.isNullOrEmpty(authentication) || (claims = jwtManager.parse(authentication)) == null) {
+			requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
 		}
 		else {
-			Claims claims = jwtFactory.parse(authentication);
-			if (claims.getExpiration().before(new Date())) {
-				Map<String, Object> map = new HashMap<>();
-				map.put("roles", claims.get("roles"));
-				authentication = jwtFactory.build(claims.getIssuer(), map);
+			if (jwtManager.hasExpire(claims)) {
+				authentication = jwtManager.regenerate(claims);
 			}
-			Member principal = memberDao.queryBuilder().where().eq("login", claims.getIssuer()).queryForFirst();
+			Member principal = memberDao.queryBuilder().where().eq("login", claims.getSubject()).queryForFirst();
 			boolean secured = requestContext.getSecurityContext().isSecure();
 			requestContext.getHeaders().putSingle(HEADER_KEY, authentication);
 			requestContext.setSecurityContext(new RoleSecurityContext(principal, secured));

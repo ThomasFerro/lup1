@@ -1,4 +1,4 @@
-package fr.da2i.lup1.entity;
+package fr.da2i.lup1.entity.formation;
 
 import java.security.Principal;
 
@@ -32,20 +32,6 @@ public class Member extends Identifiable<Integer> implements Principal {
 	private String picture;
 	@DatabaseField(columnName = "address")
 	private String address;
-	
-	public Member(int id, String firstName, String lastName, String role, String email, String birthday, String login, String phone, String siret, String picture, String address) {
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.role = role;
-		this.email = email;
-		this.birthday = birthday;
-		this.login = login;
-		this.phone = phone;
-		this.siret = siret;
-		this.picture = picture;
-		this.address = address;
-	}
 		
 	public Member() {}
 	

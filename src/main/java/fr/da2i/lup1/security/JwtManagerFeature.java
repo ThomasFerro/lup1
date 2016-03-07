@@ -24,19 +24,23 @@ import javax.ws.rs.core.FeatureContext;
 
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 
-public class JwtFactoryFeature implements Feature {
+/**
+ * @author Edouard
+ *
+ */
+public class JwtManagerFeature implements Feature {
 
 	@Override
 	public boolean configure(FeatureContext context) {
-		context.register(new JwtFactoryBinder());
+		context.register(new JwtManagerBinder());
 		return true;
 	}
 	
-	private final class JwtFactoryBinder extends AbstractBinder {
+	private final class JwtManagerBinder extends AbstractBinder {
 
 		@Override
 		protected void configure() {
-			bindAsContract(JwtFactory.class).in(Singleton.class);		
+			bindAsContract(JwtManager.class).in(Singleton.class);		
 		}
 
 	}

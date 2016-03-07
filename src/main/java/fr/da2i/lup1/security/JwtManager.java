@@ -18,6 +18,7 @@
  */
 package fr.da2i.lup1.security;
 
+import io.jsonwebtoken.ClaimJwtException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -25,7 +26,7 @@ import io.jsonwebtoken.impl.DefaultClaims;
 import io.jsonwebtoken.impl.crypto.MacProvider;
 
 import java.security.Key;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Map;
 
 import javax.inject.Singleton;
@@ -35,35 +36,51 @@ import javax.inject.Singleton;
  *
  */
 @Singleton
-public final class JwtFactory {
+public final class JwtManager {
 	
 	public static final long TTL = 600000L;
 	
 	private Key key;
 	
-	public JwtFactory() {
+	public JwtManager() {
 		this.key = MacProvider.generateKey();
 	}
 	
-	public String build(String iss, Map<String, Object> map) {
-		Claims claims = new DefaultClaims();
-		claims.putAll(map);
-		claims.setSubject("lup1");
-		claims.setIssuer(iss);
-		claims.setExpiration(new Timestamp(System.currentTimeMillis() + TTL));
+	private String compact(Claims claims) {
 		return Jwts.builder().setHeaderParam("typ", "JWT").setClaims(claims).signWith(SignatureAlgorithm.HS512, key).compact();
 	}
 	
-	public Claims parse(String jwtString) {
-		return Jwts.parser().setSigningKey(key).parseClaimsJwt(jwtString).getBody();
+	public boolean hasExpire(Claims claims) {
+		return claims.getExpiration().before(new Date(System.currentTimeMillis()));
 	}
 	
-	public boolean check(String jwtString) {
+	public String build(String sub, Map<String, Object> map) {
+		Claims claims = new DefaultClaims();
+		claims.putAll(map);
+		claims.setSubject(sub);
+		claims.setIssuer("lup1");
+		claims.setExpiration(new Date(System.currentTimeMillis() + TTL));
+		return compact(claims);
+	}
+	
+	public String regenerate(Claims from) {
+		Claims claims = new DefaultClaims();
+		for (Map.Entry<String, Object> entry : from.entrySet()) {
+			claims.put(entry.getKey(), entry.getValue());
+		}
+		claims.setSubject(from.getSubject());
+		claims.setIssuer(from.getIssuer());
+		claims.setExpiration(new Date(System.currentTimeMillis() + TTL));
+		return compact(claims);
+	}
+	
+	public Claims parse(String jwtString) {
 		try {
-			Jwts.parser().setSigningKey(key).parse(jwtString);
-			return true;
+			return Jwts.parser().setSigningKey(key).parseClaimsJws(jwtString).getBody();
+		} catch (ClaimJwtException e) {
+			return e.getClaims();
 		} catch (Exception e) {
-			return false;
+			return null;
 		}
 	}
 

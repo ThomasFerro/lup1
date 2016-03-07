@@ -16,33 +16,47 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.da2i.lup1.security;
+package fr.da2i.lup1.entity.note;
 
-import javax.inject.Singleton;
-import javax.ws.rs.core.Feature;
-import javax.ws.rs.core.FeatureContext;
 
-import org.glassfish.hk2.utilities.binding.AbstractBinder;
-
-/**
- * @author Edouard
- *
- */
-public class AuthenticationServiceFeature implements Feature {
-
-	@Override
-	public boolean configure(FeatureContext context) {
-		context.register(new AuthenticationServiceBinder());
-		return true;
+public class Mark {
+	
+	private Subject subject;
+	private double mark;
+	
+	public Mark(Subject subject, double mark) {
+		this.subject = subject;
+		this.mark = mark;
 	}
 	
-	private final class AuthenticationServiceBinder extends AbstractBinder {
-
-		@Override
-		protected void configure() {
-			bindAsContract(AuthenticationService.class).in(Singleton.class);		
-		}
-
+	public Mark() {}
+	
+	/**
+	 * @return the subject
+	 */
+	public Subject getSubject() {
+		return subject;
+	}
+	
+	/**
+	 * @param subject the subject to set
+	 */
+	public void setSubject(Subject subject) {
+		this.subject = subject;
+	}
+	
+	/**
+	 * @return the mark
+	 */
+	public double getMark() {
+		return mark;
+	}
+	
+	/**
+	 * @param mark the mark to set
+	 */
+	public void setMark(double mark) {
+		this.mark = mark;
 	}
 
 }

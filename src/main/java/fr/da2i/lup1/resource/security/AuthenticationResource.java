@@ -35,10 +35,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
-import fr.da2i.lup1.entity.Credential;
+import fr.da2i.lup1.entity.security.Credential;
 import fr.da2i.lup1.security.Authenticated;
 import fr.da2i.lup1.security.AuthenticationService;
-import fr.da2i.lup1.security.JwtFactory;
+import fr.da2i.lup1.security.JwtManager;
 import fr.da2i.lup1.security.Passwords;
 import fr.da2i.lup1.util.AbstractRestlet;
 
@@ -46,7 +46,7 @@ import fr.da2i.lup1.util.AbstractRestlet;
 public class AuthenticationResource extends AbstractRestlet<String, Credential> {
 	
 	@Inject
-	private JwtFactory jwtFactory;
+	private JwtManager jwtManager;
 
 	public AuthenticationResource() {
 		super(Credential.class);
@@ -62,7 +62,7 @@ public class AuthenticationResource extends AbstractRestlet<String, Credential> 
 			if (Passwords.check(entity.getPassword(), fromDb.getPassword())) {
 				Map<String, Object> map = new HashMap<>();
 				map.put("roles", new String[] { "default" });
-				String jwt = jwtFactory.build(id, map);
+				String jwt = jwtManager.build(id, map);
 				URI instanceURI = uriInfo.getAbsolutePathBuilder().path(id).build();
 				return Response.created(instanceURI).header(AuthenticationService.HEADER_KEY, jwt).build();
 			}
@@ -75,7 +75,7 @@ public class AuthenticationResource extends AbstractRestlet<String, Credential> 
 	@Path("{id}")
 	@Authenticated
 	public Response get(@PathParam("id") String id) throws SQLException {
-		throw new NotAllowedException(Response.noContent().build());
+		return Response.ok().build();
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public class AuthenticationResource extends AbstractRestlet<String, Credential> 
 	@Authenticated
 	public Response delete(@PathParam("id") String id) throws SQLException {
 		if (getAuthenticatedLogin().equals(id)) {
-			return Response.noContent().header(AuthenticationService.HEADER_KEY, "").build();
+			return Response.noContent().build();
 		}
 		throw new NotFoundException();
 	}

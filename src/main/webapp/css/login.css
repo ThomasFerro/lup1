@@ -1,10 +1,35 @@
 .login{
-  margin-top: 20%;
+  margin-top: 40%;
 }
 
 .logo{
-  margin-bottom: 5%;
+  margin-bottom: 10%;
 }
+
 body{
 background-image: url("../img/login/bg2.jpeg");
+}
+
+.input-block .input-group-addon{
+	color:white;
+}
+
+.input-block .input-group-addon,.input-block input {
+	background:transparent;
+	border:none;
+}
+
+.input-block input{
+	border-bottom:1px solid #cdcdcd!important;
+	-webkit-border-radius: 0!important;
+	-moz-border-radius: 0!important;
+	border-radius: 0!important;
+}
+
+.submit_button{
+		-webkit-border-radius: 0!important;
+	-moz-border-radius: 0!important;
+	border-radius: 0!important;
+	color:white!important;
+	background:transparent!important;
 }

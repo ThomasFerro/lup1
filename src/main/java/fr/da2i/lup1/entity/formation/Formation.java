@@ -1,4 +1,4 @@
-package fr.da2i.lup1.entity;
+package fr.da2i.lup1.entity.formation;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
