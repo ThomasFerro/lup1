@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <title></title>
-  <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/template.css" type="text/css">
   <link rel="stylesheet" href="css/top-menu.css" type="text/css">
@@ -32,8 +31,8 @@ table tr th, table tr td{
 </style>
 </head>
 <body>
-
-  <nav class="navbar navbar-inverse top-menu" >
+  <nav class="navbar navbar-inverse top-menu" ng-controller="AuthenticationController as authoCtrl" >
+  {{authoCtrl.member + " " + authoCtrl.isConnected() +  "???"}}
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -77,16 +76,35 @@ table tr th, table tr td{
       </div>
     </div>
   </div>
+  <!-- librairies  -->
+  
   <script src="lib/jquery-1.12.0.min.js"></script>
   <script src="lib/bootstrap-3.3.6/js/bootstrap.min.js"></script>
   <script src="lib/angular.min.js"></script>
-  <script src="lib/angular-route.min.js"></script>
+  <script src="lib/angular-route.min.js"></script>	  
+  <script src="lib/angular-jwt.js"></script>	  
+  <script src="lib/angular-ngStorage.js"></script>
+  
+  <!-- Configurations -->
+    
   <script src="javascript/app.js"></script>
   <script src="javascript/routes.js"></script>
+  
+  <!-- Services -->
+  
+  <script src="javascript/services/authentication/authentication-factory.js"></script>
+  
+  <!-- Controllers -->
+  
   <script src="javascript/controllers/menu/menu-controller.js"></script>
-  <script src="javascript/directives/menu/menu-item-directive.js"></script>
   <script src="javascript/controllers/panelFilter/panel-filter-controller.js"></script>
+  <script src="javascript/controllers/authentication/authentication-controller.js"></script>
+  
+  <!-- Directives -->
+  
+  <script src="javascript/directives/menu/menu-item-directive.js"></script>
   <script src="javascript/directives/panelFilter/panel-filter-directive.js"></script>
+  
   <script>
   $(document).ready(function(){
     var height = $(window).height();
