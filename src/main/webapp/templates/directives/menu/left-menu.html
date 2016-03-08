@@ -1,0 +1,5 @@
+<div class="menu-wrapper left-menu">
+  <div class="list-group menu" ng-if="authCtrl.isConnected()" ng-controller="MenuController as menuCtrl">
+    <menu-item  ng-repeat="item in menuCtrl.menuItems"></menu-item>
+  </div>
+</div>

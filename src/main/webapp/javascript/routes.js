@@ -7,13 +7,22 @@
 			controller: 'AuthenticationController'
 		})
 		.when('/formations/', {
-			templateUrl: 'templates/pages/formations/index.html'
+			templateUrl: 'templates/pages/formations/index.html',
+			resolve: {
+			      access: ["Access", function(Access) { return Access.hasRoles("PROF"); }],
+			}
 		})
 		.when('/formations/:formation/:date/', {
-			templateUrl:'templates/pages/formations/evaluations/index.html'
+			templateUrl:'templates/pages/formations/evaluations/index.html',
+			resolve: {
+			      access: ["Access", function(Access) { return Access.hasRoles("PROF"); }],
+			}
 		})
-		.when('/formations/bulletin', {
-			templateUrl: 'templates/pages/formations/bulletin/index.html'
+		.when('/formations/bulletin/:student/', {
+			templateUrl: 'templates/pages/formations/bulletin/index.html',
+			resolve: {
+			      access: ["Access", function(Access) { return Access.isAuthenticated(); }],
+			}
 		})
 		.when('/stages/', {
 			templateUrl: 'templates/pages/stages/index.html'
@@ -22,39 +31,28 @@
 			templateUrl: 'templates/pages/absences/index.html'
 		})
 		.when('/parametres/', {
-			templateUrl: 'templates/pages/parametres/index.html'
+			templateUrl: 'templates/pages/parametres/index.html',
+			resolve: {
+			      access: ["Access", function(Access) { return Access.hasRoles("admin"); }],
+			}
 		})
 		.when('/home/', {
 			templateUrl: 'templates/pages/home/index.html',
+			resolve: {
+			      access: ["Access", function(Access) { return Access.isAuthenticated(); }],
+			}
 		})
 		.when('/', {
-			redirectTo: '/home'
+			redirectTo: '/home',
+			resolve: {
+			      access: ["Access", function(Access) { return Access.isAuthenticated(); }],
+			}
 		})
 		.otherwise({
 			redirectTo: '/'
 		});
-		
-//		$httpProvider.interceptors.push(['$q', '$location', '$localStorage' ,'Authentication', function ($q, $location, $localStorage, authenticationFactory) {
-//            return {
-//                'request': function (config) {
-//                    config.headers = config.headers || {};
-//                    if ($localStorage.lup1) {
-//                        config.headers.Authorization = $localStorage.lup1;
-//                    }
-//                    if(!authenticationFactory.isConnected()){
-//                    	$location.path("/login");
-//                    }
-//                    return config;
-//                },
-//                'responseError': function (response) {
-//                    if (response.status === 401 || response.status === 403) {
-//                        delete $localStorage.lup1;
-//                        $location.path('/login');
-//                    }
-//                    return $q.reject(response);
-//                }
-//            };
-//        }]);
+
+		$httpProvider.interceptors.push('httpInterceptor');
 	}]);
 }
 )();

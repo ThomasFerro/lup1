@@ -1,37 +1,42 @@
-<div class="col-sm-12 col-md-offset-1 col-lg-offset-1 login">
-<div class="col-sm-12 col-md-4 col-md-offset-4">
-		<div class="center-block">
-			<img class="center-block img-responsive img-circle logo"
-				src="../img/logo.png" alt="logo de lup1">
-		</div>
-		<form role="form" method="POST" ng-submit="signin()">
-			<fieldset>
-				<div class="row">
-					<div class="col-sm-12 col-md-10  col-md-offset-1 ">
-						<div class="form-group">
-							<div class="input-group input-block">
-								<span class="input-group-addon"> <i
-									class="glyphicon glyphicon-user"></i>
-								</span> <input class="form-control" placeholder="Identifiant"
-									name="loginname" type="text"  ng-model="username" autofocus>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="input-group input-block">
-								<span class="input-group-addon"> <i
-									class="glyphicon glyphicon-lock"></i>
-								</span> <input class="form-control" placeholder="Mot de passe"
-									name="password" type="password" ng-model="password"  value="">
-							</div>
-						</div>
-						<div class="form-group">
-							<input type="submit"
-								class="submit_button btn btn-sm btn-default btn-block"
-								value="Se connecter">
-						</div>
-					</div>
+<div class="col-sm-12 login">
+	<div class="col-sm-12 col-md-4 col-md-offset-4">
+		<div class="panel panel-default panel-login">
+			<div class="panel-heading">
+				<div class="center-block">
+					<h3 class="logo">lup1</h3>
 				</div>
-			</fieldset>
-		</form>
+			</div>
+			<div class="panel-body">
+				<form role="form" method="POST" ng-submit="signin()">
+					<fieldset>
+						<div class="row">
+							<div class="col-sm-12 col-md-10  col-md-offset-1 ">
+								<div class="form-group">
+									<div class="input-group input-block">
+										<span class="input-group-addon"> <i
+											class="glyphicon glyphicon-user"></i>
+										</span> <input class="form-control" placeholder="Identifiant"
+											name="loginname" type="text" ng-model="username" autofocus>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="input-group input-block">
+										<span class="input-group-addon"> <i
+											class="glyphicon glyphicon-lock"></i>
+										</span> <input class="form-control" placeholder="Mot de passe"
+											name="password" type="password" ng-model="password" value="">
+									</div>
+								</div>
+								<div class="form-group">
+									<input type="submit"
+										class="submit_login btn btn-md btn-default btn-block"
+										value="Se connecter">
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
 	</div>
 </div>

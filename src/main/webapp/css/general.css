@@ -13,6 +13,19 @@ body{
 
 .table{
   margin: 0!important;
-  table-layout: fixed!important;
+/*   table-layout: fixed!important; */
   word-wrap: break-word!important;
+}
+
+h3.logo{
+	margin:0!important;
+	color:black!important;
+}
+
+.login .panel .panel-body{
+	padding:15px!important;
+}
+
+.panel-login{
+	margin-top:40%!important;
 }

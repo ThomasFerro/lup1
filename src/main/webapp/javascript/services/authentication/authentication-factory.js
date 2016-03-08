@@ -1,7 +1,6 @@
 (function(){
 	angular.module('lup1')
 	.factory('Authentication', ['$http','$q','jwtHelper', '$localStorage',function ($http, $q, jwtHelper, $localStorage) {
-		var security;
 		
 		function signin(username, password) {
 			var deferred = $q.defer();
@@ -16,7 +15,7 @@
 			}).then(function (result) {
 				var token = result.headers().authorization;
                 $localStorage.lup1 = JSON.stringify(token);
-				deferred.resolve(security);
+				deferred.resolve(token);
 			}, function (error) {
 				deferred.reject(error);
 			});
@@ -44,17 +43,27 @@
 		
 		function getRoles(){
 			if(isConnected()){
-				var roles = jwtHelper.decodeToken($localStorage.lup1).roles;
-				return roles.roles[0];
+				return jwtHelper.decodeToken($localStorage.lup1).roles;
 			}
+		}
+		
+		function hasRole(role){
+			var roles = getRoles();
+			 for (var i = 0; i < roles.length; i++) {
+				if(roles[i] === role){
+					return true;
+				}
+			 }
+			 return false;
 		}
 		
 		return {
 			signin: signin,
 			logout: logout,
 			getName: getName,
+			isConnected: isConnected,
 			getRoles: getRoles,
-			isConnected: isConnected
+			hasRole: hasRole
 		};
 	}]);
 })();

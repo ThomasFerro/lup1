@@ -31,49 +31,16 @@ table tr th, table tr td{
 
 </style>
 </head>
-<body ng-controller="AuthenticationController as authoCtrl">
-  <nav class="navbar navbar-inverse top-menu" ng-if="authoCtrl.isConnected()">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <a class="navbar-brand logo" href="#">Lup1</a>
-        <p class="navbar-text navbar-right log-x hidden-lg hidden-md  hidden-sm">
-            Connecté en tant que : {{authoCtrl.getUserName()}}<a href="#" ng-click="authoCtrl.logout()"><span class="glyphicon glyphicon-log-out" ></span></a>
-        <p>
-      </div>
-
-        <ul class="nav navbar-nav hidden-sm hidden-md hidden-lg responsive-menu">
-          <li class="active"><a href="#">Menu <span class="sr-only">(current)</span></a></li>
-          <li>
-             <div class="responsive-menu-wrapper" ng-controller="MenuController as menuCtrl">
-               <ul class="list-inline menu" >
-                 <li ng-repeat="item in menuCtrl.menuItems"><menu-item></menu-item></li>
-               </ul>
-            </div>
-          </li>
-        </ul>
-        <!-- <p class="navbar-text navbar-right log-x-2">Connecté en tant que : Roberto<a href="#"><span class="glyphicon glyphicon-log-out" ></span></a> -->
-        <ul class="nav navbar-nav navbar-right hidden-xs hidden-sm" >
-            <li><a>Connecté en tant que : {{authoCtrl.getUserName()}}</a></li>
-            <li><a href="#" ng-click="authoCtrl.logout()"><span class="glyphicon glyphicon-log-out" ></span>&nbsp;Log out</a></li>
-        </ul>
-
-
-    </div><!-- /.container-fluid -->
-  </nav>
+<body>
+ <top-menu></top-menu>
   <div class="row" >
-    <div class="col-lg-1 col-md-1 col-xs-1 col-without-padding hidden-xs "  ng-if="authoCtrl.isConnected()">
-      <div class="menu-wrapper left-menu" ng-controller="MenuController as menuCtrl">
-        <div class="list-group menu">
-          <menu-item  ng-repeat="item in menuCtrl.menuItems"></menu-item>
-        </div>
-      </div>
-    </div>
-
+  	<div class="col-lg-1 col-md-1 col-xs-1 col-without-padding hidden-xs ">
+  		<left-menu></left-menu>
+   	</div>
     <div class="col-md-11 col-xs-12 col-sm-11 col-without-padding">
-      <div class="row main-wrapper">
-        <div ng-view></div>
-      </div>
+		<div class="row main-wrapper">
+			<ng-view></ng-view>
+		</div>
     </div>
   </div>
   <!-- librairies  -->
@@ -93,6 +60,9 @@ table tr th, table tr td{
   <!-- Services -->
   
   <script src="javascript/services/authentication/authentication-factory.js"></script>
+  <script src="javascript/services/authentication/access-factory.js"></script>
+  <script src="javascript/services/interceptor/interceptor-factory.js"></script>
+  
   
   <!-- Controllers -->
   
@@ -101,16 +71,11 @@ table tr th, table tr td{
   <script src="javascript/controllers/authentication/authentication-controller.js"></script>
   
   <!-- Directives -->
-  
+  <script src="javascript/directives/view/view-directive.js"></script>
+  <script src="javascript/directives/menu/left-menu-directive.js"></script>
+  <script src="javascript/directives/menu/top-menu-directive.js"></script>
   <script src="javascript/directives/menu/menu-item-directive.js"></script>
   <script src="javascript/directives/panelFilter/panel-filter-directive.js"></script>
-  
-  <script>
-  $(document).ready(function(){
-    var height = $(window).height();
-    $('.menu-wrapper').css('height', height);
-    $('.panel-filter-wrapper').css('height', height);
-  });
-  </script>
+
 </body>
 </html>

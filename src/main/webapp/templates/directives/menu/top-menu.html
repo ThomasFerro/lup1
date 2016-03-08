@@ -1,0 +1,27 @@
+ <nav class="navbar navbar-inverse top-menu">
+   <div class="container-fluid" ng-if="authCtrl.isConnected()">
+     <!-- Brand and toggle get grouped for better mobile display -->
+     <div class="navbar-header">
+       <a class="navbar-brand logo" href="#">Lup1</a>
+       <p class="navbar-text navbar-right log-x hidden-lg hidden-md  hidden-sm">
+           Connecté en tant que : {{authCtrl.getUserName()}}<a href="#/login" ng-click="authCtrl.logout()"><span class="glyphicon glyphicon-log-out" ></span></a>
+       <p>
+     </div>
+
+       <ul class="nav navbar-nav hidden-sm hidden-md hidden-lg responsive-menu">
+         <li class="active"><a href="#">Menu <span class="sr-only">(current)</span></a></li>
+         <li>
+            <div class="responsive-menu-wrapper" ng-controller="MenuController as menuCtrl">
+              <ul class="list-inline menu" >
+                <li ng-repeat="item in menuCtrl.menuItems"><menu-item></menu-item></li>
+              </ul>
+           </div>
+         </li>
+       </ul>
+       <!-- <p class="navbar-text navbar-right log-x-2">Connecté en tant que : Roberto<a href="#"><span class="glyphicon glyphicon-log-out" ></span></a> -->
+       <ul class="nav navbar-nav navbar-right hidden-xs hidden-sm" >
+           <li><a>Connecté en tant que : {{authCtrl.getUserName()}}</a></li>
+           <li><a href="#/login" ng-click="authCtrl.logout()"><span class="glyphicon glyphicon-log-out" ></span>&nbsp;Log out</a></li>
+       </ul>
+   </div>
+ </nav>
