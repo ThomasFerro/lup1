@@ -1,16 +1,12 @@
-.login{
-  margin-top: 40%;
-}
-
 .logo{
   margin-bottom: 10%;
 }
 
-body{
+.login{
 background-image: url("../img/login/bg2.jpeg");
 }
 
-.input-block .input-group-addon{
+./* input-block .input-group-addon{
 	color:white;
 }
 
@@ -32,4 +28,4 @@ background-image: url("../img/login/bg2.jpeg");
 	border-radius: 0!important;
 	color:white!important;
 	background:transparent!important;
-}
+} */

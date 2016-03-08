@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="css/general.css" type="text/css">
   <link rel="stylesheet" href="css/matieres.css" type="text/css">
   <link rel="stylesheet" href="css/table.css" type="text/css">
+  <link rel="stylesheet" href="css/login.css" type="text/css">
   <link rel="stylesheet" href="css/font-awesome-4.5.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="lib/bootstrap-3.3.6/css/bootstrap.css" >
   <style>
@@ -30,15 +31,14 @@ table tr th, table tr td{
 
 </style>
 </head>
-<body>
-  <nav class="navbar navbar-inverse top-menu" ng-controller="AuthenticationController as authoCtrl" >
-  {{authoCtrl.member + " " + authoCtrl.isConnected() +  "???"}}
+<body ng-controller="AuthenticationController as authoCtrl">
+  <nav class="navbar navbar-inverse top-menu" ng-if="authoCtrl.isConnected()">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <a class="navbar-brand logo" href="#">Lup1</a>
         <p class="navbar-text navbar-right log-x hidden-lg hidden-md  hidden-sm">
-            Connecté en tant que : Roberto<a href="#"><span class="glyphicon glyphicon-log-out" ></span></a>
+            Connecté en tant que : {{authoCtrl.getUserName()}}<a href="#" ng-click="authoCtrl.logout()"><span class="glyphicon glyphicon-log-out" ></span></a>
         <p>
       </div>
 
@@ -53,16 +53,16 @@ table tr th, table tr td{
           </li>
         </ul>
         <!-- <p class="navbar-text navbar-right log-x-2">Connecté en tant que : Roberto<a href="#"><span class="glyphicon glyphicon-log-out" ></span></a> -->
-        <ul class="nav navbar-nav navbar-right hidden-xs hidden-sm">
-            <li><a>Connecté en tant que : Roberto</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-log-out" ></span>&nbsp;Log out</a></li>
+        <ul class="nav navbar-nav navbar-right hidden-xs hidden-sm" >
+            <li><a>Connecté en tant que : {{authoCtrl.getUserName()}}</a></li>
+            <li><a href="#" ng-click="authoCtrl.logout()"><span class="glyphicon glyphicon-log-out" ></span>&nbsp;Log out</a></li>
         </ul>
 
 
     </div><!-- /.container-fluid -->
   </nav>
-  <div class="row">
-    <div class="col-lg-1 col-md-1 col-xs-1 col-without-padding hidden-xs ">
+  <div class="row" >
+    <div class="col-lg-1 col-md-1 col-xs-1 col-without-padding hidden-xs "  ng-if="authoCtrl.isConnected()">
       <div class="menu-wrapper left-menu" ng-controller="MenuController as menuCtrl">
         <div class="list-group menu">
           <menu-item  ng-repeat="item in menuCtrl.menuItems"></menu-item>

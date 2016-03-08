@@ -2,7 +2,7 @@
 	angular.module('lup1')
 	.factory('Authentication', ['$http','$q','jwtHelper', '$localStorage',function ($http, $q, jwtHelper, $localStorage) {
 		var security;
-
+		
 		function signin(username, password) {
 			var deferred = $q.defer();
 			$http({
@@ -15,11 +15,7 @@
 				}
 			}).then(function (result) {
 				var token = result.headers().authorization;
-				security = {
-					token : token,
-					member : jwtHelper.decodeToken(token)
-				};
-                $localStorage.lup1 = JSON.stringify(security);
+                $localStorage.lup1 = JSON.stringify(token);
 				deferred.resolve(security);
 			}, function (error) {
 				deferred.reject(error);
@@ -33,10 +29,7 @@
 		
 		function isConnected(){
 			if($localStorage.lup1){
-				console.log($localStorage.lup1);
-				// probleme ici ! 
-				var token = $localStorage.lup1.token;
-				console.log(token);
+				var token = $localStorage.lup1;
 				return token && !jwtHelper.isTokenExpired(token);
 			}
 			console.log("c'est pas gagné !");
@@ -45,13 +38,13 @@
 		
 		function getName(){
 			if(isConnected()){
-				return $localStorage.lup1.member.iss
+				return jwtHelper.decodeToken($localStorage.lup1).sub;
 			}
 		}
 		
 		function getRoles(){
 			if(isConnected()){
-				var roles = $localStorage.lup1.member.roles;
+				var roles = jwtHelper.decodeToken($localStorage.lup1).roles;
 				return roles.roles[0];
 			}
 		}
@@ -60,6 +53,7 @@
 			signin: signin,
 			logout: logout,
 			getName: getName,
+			getRoles: getRoles,
 			isConnected: isConnected
 		};
 	}]);

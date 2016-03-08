@@ -1,11 +1,9 @@
 (function(){
 	angular.module('lup1')
 	.controller('AuthenticationController', ['$scope', '$location', '$window', 'Authentication',function ($scope, $location, $window, authenticationFactory) {
-		this.member = "otot";
 		$scope.signin = function () {
 			authenticationFactory.signin($scope.username, $scope.password)
 			.then(function (result) {
-				$scope.member = result;
 				$location.path("/");
 			}, function (error) {
 				$window.alert("Invalid credentials");
@@ -20,6 +18,15 @@
 		
 		this.isConnected = function(){
 			return authenticationFactory.isConnected();
+		}
+		
+		this.getUserName = function(){
+			return authenticationFactory.getName();
+		}
+		
+		this.logout = function(){
+			authenticationFactory.logout();
+			$location.path("/login");
 		}
 	}]);
 })();
