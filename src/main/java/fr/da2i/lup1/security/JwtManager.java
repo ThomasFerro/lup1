@@ -18,6 +18,7 @@
  */
 package fr.da2i.lup1.security;
 
+import fr.da2i.lup1.entity.security.Credential;
 import io.jsonwebtoken.ClaimJwtException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -46,21 +47,30 @@ public final class JwtManager {
 		this.key = MacProvider.generateKey();
 	}
 	
-	private String compact(Claims claims) {
-		return Jwts.builder().setHeaderParam("typ", "JWT").setClaims(claims).signWith(SignatureAlgorithm.HS512, key).compact();
-	}
-	
 	public boolean hasExpire(Claims claims) {
 		return claims.getExpiration().before(new Date(System.currentTimeMillis()));
 	}
 	
-	public String build(String sub, Map<String, Object> map) {
+	public String compact(Claims claims) {
+		return Jwts.builder().setHeaderParam("typ", "JWT").setClaims(claims).signWith(SignatureAlgorithm.HS512, key).compact();
+	}
+	
+	public String compact(Credential credential) {
+		return compact(buildFrom(credential));
+	}
+	
+	public Claims build(String sub) {
 		Claims claims = new DefaultClaims();
-		claims.putAll(map);
 		claims.setSubject(sub);
 		claims.setIssuer("lup1");
 		claims.setExpiration(new Date(System.currentTimeMillis() + TTL));
-		return compact(claims);
+		return claims;
+	}
+	
+	public Claims buildFrom(Credential credential) {
+		Claims claims = build(credential.getLogin());
+		claims.put("roles", credential.getRoles());
+		return claims;
 	}
 	
 	public String regenerate(Claims from) {

@@ -22,11 +22,15 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
+import fr.da2i.lup1.security.Authenticated;
+
 public class BulletinResource extends AnnualResource {
 	
 	@GET
-	public String get() {
-		return "Bulletins de la formation " + formationId + " (" + annee + ")";
+	@Path("{bulletinId: [0-9]+}")
+	@Authenticated
+	public String get(@PathParam("bulletin") Integer bulletinId) {
+		return "Bulletin" + bulletinId + " de la formation " + formationId + " (" + annee + ") avec le credential " + getCredential();
 	}
 	
 	@GET

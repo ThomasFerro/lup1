@@ -1,14 +1,31 @@
+/**
+ * This file is part of lup1.
+ *
+ * lup1 is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * lup1 is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.				 
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with lup1.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
+ */
 package fr.da2i.lup1.entity.formation;
 
-import java.security.Principal;
-
+import com.google.common.base.Strings;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import fr.da2i.lup1.util.Identifiable;
 
 @DatabaseTable(tableName = "member")
-public class Member extends Identifiable<Integer> implements Principal {
+public class Member extends Identifiable<Integer> {
 	
 	@DatabaseField(columnName = "member_id", id = true)
 	private int id;
@@ -16,14 +33,10 @@ public class Member extends Identifiable<Integer> implements Principal {
 	private String firstName;
 	@DatabaseField(columnName = "last_name")
 	private String lastName;
-	@DatabaseField(columnName = "role")
-	private String role;
 	@DatabaseField(columnName = "email")
 	private String email;
 	@DatabaseField(columnName = "birthday")
 	private String birthday;
-	@DatabaseField(columnName = "login")
-	private String login;
 	@DatabaseField(columnName = "phone")
 	private String phone;
 	@DatabaseField(columnName = "siret")
@@ -35,11 +48,6 @@ public class Member extends Identifiable<Integer> implements Principal {
 		
 	public Member() {}
 	
-	@Override
-	public String getName() {
-		return login;
-	}
-
 	public Integer getId() {
 		return id;
 	}
@@ -49,7 +57,7 @@ public class Member extends Identifiable<Integer> implements Principal {
 	}
 
 	public String getFirstName() {
-		return firstName;
+		return Strings.nullToEmpty(firstName);
 	}
 
 	public void setFirstName(String firstName) {
@@ -57,23 +65,15 @@ public class Member extends Identifiable<Integer> implements Principal {
 	}
 
 	public String getLastName() {
-		return lastName;
+		return Strings.nullToEmpty(lastName);
 	}
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
 	public String getEmail() {
-		return email;
+		return Strings.nullToEmpty(email);
 	}
 
 	public void setEmail(String email) {
@@ -81,23 +81,15 @@ public class Member extends Identifiable<Integer> implements Principal {
 	}
 
 	public String getBirthday() {
-		return birthday;
+		return Strings.nullToEmpty(birthday);
 	}
 
 	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
 	public String getSiret() {
-		return siret;
+		return Strings.nullToEmpty(siret);
 	}
 
 	public void setSiret(String siret) {
@@ -105,7 +97,7 @@ public class Member extends Identifiable<Integer> implements Principal {
 	}
 
 	public String getPhone() {
-		return phone;
+		return Strings.nullToEmpty(phone);
 	}
 
 	public void setPhone(String phone) {
@@ -113,7 +105,7 @@ public class Member extends Identifiable<Integer> implements Principal {
 	}
 
 	public String getPicture() {
-		return picture;
+		return Strings.nullToEmpty(picture);
 	}
 
 	public void setPicture(String picture) {
@@ -121,7 +113,7 @@ public class Member extends Identifiable<Integer> implements Principal {
 	}
 
 	public String getAddress() {
-		return address;
+		return Strings.nullToEmpty(address);
 	}
 
 	public void setAddress(String address) {
@@ -130,11 +122,11 @@ public class Member extends Identifiable<Integer> implements Principal {
 
 	@Override
 	public String toString() {
-		return "Member [id=" + id + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", role=" + role + ", email=" + email
-				+ ", birthday=" + birthday + ", login=" + login + ", phone="
-				+ phone + ", siret=" + siret + ", picture=" + picture
-				+ ", address=" + address + "]";
+		return "Member [id=" + getId() + ", firstName=" + getFirstName() + ", lastName="
+				+ getLastName() + ", email=" + getEmail()
+				+ ", birthday=" + getBirthday() + ", phone="
+				+ getPhone() + ", siret=" + getSiret() + ", picture=" + getPicture()
+				+ ", address=" + getAddress() + "]";
 	}
 	
 	
