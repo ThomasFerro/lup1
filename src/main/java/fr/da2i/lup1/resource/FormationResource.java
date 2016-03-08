@@ -28,6 +28,7 @@ import fr.da2i.lup1.resource.note.BulletinResource;
 import fr.da2i.lup1.resource.note.NoteResource;
 import fr.da2i.lup1.resource.note.SubjectResource;
 import fr.da2i.lup1.resource.note.UeResource;
+import fr.da2i.lup1.resource.stage.InternshipOfferResource;
 
 @Path("formations/{formationId: [0-9]+}/annees/{annee: [0-9]{4}-[0-9]{4}}")
 public class FormationResource extends AnnualResource {
@@ -58,5 +59,9 @@ public class FormationResource extends AnnualResource {
 	public Resource getBulletinResource() {
 		return Resource.from(BulletinResource.class);
 	}
-
+	
+	@Path("stages")
+	public Resource getStageResource() {
+		return Resource.from(InternshipOfferResource.class);
+	}
 }

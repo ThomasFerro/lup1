@@ -19,16 +19,20 @@
 package fr.da2i.lup1.resource.note;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
 public class BulletinResource extends AnnualResource {
 	
-	@PathParam("{bulletinId: [0-9]+}")
-	private Integer bulletinId;
-	
 	@GET
 	public String get() {
 		return "Bulletins de la formation " + formationId + " (" + annee + ")";
+	}
+	
+	@GET
+	@Path("{bulletinId: [0-9]+}")
+	public String getBulletin(@PathParam("bulletinId") Integer bulletinId) {
+		return "Bulletin " + bulletinId + " de la formation " + formationId + " (" + annee + ")";
 	}
 
 }

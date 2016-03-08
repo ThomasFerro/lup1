@@ -2,6 +2,7 @@ package fr.da2i.lup1.entity.stage;
 
 import java.sql.Timestamp;
 
+import com.google.common.base.Strings;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -53,7 +54,7 @@ public class InternshipLog extends Identifiable<Integer> {
 	}
 
 	public String getQuote() {
-		return quote;
+		return Strings.nullToEmpty(quote);
 	}
 
 	public void setQuote(String quote) {

@@ -1,5 +1,6 @@
 package fr.da2i.lup1.entity.organization;
 
+import com.google.common.base.Strings;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -31,7 +32,7 @@ public class Organization extends Identifiable<String>{
 	
 	@Override
 	public String getId() {
-		return siret;
+		return Strings.nullToEmpty(siret);
 	}
 	@Override
 	public void setId(String id) {
@@ -39,7 +40,7 @@ public class Organization extends Identifiable<String>{
 	}
 
 	public String getSiret() {
-		return siret;
+		return Strings.nullToEmpty(siret);
 	}
 
 	public void setSiret(String siret) {
@@ -47,7 +48,7 @@ public class Organization extends Identifiable<String>{
 	}
 
 	public String getName() {
-		return name;
+		return Strings.nullToEmpty(name);
 	}
 
 	public void setName(String name) {
@@ -55,7 +56,7 @@ public class Organization extends Identifiable<String>{
 	}
 
 	public String getAddress() {
-		return address;
+		return Strings.nullToEmpty(address);
 	}
 
 	public void setAddress(String address) {
@@ -63,7 +64,7 @@ public class Organization extends Identifiable<String>{
 	}
 
 	public String getPhone() {
-		return phone;
+		return Strings.nullToEmpty(phone);
 	}
 
 	public void setPhone(String phone) {
@@ -71,7 +72,7 @@ public class Organization extends Identifiable<String>{
 	}
 
 	public String getFax() {
-		return fax;
+		return Strings.nullToEmpty(fax);
 	}
 
 	public void setFax(String fax) {
@@ -79,12 +80,12 @@ public class Organization extends Identifiable<String>{
 	}
 	
 	public String toString() {
-		return "Organization ["
-				+ "siret=" + getId() + ", "
-				+ "name=" + getName() + ", "
-				+ "address=" + getAddress() + ", "
-				+ "phone=" + getPhone() + ", "
-				+ "fax=" + getFax()
-				+ "]";
+		return "{"
+				+ "\"siret\":\"" + getId() + "\", "
+				+ "\"name\":\"" + getName() + "\", "
+				+ "\"address\":\"" + getAddress() + "\", "
+				+ "\"phone\":\"" + getPhone() + "\", "
+				+ "\"fax\":\"" + getFax() + "\""
+				+ "}";
 	}
 }

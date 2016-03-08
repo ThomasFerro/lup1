@@ -2,6 +2,7 @@ package fr.da2i.lup1.entity.stage;
 
 import java.sql.Date;
 
+import com.google.common.base.Strings;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -11,7 +12,7 @@ import fr.da2i.lup1.util.Identifiable;
 public class Internship extends Identifiable<Integer> {
 
 	@DatabaseField(columnName = "internship_id", id = true)
-	private int internship_id;
+	private int internshipId;
 	@DatabaseField(columnName = "title")
 	private String title;
 	@DatabaseField(columnName = "missions")
@@ -26,7 +27,7 @@ public class Internship extends Identifiable<Integer> {
 	private String siret;
 	
 	public Internship(int id, String t, String m, String desc, double dur, Date b, String s) {
-		this.internship_id = id;
+		this.internshipId = id;
 		this.title = t;
 		this.missions = m;
 		this.description = desc;
@@ -39,16 +40,24 @@ public class Internship extends Identifiable<Integer> {
 	
 	@Override
 	public Integer getId() {
-		return this.internship_id;
+		return this.internshipId;
 	}
 
 	@Override
 	public void setId(Integer id) {
-		this.internship_id = id;
+		this.internshipId = id;
+	}
+	
+	public int getInternshipId() {
+		return this.internshipId;
+	}
+
+	public void setInternshipId(int id) {
+		this.internshipId = id;
 	}
 
 	public String getTitle() {
-		return title;
+		return Strings.nullToEmpty(title);
 	}
 
 	public void setTitle(String title) {
@@ -56,7 +65,7 @@ public class Internship extends Identifiable<Integer> {
 	}
 
 	public String getMissions() {
-		return missions;
+		return Strings.nullToEmpty(missions);
 	}
 
 	public void setMissions(String missions) {
@@ -64,7 +73,7 @@ public class Internship extends Identifiable<Integer> {
 	}
 
 	public String getDescription() {
-		return description;
+		return Strings.nullToEmpty(description);
 	}
 
 	public void setDescription(String description) {
@@ -88,7 +97,7 @@ public class Internship extends Identifiable<Integer> {
 	}
 
 	public String getSiret() {
-		return siret;
+		return Strings.nullToEmpty(siret);
 	}
 
 	public void setSiret(String siret) {
