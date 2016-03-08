@@ -52,6 +52,7 @@ drop table if exists UE_PROMOTION cascade;
 create table CREDENTIAL (
    LOGIN                TEXT                 not null,
    PASSWORD             TEXT                 null,
+   MEMBER_ID            INTEGER              not null,
    constraint PK_CREDENTIAL primary key (LOGIN)
 );
 
@@ -179,7 +180,6 @@ create table MEMBER (
    LAST_NAME            TEXT                 null,
    EMAIL                TEXT                 null,
    BIRTHDAY             DATE                 null,
-   LOGIN                TEXT                 null,
    PHONE                TEXT                 null,
    SIRET                TEXT                 null,
    PICTURE              TEXT                 null,
@@ -229,11 +229,11 @@ create table ROLE (
 );
 
 /*==============================================================*/
-/* Table : AS_ROLE                                                 */
+/* Table : AS_ROLE                                              */
 /*==============================================================*/
 create table AS_ROLE (
-   LOGIN                 TEXT                 not null,
-   ROLE                  TEXT                 not null,
+   LOGIN               TEXT              not null,
+   ROLE                TEXT              not null,
    constraint PK_AS_ROLE primary key (LOGIN,ROLE)
 );
 
@@ -359,19 +359,19 @@ alter table MANAGE_INTERNSHIP
       on delete restrict on update cascade;
 
 alter table MEMBER
-   add constraint FK_MEMBER_LOGS_WITH_CREDENTI foreign key (LOGIN)
-      references CREDENTIAL (LOGIN)
-      on delete restrict on update cascade;
-
-alter table MEMBER
    add constraint FK_MEMBER_WORK_IN_ORGANIZA foreign key (SIRET)
       references ORGANIZATION (SIRET)
       on delete restrict on update cascade;
 
+alter table CREDENTIAL
+    add constraint FK_CREDENTIAL_MEMBER_ID foreign key (MEMBER_ID)
+        references MEMBER (MEMBER_ID)
+        on delete restrict on update cascade;
+
 alter table AS_ROLE
-   add constraint FK_AS_ROLE_LOGIN foreign key (LOGIN)
-      references CREDENTIAL (LOGIN)
-      on delete restrict on update cascade;
+ add constraint FK_AS_ROLE_LOGIN foreign key (LOGIN)
+    references CREDENTIAL (LOGIN)
+    on delete restrict on update cascade;
 
 alter table AS_ROLE
    add constraint FK_AS_ROLE_ROLE foreign key (ROLE)

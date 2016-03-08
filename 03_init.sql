@@ -13,14 +13,27 @@ INSERT INTO role (ROLE) VALUES('etudiant_invalide');
 
 -- -- --
 
+-- Insertion de membres
+
+INSERT INTO member (FIRST_NAME,LAST_NAME,EMAIL,BIRTHDAY,PHONE,SIRET,PICTURE,ADDRESS) VALUES('Michael', 'Hauspie', 'hauspiem@univ-lille1.fr', '12/05/1985', null,null,null,null);
+INSERT INTO member (FIRST_NAME,LAST_NAME,EMAIL,BIRTHDAY,PHONE,SIRET,PICTURE,ADDRESS) VALUES('Thomas', 'Ferro', 'thomas.ferro@univ-lille1.fr', '19/10/1995', null,null,null,null);
+INSERT INTO member (FIRST_NAME,LAST_NAME,EMAIL,BIRTHDAY,PHONE,SIRET,PICTURE,ADDRESS) VALUES('Édouard', 'Cattez', 'edouard.cattez@univ-lille1.fr', '12/10/1994', null,null,null,null);
+INSERT INTO member (FIRST_NAME,LAST_NAME,EMAIL,BIRTHDAY,PHONE,SIRET,PICTURE,ADDRESS) VALUES('Rémy', 'Fevre', 'remy.fevre@univ-lille1.fr', '05/03/1995', null,null,null,null);
+INSERT INTO member (FIRST_NAME,LAST_NAME,EMAIL,BIRTHDAY,PHONE,SIRET,PICTURE,ADDRESS) VALUES('Phillipe', 'Mathieu', 'phillipe.mathieu@univ-lille1.fr', '12/11/1967', null,null,null,null);
+INSERT INTO member (FIRST_NAME,LAST_NAME,EMAIL,BIRTHDAY,PHONE,SIRET,PICTURE,ADDRESS) VALUES('Fanny', 'Oui', 'fanny.oui@smile.fr', '12/03/1989', null,null,null,null);
+
+-- Fin Insertion de membres
+
+-- -- --
+
 -- Insertion de credentials
 
-INSERT INTO credential VALUES('hauspiem', 'hauspiem');
-INSERT INTO credential VALUES('ferrot', ' ferrot');
-INSERT INTO credential VALUES('catteze', 'catteze');
-INSERT INTO credential VALUES('fevrer', 'fevrer');
-INSERT INTO credential VALUES('mathieup', 'mathieup');
-INSERT INTO credential VALUES('fannySmile', 'fannySmile');
+INSERT INTO credential VALUES('hauspiem', 'hauspiem',1);
+INSERT INTO credential VALUES('ferrot', ' ferrot',2);
+INSERT INTO credential VALUES('catteze', 'catteze',3);
+INSERT INTO credential VALUES('fevrer', 'fevrer',4);
+INSERT INTO credential VALUES('mathieup', 'mathieup',5);
+INSERT INTO credential VALUES('fannySmile', 'fannySmile',6);
 
 -- Fin Insertion de credentials
 
@@ -34,19 +47,6 @@ INSERT INTO organization VALUES('SIRET-OPQUAST', 'Opquast', 'adresse Opquast', '
 
 
 -- Fin Insertion d'entreprises
-
--- -- --
-
--- Insertion de membres
-
-INSERT INTO member (FIRST_NAME,LAST_NAME,EMAIL,BIRTHDAY,LOGIN,PHONE,SIRET,PICTURE,ADDRESS) VALUES('Michael', 'Hauspie', 'hauspiem@univ-lille1.fr', '12/05/1985', 'hauspiem', null,null,null,null);
-INSERT INTO member (FIRST_NAME,LAST_NAME,EMAIL,BIRTHDAY,LOGIN,PHONE,SIRET,PICTURE,ADDRESS) VALUES('Thomas', 'Ferro', 'thomas.ferro@univ-lille1.fr', '19/10/1995', 'ferrot', null,null,null,null);
-INSERT INTO member (FIRST_NAME,LAST_NAME,EMAIL,BIRTHDAY,LOGIN,PHONE,SIRET,PICTURE,ADDRESS) VALUES('Édouard', 'Cattez', 'edouard.cattez@univ-lille1.fr', '12/10/1994', 'catteze', null,null,null,null);
-INSERT INTO member (FIRST_NAME,LAST_NAME,EMAIL,BIRTHDAY,LOGIN,PHONE,SIRET,PICTURE,ADDRESS) VALUES('Rémy', 'Fevre', 'remy.fevre@univ-lille1.fr', '05/03/1995', 'fevrer', null,null,null,null);
-INSERT INTO member (FIRST_NAME,LAST_NAME,EMAIL,BIRTHDAY,LOGIN,PHONE,SIRET,PICTURE,ADDRESS) VALUES('Phillipe', 'Mathieu', 'phillipe.mathieu@univ-lille1.fr', '12/11/1967', 'mathieup', null,null,null,null);
-INSERT INTO member (FIRST_NAME,LAST_NAME,EMAIL,BIRTHDAY,LOGIN,PHONE,SIRET,PICTURE,ADDRESS) VALUES('Fanny', 'Oui', 'fanny.oui@smile.fr', '12/03/1989', 'fannySmile', null,null,null,null);
-
--- Fin Insertion de membres
 
 -- -- --
 
