@@ -24,6 +24,10 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
+import com.google.common.base.Strings;
+
+import fr.da2i.lup1.entity.security.Credential;
+
 public abstract class SimpleResource {
 	
 	@Context
@@ -32,12 +36,16 @@ public abstract class SimpleResource {
 	@Context
 	protected SecurityContext securityContext;
 	
+	protected Principal getPrincipal() {
+		return securityContext.getUserPrincipal();
+	}
+	
+	protected Credential getCredential() {
+		return (Credential) getPrincipal();
+	}
+	
 	protected String getAuthenticatedLogin() {
-		Principal principal = securityContext.getUserPrincipal();
-		if (principal == null) {
-			return "";
-		}
-		return principal.getName();
+		return Strings.nullToEmpty(securityContext.getUserPrincipal().getName());
 	}
 
 }

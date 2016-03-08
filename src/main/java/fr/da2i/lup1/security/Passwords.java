@@ -123,6 +123,9 @@ public final class Passwords {
 	 * @throws	InvalidKeySpecException
 	 */
 	public static boolean check(char[] password, String checkedHash) {
+		if (!checkedHash.contains(":")) {
+			return false;
+		}
 		try {
 			String[] params = checkedHash.split(":");
 			int iterations = Integer.parseInt(params[ITERATION_INDEX]);
