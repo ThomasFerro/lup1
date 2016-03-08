@@ -25,3 +25,15 @@
 - ### Afficher le suivi de la recherche de stage d'un éléve :
 
 `SELECT date_log,quote,flag.label,int.title FROM internship_log AS intLog,flag,internship AS int WHERE flag.flag_id=intLog.flag_id AND int.internship_id=intLog.internship_id AND member_id = 3;`
+
+## 3ième partie - Notes
+
+- ### Afficher la note des étudiants pour un contrôle donnée :
+
+`SELECT mark,student_id FROM do_eval WHERE evaluation_id = 1 ;`
+
+- ### Afficher la note d'un étudiant pour un contrôle donnée :
+
+`SELECT mark FROM do_eval WHERE evaluation_id = 1 AND student_id = 3 ;`
+
+- ### Afficher les informations pour le bulletin de notes d'un élève :

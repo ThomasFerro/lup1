@@ -105,11 +105,20 @@ create table INTERNSHIP (
    TITLE                TEXT                 null,
    MISSIONS             TEXT                 null,
    DESCRIPTION          TEXT                 null,
+   TECHNOLOGY           TEXT                 null,
    DURATION             FLOAT                null,
    BEGIN_DATE           DATE                 null,
    SIRET                TEXT                 not null,
-   FORMATION_ID         INTEGER              not null,
    constraint PK_INTERNSHIP primary key (INTERNSHIP_ID)
+);
+
+/*==============================================================*/
+/* Table : INTERNSHIP_BY_FORMATION                              */
+/*==============================================================*/
+create table INTERNSHIP_BY_FORMATION (
+   FORMATION_ID         INTEGER                 not null,
+   INTERNSHIP_ID        INTEGER                 not null,
+   constraint PK_INTERNSHIP_BY_FORMATION primary key (FORMATION_ID,INTERNSHIP_ID)
 );
 
 /*==============================================================*/
@@ -133,7 +142,8 @@ create table INTERVENTION (
    QUOTE                TEXT                   null,
    DATE_INTERVENTION    DATE                   null,
    INTERVENANT_ID       INTEGER                not null,
-   PROMOTION_ID         INTEGER                not null,
+   FORMATION_ID         INTEGER                 not null,
+   YEAR                 TEXT                    not null,
    constraint PK_INTERVENTION primary key (INTERVENTION_ID)
 );
 
@@ -159,8 +169,9 @@ create table IS_ABSENT_DURING (
 /*==============================================================*/
 create table IS_REGISTER_IN (
    STUDENT_ID           INTEGER                 not null,
-   PROMOTION_ID         INTEGER                 not null,
-   constraint PK_IS_REGISTER_IN primary key (STUDENT_ID,PROMOTION_ID)
+   FORMATION_ID         INTEGER                 not null,
+   YEAR                 TEXT                    not null,
+   constraint PK_IS_REGISTER_IN primary key (STUDENT_ID,FORMATION_ID,YEAR)
 );
 
 /*==============================================================*/
@@ -204,11 +215,10 @@ create table ORGANIZATION (
 /* Table : PROMOTION                                            */
 /*==============================================================*/
 create table PROMOTION (
-   PROMOTION_ID         SERIAL                  not null,
-   YEAR                 INTEGER                 null,
    FORMATION_ID         INTEGER                 not null,
+   YEAR                 TEXT                    not null,
    RESPONSABLE_ID       INTEGER                 not null,
-   constraint PK_PROMOTION primary key (PROMOTION_ID)
+   constraint PK_PROMOTION primary key (FORMATION_ID,YEAR)
 );
 
 /*==============================================================*/
@@ -219,7 +229,7 @@ create table PROMOTION (
 -- create table REGISTER_TO_INTERNSHIP (
 --    INTERNSHIP_ID        INTEGER                 not null,
 --    STUDENT_ID            INTEGER                 not null
--- );
+-- );SIRET
 
 /*==============================================================*/
 /* Table : ROLE                                                 */
@@ -262,11 +272,12 @@ create table UE (
 /* Table : UE_PROMOTION                                         */
 /*==============================================================*/
 create table UE_PROMOTION (
-   PROMOTION_ID         INTEGER                 not null,
+   FORMATION_ID         INTEGER                 not null,
+   YEAR                 TEXT                    not null,
    SEMESTER             INTEGER                 null,
    COEFF                FLOAT                   null,
    UE_ID                INTEGER                 not null,
-   constraint PK_PROMOTION_ID primary key (PROMOTION_ID,SEMESTER,UE_ID)
+   constraint PK_UE_PROMOTION primary key (FORMATION_ID,YEAR,SEMESTER,UE_ID)
 );
 
 alter table DO_EVAL
@@ -294,10 +305,15 @@ alter table INTERNSHIP
       references ORGANIZATION (SIRET)
       on delete restrict on update cascade;
 
-alter table INTERNSHIP
- add constraint FK_INTERNSH_FORMATION_ID foreign key (FORMATION_ID)
+alter table INTERNSHIP_BY_FORMATION
+ add constraint FK_INTERNSH_FORM_FORM_ID foreign key (FORMATION_ID)
     references FORMATION (FORMATION_ID)
     on delete restrict on update cascade;
+
+alter table INTERNSHIP_BY_FORMATION
+   add constraint FK_INTERNSH_FORM_INTERNSH_ID  foreign key (INTERNSHIP_ID)
+      references INTERNSHIP (INTERNSHIP_ID)
+      on delete restrict on update cascade;
 
 alter table INTERNSHIP_LOG
    add constraint FK_INTERNSH_IS_FLAGGE_FLAG foreign key (FLAG_ID)
@@ -320,8 +336,8 @@ alter table INTERVENTION
       on delete restrict on update cascade;
 
 alter table INTERVENTION
-   add constraint FK_INTERVEN_INTERVENE_PROMOTIO foreign key (PROMOTION_ID)
-      references PROMOTION (PROMOTION_ID)
+   add constraint FK_INTERVEN_FORMATION_YEAR foreign key (FORMATION_ID,YEAR)
+      references PROMOTION (FORMATION_ID,YEAR)
       on delete restrict on update cascade;
 
 alter table IS_ABSENT_DURING
@@ -345,8 +361,8 @@ alter table IS_ABSENT_DURING
 --       on delete restrict on update cascade;
 
 alter table IS_REGISTER_IN
-   add constraint FK_IS_REGIS_IS_REGIST_PROMOTIO foreign key (PROMOTION_ID)
-      references PROMOTION (PROMOTION_ID)
+   add constraint FK_IS_REGIS_FORMATION_YEAR foreign key (FORMATION_ID,YEAR)
+      references PROMOTION (FORMATION_ID,YEAR)
       on delete restrict on update cascade;
 
 alter table IS_REGISTER_IN
@@ -415,6 +431,6 @@ alter table UE_PROMOTION
       on delete restrict on update cascade;
 
 alter table UE_PROMOTION
-   add constraint FK_UE_PROMO_UE_PROMOT_PROMOTIO foreign key (PROMOTION_ID)
-      references PROMOTION (PROMOTION_ID)
+   add constraint FK_UE_PROMO_FORMATION_YEAR foreign key (FORMATION_ID,YEAR)
+      references PROMOTION (FORMATION_ID,YEAR)
       on delete restrict on update cascade;

@@ -9,6 +9,7 @@ DROP VIEW IF EXISTS mark_by_student_by_subject_with_avg_min_max CASCADE;
 DROP VIEW IF EXISTS student_by_promotion_with_avg CASCADE;
 DROP VIEW IF EXISTS interventions_by_intervenant_by_promotion CASCADE;
 DROP VIEW IF EXISTS done_internship CASCADE;
+DROP VIEW IF EXISTS internship_with_formation CASCADE;
 
 -- Creation des vues
 
@@ -27,7 +28,8 @@ CREATE VIEW mark_by_student AS
          s.coeff AS coeff_subject,
          uep.coeff AS coeff_ue,
          uep.semester,
-         uep.promotion_id
+         uep.formation_id,
+         uep.year
   FROM
          subject AS s,
          evaluation AS e,
@@ -57,7 +59,8 @@ CREATE VIEW avg_by_subject_by_student AS
         subject_id,
         coeff_subject,
         ue_id,
-        promotion_id,
+        formation_id,
+        year,
         (SUM(mark * coeff_eval) / SUM(coeff_eval)) AS average
   FROM
         mark_by_student
@@ -66,7 +69,8 @@ CREATE VIEW avg_by_subject_by_student AS
         student_id,
         coeff_subject,
         ue_id,
-        promotion_id
+        formation_id,
+        year
   ORDER BY
         ue_id ASC,
         subject_id ASC,
@@ -82,7 +86,8 @@ CREATE VIEW avg_by_ue_by_student AS
         ue_id,
         coeff_ue,
         semester,
-        promotion_id,
+        formation_id,
+        year,
         ((SELECT SUM(average*coeff_subject) FROM avg_by_subject_by_student WHERE student_id=mark.student_id AND ue_id = mark.ue_id) / (SELECT SUM(coeff_subject) FROM avg_by_subject_by_student WHERE student_id=mark.student_id AND ue_id = mark.ue_id)) AS average
   FROM
         mark_by_student AS mark
@@ -91,7 +96,8 @@ CREATE VIEW avg_by_ue_by_student AS
         ue_id,
         coeff_ue,
         semester,
-        promotion_id
+        formation_id,
+        year
   ORDER BY
         semester ASC,
         ue_id ASC,
@@ -105,14 +111,16 @@ CREATE VIEW avg_by_semester_by_student AS
   SELECT
         student_id,
         semester,
-        promotion_id,
+        formation_id,
+        year,
         ((SELECT SUM(average*coeff_ue) FROM avg_by_ue_by_student WHERE student_id=mark.student_id AND semester=mark.semester) / (SELECT SUM(coeff_ue) FROM avg_by_ue_by_student WHERE student_id=mark.student_id AND semester=mark.semester)) AS average
   FROM
         mark_by_student AS mark
   GROUP BY
         student_id,
         semester,
-        promotion_id
+        formation_id,
+        year
   ORDER BY
         semester ASC,
         student_id ASC;
@@ -178,19 +186,21 @@ CREATE VIEW mark_by_student_by_subject_with_avg_min_max AS
 
 CREATE VIEW student_by_promotion_with_avg AS
   SELECT
-        promotion_id,
+        formation_id,
+        year,
         student_id,
         semester,
         (SELECT average FROM avg_by_semester_by_student WHERE student_id=mark.student_id AND semester=mark.semester) AS average
   FROM
         mark_by_student AS mark
   GROUP BY
-        promotion_id,
+        formation_id,
+        year,
         student_id,
         semester,
         average
   ORDER BY
-        promotion_id ASC,
+        year ASC,
         semester ASC,
         average DESC;
 
@@ -205,7 +215,8 @@ CREATE VIEW student_by_promotion_with_avg AS
 CREATE VIEW interventions_by_intervenant_by_promotion AS
   SELECT
           intervention_id,
-          promotion_id,
+          formation_id,
+          year,
           date_intervention,
           quote
   FROM
@@ -243,7 +254,22 @@ CREATE VIEW done_internship AS
     AND
           reg.student_id = m.member_id;
 
--- 8. Stats sur le suivi des stages (??)
+-- 8. View qui ne sert a rien (demandé l'utilisté à Thomas)
+
+CREATE VIEW internship_with_formation AS
+    SELECT
+        i.*,
+        if.formation_id
+    FROM
+        internship AS i,
+        internship_by_formation AS if,
+        formation AS f
+    WHERE
+        i.internship_id=if.internship_id
+      AND
+        if.formation_id=f.formation_id;
+
+-- 9. Stats sur le suivi des stages (??)
 
 -- Fin Stages --
 

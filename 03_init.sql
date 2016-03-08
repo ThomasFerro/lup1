@@ -28,12 +28,12 @@ INSERT INTO member (FIRST_NAME,LAST_NAME,EMAIL,BIRTHDAY,PHONE,SIRET,PICTURE,ADDR
 
 -- Insertion de credentials
 
-INSERT INTO credential VALUES('hauspiem', 'hauspiem',1);
-INSERT INTO credential VALUES('ferrot', ' ferrot',2);
-INSERT INTO credential VALUES('catteze', 'catteze',3);
-INSERT INTO credential VALUES('fevrer', 'fevrer',4);
-INSERT INTO credential VALUES('mathieup', 'mathieup',5);
-INSERT INTO credential VALUES('fannySmile', 'fannySmile',6);
+INSERT INTO credential VALUES('hauspiem', '1000:aabc3949f5c2e0b06c2128dfe18de790d311ab43fd78dc4e:758ab728ab2498a5208df3b30f84fb265002022f1dbfbad6',1);
+INSERT INTO credential VALUES('ferrot', ' 1000:f9be0d1ace62aadaa67b31289557e21cc734e704f5883949:da427c89f1ba1cb82ae5a85d0e34d905e641ed149a7c241b',2);
+INSERT INTO credential VALUES('catteze', '1000:6139218b53a1bdc476853d1c3cac057aeece81df843571aa:56c5e709df10536967b63fc48ab30c0d3a6d10fb6613091a',3);
+INSERT INTO credential VALUES('fevrer', '1000:84c63106c14eee935eb0c854efffb26ecf529d4caa14fe60:04803f89c222d471274223c6d1f35dd6409eee72223c851d',4);
+INSERT INTO credential VALUES('mathieup', '1000:fae09990e41e01c10f55c4ea95988d562900073bc37ad5dd:9b3d6099cf32e58e87d01f66206a56107f0b1c7489b7ebe8',5);
+INSERT INTO credential VALUES('fannySmile', '1000:81441b4781ee326e1bcc4934bf36a5c99d675fbc6e6b0065:7ac0c66ad9c9b68a0b68ef7758de2b9753b0b20264da1230',6);
 
 -- Fin Insertion de credentials
 
@@ -133,9 +133,9 @@ INSERT INTO formation (NAME) VALUES('LPRéseau');
 
 -- Insertion de promotions
 
-INSERT INTO promotion (YEAR,FORMATION_ID,RESPONSABLE_ID) VALUES(2015, 1, 1);
-INSERT INTO promotion (YEAR,FORMATION_ID,RESPONSABLE_ID) VALUES(2014, 1, 5);
-INSERT INTO promotion (YEAR,FORMATION_ID,RESPONSABLE_ID) VALUES(2015, 2, 5);
+INSERT INTO promotion VALUES(1, '2015-2016', 1);
+INSERT INTO promotion VALUES(1, '2014-2015', 5);
+INSERT INTO promotion VALUES(2, '2015-2016', 5);
 
 -- Fin Insertion de promotions
 
@@ -144,10 +144,10 @@ INSERT INTO promotion (YEAR,FORMATION_ID,RESPONSABLE_ID) VALUES(2015, 2, 5);
 
 -- Insertion de listes UE/Promotion
 
-INSERT INTO ue_promotion VALUES(1, 5, 3.0, 1);
-INSERT INTO ue_promotion VALUES(2, 6, 3.0, 2);
-INSERT INTO ue_promotion VALUES(3, 7, 3.0,  3);
-INSERT INTO ue_promotion VALUES(1, 8, 3.0,  4);
+INSERT INTO ue_promotion VALUES(1, '2015-2016', 5, 3.0, 1);
+INSERT INTO ue_promotion VALUES(2, '2015-2016', 6, 3.0, 2);
+INSERT INTO ue_promotion VALUES(2, '2015-2016', 7, 3.0,  3);
+INSERT INTO ue_promotion VALUES(1, '2015-2016', 8, 3.0,  4);
 
 -- Fin Insertion de listes UE/Promotion
 
@@ -173,10 +173,10 @@ INSERT INTO flag (LABEL)  VALUES('DONE');
 
 -- Insertion d'interventions
 
-INSERT INTO intervention (QUOTE,DATE_INTERVENTION,INTERVENANT_ID,PROMOTION_ID) VALUES('Intervention1', '10-12-2015', 6, 1);
-INSERT INTO intervention (QUOTE,DATE_INTERVENTION,INTERVENANT_ID,PROMOTION_ID) VALUES('Intervention2', '17-12-2015', 6, 1);
-INSERT INTO intervention (QUOTE,DATE_INTERVENTION,INTERVENANT_ID,PROMOTION_ID) VALUES('Intervention3', '17-12-2015', 5, 3);
-INSERT INTO intervention (QUOTE,DATE_INTERVENTION,INTERVENANT_ID,PROMOTION_ID) VALUES('Intervention4', '10-12-2015', 6, 3);
+INSERT INTO intervention (QUOTE,DATE_INTERVENTION,INTERVENANT_ID,FORMATION_ID,YEAR) VALUES('Intervention1', '10-12-2015', 6, 1, '2015-2016');
+INSERT INTO intervention (QUOTE,DATE_INTERVENTION,INTERVENANT_ID,FORMATION_ID,YEAR) VALUES('Intervention2', '17-12-2015', 6, 1, '2015-2016');
+INSERT INTO intervention (QUOTE,DATE_INTERVENTION,INTERVENANT_ID,FORMATION_ID,YEAR) VALUES('Intervention3', '17-12-2015', 5, 2, '2015-2016');
+INSERT INTO intervention (QUOTE,DATE_INTERVENTION,INTERVENANT_ID,FORMATION_ID,YEAR) VALUES('Intervention4', '10-12-2015', 6, 2, '2015-2016');
 
 -- Fin Insertion d'interventions
 
@@ -185,9 +185,9 @@ INSERT INTO intervention (QUOTE,DATE_INTERVENTION,INTERVENANT_ID,PROMOTION_ID) V
 
 -- Insertion d'inscription dans une promo
 
-INSERT INTO is_register_in VALUES(2, 1);
-INSERT INTO is_register_in VALUES(3, 1);
-INSERT INTO is_register_in VALUES(4, 1);
+INSERT INTO is_register_in VALUES(2, 1, '2015-2016');
+INSERT INTO is_register_in VALUES(3, 1, '2015-2016');
+INSERT INTO is_register_in VALUES(4, 1, '2015-2016');
 
 -- Fin Insertion d'inscription dans une promo
 
@@ -211,9 +211,19 @@ INSERT INTO do_eval VALUES(16, 3, 6);
 
 -- Insertion d'offres de stage
 
-INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,DURATION,BEGIN_DATE,SIRET,FORMATION_ID) VALUES('Stage 1', 'Missions stage 1', 'Description stage 1', 20 ,'05-10-2015', 'SIRET-SMILE',1);
-INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,DURATION,BEGIN_DATE,SIRET,FORMATION_ID) VALUES('Stage 2', 'Missions stage 2', 'Description stage 2', 30 ,'07-04-2015', 'SIRET-OVH',1);
-INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,DURATION,BEGIN_DATE,SIRET,FORMATION_ID) VALUES('Stage 3', 'Missions stage 3', 'Description stage 3', 15 ,'03-06-2015', 'SIRET-OPQUAST',2);
+INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,TECHNOLOGY,DURATION,BEGIN_DATE,SIRET) VALUES('Stage 1', 'Missions stage 1', 'Description stage 1','JAVA', 20 ,'05-10-2015', 'SIRET-SMILE');
+INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,TECHNOLOGY,DURATION,BEGIN_DATE,SIRET) VALUES('Stage 2', 'Missions stage 2', 'Description stage 2','PHP', 30 ,'07-04-2015', 'SIRET-OVH');
+INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,TECHNOLOGY,DURATION,BEGIN_DATE,SIRET) VALUES('Stage 3', 'Missions stage 3', 'Description stage 3','SQL', 15 ,'03-06-2015', 'SIRET-OPQUAST');
+
+-- Fin Insertion d'offres de stage
+
+-- -- --
+
+-- Insertion liaison offre de stage / formations
+
+INSERT INTO internship_by_formation VALUES(1,1);
+INSERT INTO internship_by_formation VALUES(1,2);
+INSERT INTO internship_by_formation VALUES(2,3);
 
 -- Fin Insertion d'offres de stage
 
