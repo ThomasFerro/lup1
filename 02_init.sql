@@ -254,7 +254,7 @@ CREATE VIEW done_internship AS
     AND
           reg.student_id = m.member_id;
 
--- 8. View qui ne sert a rien (demandé l'utilisté à Thomas)
+-- 8. View qui ne sert a rien (demandé l'utilité à Thomas)
 
 CREATE VIEW internship_with_formation AS
     SELECT
