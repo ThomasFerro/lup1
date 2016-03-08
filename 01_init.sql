@@ -108,6 +108,7 @@ create table INTERNSHIP (
    DURATION             FLOAT                null,
    BEGIN_DATE           DATE                 null,
    SIRET                TEXT                 not null,
+   FORMATION_ID         INTEGER              not null,
    constraint PK_INTERNSHIP primary key (INTERNSHIP_ID)
 );
 
@@ -292,6 +293,11 @@ alter table INTERNSHIP
    add constraint FK_INTERNSH_CREATE_ORGANIZA foreign key (SIRET)
       references ORGANIZATION (SIRET)
       on delete restrict on update cascade;
+
+alter table INTERNSHIP
+ add constraint FK_INTERNSH_FORMATION_ID foreign key (FORMATION_ID)
+    references FORMATION (FORMATION_ID)
+    on delete restrict on update cascade;
 
 alter table INTERNSHIP_LOG
    add constraint FK_INTERNSH_IS_FLAGGE_FLAG foreign key (FLAG_ID)

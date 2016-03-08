@@ -211,9 +211,9 @@ INSERT INTO do_eval VALUES(16, 3, 6);
 
 -- Insertion d'offres de stage
 
-INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,DURATION,BEGIN_DATE,SIRET) VALUES('Stage 1', 'Missions stage 1', 'Description stage 1', 20 ,'05-10-2015', 'SIRET-SMILE');
-INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,DURATION,BEGIN_DATE,SIRET) VALUES('Stage 2', 'Missions stage 2', 'Description stage 2', 30 ,'07-04-2015', 'SIRET-OVH');
-INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,DURATION,BEGIN_DATE,SIRET) VALUES('Stage 3', 'Missions stage 3', 'Description stage 3', 15 ,'03-06-2015', 'SIRET-OPQUAST');
+INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,DURATION,BEGIN_DATE,SIRET,FORMATION_ID) VALUES('Stage 1', 'Missions stage 1', 'Description stage 1', 20 ,'05-10-2015', 'SIRET-SMILE',1);
+INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,DURATION,BEGIN_DATE,SIRET,FORMATION_ID) VALUES('Stage 2', 'Missions stage 2', 'Description stage 2', 30 ,'07-04-2015', 'SIRET-OVH',1);
+INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,DURATION,BEGIN_DATE,SIRET,FORMATION_ID) VALUES('Stage 3', 'Missions stage 3', 'Description stage 3', 15 ,'03-06-2015', 'SIRET-OPQUAST',2);
 
 -- Fin Insertion d'offres de stage
 
