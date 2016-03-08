@@ -52,13 +52,13 @@ INSERT INTO organization VALUES('SIRET-OPQUAST', 'Opquast', 'adresse Opquast', '
 
 -- Insertion des roles de chaque membre
 
-INSERT INTO as_role VALUES ('hauspiem','responsable_formation');
-INSERT INTO as_role VALUES ('hauspiem','responsable_cours');
-INSERT INTO as_role VALUES ('ferrot','etudiant');
-INSERT INTO as_role VALUES ('catteze','etudiant');
-INSERT INTO as_role VALUES ('fevrer','etudiant');
-INSERT INTO as_role VALUES ('mathieup','responsable_cours');
-INSERT INTO as_role VALUES ('fannySmile','responsable_cours');
+INSERT INTO has_role VALUES ('hauspiem','responsable_formation');
+INSERT INTO has_role VALUES ('hauspiem','responsable_cours');
+INSERT INTO has_role VALUES ('ferrot','etudiant');
+INSERT INTO has_role VALUES ('catteze','etudiant');
+INSERT INTO has_role VALUES ('fevrer','etudiant');
+INSERT INTO has_role VALUES ('mathieup','responsable_cours');
+INSERT INTO has_role VALUES ('fannySmile','responsable_cours');
 
 -- Fin insertion des roles de chaque membre
 

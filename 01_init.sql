@@ -38,7 +38,7 @@ drop table if exists REGISTER_TO_INTERNSHIP cascade;
 
 drop table if exists ROLE cascade;
 
-drop table if exists AS_ROLE cascade;
+drop table if exists HAS_ROLE cascade;
 
 drop table if exists SUBJECT cascade;
 
@@ -229,12 +229,12 @@ create table ROLE (
 );
 
 /*==============================================================*/
-/* Table : AS_ROLE                                              */
+/* Table : HAS_ROLE                                             */
 /*==============================================================*/
-create table AS_ROLE (
+create table HAS_ROLE (
    LOGIN               TEXT              not null,
    ROLE                TEXT              not null,
-   constraint PK_AS_ROLE primary key (LOGIN,ROLE)
+   constraint PK_HAS_ROLE primary key (LOGIN,ROLE)
 );
 
 /*==============================================================*/
@@ -368,13 +368,13 @@ alter table CREDENTIAL
         references MEMBER (MEMBER_ID)
         on delete restrict on update cascade;
 
-alter table AS_ROLE
- add constraint FK_AS_ROLE_LOGIN foreign key (LOGIN)
+alter table HAS_ROLE
+ add constraint FK_HAS_ROLE_LOGIN foreign key (LOGIN)
     references CREDENTIAL (LOGIN)
     on delete restrict on update cascade;
 
-alter table AS_ROLE
-   add constraint FK_AS_ROLE_ROLE foreign key (ROLE)
+alter table HAS_ROLE
+   add constraint FK_HAS_ROLE_ROLE foreign key (ROLE)
       references ROLE (ROLE)
       on delete restrict on update cascade;
 
