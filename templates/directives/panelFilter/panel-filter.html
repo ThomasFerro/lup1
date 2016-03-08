@@ -2,7 +2,7 @@
   <div class="filter-header">
     <h3>{{panelFilterCtrl.filterSelected.title}}</h3>
     <div class="list-group" ng-repeat="button in panelFilterCtrl.filterSelected.buttons">
-      <a ng-href="{{button.href}}" class="list-group-item">{{button.name}}</a>
+      <a class="list-group-item" data-toggle="{{button.dataToggle}}" data-target="{{button.dataTarget}}">{{button.name}}</a>
     </div>
   </div>
   <div class="filter-body">

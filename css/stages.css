@@ -18,3 +18,24 @@
   overflow: hidden !important;
   text-overflow: ellipsis !important;
 }
+
+.arrow {
+  line-height: 40px !important;
+}
+
+.steps-acceptation {
+  text-align: center;
+}
+
+.next-step {
+  text-align: center;
+}
+
+.add-stage-form .input-group-addon:first-child, .add-organization-form .input-group-addon:first-child {
+  width: 140px;
+  text-align: left;
+}
+
+.input-group {
+  width: 100%;
+}
