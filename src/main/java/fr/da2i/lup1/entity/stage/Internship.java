@@ -25,15 +25,18 @@ public class Internship extends Identifiable<Integer> {
 	private Date beginDate;
 	@DatabaseField(columnName = "siret")
 	private String siret;
+	@DatabaseField(columnName = "technology")
+	private String technology;
 	
-	public Internship(int id, String t, String m, String desc, double dur, Date b, String s) {
+	public Internship(int id, String title, String m, String desc, double dur, Date b, String s, String tec) {
 		this.internshipId = id;
-		this.title = t;
+		this.title = title;
 		this.missions = m;
 		this.description = desc;
 		this.duration = dur;
 		this.beginDate = b;
 		this.siret = s;
+		this.technology = tec;
 	}
 	
 	public Internship() {}
@@ -103,7 +106,15 @@ public class Internship extends Identifiable<Integer> {
 	public void setSiret(String siret) {
 		this.siret = siret;
 	}
-	
+
+	public String getTechnology() {
+		return technology;
+	}
+
+	public void setTechnology(String technology) {
+		this.technology = technology;
+	}
+
 	@Override
 	public String toString() {
 		return "Internship ["
