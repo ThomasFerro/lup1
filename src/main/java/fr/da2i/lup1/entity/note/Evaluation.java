@@ -14,7 +14,7 @@ public class Evaluation extends Identifiable<Integer> {
 	private int evaluationId;
 	@DatabaseField(columnName = "name")
 	private String name;
-	@DatabaseField(columnName = "name")
+	@DatabaseField(columnName = "coeff")
 	private double coeff;
 	@DatabaseField(columnName = "teacher_id", foreign = true)
 	private int teacherId;

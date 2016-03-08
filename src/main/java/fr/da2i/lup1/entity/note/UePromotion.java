@@ -2,12 +2,20 @@ package fr.da2i.lup1.entity.note;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 @XmlRootElement
+@DatabaseTable(tableName = "ue_promotion")
 public class UePromotion {
 	
+	@DatabaseField(columnName = "promotion_id", foreign = true)
 	private int promotionId;
+	@DatabaseField(columnName = "semester")
 	private int semester;
+	@DatabaseField(columnName = "coeff")
 	private double coeff;
+	@DatabaseField(columnName = "ueId", foreign = true)
 	private int ueId;
 	
 	public UePromotion(int promotionId, int semester, double coeff, int ueId) {
