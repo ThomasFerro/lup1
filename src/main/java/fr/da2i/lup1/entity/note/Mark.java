@@ -18,16 +18,18 @@
  */
 package fr.da2i.lup1.entity.note;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.base.Strings;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "mark_by_student")
 public class Mark {
 	
-	@DatabaseField(columnName = "ue_id")
-	private Integer ueId;
-	@DatabaseField(columnName = "subject_id")
-	private Integer subjectId;
+	@DatabaseField(columnName = "ue_id", foreign = true, foreignAutoRefresh = true) @JsonIgnore
+	private Ue ue;
+	@DatabaseField(columnName = "subject_id", foreign = true, foreignAutoRefresh = true) @JsonIgnore
+	private Subject subject;
 	@DatabaseField(columnName = "student_id")
 	private Integer studentId;
 	@DatabaseField(columnName = "mark")
@@ -39,36 +41,40 @@ public class Mark {
 	@DatabaseField(columnName = "coeff_ue")
 	private double coeffUe;
 	@DatabaseField(columnName = "semester")
-	private String semester;
+	private Integer semester;
+	@DatabaseField(columnName = "formation_id")
+	private Integer formationId;
+	@DatabaseField(columnName = "year")
+	private String year;
 	
 	public Mark() {}
 
 	/**
 	 * @return the ue
 	 */
-	public Integer getUeId() {
-		return ueId;
+	public Ue getUe() {
+		return ue;
 	}
 
 	/**
 	 * @param ue the ue to set
 	 */
-	public void setUeId(Integer ueId) {
-		this.ueId = ueId;
+	public void setUeId(Ue ue) {
+		this.ue = ue;
 	}
 
 	/**
 	 * @return the subject
 	 */
-	public Integer getSubjectId() {
-		return subjectId;
+	public Subject getSubject() {
+		return subject;
 	}
 
 	/**
 	 * @param subject the subject to set
 	 */
-	public void setSubjectId(Integer subjectId) {
-		this.subjectId = subjectId;
+	public void setSubjectId(Subject subject) {
+		this.subject = subject;
 	}
 
 	/**
@@ -144,23 +150,62 @@ public class Mark {
 	/**
 	 * @return the semester
 	 */
-	public String getSemester() {
+	public Integer getSemester() {
 		return semester;
 	}
 
 	/**
 	 * @param semester the semester to set
 	 */
-	public void setSemester(String semester) {
+	public void setSemester(Integer semester) {
 		this.semester = semester;
 	}
 	
+	/**
+	 * @return the formationId
+	 */
+	public Integer getFormationId() {
+		return formationId;
+	}
+
+	/**
+	 * @param formationId the formationId to set
+	 */
+	public void setFormationId(Integer formationId) {
+		this.formationId = formationId;
+	}
+
+	/**
+	 * @return the year
+	 */
+	public String getYear() {
+		return Strings.nullToEmpty(year);
+	}
+
+	/**
+	 * @param year the year to set
+	 */
+	public void setYear(String year) {
+		this.year = year;
+	}
+	
+	public boolean equals(Object o) {
+		if (o == this) {
+			return true;
+		}
+		Mark m = (Mark) o;
+		return ue.equals(m.ue) && subject.equals(m.subject) && studentId.equals(m.studentId)
+				&& formationId.equals(m.formationId) && year.equals(m.year)
+				&& semester.equals(m.semester);
+	}
+
 	@Override
 	public String toString() {
-		return "Mark [ue=" + ueId + ", subject=" + subjectId + ", student="
-				+ studentId + ", mark=" + mark + ", coeffEval=" + coeffEval
-				+ ", coeffSubject=" + coeffSubject + ", coeffUe=" + coeffUe
-				+ ", semester=" + semester + "]";
+		return "Mark [ue=" + ue + ", subject=" + subject
+				+ ", studentId=" + studentId + ", mark=" + mark
+				+ ", coeffEval=" + coeffEval + ", coeffSubject=" + coeffSubject
+				+ ", coeffUe=" + coeffUe + ", semester=" + semester
+				+ ", formationId=" + formationId + ", year=" + year + "]";
 	}
 
 }

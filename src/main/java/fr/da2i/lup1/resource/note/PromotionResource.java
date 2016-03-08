@@ -16,23 +16,22 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.da2i.lup1.resource;
+package fr.da2i.lup1.resource.note;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 import org.glassfish.jersey.server.model.Resource;
 
-import fr.da2i.lup1.resource.note.AnnualResource;
-import fr.da2i.lup1.resource.note.BulletinResource;
-import fr.da2i.lup1.resource.note.NoteResource;
-import fr.da2i.lup1.resource.note.SubjectResource;
-import fr.da2i.lup1.resource.note.UeResource;
+import fr.da2i.lup1.filter.PromotionAccess;
+import fr.da2i.lup1.security.Authenticated;
 
 @Path("formations/{formationId: [0-9]+}/annees/{annee: [0-9]{4}-[0-9]{4}}")
-public class FormationResource extends AnnualResource {
+@PromotionAccess
+@Authenticated
+public class PromotionResource extends AnnualResource {
 	
-	public FormationResource() {}
+	public PromotionResource() {}
 	
 	@GET
 	public String get() {

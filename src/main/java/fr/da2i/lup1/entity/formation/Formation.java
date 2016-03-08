@@ -53,5 +53,10 @@ public class Formation extends Identifiable<Integer> {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	@Override
+	public String toString() {
+		return "Formation [formationId=" + formationId + ", name=" + name + "]";
+	}
 
 }

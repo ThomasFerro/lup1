@@ -1,5 +1,8 @@
 package fr.da2i.lup1.entity.note;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -9,19 +12,17 @@ import fr.da2i.lup1.util.Identifiable;
 public class Subject extends Identifiable<Integer> {
 	
 	@DatabaseField(columnName = "subject_id", id = true)
-	private int subjectId;
+	private Integer subjectId;
 	@DatabaseField(columnName = "name")
 	private String name;
 	@DatabaseField(columnName = "coeff")
 	private double coeff;
-	@DatabaseField(columnName = "ue_id", foreign = true)
-	private int ueId;
+	private Set<Mark> marks = new HashSet<Mark>();
 	
 	public Subject(int subjectId, String name, double coeff, int user) {
 		this.subjectId = subjectId;
 		this.name = name;
 		this.coeff = coeff;
-		this.ueId = user;
 	}
 	
 	public Subject() {}
@@ -49,12 +50,44 @@ public class Subject extends Identifiable<Integer> {
 	public void setCoeff(double coeff) {
 		this.coeff = coeff;
 	}
-
-	public int getUeId() {
-		return ueId;
+	
+	/**
+	 * @return the marks
+	 */
+	public Set<Mark> getMarks() {
+		return marks;
 	}
 
-	public void setUeId(int ueId) {
-		this.ueId = ueId;
+	/**
+	 * @param marks the marks to set
+	 */
+	public void setMarks(Set<Mark> marks) {
+		this.marks = marks;
 	}
+
+	public boolean contains(Mark mark) {
+		return marks.contains(mark);
+	}
+	
+	public boolean add(Mark mark) {
+		return marks.add(mark);
+	}
+	
+	public boolean remove(Mark mark) {
+		return marks.remove(mark);
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o == this) {
+			return true;
+		}
+		return subjectId.equals(((Subject) o).subjectId);
+	}
+
+	@Override
+	public String toString() {
+		return "Subject [subjectId=" + subjectId + ", name=" + name + ", coeff=" + coeff + "]";
+	}
+	
 }
