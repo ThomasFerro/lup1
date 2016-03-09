@@ -46,8 +46,7 @@ public class InternshipOfferResource extends AnnualResource {
 	@Authenticated
 	@RolesAllowed({ "etudiant", "responsable_formation", "responsable_stage" })
 	public Response getStages() throws SQLException {
-//		return Response.ok(dao.queryBuilder().where().eq("formation_id", formationId).query()).build();
-//		return Response.ok(dao.queryBuilder().join(daoInternshipByFormation.queryBuilder()).where().eq("formation_id", formationId).query()).build();
+		return Response.ok(dao.queryBuilder().where().eq("formation_id", formationId).query()).build();
 	}
 	
 	/**
@@ -66,7 +65,6 @@ public class InternshipOfferResource extends AnnualResource {
 	@Authenticated
 	@RolesAllowed({ "etudiant", "responsable_formation", "responsable_stage" })
 	public Response getStage(@PathParam("internshipId") Integer internshipId) throws SQLException {
-//		List<Internship> stage = dao.queryBuilder().where().eq("formation_id", formationId).and().eq("internship_id", internshipId).query();
 		List<Internship> stage = dao.queryBuilder().where().eq("formation_id", formationId).and().eq("internship_id", internshipId).query();
 		if (stage.isEmpty()) {
 			return Response.status(Status.NOT_FOUND).build();
@@ -89,20 +87,17 @@ public class InternshipOfferResource extends AnnualResource {
 	@Path("{internshipId: [0-9]+}")
 	@Authenticated
 	@RolesAllowed({ "responsable_formation", "responsable_stage" })
-	public Response putStage(@PathParam("internshipId") Integer internshipId, Internship stage) throws SQLException {
-		if (Strings.isNullOrEmpty(stage.getSiret()) || stage.getId() == 0) {
+	public Response putStage(@PathParam("formationId") Integer formationId, @PathParam("annee") String year, @PathParam("internshipId") Integer internshipId, Internship stage) throws SQLException {
+		stage.setId(internshipId);
+		System.out.println("\n\n\n"+stage.getId()+"\n\n\n");
+		if (Strings.isNullOrEmpty(stage.getSiret()) || Strings.isNullOrEmpty(stage.getYear()) || stage.getFormationId() == 0 || stage.getId() == 0) {
 			return Response.status(Status.BAD_REQUEST).build(); 
 		}
-		stage.setId(internshipId);
 		if (dao.idExists(internshipId)) {
 			dao.update(stage);
 			return Response.status(Status.NO_CONTENT).build();		
 		}
-		else {
-			dao.create(stage);
-			URI uri = uriInfo.getAbsolutePathBuilder().path(String.valueOf(stage.getId())).build();
-			return Response.created(uri).build();
-		}
+		return post(formationId, year, stage);
 	}
 	
 	/**
@@ -115,16 +110,16 @@ public class InternshipOfferResource extends AnnualResource {
 	@POST
 	@Authenticated
 	@RolesAllowed({ "responsable_formation", "responsable_stage" })
-	public Response post(Internship stage) throws SQLException {
-		if (Strings.isNullOrEmpty(stage.getSiret()) || stage.getId() == 0) {
+	public Response post(@PathParam("formationId") Integer formationId, @PathParam("annee") String year, Internship stage) throws SQLException {
+		stage.setFormationId(formationId);
+		stage.setYear(year);
+		if (Strings.isNullOrEmpty(stage.getSiret()) || Strings.isNullOrEmpty(stage.getYear()) || stage.getFormationId() == 0) {
 			return Response.status(Status.BAD_REQUEST).build(); 
 		}
-		if (!dao.idExists(stage.getId())) {
-			dao.create(stage);
-			URI uri = uriInfo.getAbsolutePathBuilder().path(String.valueOf(stage.getId())).build();
-			return Response.created(uri).build();
-		}
-		return Response.status(Status.CONFLICT).build();
+		dao.create(stage);
+		URI uri = uriInfo.getAbsolutePathBuilder().path(String.valueOf(stage.getId())).build();
+		return Response.created(uri).build();
+//		return Response.status(Status.CONFLICT).build();
 	}
 	
 	/**

@@ -11,25 +11,31 @@ import fr.da2i.lup1.util.Identifiable;
 @DatabaseTable(tableName = "internship")
 public class Internship extends Identifiable<Integer> {
 
-	@DatabaseField(columnName = "internship_id", id = true)
-	private int internshipId;
+	@DatabaseField(columnName = "internship_id", generatedIdSequence = "internship_internship_id_seq")
+	protected int internshipId;
+	@DatabaseField(columnName = "formation_id")
+	private int formationId;
+	@DatabaseField(columnName = "year")
+	private String year;
 	@DatabaseField(columnName = "title")
-	private String title;
+	protected String title;
 	@DatabaseField(columnName = "missions")
-	private String missions;
+	protected String missions;
 	@DatabaseField(columnName = "description")
-	private String description;
+	protected String description;
 	@DatabaseField(columnName = "duration")
-	private double duration;
+	protected double duration;
 	@DatabaseField(columnName = "begin_date")
-	private Date beginDate;
+	protected Date beginDate;
 	@DatabaseField(columnName = "siret")
-	private String siret;
+	protected String siret;
 	@DatabaseField(columnName = "technology")
-	private String technology;
+	protected String technology;
 	
-	public Internship(int id, String title, String m, String desc, double dur, Date b, String s, String tec) {
+	public Internship(int id, int f, String y, String title, String m, String desc, double dur, Date b, String s, String tec) {
 		this.internshipId = id;
+		this.formationId = f;
+		this.year = y;
 		this.title = title;
 		this.missions = m;
 		this.description = desc;
@@ -51,6 +57,22 @@ public class Internship extends Identifiable<Integer> {
 		this.internshipId = id;
 	}
 	
+	public int getFormationId() {
+		return formationId;
+	}
+
+	public void setFormationId(int formationId) {
+		this.formationId = formationId;
+	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
 	public int getInternshipId() {
 		return this.internshipId;
 	}
