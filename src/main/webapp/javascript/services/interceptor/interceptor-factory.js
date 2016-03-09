@@ -5,7 +5,8 @@
             'request': function (config) {
                 config.headers = config.headers;
                 if ($localStorage.lup1) {
-                    config.headers.Authorization = $localStorage.lup1;
+                	var token = $localStorage.lup1.replace(/"/g, "");
+                    config.headers.Authorization = token;
                 }
                 return config;
             },
