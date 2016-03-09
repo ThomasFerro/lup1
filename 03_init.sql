@@ -115,6 +115,7 @@ INSERT INTO evaluation (NAME,COEFF,TEACHER_ID,SUBJECT_ID,DATE_EVAL) VALUES('CV',
 INSERT INTO evaluation (NAME,COEFF,TEACHER_ID,SUBJECT_ID,DATE_EVAL) VALUES('Projet final', 5.0, 1, 5, null);
 INSERT INTO evaluation (NAME,COEFF,TEACHER_ID,SUBJECT_ID,DATE_EVAL) VALUES('DS1', 2.0, 6, 7, null);
 INSERT INTO evaluation (NAME,COEFF,TEACHER_ID,SUBJECT_ID,DATE_EVAL) VALUES('Stage', 5.0, 1, 6, null);
+INSERT INTO evaluation (NAME,COEFF,TEACHER_ID,SUBJECT_ID,DATE_EVAL) VALUES('Controle sur l''anatomie de Tony', 5.0, 1, 9, null);
 
 -- Fin Insertion d'évaluations
 
@@ -203,6 +204,7 @@ INSERT INTO do_eval VALUES(12.0, 3, 4);
 INSERT INTO do_eval VALUES(19.9, 2, 1);
 INSERT INTO do_eval VALUES(15, 4, 1);
 INSERT INTO do_eval VALUES(16, 3, 6);
+INSERT INTO do_eval VALUES(8, 3, 8);
 
 -- Fin Insertion de notes d'évaluations
 
