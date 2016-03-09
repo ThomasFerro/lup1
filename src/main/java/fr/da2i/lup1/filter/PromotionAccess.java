@@ -16,34 +16,19 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.da2i.lup1.entity.formation;
+package fr.da2i.lup1.filter;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-@XmlRootElement
-public class IsRegisterIn {
+import javax.ws.rs.NameBinding;
 
-	private int studentId;
-	private int promotionId;
-	
-	public IsRegisterIn(int studentId, int promotionId) {
-		this.studentId = studentId;
-		this.promotionId = promotionId;
-	}
-
-	public int getStudentId() {
-		return studentId;
-	}
-
-	public void setStudentId(int studentId) {
-		this.studentId = studentId;
-	}
-
-	public int getPromotionId() {
-		return promotionId;
-	}
-
-	public void setPromotionId(int promotionId) {
-		this.promotionId = promotionId;
-	}
-}
+/**
+ * Cette annotation permet de vérifier en amont l'accès à une promotion.
+ */
+@Target({ ElementType.TYPE, ElementType.METHOD })
+@Retention(value = RetentionPolicy.RUNTIME)
+@NameBinding
+public @interface PromotionAccess {}

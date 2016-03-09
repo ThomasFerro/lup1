@@ -18,7 +18,12 @@
  */
 package fr.da2i.lup1.resource.note;
 
+import java.sql.SQLException;
+
 import javax.ws.rs.PathParam;
+
+import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.Where;
 
 import fr.da2i.lup1.util.SimpleResource;
 
@@ -35,6 +40,14 @@ public abstract class AnnualResource extends SimpleResource {
 	
 	public String getAnnee() {
 		return annee;
+	}
+	
+	public <T,ID> Where<T,ID> findFromPromotion(QueryBuilder<T, ID> queryBuilder) throws SQLException {
+		return queryBuilder.where().eq("formation_id", formationId).and().eq("year", annee);
+	}
+	
+	public <T,ID> Where<T,ID> findFromPromotion(Where<T,ID> where) throws SQLException {
+		return where.eq("formation_id", formationId).and().eq("year", annee);
 	}
 
 }
