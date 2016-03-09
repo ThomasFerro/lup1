@@ -20,45 +20,29 @@ package fr.da2i.lup1.resource.formation;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 
 import org.glassfish.jersey.server.model.Resource;
 
 import fr.da2i.lup1.filter.PromotionAccess;
-import fr.da2i.lup1.resource.note.NoteResource;
-import fr.da2i.lup1.resource.note.SubjectResource;
-import fr.da2i.lup1.resource.note.UeResource;
+import fr.da2i.lup1.filter.SemesterAccess;
+import fr.da2i.lup1.resource.note.BulletinResource;
 import fr.da2i.lup1.security.Authenticated;
 
-@Path("formations/{formationId: [0-9]+}/annees/{annee: [0-9]{4}-[0-9]{4}}")
 @PromotionAccess
+@SemesterAccess
 @Authenticated
-public class PromotionResource extends AnnualResource {
-	
-	public PromotionResource() {}
+public class SemestreResource {
 	
 	@GET
-	public String get() {
-		return "Formation " + formationId + " (" + annee + ")";
+	@Path("{semestre: [0-9]+}")
+	public String get(@PathParam("semestre") Integer semester) {
+		return "Semestre " + semester;
 	}
 	
-	@Path("ues")
-	public Resource getUeResource() {
-		return Resource.from(UeResource.class);
-	}
-	
-	@Path("subjects")
-	public Resource getSubjectResource() {
-		return Resource.from(SubjectResource.class);
-	}
-	
-	@Path("notes")
-	public Resource getNoteResource() {
-		return Resource.from(NoteResource.class);
-	}
-	
-	@Path("semestres")
+	@Path("{semestre: [0-9]+}/bulletins")
 	public Resource getBulletinResource() {
-		return Resource.from(SemestreResource.class);
+		return Resource.from(BulletinResource.class);
 	}
 
 }

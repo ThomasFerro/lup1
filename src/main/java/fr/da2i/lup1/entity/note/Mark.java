@@ -82,6 +82,7 @@ public class Mark {
 	/**
 	 * @return the student
 	 */
+	@JsonIgnore
 	public Integer getStudentId() {
 		return studentId;
 	}
@@ -110,7 +111,6 @@ public class Mark {
 	/**
 	 * @return the coeffEval
 	 */
-	@JsonIgnore
 	public double getCoeffEval() {
 		return coeffEval;
 	}
@@ -155,6 +155,7 @@ public class Mark {
 	/**
 	 * @return the semester
 	 */
+	@JsonIgnore
 	public Integer getSemester() {
 		return semester;
 	}

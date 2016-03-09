@@ -26,6 +26,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 
 import fr.da2i.lup1.filter.PromotionFilter;
+import fr.da2i.lup1.filter.SemesterFilter;
 import fr.da2i.lup1.io.GZIPWriterInterceptor;
 import fr.da2i.lup1.security.AuthenticationFilter;
 import fr.da2i.lup1.security.AuthenticationServiceFeature;
@@ -46,6 +47,7 @@ public class App extends ResourceConfig {
 		register(AuthenticationServiceFeature.class);
 		register(AuthenticationFilter.class);
 		register(PromotionFilter.class);
+		register(SemesterFilter.class);
 		register(MultiPartFeature.class);
 		register(GZIPWriterInterceptor.class);
 //		register(GZIPReaderInterceptor.class);
