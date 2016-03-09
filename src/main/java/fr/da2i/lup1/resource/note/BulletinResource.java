@@ -42,11 +42,13 @@ import fr.da2i.lup1.entity.note.Subject;
 import fr.da2i.lup1.entity.note.Ue;
 import fr.da2i.lup1.entity.security.Credential;
 import fr.da2i.lup1.filter.PromotionAccess;
+import fr.da2i.lup1.filter.SemesterAccess;
 import fr.da2i.lup1.resource.formation.AnnualResource;
 import fr.da2i.lup1.security.Authenticated;
 import fr.da2i.lup1.util.DaoProvider;
 
 @PromotionAccess
+@SemesterAccess
 @Authenticated
 public class BulletinResource extends AnnualResource {
 	
@@ -55,6 +57,9 @@ public class BulletinResource extends AnnualResource {
 	private Dao<Mark, Integer> markDao;
 	private Dao<Register, Integer> registerDao;
 	
+	@PathParam("semestre")
+	private int semester;
+	
 	public BulletinResource() {
 		this.promoDao = DaoProvider.getDao(Promotion.class);
 		this.markDao = DaoProvider.getDao(Mark.class);
@@ -62,9 +67,9 @@ public class BulletinResource extends AnnualResource {
 		this.credentialDao = DaoProvider.getDao(Credential.class);
 	}
 	
-	private List<Ue> getBulletin(Integer studentId) throws SQLException {
+	private List<Ue> getBulletin(Integer studentId, Integer semester) throws SQLException {
 		List<Ue> bulletin = new ArrayList<>();
-		List<Mark> marks = findFromPromotion(markDao.queryBuilder()).and().eq("student_id", studentId).query();
+		List<Mark> marks = findFromPromotion(markDao.queryBuilder()).and().eq("student_id", studentId).and().eq("semester", semester).query();
 		Ue ue;
 		Subject sub;
 		int i;
@@ -102,7 +107,7 @@ public class BulletinResource extends AnnualResource {
 			for (Register register : registers) {
 				studentId = register.getStudent().getId();
 				credential = credentialDao.queryBuilder().where().eq("member_id", studentId).queryForFirst();
-				bulletins.put(credential.getLogin(), getBulletin(studentId));
+				bulletins.put(credential.getLogin(), getBulletin(studentId, semester));
 			}
 			return Response.ok(bulletins).build();
 		}
@@ -136,7 +141,7 @@ public class BulletinResource extends AnnualResource {
 			}
 			else {
 				Map<String, List<Ue>> bulletin = new HashMap<>();
-				bulletin.put(studentLogin, getBulletin(studentId));
+				bulletin.put(studentLogin, getBulletin(studentId, semester));
 				return Response.ok(bulletin).build();
 			}
 		}
