@@ -29,7 +29,7 @@ import fr.da2i.lup1.security.Authenticated;
 
 @Path("formations/{formationId: [0-9]+}/annees/{annee: [0-9]{4}-[0-9]{4}}")
 @PromotionAccess
-@Authenticated
+//@Authenticated
 public class PromotionResource extends AnnualResource {
 	
 	public PromotionResource() {}
@@ -62,6 +62,11 @@ public class PromotionResource extends AnnualResource {
 	@Path("stages")
 	public Resource getStageResource() {
 		return Resource.from(InternshipOfferResource.class);
+	}
+	
+	@Path("etudiants")
+	public Resource getEtudiantResource() {
+		return Resource.from(EtudiantResource.class);
 	}
 
 }

@@ -19,12 +19,14 @@ import com.google.common.base.Strings;
 import com.j256.ormlite.dao.Dao;
 
 import fr.da2i.lup1.entity.stage.Internship;
+import fr.da2i.lup1.filter.PromotionAccess;
 import fr.da2i.lup1.resource.note.AnnualResource;
 import fr.da2i.lup1.security.Authenticated;
 import fr.da2i.lup1.util.DaoProvider;
 
 
 @Authenticated
+@PromotionAccess
 public class InternshipOfferResource extends AnnualResource {
 	
 	private Dao<Internship, Integer> dao;
@@ -47,6 +49,7 @@ public class InternshipOfferResource extends AnnualResource {
 	@Produces("application/json")
 	@RolesAllowed({ "etudiant", "responsable_formation", "responsable_stage" })
 	public Response getStages() throws SQLException {
+		
 		List<Internship> stages = findFromPromotion(dao.queryBuilder()).query();
 		if (stages.isEmpty())
 			return Response.status(Status.NOT_FOUND).build();

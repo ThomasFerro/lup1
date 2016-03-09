@@ -21,16 +21,16 @@ public class InternshipLog extends Identifiable<Integer> {
 	private int flagId;
 	@DatabaseField(columnName = "member_id")
 	private int memberId;
-	@DatabaseField(columnName = "internship_id")
-	private int internshipId;
+	@DatabaseField(columnName = "internship_id", foreign = true, foreignAutoRefresh = true)
+	private Internship internship;
 	
-	public InternshipLog(int id, Timestamp d, String q, int f, int m, int i) {
+	public InternshipLog(int id, Timestamp d, String q, int f, int m, Internship i) {
 		this.internshipLogId = id;
 		this.dateLog = d;
 		this.quote = q;
 		this.flagId = f;
 		this.memberId = m;
-		this.internshipId = i;
+		this.internship = i;
 	}
 	
 	public InternshipLog() {}
@@ -77,12 +77,12 @@ public class InternshipLog extends Identifiable<Integer> {
 		this.memberId = memberId;
 	}
 
-	public int getInternshipId() {
-		return internshipId;
+	public Internship getInternshipId() {
+		return internship;
 	}
 
-	public void setInternshipId(int internshipId) {
-		this.internshipId = internshipId;
+	public void setInternshipId(Internship internshipId) {
+		this.internship = internshipId;
 	}
 	
 	public String toString() {
