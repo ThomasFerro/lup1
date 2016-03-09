@@ -26,11 +26,16 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.DefaultClaims;
 import io.jsonwebtoken.impl.crypto.MacProvider;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.net.URL;
 import java.security.Key;
 import java.util.Date;
 import java.util.Map;
 
 import javax.inject.Singleton;
+
+import com.google.common.io.Resources;
 
 /**
  * @author Edouard
@@ -44,7 +49,16 @@ public final class JwtManager {
 	private Key key;
 	
 	public JwtManager() {
-		this.key = MacProvider.generateKey();
+		try {
+			URL url = Resources.getResource("key.ser");
+			try (ObjectInputStream ois = new ObjectInputStream(url.openStream())) {
+				this.key = (Key) ois.readObject();
+			} catch (IOException | ClassNotFoundException e) {
+				this.key = MacProvider.generateKey();
+			}
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public boolean hasExpire(Claims claims) {

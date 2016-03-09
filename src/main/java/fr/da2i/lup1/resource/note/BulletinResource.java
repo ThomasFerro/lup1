@@ -19,11 +19,10 @@
 package fr.da2i.lup1.resource.note;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.ForbiddenException;
@@ -43,6 +42,7 @@ import fr.da2i.lup1.entity.note.Subject;
 import fr.da2i.lup1.entity.note.Ue;
 import fr.da2i.lup1.entity.security.Credential;
 import fr.da2i.lup1.filter.PromotionAccess;
+import fr.da2i.lup1.resource.formation.AnnualResource;
 import fr.da2i.lup1.security.Authenticated;
 import fr.da2i.lup1.util.DaoProvider;
 
@@ -62,18 +62,24 @@ public class BulletinResource extends AnnualResource {
 		this.credentialDao = DaoProvider.getDao(Credential.class);
 	}
 	
-	private Set<Ue> getBulletin(Integer studentId) throws SQLException {
-		Set<Ue> bulletin = new HashSet<>();
+	private List<Ue> getBulletin(Integer studentId) throws SQLException {
+		List<Ue> bulletin = new ArrayList<>();
 		List<Mark> marks = findFromPromotion(markDao.queryBuilder()).and().eq("student_id", studentId).query();
 		Ue ue;
 		Subject sub;
+		int i;
 		for (Mark mark : marks) {
 			ue = mark.getUe();
+			i = bulletin.indexOf(ue);
 			sub = mark.getSubject();
 			sub.add(mark);
-			ue.add(sub);
-			bulletin.add(ue);
-			
+			if (i < 0) {
+				ue.add(sub);
+				bulletin.add(ue);
+			}
+			else {
+				bulletin.get(i).add(sub);
+			}
 			ue.setCoeff(mark.getCoeffUe());
 			sub.setCoeff(mark.getCoeffSubject());
 		}
@@ -90,7 +96,7 @@ public class BulletinResource extends AnnualResource {
 		}
 		else {
 			List<Register> registers = findFromPromotion(registerDao.queryBuilder()).query();
-			Map<String, Set<Ue>> bulletins = new HashMap<>();
+			Map<String, List<Ue>> bulletins = new HashMap<>();
 			Credential credential;
 			Integer studentId;
 			for (Register register : registers) {
@@ -129,7 +135,7 @@ public class BulletinResource extends AnnualResource {
 				throw new ForbiddenException();
 			}
 			else {
-				Map<String, Set<Ue>> bulletin = new HashMap<>();
+				Map<String, List<Ue>> bulletin = new HashMap<>();
 				bulletin.put(studentLogin, getBulletin(studentId));
 				return Response.ok(bulletin).build();
 			}

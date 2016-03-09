@@ -27,6 +27,7 @@
 				<directory>src/main/resources</directory>
 				<includes>
 					<include>**/*.properties</include>
+					<include>**/*.ser</include>
 				</includes>
 			</resource>	
 		</resources>
