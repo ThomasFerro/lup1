@@ -20,6 +20,8 @@ package fr.da2i.lup1.resource.note;
 
 import javax.ws.rs.GET;
 
+import fr.da2i.lup1.resource.formation.AnnualResource;
+
 public class UeResource extends AnnualResource {
 	
 	@GET

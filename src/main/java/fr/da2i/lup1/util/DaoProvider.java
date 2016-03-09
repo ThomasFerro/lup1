@@ -47,7 +47,7 @@ public class DaoProvider {
 			Properties props = IO.loadProperties(Paths.get(url.toURI()));
 			Class.forName(props.getProperty("db.driver"));
 			conSource = new JdbcPooledConnectionSource(props.getProperty("db.uri"), props.getProperty("db.username"), props.getProperty("db.password"));
-		} catch (ClassNotFoundException | URISyntaxException | SQLException e) {
+		} catch (IllegalArgumentException | ClassNotFoundException | URISyntaxException | SQLException e) {
 			throw new DaoException(e);
 		}
 	}

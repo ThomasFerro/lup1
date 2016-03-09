@@ -16,7 +16,7 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.da2i.lup1.resource.note;
+package fr.da2i.lup1.resource.formation;
 
 import java.sql.SQLException;
 
