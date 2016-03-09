@@ -115,7 +115,7 @@ INSERT INTO evaluation (NAME,COEFF,TEACHER_ID,SUBJECT_ID,DATE_EVAL) VALUES('CV',
 INSERT INTO evaluation (NAME,COEFF,TEACHER_ID,SUBJECT_ID,DATE_EVAL) VALUES('Projet final', 5.0, 1, 5, null);
 INSERT INTO evaluation (NAME,COEFF,TEACHER_ID,SUBJECT_ID,DATE_EVAL) VALUES('DS1', 2.0, 6, 7, null);
 INSERT INTO evaluation (NAME,COEFF,TEACHER_ID,SUBJECT_ID,DATE_EVAL) VALUES('Stage', 5.0, 1, 6, null);
-INSERT INTO evaluation (NAME,COEFF,TEACHER_ID,SUBJECT_ID,DATE_EVAL) VALUES('Controle sur l''anatomie de Tony', 5.0, 1, 9, null);
+INSERT INTO evaluation (NAME,COEFF,TEACHER_ID,SUBJECT_ID,DATE_EVAL) VALUES('DS_PHP', 5.0, 1, 9, null);
 
 -- Fin Insertion d'évaluations
 
@@ -157,6 +157,7 @@ INSERT INTO ue_promotion VALUES(1, '2015-2016', 8, 3.0,  4);
 
 -- Insertion de flags
 
+INSERT INTO flag (LABEL) VALUES('SIGNING');
 INSERT INTO flag (LABEL) VALUES('CONTACT');
 INSERT INTO flag (LABEL)  VALUES('APPOINTMENT');
 INSERT INTO flag (LABEL)  VALUES('INTERVIEW');
@@ -164,7 +165,6 @@ INSERT INTO flag (LABEL)  VALUES('CALLBACK');
 INSERT INTO flag (LABEL)  VALUES('MAKING');
 INSERT INTO flag (LABEL)  VALUES('CHECKING');
 INSERT INTO flag (LABEL)  VALUES('VALIDATING');
-INSERT INTO flag (LABEL)  VALUES('SIGNING');
 INSERT INTO flag (LABEL)  VALUES('DONE');
 
 -- Fin Insertion de flags
@@ -252,6 +252,8 @@ INSERT INTO manage_internship VALUES(1, 3);
 INSERT INTO internship_log (DATE_LOG,QUOTE,FLAG_ID,MEMBER_ID,INTERNSHIP_ID) VALUES(TIMESTAMP '2015-12-19 10:23:54', 'Après passage d un responsable de la boite', 1, 2, 1);
 INSERT INTO internship_log (DATE_LOG,QUOTE,FLAG_ID,MEMBER_ID,INTERNSHIP_ID) VALUES(TIMESTAMP '2015-12-22 15:10:54', 'Après passage d un responsable de la boite', 1, 3, 2);
 INSERT INTO internship_log (DATE_LOG,QUOTE,FLAG_ID,MEMBER_ID,INTERNSHIP_ID) VALUES(TIMESTAMP '2016-01-05 10:23:54', 'Offre trouvée sur le site', 1, 4, 3);
+INSERT INTO internship_log (DATE_LOG,QUOTE,FLAG_ID,MEMBER_ID,INTERNSHIP_ID) VALUES(TIMESTAMP '2015-12-19 10:23:54', 'Après passage d un responsable de la boite', 2, 2, 1);
+INSERT INTO internship_log (DATE_LOG,QUOTE,FLAG_ID,MEMBER_ID,INTERNSHIP_ID) VALUES(TIMESTAMP '2015-12-19 10:23:54', 'Après passage d un responsable de la boite', 2, 2, 1);
 
 -- Fin Insertion de logs de stage
 
