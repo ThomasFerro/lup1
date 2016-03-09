@@ -26,8 +26,12 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.DefaultClaims;
 import io.jsonwebtoken.impl.crypto.MacProvider;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.security.Key;
 import java.util.Date;
@@ -106,6 +110,11 @@ public final class JwtManager {
 		} catch (Exception e) {
 			return null;
 		}
+	}
+	
+	public static void main(String[] args) throws FileNotFoundException, IOException {
+		ObjectOutputStream in = new ObjectOutputStream(new FileOutputStream(new File("key.ser")));
+		in.writeObject(MacProvider.generateKey());
 	}
 
 }
