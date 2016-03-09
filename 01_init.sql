@@ -109,16 +109,9 @@ create table INTERNSHIP (
    DURATION             FLOAT                null,
    BEGIN_DATE           DATE                 null,
    SIRET                TEXT                 not null,
-   constraint PK_INTERNSHIP primary key (INTERNSHIP_ID)
-);
-
-/*==============================================================*/
-/* Table : INTERNSHIP_BY_FORMATION                              */
-/*==============================================================*/
-create table INTERNSHIP_BY_FORMATION (
    FORMATION_ID         INTEGER                 not null,
-   INTERNSHIP_ID        INTEGER                 not null,
-   constraint PK_INTERNSHIP_BY_FORMATION primary key (FORMATION_ID,INTERNSHIP_ID)
+   YEAR                 TEXT                    not null,
+   constraint PK_INTERNSHIP primary key (INTERNSHIP_ID)
 );
 
 /*==============================================================*/
@@ -305,15 +298,10 @@ alter table INTERNSHIP
       references ORGANIZATION (SIRET)
       on delete restrict on update cascade;
 
-alter table INTERNSHIP_BY_FORMATION
- add constraint FK_INTERNSH_FORM_FORM_ID foreign key (FORMATION_ID)
-    references FORMATION (FORMATION_ID)
+alter table INTERNSHIP
+ add constraint FK_INTERNSH_FORM_YEAR foreign key (FORMATION_ID,YEAR)
+    references PROMOTION (FORMATION_ID,YEAR)
     on delete restrict on update cascade;
-
-alter table INTERNSHIP_BY_FORMATION
-   add constraint FK_INTERNSH_FORM_INTERNSH_ID  foreign key (INTERNSHIP_ID)
-      references INTERNSHIP (INTERNSHIP_ID)
-      on delete restrict on update cascade;
 
 alter table INTERNSHIP_LOG
    add constraint FK_INTERNSH_IS_FLAGGE_FLAG foreign key (FLAG_ID)

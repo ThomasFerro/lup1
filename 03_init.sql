@@ -211,19 +211,9 @@ INSERT INTO do_eval VALUES(16, 3, 6);
 
 -- Insertion d'offres de stage
 
-INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,TECHNOLOGY,DURATION,BEGIN_DATE,SIRET) VALUES('Stage 1', 'Missions stage 1', 'Description stage 1','JAVA', 20 ,'05-10-2015', 'SIRET-SMILE');
-INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,TECHNOLOGY,DURATION,BEGIN_DATE,SIRET) VALUES('Stage 2', 'Missions stage 2', 'Description stage 2','PHP', 30 ,'07-04-2015', 'SIRET-OVH');
-INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,TECHNOLOGY,DURATION,BEGIN_DATE,SIRET) VALUES('Stage 3', 'Missions stage 3', 'Description stage 3','SQL', 15 ,'03-06-2015', 'SIRET-OPQUAST');
-
--- Fin Insertion d'offres de stage
-
--- -- --
-
--- Insertion liaison offre de stage / formations
-
-INSERT INTO internship_by_formation VALUES(1,1);
-INSERT INTO internship_by_formation VALUES(1,2);
-INSERT INTO internship_by_formation VALUES(2,3);
+INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,TECHNOLOGY,DURATION,BEGIN_DATE,SIRET,FORMATION_ID,YEAR) VALUES('Stage 1', 'Missions stage 1', 'Description stage 1','JAVA', 20 ,'05-10-2015', 'SIRET-SMILE',1,'2015-2016');
+INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,TECHNOLOGY,DURATION,BEGIN_DATE,SIRET,FORMATION_ID,YEAR) VALUES('Stage 2', 'Missions stage 2', 'Description stage 2','PHP', 30 ,'07-04-2015', 'SIRET-OVH',1,'2015-2016');
+INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,TECHNOLOGY,DURATION,BEGIN_DATE,SIRET,FORMATION_ID,YEAR) VALUES('Stage 3', 'Missions stage 3', 'Description stage 3','SQL', 15 ,'03-06-2015', 'SIRET-OPQUAST',2,'2015-2016');
 
 -- Fin Insertion d'offres de stage
 

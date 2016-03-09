@@ -9,7 +9,6 @@ DROP VIEW IF EXISTS mark_by_student_by_subject_with_avg_min_max CASCADE;
 DROP VIEW IF EXISTS student_by_promotion_with_avg CASCADE;
 DROP VIEW IF EXISTS interventions_by_intervenant_by_promotion CASCADE;
 DROP VIEW IF EXISTS done_internship CASCADE;
-DROP VIEW IF EXISTS internship_with_formation CASCADE;
 
 -- Creation des vues
 
@@ -254,22 +253,7 @@ CREATE VIEW done_internship AS
     AND
           reg.student_id = m.member_id;
 
--- 8. View qui ne sert a rien (demandé l'utilité à Thomas)
-
-CREATE VIEW internship_with_formation AS
-    SELECT
-        i.*,
-        if.formation_id
-    FROM
-        internship AS i,
-        internship_by_formation AS if,
-        formation AS f
-    WHERE
-        i.internship_id=if.internship_id
-      AND
-        if.formation_id=f.formation_id;
-
--- 9. Stats sur le suivi des stages (??)
+-- 8. Stats sur le suivi des stages (??)
 
 -- Fin Stages --
 
@@ -278,8 +262,6 @@ CREATE VIEW internship_with_formation AS
 -- ----- --
 
 -- Fonctions d'insertion --
-
-
 
 -- Fin Fonctions d'insertion --
 
