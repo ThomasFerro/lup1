@@ -16,55 +16,50 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.da2i.lup1.entity;
+package fr.da2i.lup1.entity.formation;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-import fr.da2i.lup1.util.Identifiable;
+@DatabaseTable(tableName = "is_register_in")
+public class Register {
 
-@DatabaseTable(tableName = "task")
-public class Task extends Identifiable<Integer> {
+	@DatabaseField(columnName = "student_id", foreign = true)
+	private Member student;
+	@DatabaseField(columnName = "formation_id", foreign = true)
+	private Formation formation;
+	@DatabaseField(columnName = "year")
+	private String year;
 	
-	public static int NB_INSTANCES;
-	
-	@DatabaseField(columnName = "id", id = true)
-	private Integer id;
-	@DatabaseField(columnName = "description")
-	private String description;
-	
-	public Task(Integer id, String description) {
-		this.id = id;
-		this.description = description;
-	}
-	
-	public Task(String description) {
-		this(++NB_INSTANCES, description);
-	}
-	
-	public Task() {}
+	public Register() {}
 
-	@Override
-	public Integer getId() {
-		return id;
+	public Member getStudent() {
+		return student;
 	}
 
-	@Override
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	
-	public String getDescription() {
-		return description;
+	public void setStudent(Member student) {
+		this.student = student;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public Formation getFormation() {
+		return formation;
+	}
+
+	public void setFormation(Formation formation) {
+		this.formation = formation;
 	}
 	
+	public String getYear() {
+		return year;
+	}
+	
+	public void setYear(String year) {
+		this.year = year;
+	}
+
 	@Override
 	public String toString() {
-		return "Task[id=" + id + ", description=" + description + "]";
+		return "Register [student=" + student + ", formation=" + formation + ", year=" + year + "]";
 	}
-
+	
 }

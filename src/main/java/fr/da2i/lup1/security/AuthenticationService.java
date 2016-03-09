@@ -22,6 +22,7 @@ import io.jsonwebtoken.Claims;
 
 import java.security.Principal;
 import java.sql.SQLException;
+import java.util.Iterator;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -32,7 +33,7 @@ import javax.ws.rs.core.SecurityContext;
 import com.google.common.base.Strings;
 import com.j256.ormlite.dao.Dao;
 
-import fr.da2i.lup1.entity.formation.Member;
+import fr.da2i.lup1.entity.security.Credential;
 import fr.da2i.lup1.util.DaoProvider;
 
 /**
@@ -48,10 +49,10 @@ public class AuthenticationService {
 	@Inject
 	private JwtManager jwtManager;
 	
-	private Dao<Member, Integer> memberDao;
+	private Dao<Credential, String> credentialDao;
 	
 	public AuthenticationService() {
-		this.memberDao = DaoProvider.getDao(Member.class);
+		this.credentialDao = DaoProvider.getDao(Credential.class);
 	}
 	
 	public void authenticate(ContainerRequestContext requestContext, String authentication) throws SQLException {
@@ -63,7 +64,7 @@ public class AuthenticationService {
 			if (jwtManager.hasExpire(claims)) {
 				authentication = jwtManager.regenerate(claims);
 			}
-			Member principal = memberDao.queryBuilder().where().eq("login", claims.getSubject()).queryForFirst();
+			Credential principal = credentialDao.queryForId(claims.getSubject());
 			boolean secured = requestContext.getSecurityContext().isSecure();
 			requestContext.getHeaders().putSingle(HEADER_KEY, authentication);
 			requestContext.setSecurityContext(new RoleSecurityContext(principal, secured));
@@ -72,10 +73,10 @@ public class AuthenticationService {
 	
 	private final class RoleSecurityContext implements SecurityContext {
 		
-		private Member principal;
+		private Credential principal;
 		private boolean secured;
 		
-		public RoleSecurityContext(Member principal, boolean secured) {
+		public RoleSecurityContext(Credential principal, boolean secured) {
 			this.principal = principal;
 			this.secured = secured;
 		}
@@ -100,7 +101,13 @@ public class AuthenticationService {
 			if (principal == null) {
 				return false;
 			}
-			return principal.getRole().equals(role);
+			Iterator<String> it = principal.getRoles().iterator();
+			while (it.hasNext()) {
+				if (it.next().equals(role)) {
+					return true;
+				}
+			}
+			return false;
 		}
 		
 	}

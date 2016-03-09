@@ -32,20 +32,11 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.SecurityContext;
-import javax.ws.rs.core.UriInfo;
 
 import com.j256.ormlite.dao.Dao;
 
-public abstract class AbstractRestlet<ID extends Serializable, T extends Identifiable<ID>> implements Restlet<ID, T> {
-	
-	@Context
-	protected UriInfo uriInfo;
-	
-	@Context
-	protected SecurityContext securityContext;
+public abstract class AbstractRestlet<ID extends Serializable, T extends Identifiable<ID>> extends SimpleResource implements Restlet<ID, T> {
 	
 	protected Dao<T,ID> dao;
 	

@@ -20,8 +20,6 @@ package fr.da2i.lup1.resource.security;
 
 import java.net.URI;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -56,14 +54,12 @@ public class AuthenticationResource extends AbstractRestlet<String, Credential> 
 	@POST
 	@Consumes("application/json")
 	public Response create(Credential entity) throws SQLException {
-		String id = entity.getId();
-		if (dao.idExists(id)) {
-			Credential fromDb = dao.queryForId(id);
+		String login = entity.getId();
+		if (dao.idExists(login)) {
+			Credential fromDb = dao.queryForId(login);
 			if (Passwords.check(entity.getPassword(), fromDb.getPassword())) {
-				Map<String, Object> map = new HashMap<>();
-				map.put("roles", new String[] { "default" });
-				String jwt = jwtManager.build(id, map);
-				URI instanceURI = uriInfo.getAbsolutePathBuilder().path(id).build();
+				String jwt = jwtManager.compact(fromDb);
+				URI instanceURI = uriInfo.getAbsolutePathBuilder().path(login).build();
 				return Response.created(instanceURI).header(AuthenticationService.HEADER_KEY, jwt).build();
 			}
 		}

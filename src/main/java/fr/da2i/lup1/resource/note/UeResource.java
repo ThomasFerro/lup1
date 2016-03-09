@@ -16,44 +16,15 @@
  * 
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
-package fr.da2i.lup1.entity.note;
+package fr.da2i.lup1.resource.note;
 
-import java.util.List;
+import javax.ws.rs.GET;
 
-import fr.da2i.lup1.entity.formation.Member;
-import fr.da2i.lup1.util.Identifiable;
-
-public class Bulletin extends Identifiable<String> {
+public class UeResource extends AnnualResource {
 	
-	private Member student;
-	private List<Mark> marks;
-	
-	public Bulletin() {}
-
-	public Member getStudent() {
-		return student;
-	}
-
-	public void setStudent(Member student) {
-		this.student = student;
-	}
-	
-	public List<Mark> getMarks() {
-		return marks;
-	}
-	
-	public void setMarks(List<Mark> marks) {
-		this.marks = marks;
-	}
-
-	@Override
-	public String getId() {
-		return student.getLogin();
-	}
-
-	@Override
-	public void setId(String id) {
-		// Nothing to do
+	@GET
+	public String get() {
+		return "Ues de la formation " + formationId + " (" + annee + ")";
 	}
 
 }
