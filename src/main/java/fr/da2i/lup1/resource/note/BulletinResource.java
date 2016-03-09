@@ -26,7 +26,9 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.security.RolesAllowed;
+import javax.ws.rs.ForbiddenException;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -34,6 +36,7 @@ import javax.ws.rs.core.Response;
 
 import com.j256.ormlite.dao.Dao;
 
+import fr.da2i.lup1.entity.formation.Promotion;
 import fr.da2i.lup1.entity.formation.Register;
 import fr.da2i.lup1.entity.note.Mark;
 import fr.da2i.lup1.entity.note.Subject;
@@ -47,11 +50,13 @@ import fr.da2i.lup1.util.DaoProvider;
 @Authenticated
 public class BulletinResource extends AnnualResource {
 	
+	private Dao<Promotion, Integer> promoDao;
 	private Dao<Credential, String> credentialDao;
 	private Dao<Mark, Integer> markDao;
 	private Dao<Register, Integer> registerDao;
 	
 	public BulletinResource() {
+		this.promoDao = DaoProvider.getDao(Promotion.class);
 		this.markDao = DaoProvider.getDao(Mark.class);
 		this.registerDao = DaoProvider.getDao(Register.class);
 		this.credentialDao = DaoProvider.getDao(Credential.class);
@@ -79,36 +84,57 @@ public class BulletinResource extends AnnualResource {
 	@Produces("application/json")
 	@RolesAllowed("responsable_formation")
 	public Response list() throws SQLException {
-		List<Register> registers = findFromPromotion(registerDao.queryBuilder()).query();
-		Map<String, Set<Ue>> bulletins = new HashMap<>();
-		Credential credential;
-		Integer studentId;
-		for (Register register : registers) {
-			studentId = register.getStudent().getId();
-			credential = credentialDao.queryBuilder().where().eq("member_id", studentId).queryForFirst();
-			bulletins.put(credential.getLogin(), getBulletin(studentId));
+		Integer responsableId = getCredential().getMember().getId();
+		if (findFromPromotion(promoDao.queryBuilder()).and().eq("responsable_id", responsableId).countOf() == 0) {
+			throw new ForbiddenException();
 		}
-		return Response.ok(bulletins).build();
+		else {
+			List<Register> registers = findFromPromotion(registerDao.queryBuilder()).query();
+			Map<String, Set<Ue>> bulletins = new HashMap<>();
+			Credential credential;
+			Integer studentId;
+			for (Register register : registers) {
+				studentId = register.getStudent().getId();
+				credential = credentialDao.queryBuilder().where().eq("member_id", studentId).queryForFirst();
+				bulletins.put(credential.getLogin(), getBulletin(studentId));
+			}
+			return Response.ok(bulletins).build();
+		}
 	}
 	
 	@GET
 	@Path("{user}")
 	@Produces("application/json")
-	@RolesAllowed("etudiant")
+	@RolesAllowed({ "etudiant", "responsable_formation" })
 	public Response get(@PathParam("user") String user) throws SQLException {
-		String login = getCredential().getLogin();
-		if (user.equals(login)) {
-			int studentId = getCredential().getMember().getId();
+		Credential credential = getCredential();
+		String login = credential.getLogin();
+		int memberId = credential.getMember().getId();
+		if (user.equals(login) || findFromPromotion(promoDao.queryBuilder()).and().eq("responsable_id", memberId).countOf() > 0) {
+			String studentLogin;
+			Integer studentId;
+			if (user.equals(login)) {
+				studentLogin = login;
+				studentId = memberId;
+			}
+			else {
+				Credential auth = credentialDao.queryBuilder().where().eq("login", user).queryForFirst();
+				if (auth == null) {
+					throw new NotFoundException();
+				}
+				studentLogin = auth.getLogin();
+				studentId = auth.getMember().getId();
+			}
 			if (findFromPromotion(registerDao.queryBuilder()).and().eq("student_id", studentId).countOf() == 0) {
-				return Response.status(Response.Status.FORBIDDEN).build();
+				throw new ForbiddenException();
 			}
 			else {
 				Map<String, Set<Ue>> bulletin = new HashMap<>();
-				bulletin.put(login, getBulletin(studentId));
+				bulletin.put(studentLogin, getBulletin(studentId));
 				return Response.ok(bulletin).build();
 			}
 		}
-		return Response.status(Response.Status.FORBIDDEN).build();
+		throw new ForbiddenException();
 	}
 
 }
