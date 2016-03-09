@@ -1,21 +1,18 @@
 package fr.da2i.lup1.entity.note;
 
-import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-import fr.da2i.lup1.util.Identifiable;
-
 @DatabaseTable(tableName = "ue")
-public class Ue extends Identifiable<Integer> {
+public class Ue extends Assessable<Subject> {
 	
 	@DatabaseField(columnName = "ue_id", id = true)
 	private Integer ueId;
 	@DatabaseField(columnName = "name")
 	private String name;
-	private Set<Subject> subjects = new HashSet<>();
 	
 	public Ue(int ueId, String nameId) {
 		this.ueId = ueId;
@@ -40,38 +37,9 @@ public class Ue extends Identifiable<Integer> {
 		this.name = name;
 	}
 	
-	/**
-	 * @return the subjects
-	 */
-	public Set<Subject> getSubjects() {
-		return subjects;
-	}
-
-	/**
-	 * @param subjects the subjects to set
-	 */
-	public void setSubjects(Set<Subject> subjects) {
-		this.subjects = subjects;
-	}
-
-	public boolean contains(Subject subject) {
-		return subjects.contains(subject);
-	}
-	
-	public boolean add(Subject subject) {
-		return subjects.add(subject);
-	}
-	
-	public boolean remove(Subject subject) {
-		return subjects.remove(subject);
-	}
-	
-	@Override
-	public boolean equals(Object o) {
-		if (o == this) {
-			return true;
-		}
-		return ueId.equals(((Ue) o).ueId);
+	@JsonProperty(value = "subjects")
+	public Set<Subject> getAssessables() {
+		return super.getAssessables();
 	}
 
 	@Override

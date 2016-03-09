@@ -26,9 +26,9 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "mark_by_student")
 public class Mark {
 	
-	@DatabaseField(columnName = "ue_id", foreign = true, foreignAutoRefresh = true) @JsonIgnore
+	@DatabaseField(columnName = "ue_id", foreign = true, foreignAutoRefresh = true)
 	private Ue ue;
-	@DatabaseField(columnName = "subject_id", foreign = true, foreignAutoRefresh = true) @JsonIgnore
+	@DatabaseField(columnName = "subject_id", foreign = true, foreignAutoRefresh = true)
 	private Subject subject;
 	@DatabaseField(columnName = "student_id")
 	private Integer studentId;
@@ -52,6 +52,7 @@ public class Mark {
 	/**
 	 * @return the ue
 	 */
+	@JsonIgnore
 	public Ue getUe() {
 		return ue;
 	}
@@ -59,13 +60,14 @@ public class Mark {
 	/**
 	 * @param ue the ue to set
 	 */
-	public void setUeId(Ue ue) {
+	public void setUe(Ue ue) {
 		this.ue = ue;
 	}
 
 	/**
 	 * @return the subject
 	 */
+	@JsonIgnore
 	public Subject getSubject() {
 		return subject;
 	}
@@ -73,7 +75,7 @@ public class Mark {
 	/**
 	 * @param subject the subject to set
 	 */
-	public void setSubjectId(Subject subject) {
+	public void setSubject(Subject subject) {
 		this.subject = subject;
 	}
 
@@ -108,6 +110,7 @@ public class Mark {
 	/**
 	 * @return the coeffEval
 	 */
+	@JsonIgnore
 	public double getCoeffEval() {
 		return coeffEval;
 	}
@@ -122,6 +125,7 @@ public class Mark {
 	/**
 	 * @return the coeffSubject
 	 */
+	@JsonIgnore
 	public double getCoeffSubject() {
 		return coeffSubject;
 	}
@@ -136,6 +140,7 @@ public class Mark {
 	/**
 	 * @return the coeffUe
 	 */
+	@JsonIgnore
 	public double getCoeffUe() {
 		return coeffUe;
 	}
@@ -164,6 +169,7 @@ public class Mark {
 	/**
 	 * @return the formationId
 	 */
+	@JsonIgnore
 	public Integer getFormationId() {
 		return formationId;
 	}
@@ -178,6 +184,7 @@ public class Mark {
 	/**
 	 * @return the year
 	 */
+	@JsonIgnore
 	public String getYear() {
 		return Strings.nullToEmpty(year);
 	}
