@@ -31,7 +31,6 @@
 				var token = $localStorage.lup1;
 				return token && !jwtHelper.isTokenExpired(token);
 			}
-			console.log("c'est pas gagné !");
 			return false;
 		}
 		

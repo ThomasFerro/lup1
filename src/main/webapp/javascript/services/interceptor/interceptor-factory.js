@@ -16,6 +16,7 @@
                         delete $localStorage.lup1;                		
                 	}
                     $rootScope.$broadcast('unauthorized');
+                    $location.path('/login');
                 }
                 return $q.reject(response);
             }

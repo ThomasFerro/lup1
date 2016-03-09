@@ -18,9 +18,10 @@
 			      access: ["Access", function(Access) { return Access.hasRoles("PROF"); }],
 			}
 		})
-		.when('/formations/:formation/annees/:annee/bulletins/:student', {
+		.when('/formations/:formation/annees/:annee/semestres/:semestre/bulletins/:student', {
 			templateUrl: 'templates/pages/formations/bulletin/index.html',
 			controller : 'BulletinController',
+			controllerAs : 'bulletinCtrl',
 			resolve: {
 			      access: ["Access", function(Access) { return Access.isAuthenticated(); }],
 			}
