@@ -23,7 +23,7 @@ import java.util.Set;
 
 import fr.da2i.lup1.util.Identifiable;
 
-public abstract class Assessable<T> extends Identifiable<Integer> {
+public abstract class Assessable<T, I> extends Identifiable<I> {
 
 	private double coeff;
 	private Set<T> assessables;

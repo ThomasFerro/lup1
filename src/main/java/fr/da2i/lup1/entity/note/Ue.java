@@ -7,7 +7,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "ue")
-public class Ue extends Assessable<Subject> {
+public class Ue extends Assessable<Subject, Integer> {
 	
 	@DatabaseField(columnName = "ue_id", id = true)
 	private Integer ueId;
