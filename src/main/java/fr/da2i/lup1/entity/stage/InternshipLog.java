@@ -11,24 +11,24 @@ import fr.da2i.lup1.util.Identifiable;
 @DatabaseTable(tableName = "internship_log")
 public class InternshipLog extends Identifiable<Integer> {
 
-	@DatabaseField(columnName = "internship_log_id", id = true)
+	@DatabaseField(columnName = "internship_log_id", generatedIdSequence = "internship_log_internship_log_id_seq")
 	private int internshipLogId;
 	@DatabaseField(columnName = "date_log")
 	private Timestamp dateLog;
 	@DatabaseField(columnName = "quote")
 	private String quote;
-	@DatabaseField(columnName = "flag_id")
-	private int flagId;
+	@DatabaseField(columnName = "flag_id", foreign = true, foreignAutoRefresh = true)
+	private Flag flag;
 	@DatabaseField(columnName = "member_id")
 	private int memberId;
 	@DatabaseField(columnName = "internship_id", foreign = true, foreignAutoRefresh = true)
 	private Internship internship;
 	
-	public InternshipLog(int id, Timestamp d, String q, int f, int m, Internship i) {
+	public InternshipLog(int id, Timestamp d, String q, Flag f, int m, Internship i) {
 		this.internshipLogId = id;
 		this.dateLog = d;
 		this.quote = q;
-		this.flagId = f;
+		this.flag = f;
 		this.memberId = m;
 		this.internship = i;
 	}
@@ -61,12 +61,12 @@ public class InternshipLog extends Identifiable<Integer> {
 		this.quote = quote;
 	}
 
-	public int getFlagId() {
-		return flagId;
+	public Flag getFlagId() {
+		return flag;
 	}
 
-	public void setFlagId(int flagId) {
-		this.flagId = flagId;
+	public void setFlagId(Flag flagId) {
+		this.flag = flagId;
 	}
 
 	public int getMemberId() {
