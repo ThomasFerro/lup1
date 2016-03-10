@@ -1,6 +1,6 @@
 (function(){
 	angular.module('lup1')
-	.factory('httpInterceptor', ['$q', '$location', '$localStorage', '$rootScope', function ($q, $location, $localStorage, $rootScope) {
+	.factory('httpInterceptor', ['$q', '$location', '$localStorage', '$rootScope', 'Access', function ($q, $location, $localStorage, $rootScope, accessFactory) {
 		return {
             'request': function (config) {
                 config.headers = config.headers;
@@ -11,7 +11,7 @@
                 return config;
             },
             'responseError': function (response) {
-                if (response.status === 401 || response.status === 403) {
+                if (response.status === accessFactory.FORBIDDEN || response.status === accessFactory.UNAUTHORIZED) {
                 	if($localStorage.lup1){
                         delete $localStorage.lup1;                		
                 	}

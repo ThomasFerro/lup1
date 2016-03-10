@@ -1,7 +1,6 @@
 (function(){
 	angular.module('lup1')
-	.factory('Access', ['$http','$q','jwtHelper', '$localStorage','Authentication',function ($http, $q, jwtHelper, $localStorage, authenticationFactory) {		
-
+	.factory('Access', ['$q','jwtHelper', '$localStorage','Authentication',function ($q, jwtHelper, $localStorage, authenticationFactory) {		
 		var Access = {
 				OK:200,
 				UNAUTHORIZED:401,

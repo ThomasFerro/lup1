@@ -4,7 +4,7 @@
         function($rootScope, Access, $location) {
 
           $rootScope.$on("$routeChangeError", function(event, current, previous, rejection) {
-            if (rejection == Access.UNAUTHORIZED) {
+            if (rejection == Access.UNAUTHORIZED || rejection == Access.FORBBIDEN) {
               $location.path("/login");
             }
           });

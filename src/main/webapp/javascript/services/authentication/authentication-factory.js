@@ -1,9 +1,9 @@
 (function(){
 	angular.module('lup1')
-	.factory('Authentication', ['$http','$q','jwtHelper', '$localStorage',function ($http, $q, jwtHelper, $localStorage) {
-		
+	.factory('Authentication', ['$q','jwtHelper', '$localStorage', '$injector',function ($q, jwtHelper, $localStorage, $injector) {
 		function signin(username, password) {
 			var deferred = $q.defer();
+			var $http = $injector.get('$http');
 			$http({
 				method: "POST",
 				url: "/api/authentication",
