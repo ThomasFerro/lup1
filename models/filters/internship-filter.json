@@ -4,13 +4,21 @@
     "buttons":[
       {
         "name":"Ajouter une offre de stage",
-        "href":"#",
         "dataToggle":"modal",
         "dataTarget":".add-stage-modal"
       },
       {
         "name":"Ajouter une entreprise",
-        "href":"#",
+        "dataToggle":"modal",
+        "dataTarget":".add-organization-modal"
+      },
+      {
+        "name":"Suivi des stages",
+        "dataToggle":"modal",
+        "dataTarget":".add-organization-modal"
+      },
+      {
+        "name":"Liste des offres",
         "dataToggle":"modal",
         "dataTarget":".add-organization-modal"
       }

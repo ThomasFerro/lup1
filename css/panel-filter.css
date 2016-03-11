@@ -9,8 +9,9 @@
   font-size: 1.2em!important;
 }
 
-.panel-filter-wrapper .filter-header .list-group a{
+.panel-filter-wrapper .filter-header .list-group a {
   margin: 10px!important;
+  cursor: pointer;
 }
 
 .filter-body{

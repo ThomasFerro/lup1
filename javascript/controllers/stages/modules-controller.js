@@ -1,4 +1,4 @@
-(function() {
+/*(function() {
   var app = angular.module('lup1');
   app.controller('ModuleController', function() {
     this.active = 'module';
@@ -10,4 +10,4 @@
       return this.active === buttonName;
     };
   });
-})();
+})();*/
