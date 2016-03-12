@@ -19,7 +19,6 @@
 package fr.da2i.lup1.resource.note;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +36,7 @@ import com.j256.ormlite.dao.Dao;
 
 import fr.da2i.lup1.entity.formation.Promotion;
 import fr.da2i.lup1.entity.formation.Register;
+import fr.da2i.lup1.entity.note.Bulletin;
 import fr.da2i.lup1.entity.note.Mark;
 import fr.da2i.lup1.entity.note.Subject;
 import fr.da2i.lup1.entity.note.Ue;
@@ -67,8 +67,8 @@ public class BulletinResource extends AnnualResource {
 		this.credentialDao = DaoProvider.getDao(Credential.class);
 	}
 	
-	private List<Ue> getBulletin(Integer studentId, Integer semester) throws SQLException {
-		List<Ue> bulletin = new ArrayList<>();
+	private Bulletin getBulletin(Integer studentId, Integer semester) throws SQLException {
+		Bulletin bulletin = new Bulletin();
 		List<Mark> marks = findFromPromotion(markDao.queryBuilder()).and().eq("student_id", studentId).and().eq("semester", semester).query();
 		Ue ue;
 		Subject sub;
@@ -101,7 +101,7 @@ public class BulletinResource extends AnnualResource {
 		}
 		else {
 			List<Register> registers = findFromPromotion(registerDao.queryBuilder()).query();
-			Map<String, List<Ue>> bulletins = new HashMap<>();
+			Map<String, Bulletin> bulletins = new HashMap<>();
 			Credential credential;
 			Integer studentId;
 			for (Register register : registers) {
@@ -140,7 +140,7 @@ public class BulletinResource extends AnnualResource {
 				throw new ForbiddenException();
 			}
 			else {
-				Map<String, List<Ue>> bulletin = new HashMap<>();
+				Map<String, Bulletin> bulletin = new HashMap<>();
 				bulletin.put(studentLogin, getBulletin(studentId, semester));
 				return Response.ok(bulletin).build();
 			}
