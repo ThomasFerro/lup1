@@ -11,6 +11,9 @@
     .when('/stages', {
       templateUrl: 'templates/pages/stages/index.html'
     })
+    .when('/stages/lister', {
+      templateUrl: 'templates/pages/stages/lister/index.html'
+    })
     .when('/absences', {
       templateUrl: 'templates/pages/absences/index.html'
     })
