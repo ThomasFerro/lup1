@@ -9,7 +9,7 @@
 				<div class="col-lg-12 col-xs-12">
 					<div class="hidden-xs hidden-sm panel panel-default">
 						<div class="panel-heading">
-							<h5>Informations personnelles :</h5>
+							Informations personnelles :
 						</div>
 						<div class="panel-body">
 							<table
@@ -75,131 +75,34 @@
 					</div>
 				</div>
 				<div class="col-lg-12 col-xs-12">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<h5>Notes :</h5>
-						</div>
-						<div class="panel-body">
-							<table
-								class="bulletin-body table table-bordred table-striped table-hover table-list-search">
-								<thead>
-									<tr class="line-header-marks">
-										<th colspan="2"></th>
-										<th>Coeff</th>
-										<th>Note /20</th>
-										<th>Voir</th>
-									</tr>
-								</thead>
-								<tbody ng-repeat="ue in bulletin">
-									<tr>
-										<th colspan="8">UE {{ue.name}}</th>
-									</tr>
-									<tr class="collapse reseau" ng-repeat="subject in ue.subjects">
-										<td colspan="2">{{subject.name}}</td>
-										<td>{{subject.coeff}}</td>
-										<td></td>
-										<td>
-											<button class="btn btn-default btn-sm collapse-button">
-												<span class="glyphicon glyphicon-menu-down"></span>
-											</button>
-										</td>
-									</tr>
-
-									<tr>
-										<td class="subject" colspan="2">Reseau</td>
-										<td>2</td>
-										<td>9</td>
-										<td><button
-												class="btn btn-default btn-sm collapse-button"
-												data-toggle="collapse" data-target=".reseau">
-												<span class="glyphicon glyphicon-menu-down"></span>
-											</button></td>
-									</tr>
-									<tr class="collapse reseau">
-										<td></td>
-										<td>ds1</td>
-										<td>4</td>
-										<td>2</td>
-										<td></td>
-									</tr>
-									<tr class="collapse reseau">
-										<td></td>
-										<td>tp1</td>
-										<td>2</td>
-										<td>16</td>
-										<td></td>
-									</tr>
-									<tr>
-										<td colspan="2">Bdd</td>
-										<td>2</td>
-										<td>14</td>
-										<td><button
-												class="btn btn-default btn-sm collapse-button">
-												<span class="glyphicon glyphicon-menu-down"></span>
-											</button></td>
-									</tr>
-									<tr>
-										<th colspan="8">UE Générale</th>
-									</tr>
-									<tr>
-										<td colspan="2">Anglais</td>
-										<td>1</td>
-										<td>10</td>
-										<td><button
-												class="btn btn-default btn-sm collapse-button">
-												<span class="glyphicon glyphicon-menu-down"></span>
-											</button></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-					<div class="row">
-						<p>300 absences !</p>
-					</div>
+					<ul class="bulletin list-group">
+						<ul class="bulletin list-group">
+							<li class="list-group-item active"> Bulletin
+							 <span class="badge badge-mark">note</span> 
+							 <span class="badge badge-coeff">coefficient</span>
+							</li>
+							<ul class="list-group ue" ng-repeat="ue in bulletin.ues">
+								<li class="list-group-item active"> UE {{ue.name}}
+								 <span class="badge badge-mark">14</span> 
+								 <span class="badge badge-coeff">8</span>
+								</li>
+								<ul class="list-group subject" ng-repeat="subject in ue.subjects">
+									<li class="list-group-item" data-toggle="collapse"
+										data-target="#{{subject.name | nospace}}">{{subject.name}} 
+										<i class="glyphicon glyphicon-menu-down"></i> 
+										<span class="badge">14</span>
+									</li>
+									<ul id="{{subject.name | nospace}}" class="list-group collapse marks">
+										<li ng-repeat="mark in subject.marks" class="list-group-item">DS1
+											<span class="badge badge-mark">{{mark.mark}}</span>
+											<span class="badge badge-coeff">{{mark.coeffEval}}</span>
+										</li>
+									</ul>
+								</ul>
+							</ul>
+						</ul>
+					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-
-<div class="bulletin list-group">
-	<a href="#" class="list-group-item active">
-		Bulletin 
-		<span class="badge">voir</span>
-		<span class="badge">note</span>
-		<span class="badge">coeff</span> 
-	</a>
-	<div class="list-group ue">
-		<a href="#" class="list-group-item active"> UE Gérérale
-			<span class="badge">14</span>
-			<span class="badge">8</span>
-		</a>
-		<div class="list-group subject">
-			<a href="#" class="list-group-item">Anglais	<i class="glyphicon glyphicon-menu-down"></i>
-			<span class="badge">14</span></a>
-				<div class="list-group">
-					<a href="#" class="list-group-item">DS1<span class="badge">8</span></a> 
-					<a href="#" class="list-group-item">DS2<span class="badge">14</span></a> 
-				</div>
-		</div>
-		<div class="list-group subject">
-			<a href="#" class="list-group-item">Mathématiques	<i class="glyphicon glyphicon-menu-down"></i>
-			<span class="badge">14</span></a>
-				<div class="list-group">
-					<a href="#" class="list-group-item">DS1<span class="badge">8</span></a> 
-					<a href="#" class="list-group-item">DS2<span class="badge">14</span></a> 
-				</div>
-		</div>
-	</div>
-	<div class="list-group ue">
-		<a href="#" class="list-group-item active"> UE Informatique </a>
-		<div class="list-group">
-			<a href="#" class="list-group-item">Génie Logiciel<span class="badge">14</span></a>
-				<div class="list-group subject">
-					<a href="#" class="list-group-item">DS1<span class="badge">8</span></a> 
-					<a href="#" class="list-group-item">DS2<span class="badge">14</span></a> 
-				</div>
-		</div>
-	</div>
-</div>
