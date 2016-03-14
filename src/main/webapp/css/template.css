@@ -16,6 +16,7 @@
 .menu a.home{
   background: #FF8C00;
   border-color:black;
+  color:white!important;
 }
 
 .menu a:hover{

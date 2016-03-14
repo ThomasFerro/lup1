@@ -23,6 +23,7 @@
 
 .responsive-menu-wrapper ul li{
   max-width: 20%;
+  min-width: 20%;
 }
 
 .responsive-menu-wrapper{

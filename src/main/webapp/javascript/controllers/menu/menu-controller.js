@@ -1,34 +1,34 @@
 (function(){
-  angular.module('lup1')
-  .controller('MenuController', [ "$http", function($http){
-    var controller = this;
-    var menuItems = [];
-    $http.get('models/menus/left-menu.json').success(function(data){
-     controller.menuItems = data;
-    });
+	angular.module('lup1')
+	.controller('MenuController', ['$http', 'Authentication',function($http, authenticationFactory){
+		var controller = this;
 
-    this.selectedMenuItem = 0;
-    this.menuItems = menuItems;
+		$http.get('models/menus/left-menu.json').success(function(data){
+			controller.menuItems = data;
+		});
 
-    this.setSelectedMenuItem = function(setItemIndex){
-      this.selectedMenuItem = setItemIndex;
-    };
+		controller.selectedMenuItem = 0;
 
-    this.isSelectedMenuItem = function(checkItemIndex){
-      return this.selectedMenuItem === checkItemIndex;
-    };
+		controller.setSelectedMenuItem = function(setItemIndex){
+			controller.selectedMenuItem = setItemIndex;
+		};
 
-    this.imgSelectedMenuItem = function(index){
-      if(this.isSelectedMenuItem(index)){
-        return this.menuItems[index].img_active;
-      }
-      return this.menuItems[index].img_passive;
-    };
+		controller.isSelectedMenuItem = function(checkItemIndex){
+			return controller.selectedMenuItem === checkItemIndex;
+		};
 
-    this.isHome = function(item){
-      return item.name === "home";
-    };
+		controller.isHome = function(item){
+			return item.name === "home";
+		};
 
-  }]);
-}
-)();
+		controller.getHref = function(item){
+			if(item.name === "notes"){
+				if(authenticationFactory.hasRole('etudiant')){
+					item.url="formations/1/annees/2015-2016/semestres/5/bulletins/"+authenticationFactory.getName();
+				}
+			};
+			return item.url;
+		};
+
+	}]);
+})();

@@ -9,13 +9,13 @@
 		.when('/formations/', {
 			templateUrl: 'templates/pages/formations/index.html',
 			resolve: {
-			      access: ["Access", function(Access) { return Access.hasRoles("PROF"); }],
+			      access: ["Access", function(Access) { return Access.hasRoles("responsable_formation"); }],
 			}
 		})
 		.when('/formations/:formation/:date/', {
 			templateUrl:'templates/pages/formations/evaluations/index.html',
 			resolve: {
-			      access: ["Access", function(Access) { return Access.hasRoles("PROF"); }],
+			      access: ["Access", function(Access) { return Access.hasRoles("responsable_formation"); }],
 			}
 		})
 		.when('/formations/:formation/annees/:annee/semestres/:semestre/bulletins/:student', {
@@ -35,7 +35,7 @@
 		.when('/parametres/', {
 			templateUrl: 'templates/pages/parametres/index.html',
 			resolve: {
-			      access: ["Access", function(Access) { return Access.hasRoles("admin"); }],
+			      access: ["Access", function(Access) { return Access.hasRoles("responsable_formation"); }],
 			}
 		})
 		.when('/home/', {
