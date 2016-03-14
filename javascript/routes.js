@@ -11,8 +11,17 @@
     .when('/stages', {
       templateUrl: 'templates/pages/stages/index.html'
     })
-    .when('/stages/lister', {
-      templateUrl: 'templates/pages/stages/lister/index.html'
+    .when('/stages/ajouter/offre', {
+      templateUrl: 'templates/pages/stages/ajouter/offre/index.html'
+    })
+    .when('/stages/ajouter/entreprise', {
+      templateUrl: 'templates/pages/stages/ajouter/entreprise/index.html'
+    })
+    .when('/stages/offres', {
+      templateUrl: 'templates/pages/stages/offres/index.html'
+    })
+    .when('/stages/suivi', {
+      templateUrl: 'templates/pages/stages/suivi/index.html'
     })
     .when('/absences', {
       templateUrl: 'templates/pages/absences/index.html'

@@ -1,0 +1,126 @@
+<div class="col-md-4 col-lg-3 hidden-xs hidden-sm col-without-padding panel-filter" ng-controller="PanelInternshipFilterController as panelFilterCtrl">
+  {{panelFilterCtrl.selectFilter(0)}}
+  <panel-filter></panel-filter>
+</div>
+<div class="col-lg-9 col-xs-12 col-sm-12 col-md-8 container-fluid">
+  <h4>Ajout d'une offre de stage</h4>
+  <div class="contrainer-fluid">
+    <form class="form-horizontal">
+      <!-- Etape 1: Entreprise -->
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+          <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+            <h4 class="panel-title">Informations sur l'entreprise</h4>
+          </div>
+          <div class="panel-body panel-collapse collapse in" id="collapse1">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <th>
+                    <label for="organization">Entreprise</label>
+                  </th>
+                  <td>
+                    <select id="organization" class="form-control">
+                      <option>Archimed</option>
+                      <option>Norsys</option>
+                      <option>Smile</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <th>SIRET</th>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>Adresse</th>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>Téléphone</th>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>Effectif</th>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th>APE(SA)</th>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="row next-step">
+              <button class="btn btn-success next" data-toggle="collapse" data-parent="#accordion" href="#collapse2">Suivant</button>
+            </div>
+          </div>
+        </div>
+        <!-- ! Fin Etape 1: Entreprise-->
+        <!-- Etape 2: Informations sur le stage-->
+        <div class="panel panel-default">
+          <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+            <h4 class="panel-title">Informations sur le stage</h4>
+          </div>
+          <div class="panel-body container-fluid panel-collapse collapse" id="collapse2">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <div class="input-group add-stage-form">
+                    <div class="input-group-addon">Formation(s)*</div>
+                    <select class="form-control input-group">
+                      <option>CGIR</option>
+                      <option>DA2I</option>
+                      <option>DUT Informatique</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group add-stage-form">
+                    <div class="input-group-addon">Intitulé*</div>
+                    <input type="text" class="form-control" placeholder="Intitulé"/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group add-stage-form">
+                    <div class="input-group-addon">Missions</div>
+                    <textarea class="form-control" rows="3" placeholder="Missions"></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group add-stage-form">
+                    <div class="input-group-addon">Description</div>
+                    <textarea class="form-control" placeholder="Description"></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group add-stage-form">
+                    <div class="input-group-addon">Technologies</div>
+                    <input type="text" class="form-control" placeholder="Technologies"/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group add-stage-form">
+                    <div class="input-group-addon">Date de début</div>
+                    <input type="date" class="form-control" placeholder="jj/mm/aaaa"/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group add-stage-form">
+                    <div class="input-group-addon">Durée(semaines)</div>
+                    <input type="number" class="form-control" placeholder="Durée"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              * Champs obligatoires
+            </div>
+            <div class="row next-step">
+              <a class="btn btn-success next">Ajouter</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Fin Etape 2: Informations sur le stage -->
+    </form>
+  </div>
+</div>

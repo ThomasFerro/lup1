@@ -1,0 +1,55 @@
+<div class="col-md-4 col-lg-3 hidden-xs hidden-sm col-without-padding panel-filter" ng-controller="PanelInternshipFilterController as panelFilterCtrl">
+  {{panelFilterCtrl.selectFilter(0)}}
+  <panel-filter></panel-filter>
+</div>
+<div class="col-lg-9 col-xs-12 col-sm-12 col-md-8 container-fluid">
+  <div class="contrainer-fluid">
+    <h4>Ajouter une entreprise</h4>
+    <form class="form-horizontal">
+      <!-- Début Ajout Entreprise -->
+      <div class="tab-1">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <div class="input-group add-organization-form">
+                <div class="input-group-addon">SIRET*</div>
+                <input type="text" class="form-control" placeholder="SIRET"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group add-organization-form">
+                <div class="input-group-addon">Nom*</div>
+                <input type="text" class="form-control" placeholder="Nom"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group add-organization-form">
+                <div class="input-group-addon">Adresse*</div>
+                <textarea class="form-control" placeholder="Adresse"></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group add-organization-form">
+                <div class="input-group-addon">Effectif</div>
+                <input type="text" class="form-control" placeholder="Effectif"/>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group add-organization-form">
+                <div class="input-group-addon">APE(SA)*</div>
+                <input type="text" class="form-control" placeholder="APE(SA)"/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          * Champs obligatoires
+        </div>
+        <div class="row next-step">
+          <a class="btn btn-success next">Ajouter</a>
+        </div>
+      </div>
+      <!-- ! Fin Ajout Entreprise-->
+    </form>
+  </div>
+</div>

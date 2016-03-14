@@ -39,3 +39,12 @@
 .input-group {
   width: 100%;
 }
+
+#accordion .panel-heading {
+  background-color: #444444;
+  color: white;
+}
+
+textarea {
+  resize: vertical;
+}

@@ -3,8 +3,89 @@
   <panel-filter></panel-filter>
 </div>
 <div class="col-lg-9 col-xs-12 col-sm-12 col-md-8 container-fluid">
-  <div ng-view>
+  <div class="moduleContainer">
+    <div class="row">
+      <div class="block-internship" ng-class="viewController.isActive('list') ? 'col-lg-12' : 'col-lg-6'">
+        <div class="panel panel-default ">
+          <div class="panel-heading">
+            <a class="btn btn-danger btn-xs pull-right" href="#"><span class="glyphicon glyphicon-trash"/></a>
+            <span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;&nbsp;Système mash-up multimédia
+          </div>
+          <div class="panel-body">
+              <ul class="list-group details-intership" ng-class="{ 'list-inline' : viewController.isActive('list') }">
+                <li class="list-group-item">&nbsp;<strong>Archimed</strong></li>
+                <li class="list-group-item" data-toggle="tooltip" data-placement="bottom" title="Lille"><span class="glyphicon glyphicon-map-marker"/>&nbsp;Lille</li>
+                <li class="list-group-item" data-toggle="tooltip" data-placement="bottom" title="RH: Aurélie Vanpoulle"><span class="glyphicon glyphicon-user"/>&nbsp;RH: Aurélie Vanpoulle</li>
+                <li class="list-group-item" data-toggle="tooltip" data-placement="bottom" title="21/04/2016"><span class="glyphicon glyphicon-calendar"/>&nbsp;21/04/2016</li>
+                <li class="list-group-item" data-toggle="tooltip" data-placement="bottom" title="3 mois"><span class="glyphicon glyphicon-time"/>&nbsp;3 mois</li>
+                <li class="list-group-item" data-toggle="tooltip" data-placement="bottom" title=".NET, jQuery, CSS/BootStrap"><span class="glyphicon glyphicon-console"/>&nbsp;.NET, jQuery, CSS/BootStrap</li>
+              </ul>
+              <a class="btn btn-success btn-block pull-right" href="#">Voir cette annonce</a>
+          </div>
+        </div>
+      </div>
+      <div class="block-internship" ng-class="viewController.isActive('list') ? 'col-lg-12' : 'col-lg-6'">
+        <div class="panel panel-default ">
+          <div class="panel-heading">
+            <a class="btn btn-danger btn-xs pull-right" href="#"><span class="glyphicon glyphicon-trash"/></a>
+            <span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;&nbsp;Application androïd
+          </div>
+          <div class="panel-body">
+            <ul class="list-group details-intership" ng-class="{ 'list-inline' : viewController.isActive('list') }">
+              <li class="list-group-item">&nbsp;<strong>Norsys</strong></li>
+              <li class="list-group-item"><span class="glyphicon glyphicon-map-marker"/>&nbsp;Villeneuve d'Ascq</li>
+              <li class="list-group-item"><span class="glyphicon glyphicon-user"/>&nbsp;RH: J. Coulon</li>
+              <li class="list-group-item"><span class="glyphicon glyphicon-calendar"/>&nbsp;21/04/2016</li>
+              <li class="list-group-item"><span class="glyphicon glyphicon-time"/>&nbsp;6 mois</li>
+              <li class="list-group-item"><span class="glyphicon glyphicon-console"/>&nbsp;Java : Androïd studio</li>
+            </ul>
+            <a class="btn btn-success btn-block pull-right" href="#">Voir cette annonce</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="block-internship" ng-class="viewController.isActive('list') ? 'col-lg-12' : 'col-lg-6'">
+        <div class="panel panel-default ">
+          <div class="panel-heading">
+            <a class="btn btn-danger btn-xs pull-right" href="#"><span class="glyphicon glyphicon-trash"/></a>
+            <span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;&nbsp;Application sous magento
+          </div>
+          <div class="panel-body">
+            <ul class="list-group details-intership" ng-class="{ 'list-inline' : viewController.isActive('list') }">
+              <li class="list-group-item">&nbsp;<strong>Smile</strong></li>
+              <li class="list-group-item"><span class="glyphicon glyphicon-map-marker"/>&nbsp;Villeneuve d'Ascq</li>
+              <li class="list-group-item"><span class="glyphicon glyphicon-user"/>&nbsp;RH: Fanny Charnière</li>
+              <li class="list-group-item"><span class="glyphicon glyphicon-calendar"/>&nbsp;21/05/2016</li>
+              <li class="list-group-item"><span class="glyphicon glyphicon-time"/>&nbsp;5 mois</li>
+              <li class="list-group-item"><span class="glyphicon glyphicon-console"/>&nbsp;PHP, jQuery</li>
+            </ul>
+            <a class="btn btn-success btn-block pull-right" href="#">Voir cette annonce</a>
+          </div>
+        </div>
+      </div>
+      <div class="block-internship" ng-class="viewController.isActive('list') ? 'col-lg-12' : 'col-lg-6'">
+        <div class="panel panel-default ">
+          <div class="panel-heading">
+            <a class="btn btn-danger btn-xs pull-right" href="#"><span class="glyphicon glyphicon-trash"/></a>
+            <span class="glyphicon glyphicon-briefcase"></span>&nbsp;&nbsp;&nbsp;Application web de gestion de notes
+          </div>
+          <div class="panel-body container-fluid">
+            <ul class="list-group details-intership" ng-class="{ 'list-inline' : viewController.isActive('list') }">
+              <li class="list-group-item">&nbsp;<strong>Pictime</strong></li>
+              <li class="list-group-item"><span class="glyphicon glyphicon-map-marker"/>&nbsp;Villeneuve d'Ascq</li>
+              <li class="list-group-item"><span class="glyphicon glyphicon-user"/>&nbsp;RH: J. Coulon</li>
+              <li class="list-group-item"><span class="glyphicon glyphicon-calendar"/>&nbsp;21/04/2016</li>
+              <li class="list-group-item"><span class="glyphicon glyphicon-time"/>&nbsp;3 mois</li>
+              <li class="list-group-item"><span class="glyphicon glyphicon-console"/>&nbsp;PHP, jQuery, Python</li>
+            </ul>
+            <a class="btn btn-success btn-block pull-right" href="#">Voir cette annonce</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
 </div>
 <div class="modal fade add-stage-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
   <div class="modal-dialog">
