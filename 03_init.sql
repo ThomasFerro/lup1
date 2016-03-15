@@ -41,9 +41,9 @@ INSERT INTO credential VALUES('fannySmile', '1000:81441b4781ee326e1bcc4934bf36a5
 
 -- Insertion d'entreprises
 
-INSERT INTO organization VALUES('SIRET-SMILE', 'Smile', 'adresse Smile', 'phoneSmile', 'fax_smile');
-INSERT INTO organization VALUES('SIRET-OVH', 'OVH', 'adresse OVH', 'phoneOVH', 'fax_ovh');
-INSERT INTO organization VALUES('SIRET-OPQUAST', 'Opquast', 'adresse Opquast', 'phoneOpquast', 'fax_opquast');
+INSERT INTO organization VALUES('73282932000074', 'Smile', 'adresse Smile', 'phoneSmile', 'fax_smile');
+INSERT INTO organization VALUES('73282932000075', 'OVH', 'adresse OVH', 'phoneOVH', 'fax_ovh');
+INSERT INTO organization VALUES('73282932000076', 'Opquast', 'adresse Opquast', 'phoneOpquast', 'fax_opquast');
 
 
 -- Fin Insertion d'entreprises
@@ -146,9 +146,10 @@ INSERT INTO promotion VALUES(2, '2015-2016', 5);
 -- Insertion de listes UE/Promotion
 
 INSERT INTO ue_promotion VALUES(1, '2015-2016', 5, 3.0, 1);
+INSERT INTO ue_promotion VALUES(1, '2015-2016', 5, 3.0, 4);
+INSERT INTO ue_promotion VALUES(1, '2015-2016', 8, 3.0, 4);
 INSERT INTO ue_promotion VALUES(2, '2015-2016', 6, 3.0, 2);
-INSERT INTO ue_promotion VALUES(2, '2015-2016', 7, 3.0,  3);
-INSERT INTO ue_promotion VALUES(1, '2015-2016', 8, 3.0,  4);
+INSERT INTO ue_promotion VALUES(2, '2015-2016', 7, 3.0, 3);
 
 -- Fin Insertion de listes UE/Promotion
 
@@ -208,9 +209,9 @@ INSERT INTO do_eval VALUES(8, 3, 8);
 
 -- Insertion d'offres de stage
 
-INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,TECHNOLOGY,DURATION,BEGIN_DATE,SIRET,FORMATION_ID,YEAR) VALUES('Stage 1', 'Missions stage 1', 'Description stage 1','JAVA', 20 ,'05-10-2015', 'SIRET-SMILE',1,'2015-2016');
-INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,TECHNOLOGY,DURATION,BEGIN_DATE,SIRET,FORMATION_ID,YEAR) VALUES('Stage 2', 'Missions stage 2', 'Description stage 2','PHP', 30 ,'07-04-2015', 'SIRET-OVH',1,'2015-2016');
-INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,TECHNOLOGY,DURATION,BEGIN_DATE,SIRET,FORMATION_ID,YEAR) VALUES('Stage 3', 'Missions stage 3', 'Description stage 3','SQL', 15 ,'03-06-2015', 'SIRET-OPQUAST',2,'2015-2016');
+INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,TECHNOLOGY,DURATION,BEGIN_DATE,SIRET,FORMATION_ID,YEAR) VALUES('Stage 1', 'Missions stage 1', 'Description stage 1','JAVA', 20 ,'05-10-2015', '73282932000074',1,'2015-2016');
+INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,TECHNOLOGY,DURATION,BEGIN_DATE,SIRET,FORMATION_ID,YEAR) VALUES('Stage 2', 'Missions stage 2', 'Description stage 2','PHP', 30 ,'07-04-2015', '73282932000075',1,'2015-2016');
+INSERT INTO internship (TITLE,MISSIONS,DESCRIPTION,TECHNOLOGY,DURATION,BEGIN_DATE,SIRET,FORMATION_ID,YEAR) VALUES('Stage 3', 'Missions stage 3', 'Description stage 3','SQL', 15 ,'03-06-2015', '73282932000076',2,'2015-2016');
 
 -- Fin Insertion d'offres de stage
 

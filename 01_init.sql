@@ -196,7 +196,7 @@ create table MEMBER (
 /* Table : ORGANIZATION                                         */
 /*==============================================================*/
 create table ORGANIZATION (
-   SIRET                TEXT                 not null,
+   SIRET                CHAR(14)             not null,
    NAME                 TEXT                 null,
    ADDRESS              TEXT                 null,
    PHONE                TEXT                 null,
@@ -267,7 +267,7 @@ create table UE (
 create table UE_PROMOTION (
    FORMATION_ID         INTEGER                 not null,
    YEAR                 TEXT                    not null,
-   SEMESTER             INTEGER                 null,
+   SEMESTER             INTEGER                 not null,
    COEFF                FLOAT                   null,
    UE_ID                INTEGER                 not null,
    constraint PK_UE_PROMOTION primary key (FORMATION_ID,YEAR,SEMESTER,UE_ID)
