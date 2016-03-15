@@ -17,15 +17,15 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.google.common.util.concurrent.Service.State;
 import com.j256.ormlite.dao.Dao;
 
 import fr.da2i.lup1.entity.stage.InternshipLog;
 import fr.da2i.lup1.filter.PromotionAccess;
 import fr.da2i.lup1.resource.note.AnnualResource;
+import fr.da2i.lup1.security.Authenticated;
 import fr.da2i.lup1.util.DaoProvider;
 
-//@Authenticated
+@Authenticated
 @PromotionAccess
 public class InternshipLogResource extends AnnualResource{
 	
@@ -50,7 +50,7 @@ public class InternshipLogResource extends AnnualResource{
 	 */
 	@GET
 	@Produces("application/json")
-//	@RolesAllowed({ "responsable_formation", "responsable_stage", "etudiant" })
+	@RolesAllowed({ "responsable_formation", "responsable_stage", "etudiant" })
 	public Response getLogs(@PathParam("etudiantId") int id) throws SQLException {
 		List<InternshipLog> logs = dao.queryBuilder().where().eq("flag_id", 1).and().eq("member_id", id).query();
 		if (logs.isEmpty()) {
@@ -75,7 +75,7 @@ public class InternshipLogResource extends AnnualResource{
 	@GET
 	@Produces("application/json")
 	@Path("{stageId: [0-9]+}")
-//	@RolesAllowed({ "etudiant", "responsable_formation", "responsable_stage" })
+	@RolesAllowed({ "etudiant", "responsable_formation", "responsable_stage" })
 	public Response getLogsFromInternship(@PathParam("etudiantId") int etudiantId, @PathParam("stageId") int stageId) throws SQLException {
 		List<InternshipLog> logs = dao.queryBuilder().where().eq("member_id", etudiantId).and().eq("internship_id", stageId).query();
 		if (logs.isEmpty()) {
@@ -103,7 +103,7 @@ public class InternshipLogResource extends AnnualResource{
 	@PUT
 	@Produces("application/json")
 	@Path("{stageId: [0-9]+}")
-//	@RolesAllowed({ "etudiant", "responsable_formation", "responsable_stage" })
+	@RolesAllowed({ "etudiant", "responsable_formation", "responsable_stage" })
 	public Response put(@PathParam("etudiantId") int etudiantId, @PathParam("stageId") int stageId, InternshipLog log) throws SQLException {
 		if (log.getFlagId() == null || log.getFlagId().getId() == 0 || log.getMemberId() == 0 || log.getInternshipId() == null || log.getInternshipId().getId() == 0 || log.getId() == 0) {
 			return Response.status(Status.BAD_REQUEST).build();
@@ -130,7 +130,7 @@ public class InternshipLogResource extends AnnualResource{
 	 */
 	@POST
 	@Produces("application/json")
-//	@RolesAllowed({ "etudiant", "responsable_formation", "responsable_stage" })
+	@RolesAllowed({ "etudiant", "responsable_formation", "responsable_stage" })
 	public Response subscribeToInternship(@PathParam("etudiantId") int etudiantId, InternshipLog log) throws SQLException {
 		List<InternshipLog> logs = dao.queryBuilder().where().eq("member_id", etudiantId).and().eq("internship_id", log.getInternshipId().getId()).query();
 		if (logs.isEmpty()) {
@@ -166,7 +166,7 @@ public class InternshipLogResource extends AnnualResource{
 	 */
 	@POST
 	@Path("{stageId: [0-9]+}")
-//	@RolesAllowed({ "etudiant", "responsable_formation", "responsable_stage" })
+	@RolesAllowed({ "etudiant", "responsable_formation", "responsable_stage" })
 	public Response writeLog(@PathParam("etudiantId") int etudiantId, @PathParam("stageId") int stageId, InternshipLog log) throws SQLException {
 		log.setMemberId(etudiantId);
 		log.setDateLog(new Timestamp(new Date().getTime()));
@@ -190,7 +190,7 @@ public class InternshipLogResource extends AnnualResource{
 	 * @throws SQLException 
 	 */
 	@DELETE
-//	@RolesAllowed({ "responsable_formation", "responsable_stage" })
+	@RolesAllowed({ "responsable_formation", "responsable_stage" })
 	public Response deleteSusbrictions(@PathParam("etudiantId") int etudiantId) throws SQLException {
 		List<InternshipLog> logs = dao.queryBuilder().where().eq("member_id", etudiantId).query();
 		if (logs.isEmpty()) {
@@ -214,7 +214,7 @@ public class InternshipLogResource extends AnnualResource{
 	 */
 	@DELETE
 	@Path("{stageId: [0-9]+}")
-//	@RolesAllowed({ "responsable_formation", "responsable_stage" })
+	@RolesAllowed({ "responsable_formation", "responsable_stage" })
 	public Response deleteSusbriction(@PathParam("etudiantId") int etudiantId, @PathParam("stageId") int stageId) throws SQLException {
 		List<InternshipLog> logs = dao.queryBuilder().where().eq("member_id", etudiantId).and().eq("internship_id", stageId).query();
 		if (logs.isEmpty()) {

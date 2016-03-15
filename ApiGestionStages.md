@@ -13,5 +13,5 @@
 
 | Ressource | **GET** | **PUT** | **POST** | **DELETE** |
 | :-------: | :-----: | :-----: | :------: | :--------: |
-| */api/{version}/entreprises/* | Liste les entreprises dans la base | X | Créer une nouvelle entrée dans la table des entreprises | Supprime les entreprises |
-| */api/{version}/entreprises/{entreprises_siret}* | Retourne l'entreprise avec le SIRET indiqué | Modifie ou ajoute à la base l'entreprise au SIRET indiqué | X | Supprime de la base l'entreprise avec le SIRET indiqué |
+| */api/{version}/entreprises/* | Liste les entreprises dans la base | X | Créer une nouvelle entrée dans la table des entreprises | X |
+| */api/{version}/entreprises/{entreprises_siret}* | Retourne l'entreprise avec le SIRET indiqué | Modifie ou ajoute à la base l'entreprise au SIRET indiqué | X | X |
