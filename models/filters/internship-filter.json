@@ -12,11 +12,11 @@
       },
       {
         "name":"Suivi des stages",
-        "href":"#/stages/suivi"
+        "href":"#/stages/suivi/etudiant"
       },
       {
         "name":"Liste des offres",
-        "href":"#/stages/offres"
+        "href":"#/stages/offre"
       }
     ],
     "filters":[

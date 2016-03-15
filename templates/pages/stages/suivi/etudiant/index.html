@@ -1,0 +1,105 @@
+<div class="col-md-4 col-lg-3 hidden-xs hidden-sm col-without-padding panel-filter" ng-controller="PanelInternshipFilterController as panelFilterCtrl">
+  {{panelFilterCtrl.selectFilter(0)}}
+  <panel-filter></panel-filter>
+</div>
+<div class="col-lg-9 col-xs-12 col-sm-12 col-md-8 container-fluid">
+  <div class="contrainer-fluid">
+    <div class="row">
+      <h4>Suivi du stage</h4>
+    </div>
+    <div class="row">
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+          <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+            <h4 class="panel-title">Postuler à une offre</h4>
+          </div>
+          <div class="panel-body panel-collapse collapse in" id="collapse1">
+            <div class="row">
+              <select class="col-lg-12">
+                <option>Autre</option>
+                <option>#1 - Système de mashup multimédia chez Archimed SystèmeSystèmeSystèmeSystèmeSystème</option>
+                <option>#2 - Centre aéré activité accro-branche chez Norsys</option>
+              </select>
+            </div>
+            <div class="row">
+              <h4>Missions :</h4>
+              <p>La mission consiste en voilà quoi hein tu vois ce que j'veux dire, donc pas besoin de voilà quoi hein ! Parce là c'est clair, mais oui c'est clair, c'est la congolexicomatisation des lois du marché</p>
+            </div>
+            <div class="row">
+              <h4>Description :</h4>
+              <p>La description ? Le stage consiste en voilà quoi hein tu vois ce que j'veux dire, donc pas besoin de voilà quoi hein ! Parce là c'est clair, mais oui c'est clair, c'est la congolexicomatisation des lois du marché</p>
+            </div>
+            <div class="row">
+              <h4>Technologies :</h4>
+              <p>.NET, jQuery, MySQL(<3)</p>
+            </div>
+            <div class="row">
+              <h4>Durée :</h4>
+              <p>5 semaines</p>
+            </div>
+            <div class="row">
+              <h4>Date de début :</h4>
+              <p>21/10/2018</p>
+            </div>
+            <div class="row next-step">
+              <button class="btn btn-success next" data-toggle="collapse" data-parent="#accordion" href="#collapse2">Postuler</button>
+            </div>
+          </div>
+        </div>
+        <!-- ! Fin Etape 1: Entreprise-->
+        <!-- Etape 2: Informations sur le stage-->
+        <div class="panel panel-default">
+          <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+            <h4 class="panel-title">Etat des stages</h4>
+          </div>
+          <div class="panel-body container-fluid panel-collapse collapse" id="collapse2">
+            <div class="row">
+              <div class="table-reponsive">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Stage</th>
+                        <th>Etat d'avancement</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><a href="#">#1 - Système de mashup multimédia</a></td>
+                        <td>
+                          <select>
+                            <option>Prise de rendez-vous</option>
+                            <option>Terminé</option>
+                            <option>Attente de signature</option>
+                          </select>
+                        </td>
+                        <td>
+                          <a href="#" class="btn"><span class="glyphicon glyphicon-trash"></span></a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><a href="#">#2 - Centre aéré activité accro-branche chez Norsys</a></td>
+                        <td>
+                          <select>
+                            <option>Prise de rendez-vous</option>
+                            <option>Terminé</option>
+                            <option>Attente de signature</option>
+                          </select>
+                        </td>
+                        <td>
+                          <a href="#" class="btn"><span class="glyphicon glyphicon-trash"></span></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                <table>
+              </div>
+            </div>
+            <div class="row next-step">
+              <a class="btn btn-success next">Valider</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

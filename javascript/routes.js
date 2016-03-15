@@ -17,11 +17,17 @@
     .when('/stages/ajouter/entreprise', {
       templateUrl: 'templates/pages/stages/ajouter/entreprise/index.html'
     })
-    .when('/stages/offres', {
-      templateUrl: 'templates/pages/stages/offres/index.html'
+    .when('/stages/offre', {
+      templateUrl: 'templates/pages/stages/offre/index.html'
     })
-    .when('/stages/suivi', {
-      templateUrl: 'templates/pages/stages/suivi/index.html'
+    .when('/stages/offre/:id', {
+      templateUrl: 'templates/pages/stages/offre/id/index.html'
+    })
+    .when('/stages/suivi/enseignant', {
+      templateUrl: 'templates/pages/stages/suivi/enseignant/index.html'
+    })
+    .when('/stages/suivi/etudiant', {
+      templateUrl: 'templates/pages/stages/suivi/etudiant/index.html'
     })
     .when('/absences', {
       templateUrl: 'templates/pages/absences/index.html'
