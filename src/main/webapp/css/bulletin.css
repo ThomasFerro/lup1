@@ -8,6 +8,10 @@
 	}
 }
 
+.bulletin .ue{
+	margin-bottom:0!important;
+}
+
 .bulletin>li:first-child {
 	background-color: #444444 !important;
 	border-color: #444444 !important;

@@ -12,8 +12,14 @@
 			      access: ["Access", function(Access) { return Access.hasRoles("responsable_formation"); }],
 			}
 		})
-		.when('/formations/:formation/:date/', {
+		.when('/formations/:formation/annees/:annee/semestres/:semestre/', {
 			templateUrl:'templates/pages/formations/evaluations/index.html',
+			resolve: {
+			      access: ["Access", function(Access) { return Access.hasRoles("responsable_formation"); }],
+			}
+		})
+		.when('/formations/:formation/annees/:annee/semestres/:semestre/evaluations/:evaluation/', {
+			templateUrl:'templates/pages/formations/notes/index.html',
 			resolve: {
 			      access: ["Access", function(Access) { return Access.hasRoles("responsable_formation"); }],
 			}

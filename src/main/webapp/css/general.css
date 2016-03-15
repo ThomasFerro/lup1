@@ -18,7 +18,7 @@ body{
 
 .table{
   margin: 0!important;
-/*   table-layout: fixed!important; */
+  table-layout: fixed!important;
   word-wrap: break-word!important;
 }
 
@@ -33,4 +33,15 @@ h3.logo{
 
 .panel-login{
 	margin-top:40%!important;
+}
+
+.breadcrumb{
+	margin-top:10px!important;
+}
+.undo-edit{
+	margin-left:5px;
+}
+
+.mark-buttons{
+    white-space: nowrap;
 }
