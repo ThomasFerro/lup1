@@ -19,9 +19,8 @@
 package fr.da2i.lup1.resource.note;
 
 import java.sql.SQLException;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.ForbiddenException;
@@ -34,12 +33,11 @@ import javax.ws.rs.core.Response;
 
 import com.j256.ormlite.dao.Dao;
 
+import fr.da2i.lup1.entity.formation.Member;
 import fr.da2i.lup1.entity.formation.Promotion;
 import fr.da2i.lup1.entity.formation.Register;
 import fr.da2i.lup1.entity.note.Bulletin;
 import fr.da2i.lup1.entity.note.Mark;
-import fr.da2i.lup1.entity.note.Subject;
-import fr.da2i.lup1.entity.note.Ue;
 import fr.da2i.lup1.entity.security.Credential;
 import fr.da2i.lup1.filter.PromotionAccess;
 import fr.da2i.lup1.filter.SemesterAccess;
@@ -67,27 +65,13 @@ public class BulletinResource extends AnnualResource {
 		this.credentialDao = DaoProvider.getDao(Credential.class);
 	}
 	
-	private Bulletin getBulletin(Integer studentId, Integer semester) throws SQLException {
+	private Bulletin getBulletin(Member student, Integer semester) throws SQLException {
 		Bulletin bulletin = new Bulletin();
-		List<Mark> marks = findFromPromotion(markDao.queryBuilder()).and().eq("student_id", studentId).and().eq("semester", semester).query();
-		Ue ue;
-		Subject sub;
-		int i;
+		List<Mark> marks = findFromPromotion(markDao.queryBuilder()).and().eq("student_id", student.getId()).and().eq("semester", semester).query();
 		for (Mark mark : marks) {
-			ue = mark.getUe();
-			i = bulletin.indexOf(ue);
-			sub = mark.getSubject();
-			sub.add(mark);
-			if (i < 0) {
-				ue.add(sub);
-				bulletin.add(ue);
-			}
-			else {
-				bulletin.get(i).add(sub);
-			}
-			ue.setCoeff(mark.getCoeffUe());
-			sub.setCoeff(mark.getCoeffSubject());
+			bulletin.add(mark);
 		}
+		bulletin.setStudent(student);
 		return bulletin;
 	}
 	
@@ -101,13 +85,9 @@ public class BulletinResource extends AnnualResource {
 		}
 		else {
 			List<Register> registers = findFromPromotion(registerDao.queryBuilder()).query();
-			Map<String, Bulletin> bulletins = new HashMap<>();
-			Credential credential;
-			Integer studentId;
+			List<Bulletin> bulletins = new ArrayList<>();
 			for (Register register : registers) {
-				studentId = register.getStudent().getId();
-				credential = credentialDao.queryBuilder().where().eq("member_id", studentId).queryForFirst();
-				bulletins.put(credential.getLogin(), getBulletin(studentId, semester));
+				bulletins.add(getBulletin(register.getStudent(), semester));
 			}
 			return Response.ok(bulletins).build();
 		}
@@ -120,28 +100,22 @@ public class BulletinResource extends AnnualResource {
 	public Response get(@PathParam("user") String user) throws SQLException {
 		Credential credential = getCredential();
 		String login = credential.getLogin();
-		int memberId = credential.getMember().getId();
-		if (user.equals(login) || findFromPromotion(promoDao.queryBuilder()).and().eq("responsable_id", memberId).countOf() > 0) {
-			String studentLogin;
-			Integer studentId;
-			if (user.equals(login)) {
-				studentLogin = login;
-				studentId = memberId;
-			}
-			else {
+		Member member = credential.getMember();
+		if (user.equals(login) || findFromPromotion(promoDao.queryBuilder()).and().eq("responsable_id", member.getId()).countOf() > 0) {
+			Member student = member;
+			if (!user.equals(login)) {
 				Credential auth = credentialDao.queryBuilder().where().eq("login", user).queryForFirst();
 				if (auth == null) {
 					throw new NotFoundException();
 				}
-				studentLogin = auth.getLogin();
-				studentId = auth.getMember().getId();
+				student = auth.getMember();
 			}
-			if (findFromPromotion(registerDao.queryBuilder()).and().eq("student_id", studentId).countOf() == 0) {
+			if (findFromPromotion(registerDao.queryBuilder()).and().eq("student_id", student.getId()).countOf() == 0) {
 				throw new ForbiddenException();
 			}
 			else {
-				Map<String, Bulletin> bulletin = new HashMap<>();
-				bulletin.put(studentLogin, getBulletin(studentId, semester));
+				List<Bulletin> bulletin = new ArrayList<>();
+				bulletin.add(getBulletin(student, semester));
 				return Response.ok(bulletin).build();
 			}
 		}
