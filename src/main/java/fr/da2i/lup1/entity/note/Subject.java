@@ -1,18 +1,23 @@
 package fr.da2i.lup1.entity.note;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import fr.da2i.lup1.util.Identifiable;
+
 @DatabaseTable(tableName = "subject")
-public class Subject extends Assessable<Mark, Integer> {
+public class Subject extends Identifiable<Integer> {
 	
 	@DatabaseField(columnName = "subject_id", id = true)
 	private Integer subjectId;
 	@DatabaseField(columnName = "name")
 	private String name;
+	
+	private double coeff;
+	private List<Mark> marks = new ArrayList<>();
 	
 	public Subject() {}
 
@@ -32,9 +37,36 @@ public class Subject extends Assessable<Mark, Integer> {
 		this.name = name;
 	}
 	
-	@JsonProperty(value = "marks")
-	public Set<Mark> getAssessables() {
-		return super.getAssessables();
+	public double getCoeff() {
+		return coeff;
+	}
+	
+	public void setCoeff(double coeff) {
+		this.coeff = coeff;
+	}
+	
+	public List<Mark> getMarks() {
+		return marks;
+	}
+	
+	public void setMarks(List<Mark> marks) {
+		this.marks = marks;
+	}
+	
+	public boolean add(Mark mark) {
+		return getMarks().add(mark);
+	}
+	
+	public boolean remove(Mark mark) {
+		return getMarks().remove(mark);
+	}
+	
+	public Mark get(int idx) {
+		return getMarks().get(idx);
+	}
+	
+	public int indexOf(Mark mark) {
+		return getMarks().indexOf(mark);
 	}
 
 	@Override
