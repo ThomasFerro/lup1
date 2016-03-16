@@ -24,6 +24,7 @@ import javax.ws.rs.Path;
 import org.glassfish.jersey.server.model.Resource;
 
 import fr.da2i.lup1.filter.PromotionAccess;
+import fr.da2i.lup1.resource.organization.OrganizationResource;
 import fr.da2i.lup1.resource.stage.InternshipOfferResource;
 import fr.da2i.lup1.security.Authenticated;
 
@@ -68,5 +69,4 @@ public class PromotionResource extends AnnualResource {
 	public Resource getEtudiantResource() {
 		return Resource.from(EtudiantResource.class);
 	}
-
 }
