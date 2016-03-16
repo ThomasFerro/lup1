@@ -223,13 +223,43 @@ TODO : Reprendre le tableau
 
 #### Présentation de l'API
 
-TODO : Reprendre le tableau
+Pour la partie *Gestion des stages*, nous avons eu besoin de resources pour les offres disponibles mais aussi pour les *logs* et pour les entreprises. Voici donc un résumé de notre API :
+
+##### API pour les stages
+
+Les adresses des ressources suivantes commencent par **/api/{version}/formation/{formation_id}/annees/{annee}**
+
+| Ressource | **GET** | **PUT** | **POST** | **DELETE** |
+| :-------: | :-----: | :-----: | :------: | :--------: |
+| */stages* | Retourne la liste des offres de stage | Remplace la collection d'offres de stage par une autre | Créer une nouvelle offre de stage | Supprime toutes les offres de stage |
+| */stages/{stage_id}* | Retourne les informations de cette offre de stage | Remplace les informations de cette offre ou la créer si elle n'existe pas | X | Supprime l'offre de stage |
+|  */etudiants/{etudiant_id}/stages* | Retourne les offres de stage auxquelles est inscrit un étudiant | X | Inscrit l'étudiant à une offre de stage | Supprime les inscriptions aux offres de l'étudiant |
+|  */etudiants/{etudiant_id}/stages/{stage_id}* | Retourne les informations et logs de l'étudiant pour cette offre de stage | Remplace les informations et logs de cette offre pour cet étudiant ou l'inscrit à l'offre de stage si il ne l'est pas déjà | Ajoute un nouveau log à l'offre de stage pour l'étudiant | Supprime l'inscription à l'offre de stage |
+
+##### API pour les entreprises
+
+Les adresses des ressources suivantes commencent par **/api/{version}**
+
+| Ressource | **GET** | **PUT** | **POST** | **DELETE** |
+| :-------: | :-----: | :-----: | :------: | :--------: |
+| */entreprises/* | Liste les entreprises dans la base | X | Créer une nouvelle entrée dans la table des entreprises | X |
+| */entreprises/{entreprises_siret}* | Retourne l'entreprise avec le SIRET indiqué | Modifie ou ajoute à la base l'entreprise au SIRET indiqué | X | X |
 
 ## Front-End
 
+Pour le *Front-End*, nous avons principalement utilisé **Angular.js**, un framework *Javascript* permettant de facilité grandement le développement d'application "*One Page*" et offrant de nombreuses fonctionnalités que nous développerons plus loin de cette documentation.
+
 ### Authentification
 
-TODO : Description intégration du système d'authentification
+L'authentification se déroule en plusieurs étapes, côté *Front-End*.
+
+Premièrement, nous allons utilisé le module **http** d'*Angular* afin de consommer le service */api/authentication* en **POST**. Cette requête côté serveur est décrite dans la partie *Back-End* de cette documentation technique.
+
+Si la requête n'a pas échouée, l'application place le token dans le *localStorage*, après l'avoir extrait du *header* renvoyé par le serveur.
+
+Il est ensuite possible, grâce à l'**authentication-factory**, de vérifier si l'utilisateur est connecté, retourner ses rôles ou encore de le déconnecter.
+
+Enfin, l'application redirige l'utilisateur selon le résultat de la requête et informe l'utilisateur de toute erreur dans le processus d'authentification.
 
 ### Gestion des notes
 
