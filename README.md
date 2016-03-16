@@ -217,13 +217,89 @@ TODO : Description principe
 
 #### Présentation de l'API
 
-TODO : Reprendre le tableau
+L'*API* pour la gestion des notes est la plus complexe car de nombreuses informations peuvent être demandées. Voici un tableau récapitulatif de ces ressources :
+
+##### API pour les promotions
+
+Les adresses des ressources suivantes commencent par **/api/{version}**
+
+| Ressource | **GET** | **PUT** | **POST** | **DELETE** |
+| :-------: | :-----: | :-----: | :------: | :--------: |
+| */formation* | Retourne la liste des promotions | Remplace toute la collection de promotions par une autre | Créer une nouvelle promotion | Supprime toutes les promotions |
+| */formation/{formation_id}* | Retourne la liste des promotions de cette formation | Remplace les informations de cette formation ou la créer si elle n'existe pas | X | Supprime la formation à cette adresse |
+| */formation/{formation_id}/{annee}* | Retourne les informations de la promotion | Remplace les informations de la promotion ou l'ajouter si il n'existe pas | X | Supprime la promotion |
+
+##### API pour les étudiants
+
+Les adresses des ressources suivantes commencent par **/api/{version}**
+
+| Ressource | **GET** | **PUT** | **POST** | **DELETE** |
+| :-------: | :-----: | :-----: | :------: | :--------: |
+| */etudiants* | Retourne la liste des étudiants | Remplace toute la collection des étudiants par une autre | Créer un nouvel étudiant | Supprime tous les étudiants |
+| */etudiants/{etudiant_id}* | Retourne les informations de l'étudiant | Remplace les informations de cet étudiant ou l'ajouter si il n'existe pas | X | Supprime l'étudiant |
+
+Les adresses des ressources suivantes commencent par **/api/{version}/formation/{formation_id}/{annee}**
+
+| Ressource | **GET** | **PUT** | **POST** | **DELETE** |
+| :-------: | :-----: | :-----: | :------: | :--------: |
+| */etudiants* | Retourne la liste des étudiants de la promotion | Remplace toute la collection d'étudiants par une autre | Ajoute un étudiant à cette promotion | Retire tous les étudiants de cette promotion |
+| */etudiants/{etudiant_id}* | Retourne les informations de l'étudiant | Remplace les informations de cet étudiant ou l'ajouter si il n'existe pas | X | Retire l'étudiant à cette adresse de la promotion |
+
+##### API pour les UEs
+
+Les adresses des ressources suivantes commencent par **/api/{version}**
+
+| Ressource | **GET** | **PUT** | **POST** | **DELETE** |
+| :-------: | :-----: | :-----: | :------: | :--------: |
+| */ues* | Retourne la liste des UEs  | Remplace toute la collection d'UEs par une autre | Créer une nouvelle UE | Supprime toutes les UEs |
+| */ues/{ue_id}* | Retourne les informations de l'UE | Remplace les informations de cette UE ou l'ajouter si elle n'existe pas | X | Supprime l'UE |
+
+Les adresses des ressources suivantes commencent par **/api/{version}/formation/{formation_id}/{annee}**
+
+| Ressource | **GET** | **PUT** | **POST** | **DELETE** |
+| :-------: | :-----: | :-----: | :------: | :--------: |
+| */ues* | Retourne la liste des UE de la promotion | Remplace toute la collection d'UE par une autre | Ajouter une UE dans la promotion | Retire toutes les UE de la promotion |
+| */ues/{ue_id}* | Retourne les informations de l'UE | Remplace les informations de cette UE ou l'ajouter si elle n'existe pas | X | Retire l'UE à cette adresse de la promotion |
+
+##### API pour les matières
+
+Les adresses des ressources suivantes commencent par **/api/{version}**
+
+| Ressource | **GET** | **PUT** | **POST** | **DELETE** |
+| :-------: | :-----: | :-----: | :------: | :--------: |
+| */matieres* | Retourne la liste des matières | Remplace toute la collection de matières par une autre | Créer une nouvelle matière | Supprime toutes les matières |
+| */matieres/{matiere_id}* | Retourne les informations de la matière | Remplace les informations de cette matière ou l'ajouter si elle n'existe pas | X | Supprime la matière |
+
+Les adresses des ressources suivantes commencent par **/api/{version}/formation/{formation_id}/{annee}/ues/{ue_id}**
+
+| Ressource | **GET** | **PUT** | **POST** | **DELETE** |
+| :-------: | :-----: | :-----: | :------: | :--------: |
+| */matiere* | Retourne la liste des matières de l'UE | Remplace toute la collection des matières par une autre | Ajouter une matière dans l'UE | Retire toutes les matières de l'UE |
+| */matiere/{matiere_id}* | Retourne les informations de la matière | Remplace les informations de cette matière ou l'ajouter si elle n'existe pas | X | Retire la matière à cette adresse de l'UE |
+
+##### API pour les évaluations
+
+Les adresses des ressources suivantes commencent par **/api/{version}/formation/{formation_id}/{annee}/ues/{ue_id}/matiere/{matiere_id}**
+
+| Ressource | **GET** | **PUT** | **POST** | **DELETE** |
+| :-------: | :-----: | :-----: | :------: | :--------: |
+| */evaluations* | Retourne la liste des évaluations de la matière | Remplace toute la collection des evaluations par une autre | Ajouter une évaluation dans la matière | Retire toutes les évaluation de la matières |
+| */evaluations/{evaluation_id}* | Retourne les informations de l'évaluation | Remplace les informations de cette évaluation ou l'ajouter si elle n'existe pas | X | Retire l'évaluation à cette adresse de la matière |
+
+##### API pour les notes
+
+Les adresses des ressources suivantes commencent par **/api/{version}/formation/{formation_id}/{annee}/ues/{ue_id}/matiere/{matiere_id}/evaluations/{evaluation_id}**
+
+| Ressource | **GET** | **PUT** | **POST** | **DELETE** |
+| :-------: | :-----: | :-----: | :------: | :--------: |
+| */notes* | Retourne la liste des notes de l'évaluation | Remplace toute la collection des notes de l'évaluation par une autre | Ajouter une nouvelle liste de notes | Supprime toutes les notes |
+| */notes/{etudiant_id}* | Retourne les informations de la note pour un étudiant | Remplace les informations de cette note ou l'ajoute si elle n'existe pas | X | Supprime la note de l'étudiant à cette adresse pour cette évaluation |
 
 ### Gestion des stages
 
 #### Présentation de l'API
 
-Pour la partie *Gestion des stages*, nous avons eu besoin de resources pour les offres disponibles mais aussi pour les *logs* et pour les entreprises. Voici donc un résumé de notre API :
+Pour la partie *Gestion des stages*, nous avons eu besoin de resources pour les offres disponibles mais aussi pour les *logs* et pour les entreprises. Voici donc un résumé de notre *API* :
 
 ##### API pour les stages
 
