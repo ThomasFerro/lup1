@@ -32,8 +32,8 @@ import fr.da2i.lup1.util.DaoProvider;
 @PromotionAccess
 public class StudentByFormationResource extends AnnualResource {
 
-	Dao<Member, Integer> daoMember;
-	Dao<Register, Integer> daoRegister;
+	private Dao<Member, Integer> daoMember;
+	private Dao<Register, Integer> daoRegister;
 	private Dao<Credential, String> daoCredential;
 	
 	public StudentByFormationResource() {

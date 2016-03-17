@@ -26,8 +26,9 @@ import org.glassfish.jersey.server.model.Resource;
 import fr.da2i.lup1.filter.PromotionAccess;
 import fr.da2i.lup1.resource.note.NoteResource;
 import fr.da2i.lup1.resource.note.SubjectResource;
-import fr.da2i.lup1.resource.note.UeResource;
 import fr.da2i.lup1.resource.student.StudentByFormationResource;
+import fr.da2i.lup1.resource.ue.UePromotionResource;
+import fr.da2i.lup1.resource.ue.UeResource;
 import fr.da2i.lup1.security.Authenticated;
 
 @Path("formations/{formationId: [0-9]+}/annees/{annee: [0-9]{4}-[0-9]{4}}")
@@ -44,7 +45,7 @@ public class PromotionResource extends AnnualResource {
 	
 	@Path("ues")
 	public Resource getUeResource() {
-		return Resource.from(UeResource.class);
+		return Resource.from(UePromotionResource.class);
 	}
 	
 	@Path("subjects")
