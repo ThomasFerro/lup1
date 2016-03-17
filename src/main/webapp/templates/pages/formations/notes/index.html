@@ -1,8 +1,5 @@
-<div
-	class="col-md-4 col-lg-3 hidden-xs hidden-sm col-without-padding panel-filter"
-	ng-controller="PanelFilterController as panelFilterCtrl">
-	{{panelFilterCtrl.selectFilter(0)}}
-	<panel-filter></panel-filter>
+<div class="col-md-4 col-lg-3 hidden-xs hidden-sm col-without-padding panel-filter" ng-controller="PanelMenuController as panelCtrl" ng-init="panelCtrl.selectPanel('notes','promotions')">
+  <panel-menu></panel-menu>
 </div>
 <div class="col-lg-9 col-xs-12 col-sm-12 col-md-8">
 	<h3>DA2I - 2015-2016 : Evaluations du semestre 5 - Notations</h3>

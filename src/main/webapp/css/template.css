@@ -33,14 +33,14 @@
   border-color:#008080 !important;
 }
 
-/*panel filter*/
+/*panel lenu*/
 
-.panel-filter-wrapper{
+.panel-menu-wrapper{
   background-color: #444444;
   color:white;
 }
 
-.filter-body legend{
+.panel-menu-body legend{
   color:white;
 }
 

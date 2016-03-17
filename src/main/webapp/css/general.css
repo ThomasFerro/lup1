@@ -45,3 +45,11 @@ h3.logo{
 .mark-buttons{
     white-space: nowrap;
 }
+
+.form-header-addEval{
+	vertical-align:middle!important;
+}
+
+.label-table{
+	    padding: 10px!important;
+}

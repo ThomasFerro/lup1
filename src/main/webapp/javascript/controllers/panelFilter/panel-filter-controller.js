@@ -1,6 +1,6 @@
 (function(){
   angular.module('lup1')
-  .controller('PanelFilterController', [ "$http", function($http){
+  .controller('PanelFilterController', [ fileManager, function(fileManagerFactory){
     var controller = this;
     controller.filters = [];
     controller.filterSelected;

@@ -1,0 +1,19 @@
+{
+	 "title":"Gestion des formations",
+	 "buttons":[
+	            {
+	            	"name":"Ajouter une promotion",
+	            	"href":"#"
+	            },
+	            {
+	            	"name":"Modifier une promotion",
+	            	"href":"#"
+	            },
+	            {
+	            	"name":"Supprimer une promotion",
+	            	"href":"#"
+	            }
+	            ],
+	  "filters":""
+ }
+ 
