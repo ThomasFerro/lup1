@@ -199,6 +199,8 @@ TODO : Screen MCD
 
 TODO : Tableau des technos comme pour le QuoiDNeuf
 
+
+
 ## Back-End
 
 ### Authentification...
@@ -225,9 +227,9 @@ Les adresses des ressources suivantes commencent par **/api/{version}**
 
 | Ressource | **GET** | **PUT** | **POST** | **DELETE** |
 | :-------: | :-----: | :-----: | :------: | :--------: |
-| */formation* | Retourne la liste des promotions | Remplace toute la collection de promotions par une autre | Créer une nouvelle promotion | Supprime toutes les promotions |
-| */formation/{formation_id}* | Retourne la liste des promotions de cette formation | Remplace les informations de cette formation ou la créer si elle n'existe pas | X | Supprime la formation à cette adresse |
-| */formation/{formation_id}/{annee}* | Retourne les informations de la promotion | Remplace les informations de la promotion ou l'ajouter si il n'existe pas | X | Supprime la promotion |
+| */formations* | Retourne la liste des promotions | Remplace toute la collection de promotions par une autre | Créer une nouvelle promotion | Supprime toutes les promotions |
+| */formations/{formation_id}* | Retourne la liste des promotions de cette formation | Remplace les informations de cette formation ou la créer si elle n'existe pas | X | Supprime la formation à cette adresse |
+| */formations/{formation_id}/{annee}* | Retourne les informations de la promotion | Remplace les informations de la promotion ou l'ajouter si il n'existe pas | X | Supprime la promotion |
 
 ##### API pour les étudiants
 
@@ -238,7 +240,7 @@ Les adresses des ressources suivantes commencent par **/api/{version}**
 | */etudiants* | Retourne la liste des étudiants | Remplace toute la collection des étudiants par une autre | Créer un nouvel étudiant | Supprime tous les étudiants |
 | */etudiants/{etudiant_id}* | Retourne les informations de l'étudiant | Remplace les informations de cet étudiant ou l'ajouter si il n'existe pas | X | Supprime l'étudiant |
 
-Les adresses des ressources suivantes commencent par **/api/{version}/formation/{formation_id}/{annee}**
+Les adresses des ressources suivantes commencent par **/api/{version}/formations/{formation_id}/{annee}**
 
 | Ressource | **GET** | **PUT** | **POST** | **DELETE** |
 | :-------: | :-----: | :-----: | :------: | :--------: |
@@ -254,7 +256,7 @@ Les adresses des ressources suivantes commencent par **/api/{version}**
 | */ues* | Retourne la liste des UEs  | Remplace toute la collection d'UEs par une autre | Créer une nouvelle UE | Supprime toutes les UEs |
 | */ues/{ue_id}* | Retourne les informations de l'UE | Remplace les informations de cette UE ou l'ajouter si elle n'existe pas | X | Supprime l'UE |
 
-Les adresses des ressources suivantes commencent par **/api/{version}/formation/{formation_id}/{annee}**
+Les adresses des ressources suivantes commencent par **/api/{version}/formations/{formation_id}/{annee}**
 
 | Ressource | **GET** | **PUT** | **POST** | **DELETE** |
 | :-------: | :-----: | :-----: | :------: | :--------: |
@@ -270,7 +272,7 @@ Les adresses des ressources suivantes commencent par **/api/{version}**
 | */matieres* | Retourne la liste des matières | Remplace toute la collection de matières par une autre | Créer une nouvelle matière | Supprime toutes les matières |
 | */matieres/{matiere_id}* | Retourne les informations de la matière | Remplace les informations de cette matière ou l'ajouter si elle n'existe pas | X | Supprime la matière |
 
-Les adresses des ressources suivantes commencent par **/api/{version}/formation/{formation_id}/{annee}/ues/{ue_id}**
+Les adresses des ressources suivantes commencent par **/api/{version}/formations/{formation_id}/{annee}/ues/{ue_id}**
 
 | Ressource | **GET** | **PUT** | **POST** | **DELETE** |
 | :-------: | :-----: | :-----: | :------: | :--------: |
@@ -279,7 +281,7 @@ Les adresses des ressources suivantes commencent par **/api/{version}/formation/
 
 ##### API pour les évaluations
 
-Les adresses des ressources suivantes commencent par **/api/{version}/formation/{formation_id}/{annee}/ues/{ue_id}/matiere/{matiere_id}**
+Les adresses des ressources suivantes commencent par **/api/{version}/formations/{formation_id}/{annee}/ues/{ue_id}/matiere/{matiere_id}**
 
 | Ressource | **GET** | **PUT** | **POST** | **DELETE** |
 | :-------: | :-----: | :-----: | :------: | :--------: |
@@ -288,7 +290,7 @@ Les adresses des ressources suivantes commencent par **/api/{version}/formation/
 
 ##### API pour les notes
 
-Les adresses des ressources suivantes commencent par **/api/{version}/formation/{formation_id}/{annee}/ues/{ue_id}/matiere/{matiere_id}/evaluations/{evaluation_id}**
+Les adresses des ressources suivantes commencent par **/api/{version}/formations/{formation_id}/{annee}/ues/{ue_id}/matiere/{matiere_id}/evaluations/{evaluation_id}**
 
 | Ressource | **GET** | **PUT** | **POST** | **DELETE** |
 | :-------: | :-----: | :-----: | :------: | :--------: |
@@ -303,7 +305,7 @@ Pour la partie *Gestion des stages*, nous avons eu besoin de resources pour les 
 
 ##### API pour les stages
 
-Les adresses des ressources suivantes commencent par **/api/{version}/formation/{formation_id}/annees/{annee}**
+Les adresses des ressources suivantes commencent par **/api/{version}/formations/{formation_id}/annees/{annee}**
 
 | Ressource | **GET** | **PUT** | **POST** | **DELETE** |
 | :-------: | :-----: | :-----: | :------: | :--------: |
