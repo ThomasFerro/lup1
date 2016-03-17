@@ -1,4 +1,4 @@
-package fr.da2i.lup1.resource.note;
+package fr.da2i.lup1.resource.student;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -11,7 +11,7 @@ import fr.da2i.lup1.resource.stage.InternshipLogResource;
 
 //@Authenticated
 @PromotionAccess
-public class EtudiantResource {
+public class StudentByFormationResource {
 	
 	@GET
 	@Path("{etudiantId: [0-9]+}")
