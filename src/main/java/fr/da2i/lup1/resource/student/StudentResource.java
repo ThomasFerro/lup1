@@ -47,7 +47,7 @@ public class StudentResource extends SimpleResource {
 	 * 
 	 * @return	La liste des étudiants de la base
 	 * 
-	 * @throws SQLException 
+	 * @throws	SQLException 
 	 */
 	@GET
 	@Produces("application/json")
@@ -68,7 +68,7 @@ public class StudentResource extends SimpleResource {
 	 * 
 	 * @return	Les informations de l'étudiant ou un code <404> si il n'existe pas
 	 * 
-	 * @throws SQLException 
+	 * @throws	SQLException 
 	 */
 	@GET
 	@Produces("application/json")
@@ -93,7 +93,7 @@ public class StudentResource extends SimpleResource {
 	 * 
 	 * @return	Le code de retour de la modification ou de l'ajout à la base
 	 * 
-	 * @throws SQLException 
+	 * @throws	SQLException 
 	 */
 	@PUT
 	@Path("{studentId: [0-9]+}")
@@ -121,9 +121,10 @@ public class StudentResource extends SimpleResource {
 	 * 
 	 * @return	Le code de retour de l'ajout à la base
 	 * 
-	 * @throws SQLException 
+	 * @throws	SQLException 
 	 */
 	@POST
+	@RolesAllowed({ "responsable_formation", "responsable_stage", "etudiant" })
 	public Response postStudent(Member student) throws SQLException {
 		return addStudent(student, true);
 	}
