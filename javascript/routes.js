@@ -9,7 +9,7 @@
       templateUrl: 'templates/pages/formations/bulletin/index.html'
     })
     .when('/stages', {
-      templateUrl: 'templates/pages/stages/index.html'
+      templateUrl: 'templates/pages/stages/offres/index.html'
     })
     .when('/stages/ajouter/offre', {
       templateUrl: 'templates/pages/stages/ajouter/offre/index.html'
@@ -17,11 +17,11 @@
     .when('/stages/ajouter/entreprise', {
       templateUrl: 'templates/pages/stages/ajouter/entreprise/index.html'
     })
-    .when('/stages/offre', {
-      templateUrl: 'templates/pages/stages/offre/index.html'
+    .when('/stages/offres', {
+      templateUrl: 'templates/pages/stages/offres/index.html'
     })
-    .when('/stages/offre/:id', {
-      templateUrl: 'templates/pages/stages/offre/id/index.html'
+    .when('/stages/offres/:id', {
+      templateUrl: 'templates/pages/stages/offres/id/index.html'
     })
     .when('/stages/suivi/enseignant', {
       templateUrl: 'templates/pages/stages/suivi/enseignant/index.html'
