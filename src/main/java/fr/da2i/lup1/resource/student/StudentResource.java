@@ -182,12 +182,11 @@ public class StudentResource extends SimpleResource {
 	
 	private Member student(int id) throws SQLException {
 		List<Credential> creds = daoCredential.queryBuilder().where().eq("member_id", id).query();
-		Member m = null;
 		for (Credential c : creds) {
 			if (c.getRoles().contains("etudiant")) {
-				m = c.getMember();
+				return c.getMember();
 			}
 		}
-		return m;
+		return null;
 	}
 }
