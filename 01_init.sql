@@ -201,6 +201,7 @@ create table ORGANIZATION (
    ADDRESS              TEXT                 null,
    PHONE                TEXT                 null,
    FAX                  TEXT                 null,
+   HR                   TEXT                 null,
    constraint PK_ORGANIZATION primary key (SIRET)
 );
 

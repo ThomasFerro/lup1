@@ -29,7 +29,7 @@ INSERT INTO member (FIRST_NAME,LAST_NAME,EMAIL,BIRTHDAY,PHONE,SIRET,PICTURE,ADDR
 -- Insertion de credentials
 
 INSERT INTO credential VALUES('hauspiem', '1000:aabc3949f5c2e0b06c2128dfe18de790d311ab43fd78dc4e:758ab728ab2498a5208df3b30f84fb265002022f1dbfbad6',1);
-INSERT INTO credential VALUES('ferrot', ' 1000:f9be0d1ace62aadaa67b31289557e21cc734e704f5883949:da427c89f1ba1cb82ae5a85d0e34d905e641ed149a7c241b',2);
+INSERT INTO credential VALUES('ferrot', '1000:f9be0d1ace62aadaa67b31289557e21cc734e704f5883949:da427c89f1ba1cb82ae5a85d0e34d905e641ed149a7c241b',2);
 INSERT INTO credential VALUES('catteze', '1000:6139218b53a1bdc476853d1c3cac057aeece81df843571aa:56c5e709df10536967b63fc48ab30c0d3a6d10fb6613091a',3);
 INSERT INTO credential VALUES('fevrer', '1000:84c63106c14eee935eb0c854efffb26ecf529d4caa14fe60:04803f89c222d471274223c6d1f35dd6409eee72223c851d',4);
 INSERT INTO credential VALUES('mathieup', '1000:fae09990e41e01c10f55c4ea95988d562900073bc37ad5dd:9b3d6099cf32e58e87d01f66206a56107f0b1c7489b7ebe8',5);
@@ -41,9 +41,9 @@ INSERT INTO credential VALUES('fannySmile', '1000:81441b4781ee326e1bcc4934bf36a5
 
 -- Insertion d'entreprises
 
-INSERT INTO organization VALUES('73282932000074', 'Smile', 'adresse Smile', 'phoneSmile', 'fax_smile');
-INSERT INTO organization VALUES('73282932000075', 'OVH', 'adresse OVH', 'phoneOVH', 'fax_ovh');
-INSERT INTO organization VALUES('73282932000076', 'Opquast', 'adresse Opquast', 'phoneOpquast', 'fax_opquast');
+INSERT INTO organization VALUES('73282932000074', 'Smile', 'adresse Smile', 'phoneSmile', 'fax_smile','RH_smile');
+INSERT INTO organization VALUES('73282932000075', 'OVH', 'adresse OVH', 'phoneOVH', 'fax_ovh','RH_ovh');
+INSERT INTO organization VALUES('73282932000076', 'Opquast', 'adresse Opquast', 'phoneOpquast', 'fax_opquast','RH_opquast');
 
 
 -- Fin Insertion d'entreprises
