@@ -34,6 +34,7 @@ public class FormationResource extends SimpleResource {
 	}
 	
 	@GET
+	@Produces("application/json")
 	@RolesAllowed("admin")
 	public Response list() throws SQLException {
 		return Response.ok(formationDao.queryForAll()).build();
