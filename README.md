@@ -240,7 +240,7 @@ Les adresses des ressources suivantes commencent par **/api/{version}**
 | */etudiants* | Retourne la liste des étudiants | Remplace toute la collection des étudiants par une autre | Créer un nouvel étudiant | Supprime tous les étudiants |
 | */etudiants/{etudiant_id}* | Retourne les informations de l'étudiant | Remplace les informations de cet étudiant ou l'ajouter si il n'existe pas | X | Supprime l'étudiant |
 
-Les adresses des ressources suivantes commencent par **/api/{version}/formations/{formation_id}/{annee}**
+Les adresses des ressources suivantes commencent par **/api/{version}/formations/{formation_id}/annees/{annee}**
 
 | Ressource | **GET** | **PUT** | **POST** | **DELETE** |
 | :-------: | :-----: | :-----: | :------: | :--------: |
@@ -256,7 +256,7 @@ Les adresses des ressources suivantes commencent par **/api/{version}**
 | */ues* | Retourne la liste des UEs  | Remplace toute la collection d'UEs par une autre | Créer une nouvelle UE | Supprime toutes les UEs |
 | */ues/{ue_id}* | Retourne les informations de l'UE | Remplace les informations de cette UE ou l'ajouter si elle n'existe pas | X | Supprime l'UE |
 
-Les adresses des ressources suivantes commencent par **/api/{version}/formations/{formation_id}/{annee}**
+Les adresses des ressources suivantes commencent par **/api/{version}/formations/{formation_id}/annees/{annee}/semestres/{semestre_id}**
 
 | Ressource | **GET** | **PUT** | **POST** | **DELETE** |
 | :-------: | :-----: | :-----: | :------: | :--------: |
@@ -272,7 +272,7 @@ Les adresses des ressources suivantes commencent par **/api/{version}**
 | */matieres* | Retourne la liste des matières | Remplace toute la collection de matières par une autre | Créer une nouvelle matière | Supprime toutes les matières |
 | */matieres/{matiere_id}* | Retourne les informations de la matière | Remplace les informations de cette matière ou l'ajouter si elle n'existe pas | X | Supprime la matière |
 
-Les adresses des ressources suivantes commencent par **/api/{version}/formations/{formation_id}/{annee}/ues/{ue_id}**
+Les adresses des ressources suivantes commencent par **/api/{version}/formations/{formation_id}/annees/{annee}/semestres/{semestre_id}/ues/{ue_id}**
 
 | Ressource | **GET** | **PUT** | **POST** | **DELETE** |
 | :-------: | :-----: | :-----: | :------: | :--------: |
@@ -281,7 +281,7 @@ Les adresses des ressources suivantes commencent par **/api/{version}/formations
 
 ##### API pour les évaluations
 
-Les adresses des ressources suivantes commencent par **/api/{version}/formations/{formation_id}/{annee}/ues/{ue_id}/matiere/{matiere_id}**
+Les adresses des ressources suivantes commencent par **/api/{version}/formations/{formation_id}/{annee}/semestres/{semestre_id}/ues/{ue_id}/matiere/{matiere_id}**
 
 | Ressource | **GET** | **PUT** | **POST** | **DELETE** |
 | :-------: | :-----: | :-----: | :------: | :--------: |
@@ -290,7 +290,7 @@ Les adresses des ressources suivantes commencent par **/api/{version}/formations
 
 ##### API pour les notes
 
-Les adresses des ressources suivantes commencent par **/api/{version}/formations/{formation_id}/{annee}/ues/{ue_id}/matiere/{matiere_id}/evaluations/{evaluation_id}**
+Les adresses des ressources suivantes commencent par **/api/{version}/formations/{formation_id}/annees/{annee}/semestres/{semestre_id}/ues/{ue_id}/matiere/{matiere_id}/evaluations/{evaluation_id}**
 
 | Ressource | **GET** | **PUT** | **POST** | **DELETE** |
 | :-------: | :-----: | :-----: | :------: | :--------: |
