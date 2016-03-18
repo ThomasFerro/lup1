@@ -7,32 +7,32 @@
     <div class="row">
       <h4>Consultation d'une offre</h4>
     </div>
-    <div class="row">
-      <div class="panel-group" id="accordion">
+    <div class="row" ng-controller="InternshipOfferByIdController as controller">
+      <div class="panel-group stage-offer">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h4 class="panel-title">#1 - Système de mashup multimédia chez Archimed</h4>
+            <h4 class="panel-title">#{{controller.stage.internship_id}} - {{controller.stage.title}}</h4>
           </div>
           <div class="panel-body panel-collapse collapse in" id="collapse1">
             <div class="row">
               <h4>Missions :</h4>
-              <p>La mission consiste en voilà quoi hein tu vois ce que j'veux dire, donc pas besoin de voilà quoi hein ! Parce là c'est clair, mais oui c'est clair, c'est la congolexicomatisation des lois du marché</p>
+              <p>{{controller.stage.missions}}</p>
             </div>
             <div class="row">
               <h4>Description :</h4>
-              <p>La description ? Le stage consiste en voilà quoi hein tu vois ce que j'veux dire, donc pas besoin de voilà quoi hein ! Parce là c'est clair, mais oui c'est clair, c'est la congolexicomatisation des lois du marché</p>
+              <p>{{controller.stage.description}}</p>
             </div>
             <div class="row">
               <h4>Technologies :</h4>
-              <p>.NET, jQuery, MySQL(<3)</p>
+              <p>{{controller.stage.technology}}</p>
             </div>
             <div class="row">
               <h4>Durée :</h4>
-              <p>5 semaines</p>
+              <p>{{controller.stage.duration}} semaines</p>
             </div>
             <div class="row">
               <h4>Date de début :</h4>
-              <p>21/10/2018</p>
+              <p>{{controller.stage.begin_date}}</p>
             </div>
             <div class="row next-step">
               <button class="btn btn-warning">Editer</button>

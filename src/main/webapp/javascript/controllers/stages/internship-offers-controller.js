@@ -4,7 +4,10 @@
     var controller = this;
     controller.stages = [];
 
-    $http.get('models/stages/offres/internship-offers.json').success(function(data) {
+    /*$http.get('models/stages/offres/internship-offers.json').success(function(data) {
+      controller.stages = data;
+    });*/
+    $http.get('/api/formations/1/annees/2015-2016/stages').success(function(data) {
       controller.stages = data;
     });
   }])

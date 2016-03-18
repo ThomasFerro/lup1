@@ -40,9 +40,9 @@
   width: 100%;
 }
 
-#accordion .panel-heading {
-  background-color: #444444;
-  color: white;
+#accordion .panel-heading, .stage-offer .panel-heading {
+  background-color: #444444 !important;
+  color: white !important;
 }
 
 textarea {
