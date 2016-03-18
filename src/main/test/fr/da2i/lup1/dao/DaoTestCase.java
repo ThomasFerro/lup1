@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import com.j256.ormlite.dao.Dao;
 
+import fr.da2i.lup1.entity.formation.Formation;
 import fr.da2i.lup1.entity.formation.Promotion;
 import fr.da2i.lup1.entity.note.Mark;
 import fr.da2i.lup1.entity.security.Credential;
@@ -33,6 +34,13 @@ public class DaoTestCase extends TestCase {
 		Dao<Promotion, Integer> dao = DaoProvider.getDao(Promotion.class);
 		Promotion promo = dao.queryBuilder().where().eq("formation_id", 1).and().eq("year", "2015-2016").queryForFirst();
 		System.out.println(promo);
+	}
+	
+	@Test
+	public void test_formations() throws SQLException {
+		Dao<Formation, Integer> dao = DaoProvider.getDao(Formation.class);
+		Formation f = dao.queryForId(1);
+		System.out.println(f);
 	}
 
 }
