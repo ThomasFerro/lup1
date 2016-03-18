@@ -78,21 +78,21 @@
 					<ul class="bulletin list-group">
 						<ul class="bulletin list-group">
 							<li class="list-group-item active"> Bulletin
-							 <span class="badge badge-mark">note</span> 
+							 <span class="badge badge-mark">note</span>
 							 <span class="badge badge-coeff">coefficient</span>
 							</li>
 							<ul class="list-group ue" ng-repeat="ue in bulletin.ues">
 								<li class="list-group-item active"> UE {{ue.name}}
-								 <span class="badge badge-mark">{{ue.avg | limitTo:4}}</span> 
+								 <span class="badge badge-mark">{{ue.avg | limitTo:4}}</span>
 								 <span class="badge badge-coeff">{{ue.coeff}}</span>
 								</li>
 								<ul class="list-group subject" ng-repeat="subject in ue.subjects">
 									<li class="list-group-item" data-toggle="collapse"
-										data-target="#{{subject.name | nospace}}">{{subject.name}} 
-										<i class="glyphicon glyphicon-menu-down"></i> 
-										 <span class="badge badge-mark">{{subject.avg | limitTo:4}}</span> 
+										data-target="#{{subject.name | nospace | noquote}}">{{subject.name}}
+										<i class="glyphicon glyphicon-menu-down"></i>
+										 <span class="badge badge-mark">{{subject.avg | limitTo:4}}</span>
 										 <span class="badge badge-coeff">{{subject.coeff}}</span>									</li>
-									<ul id="{{subject.name | nospace}}" class="list-group collapse marks">
+									<ul id="{{subject.name | nospace | noquote}}" class="list-group collapse marks">
 										<li ng-repeat="mark in subject.marks" class="list-group-item">DS1
 											<span class="badge badge-mark">{{mark.mark | limitTo:4}}</span>
 											<span class="badge badge-coeff">{{mark.coeffEval}}</span>

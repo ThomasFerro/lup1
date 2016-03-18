@@ -6,26 +6,30 @@
 			templateUrl: 'templates/pages/login/index.html',
 			controller: 'AuthenticationController'
 		})
-		.when('/formations/', {
-			templateUrl: 'templates/pages/formations/index.html',
+		.when('/notes/formations/', {
+			templateUrl: 'templates/pages/notes/index.html',
+			controller : 'FormationsController',
+			controllerAs : 'formationsCtrl',
 			resolve: {
 			      access: ["Access", function(Access) { return Access.hasRoles("responsable_formation"); }],
 			}
 		})
-		.when('/formations/:formation/annees/:annee/semestres/:semestre/', {
-			templateUrl:'templates/pages/formations/evaluations/index.html',
+		.when('/notes/formations/:formation/annees/:annee/semestres/:semestre/', {
+			templateUrl:'templates/pages/notes/promotion/index.html',
+			controller : 'PromotionController',
+			controllerAs : 'promotionCtrl',
 			resolve: {
 			      access: ["Access", function(Access) { return Access.hasRoles("responsable_formation"); }],
 			}
 		})
-		.when('/formations/:formation/annees/:annee/semestres/:semestre/evaluations/:evaluation/', {
-			templateUrl:'templates/pages/formations/notes/index.html',
+		.when('/notes/formations/:formation/annees/:annee/semestres/:semestre/evaluations/:evaluation/', {
+			templateUrl:'templates/pages/notes/evaluation/index.html',
 			resolve: {
 			      access: ["Access", function(Access) { return Access.hasRoles("responsable_formation"); }],
 			}
 		})
-		.when('/formations/:formation/annees/:annee/semestres/:semestre/bulletins/:student', {
-			templateUrl: 'templates/pages/formations/bulletin/index.html',
+		.when('/notes/formations/:formation/annees/:annee/semestres/:semestre/bulletins/:student', {
+			templateUrl: 'templates/pages/notes/bulletin/index.html',
 			controller : 'BulletinController',
 			controllerAs : 'bulletinCtrl',
 			resolve: {

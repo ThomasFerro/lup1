@@ -24,7 +24,7 @@
 		controller.getHref = function(item){
 			if(item.name === "notes"){
 				if(authenticationFactory.hasRole('etudiant')){
-					item.url="formations/1/annees/2015-2016/semestres/5/bulletins/"+authenticationFactory.getName();
+					item.url="notes/formations/1/annees/2015-2016/semestres/5/bulletins/"+authenticationFactory.getName();
 				}
 			};
 			return item.url;
