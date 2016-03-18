@@ -27,6 +27,8 @@ import org.glassfish.jersey.server.model.Resource;
 import fr.da2i.lup1.filter.PromotionAccess;
 import fr.da2i.lup1.filter.SemesterAccess;
 import fr.da2i.lup1.resource.note.BulletinResource;
+import fr.da2i.lup1.resource.note.SubjectResource;
+import fr.da2i.lup1.resource.ue.UePromotionResource;
 import fr.da2i.lup1.security.Authenticated;
 
 @PromotionAccess
@@ -35,14 +37,23 @@ import fr.da2i.lup1.security.Authenticated;
 public class SemestreResource {
 	
 	@GET
-	@Path("{semestre: [0-9]+}")
 	public String get(@PathParam("semestre") Integer semester) {
 		return "Semestre " + semester;
 	}
 	
-	@Path("{semestre: [0-9]+}/bulletins")
+	@Path("bulletins")
 	public Resource getBulletinResource() {
 		return Resource.from(BulletinResource.class);
+	}
+
+	@Path("ues")
+	public Resource getUePromotionResource() {
+		return Resource.from(UePromotionResource.class);
+	}
+	
+	@Path("subjects")
+	public Resource getSubjectResource() {
+		return Resource.from(SubjectResource.class);
 	}
 
 }

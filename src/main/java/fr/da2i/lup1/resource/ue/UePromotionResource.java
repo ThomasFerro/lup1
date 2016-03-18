@@ -1,5 +1,9 @@
 package fr.da2i.lup1.resource.ue;
 
+import java.net.URI;
+import java.sql.SQLException;
+import java.util.List;
+
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -13,6 +17,7 @@ import javax.ws.rs.core.Response.Status;
 
 import com.j256.ormlite.dao.Dao;
 
+import fr.da2i.lup1.entity.formation.Formation;
 import fr.da2i.lup1.entity.note.Ue;
 import fr.da2i.lup1.entity.note.UePromotion;
 import fr.da2i.lup1.filter.PromotionAccess;
@@ -24,22 +29,34 @@ import fr.da2i.lup1.util.DaoProvider;
 @PromotionAccess
 public class UePromotionResource extends AnnualResource {
 
-	Dao<UePromotion, Integer> dao;
+	private Dao<UePromotion, Integer> dao;
+	private Dao<Ue, Integer> daoUe;
+	@PathParam("semestre")
+	private int semester;
 	
 	public UePromotionResource() {
 		dao = DaoProvider.getDao(UePromotion.class);
+		daoUe = DaoProvider.getDao(Ue.class);
 	}
 	
 	/**
-	 * Retourne la liste des UE de la promotion
+	 * Retourne la liste des UE de la promotion pour un semestre
 	 * 
 	 * @return	La liste des UEs de la promotion
+	 * 
+	 * @throws	SQLException 
 	 */
 	@GET
 	@RolesAllowed({ "responsable_formation", "etudiant" })
 	@Produces("application/json")
-	public Response getUesPromotion() {
-		return Response.ok("Retourne la liste des UE de la promotion").build();
+	public Response getUesPromotion() throws SQLException {
+		List<UePromotion> uesPromotion = dao.queryBuilder().where().eq("semester", this.semester).and().eq("formation_id", formationId).and().eq("year", annee).query();
+		
+		if (uesPromotion.isEmpty()) {
+			return Response.status(Status.NOT_FOUND).build();
+		}
+		
+		return Response.ok(uesPromotion).build();
 	}
 	
 	/**
@@ -49,13 +66,21 @@ public class UePromotionResource extends AnnualResource {
 	 * 				L'ID de l'UE à rechercher
 	 * 
 	 * @return	Les informations de cette UE
+	 * 
+	 * @throws	SQLException 
 	 */
 	@GET
 	@RolesAllowed({ "responsable_formation", "etudiant" })
 	@Produces("application/json")
 	@Path("{ueId: [0-9]+}")
-	public Response getUePromotion(@PathParam("ueId") int ueId) {
-		return Response.ok("Retourne les informations de l'UE").build();
+	public Response getUePromotion(@PathParam("ueId") int ueId) throws SQLException {
+		UePromotion uePromotion = dao.queryBuilder().where().eq("semester", this.semester).and().eq("formation_id", formationId).and().eq("year", annee).and().eq("ue_id", ueId).queryForFirst();
+		
+		if (uePromotion == null) {
+			return Response.status(Status.NOT_FOUND).build();
+		}
+		
+		return Response.ok(uePromotion).build();
 	}
 	
 	/**
@@ -69,17 +94,39 @@ public class UePromotionResource extends AnnualResource {
 	}
 	
 	/**
-	 * Ajouter une UE dans la promotion
+	 * Ajouter une UE dans un semestre de la promotion
 	 * 
 	 * @param	ue
 	 * 				L'UE à ajouter à la promotion
 	 * 
 	 * @return	Le code de retour de l'ajout à la base
+	 * 
+	 * @throws	SQLException 
 	 */
 	@POST
 	@RolesAllowed("responsable_formation")
-	public Response postUe(Ue ue) {
-		return Response.ok("Ajouter une UE dans la promotion").build();
+	public Response postUe(Ue ue) throws SQLException {
+		if (ue.getId() == null || ue.getId() == 0) {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+		
+		if (daoUe.queryBuilder().where().eq("ue_id", ue.getId()).queryForFirst() == null) {
+			return Response.status(Status.NOT_FOUND).build();
+		}
+		
+		UePromotion uePromotion = dao.queryBuilder().where().eq("semester", this.semester).and().eq("formation_id", formationId).and().eq("year", annee).and().eq("ue_id", ue.getId()).queryForFirst();
+		
+		if (uePromotion != null) {
+			return Response.status(Status.CONFLICT).build();
+		}
+		
+		UePromotion u = new UePromotion(new Formation(formationId, ""), annee, this.semester, ue.getId());
+		
+		dao.create(u);
+
+		URI uri = uriInfo.getAbsolutePathBuilder().path(String.valueOf(ue.getId())).build();
+		
+		return Response.created(uri).build();
 	}
 	
 	/**

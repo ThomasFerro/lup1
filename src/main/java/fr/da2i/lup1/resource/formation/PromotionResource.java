@@ -48,18 +48,13 @@ public class PromotionResource extends AnnualResource {
 		return Resource.from(UePromotionResource.class);
 	}
 	
-	@Path("subjects")
-	public Resource getSubjectResource() {
-		return Resource.from(SubjectResource.class);
-	}
-	
 	@Path("notes")
 	public Resource getNoteResource() {
 		return Resource.from(NoteResource.class);
 	}
 	
-	@Path("semestres")
-	public Resource getBulletinResource() {
+	@Path("semestres/{semestre: [0-9]+}")
+	public Resource getSemestreResource() {
 		return Resource.from(SemestreResource.class);
 	}
 	
