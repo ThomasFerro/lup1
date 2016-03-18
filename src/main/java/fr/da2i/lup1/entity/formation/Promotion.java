@@ -18,6 +18,7 @@
  */
 package fr.da2i.lup1.entity.formation;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -39,6 +40,7 @@ public class Promotion {
 	
 	public Promotion() {}
 	
+	@JsonIgnore
 	public Formation getFormation() {
 		return formation;
 	}
@@ -65,7 +67,7 @@ public class Promotion {
 
 	@Override
 	public String toString() {
-		return "Promotion [formation=" + formation + ", year=" + year + ", responsableId=" + responsable + "]";
+		return "Promotion [formation=" + formation.getId() + ", year=" + year + ", responsableId=" + responsable + "]";
 	}
 	
 }

@@ -31,7 +31,6 @@ import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import fr.da2i.lup1.entity.formation.Member;
-import fr.da2i.lup1.security.Passwords;
 import fr.da2i.lup1.util.Identifiable;
 
 @DatabaseTable(tableName = "credential")
@@ -102,10 +101,6 @@ public class Credential extends Identifiable<String> implements Principal {
 			}
 		}
 		return roleNames;
-	}
-	
-	public void encrypt() {
-		this.password = Passwords.hash(password);
 	}
 
 	@Override
