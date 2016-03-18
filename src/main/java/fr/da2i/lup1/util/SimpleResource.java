@@ -44,6 +44,10 @@ public abstract class SimpleResource {
 		return (Credential) getPrincipal();
 	}
 	
+	protected Integer getMemberId() {
+		return getCredential().getMember().getId();
+	}
+	
 	protected String getAuthenticatedLogin() {
 		return Strings.nullToEmpty(securityContext.getUserPrincipal().getName());
 	}

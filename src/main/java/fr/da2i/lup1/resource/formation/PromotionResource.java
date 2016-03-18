@@ -37,17 +37,6 @@ import fr.da2i.lup1.security.Authenticated;
 public class PromotionResource extends AnnualResource {
 	
 	public PromotionResource() {}
-	
-	@GET
-	public String get() {
-		return "Formation " + formationId + " (" + annee + ")";
-	}
-	
-	@Path("ues")
-	public Resource getUeResource() {
-		return Resource.from(UePromotionResource.class);
-	}
-	
 	@Path("notes")
 	public Resource getNoteResource() {
 		return Resource.from(NoteResource.class);

@@ -113,11 +113,7 @@ public class BulletinResource extends AnnualResource {
 			if (findFromPromotion(registerDao.queryBuilder()).and().eq("student_id", student.getId()).countOf() == 0) {
 				throw new ForbiddenException();
 			}
-			else {
-				List<Bulletin> bulletin = new ArrayList<>();
-				bulletin.add(getBulletin(student, semester));
-				return Response.ok(bulletin).build();
-			}
+			return Response.ok(getBulletin(student, semester)).build();
 		}
 		throw new ForbiddenException();
 	}

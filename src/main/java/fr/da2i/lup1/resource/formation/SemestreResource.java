@@ -18,9 +18,7 @@
  */
 package fr.da2i.lup1.resource.formation;
 
-import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 
 import org.glassfish.jersey.server.model.Resource;
 
@@ -36,18 +34,13 @@ import fr.da2i.lup1.security.Authenticated;
 @Authenticated
 public class SemestreResource {
 	
-	@GET
-	public String get(@PathParam("semestre") Integer semester) {
-		return "Semestre " + semester;
-	}
-	
 	@Path("bulletins")
 	public Resource getBulletinResource() {
 		return Resource.from(BulletinResource.class);
 	}
-
+	
 	@Path("ues")
-	public Resource getUePromotionResource() {
+	public Resource getUeResource() {
 		return Resource.from(UePromotionResource.class);
 	}
 	

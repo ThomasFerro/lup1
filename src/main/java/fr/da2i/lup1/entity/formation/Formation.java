@@ -18,7 +18,14 @@
  */
 package fr.da2i.lup1.entity.formation;
 
+import java.util.Arrays;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import fr.da2i.lup1.util.Identifiable;
@@ -30,6 +37,8 @@ public class Formation extends Identifiable<Integer> {
 	private int formationId;
 	@DatabaseField(columnName = "name")
 	private String name;
+	@ForeignCollectionField @JsonIgnore
+	private ForeignCollection<Promotion> promotions;
 	
 	public Formation(int formationId, String name) {
 		this.formationId = formationId;
@@ -54,9 +63,14 @@ public class Formation extends Identifiable<Integer> {
 		this.name = name;
 	}
 	
+	@JsonProperty("promotions")
+	public List<Promotion> getPromotions() {
+		return Arrays.asList(promotions.toArray(new Promotion[promotions.size()]));
+	}
+	
 	@Override
 	public String toString() {
-		return "Formation [formationId=" + formationId + ", name=" + name + "]";
+		return "Formation [formationId=" + formationId + ", name=" + name + ", promotions=" + getPromotions() + "]";
 	}
 
 }
