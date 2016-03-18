@@ -1,0 +1,65 @@
+{
+	 "title":"Gestion des stages",
+	 "buttons":[
+     {
+       "name":"Ajouter une offre de stage",
+       "href":"#/stages/ajouter/offre"
+     },
+     {
+       "name":"Ajouter une entreprise",
+       "href":"#/stages/ajouter/entreprise"
+     },
+     {
+       "name":"Suivi des stages",
+       "href":"#/stages/suivi/etudiant"
+     },
+     {
+       "name":"Liste des offres",
+       "href":"#/stages/offres"
+     }
+	  ],
+    "filters":[
+      {
+        "label":"Entreprise",
+        "name":"entreprise",
+        "type":"text",
+        "id":"company-internship",
+        "placeholder":"Entreprise"
+      },
+      {
+        "label":"Intitulé",
+        "name":"intitule",
+        "type":"text",
+        "id":"title-internship",
+        "placeholder":"Intitulé"
+      },
+      {
+        "label":"localisation",
+        "name":"localisation",
+        "type":"text",
+        "id":"localisation-internship",
+        "placeholder":"Localisation"
+      },
+      {
+        "label":"Date début",
+        "name":"datedebut",
+        "type":"text",
+        "id":"begin-internship",
+        "placeholder":"Date début"
+      },
+      {
+        "label":"Durée",
+        "name":"duree",
+        "type":"text",
+        "id":"duration-internship",
+        "placeholder":"Durée"
+      },
+      {
+        "label":"Technologies",
+        "name":"technologies",
+        "type":"text",
+        "id":"technologies-internship",
+        "placeholder":"Technologies"
+      }
+    ]
+ }

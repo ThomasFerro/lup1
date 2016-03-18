@@ -33,7 +33,7 @@
 			}
 		})
 		.when('/stages/', {
-			templateUrl: 'templates/pages/stages/index.html'
+			templateUrl: 'templates/pages/stages/offres/index.html'
 		})
 		.when('/absences/', {
 			templateUrl: 'templates/pages/absences/index.html'
