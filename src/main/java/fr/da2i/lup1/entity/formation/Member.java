@@ -18,6 +18,8 @@
  */
 package fr.da2i.lup1.entity.formation;
 
+import java.sql.Date;
+
 import com.google.common.base.Strings;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -27,7 +29,7 @@ import fr.da2i.lup1.util.Identifiable;
 @DatabaseTable(tableName = "member")
 public class Member extends Identifiable<Integer> {
 	
-	@DatabaseField(columnName = "member_id", id = true)
+	@DatabaseField(columnName = "member_id", generatedIdSequence = "member_member_id_seq")
 	private int id;
 	@DatabaseField(columnName = "first_name")
 	private String firstName;
@@ -36,7 +38,7 @@ public class Member extends Identifiable<Integer> {
 	@DatabaseField(columnName = "email")
 	private String email;
 	@DatabaseField(columnName = "birthday")
-	private String birthday;
+	private Date birthday;
 	@DatabaseField(columnName = "phone")
 	private String phone;
 	@DatabaseField(columnName = "siret")
@@ -80,11 +82,11 @@ public class Member extends Identifiable<Integer> {
 		this.email = email;
 	}
 
-	public String getBirthday() {
-		return Strings.nullToEmpty(birthday);
+	public Date getBirthday() {
+		return birthday;
 	}
 
-	public void setBirthday(String birthday) {
+	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
 

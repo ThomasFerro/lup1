@@ -32,6 +32,12 @@ public class Register {
 	private String year;
 	
 	public Register() {}
+	
+	public Register(Member s, Formation f, String y) {
+		this.student = s;
+		this.formation = f;
+		this.year = y;
+	}
 
 	public Member getStudent() {
 		return student;

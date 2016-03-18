@@ -31,7 +31,7 @@ import fr.da2i.lup1.util.Identifiable;
 @DatabaseTable(tableName = "ue")
 public class Ue extends Identifiable<Integer> implements Average {
 	
-	@DatabaseField(columnName = "ue_id", id = true)
+	@DatabaseField(columnName = "ue_id", generatedIdSequence = "ue_ue_id_seq")
 	private Integer ueId;
 	@DatabaseField(columnName = "name")
 	private String name;
