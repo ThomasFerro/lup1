@@ -29,8 +29,8 @@
 					<th>Editer</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr notation ng-repeat="number in [1, 2, 3, 4]" ></tr>
+			<tbody ng-controller="StudentMarkerController as studentCtrl">
+				<tr notation ng-repeat="student in studentCtrl.students ></tr>
 			</tbody>
 		</table>
 		</div>

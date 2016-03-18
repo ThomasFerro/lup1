@@ -31,11 +31,11 @@
             </thead>
             <tbody>
             <tr ng-repeat="promotion in formation.promotions">
-              <td>{{promotion.responsable}}</td>
-              <td>{{promotion.annee}}</td>
+              <td>{{promotion.responsable.firstName}}</td>
+              <td>{{promotion.year}}</td>
               <td>
-              	<a ng-href="#/notes/formations/da2i/annees/{{promotion.annee}}/semestres/5/" class="btn btn-success btn-sm">S5</a>
-              	<a ng-href="#/notes/formations/da2i/annees/{{promotion.annee}}/semestres/6/" class="btn btn-success btn-sm">S6</a>
+              	<a ng-href="#/notes/formations/{{formation.id}}/annees/{{promotion.annee}}/semestres/5/" class="btn btn-success btn-sm">S5</a>
+              	<a ng-href="#/notes/formations/{{formation.id}}/annees/{{promotion.annee}}/semestres/6/" class="btn btn-success btn-sm">S6</a>
               </td>
               <td><a class="btn btn-warning btn-sm editButton"><span class="glyphicon glyphicon glyphicon-pencil"></span></a></td>
               <td><a class="btn btn-danger btn-sm deleteButton"><span class="glyphicon glyphicon-trash"></span></a></td>

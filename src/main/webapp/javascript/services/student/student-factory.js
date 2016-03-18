@@ -1,25 +1,40 @@
 (function(){
 	angular.module('lup1')
-	.factory('httpInterceptor', ['$q', '$location', '$localStorage', '$rootScope', 'Access', function ($q, $location, $localStorage, $rootScope, accessFactory) {
+	.factory('student', ['$http','$q', function ($http,$q) {
 		return {
-            'request': function (config) {
-                config.headers = config.headers;
-                if ($localStorage.lup1) {
-                	var token = $localStorage.lup1.replace(/"/g, "");
-                    config.headers.Authorization = token;
-                }
-                return config;
+            'getAll': function () {   	
+            	var defer = $q.defer();
+        		$http.get('/api/etudiants/')
+        		.success(function(data){
+        			defer.resolve(data);
+        		})
+        		.error(function(data){
+        			defer.reject(data);
+        		});
+        		return defer.promise;
             },
-            'responseError': function (response) {
-                if (response.status === accessFactory.FORBIDDEN || response.status === accessFactory.UNAUTHORIZED) {
-                	if($localStorage.lup1){
-                        delete $localStorage.lup1;                		
-                	}
-                    $rootScope.$broadcast('unauthorized');
-                    $location.path('/login');
-                }
-                return $q.reject(response);
-            }
+            'getById': function (formation, annee, id) {
+            	var defer = $q.defer();
+        		$http.get('/api//formations/'+formation+'/annees/'+annee+'/etudiants/'+id)
+        		.success(function(data){
+        			defer.resolve(data);
+        		})
+        		.error(function(data){
+        			defer.reject(data);
+        		});
+        		return defer.promise;
+            },
+            'getByPromotion': function (formation,annee) {
+            	var defer = $q.defer();
+        		$http.get('/api/formations/'+formation+'/annees/'+annee+'/etudiants')
+        		.success(function(data){
+        			defer.resolve(data);
+        		})
+        		.error(function(data){
+        			defer.reject(data);
+        		});
+        		return defer.promise;
+            }            
         };
 	}]);
 })();

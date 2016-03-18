@@ -1,6 +1,7 @@
 [
 	{
 		"name":"DA2I",
+		"id":"1",
 		"promotions":[
 			{
 				"responsable":"Hauspie",
@@ -18,6 +19,7 @@
 	},
 	{
 		"name":"CGIR",
+		"id":"2",
 		"promotions":[
 			{
 				"responsable":"Peter",
