@@ -7,6 +7,7 @@ INSERT INTO role (ROLE) VALUES('responsable_formation');
 INSERT INTO role (ROLE) VALUES('responsable_stage');
 INSERT INTO role (ROLE) VALUES('responsable_cours');
 INSERT INTO role (ROLE) VALUES('etudiant_invalide');
+INSERT INTO role (ROLE) VALUES('admin');
 -- INSERT INTO role VALUES('responsable_promo');
 
 -- Fin Insertion de rôles
@@ -54,6 +55,7 @@ INSERT INTO organization VALUES('73282932000076', 'Opquast', 'adresse Opquast', 
 
 INSERT INTO has_role VALUES ('hauspiem','responsable_formation');
 INSERT INTO has_role VALUES ('hauspiem','responsable_cours');
+INSERT INTO has_role VALUES ('hauspiem','admin');
 INSERT INTO has_role VALUES ('ferrot','etudiant');
 INSERT INTO has_role VALUES ('catteze','etudiant');
 INSERT INTO has_role VALUES ('fevrer','etudiant');
@@ -124,8 +126,8 @@ INSERT INTO evaluation (NAME,COEFF,TEACHER_ID,SUBJECT_ID,DATE_EVAL) VALUES('DS_P
 
 -- Insertion de formations
 
-INSERT INTO formation (NAME) VALUES('DA2I');
-INSERT INTO formation (NAME) VALUES('LPRéseau');
+INSERT INTO formation (NAME,SEMESTRE_MIN,SEMESTRE_MAX) VALUES('DA2I',5,6);
+INSERT INTO formation (NAME,SEMESTRE_MIN,SEMESTRE_MAX) VALUES('LPRéseau',5,6);
 
 -- Fin Insertion de formations
 

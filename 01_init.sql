@@ -83,7 +83,7 @@ create table EVALUATION (
 /* Table : FLAG                                                 */
 /*==============================================================*/
 create table FLAG (
-   FLAG_ID              SERIAL                 not null,
+   FLAG_ID              SERIAL               not null,
    LABEL                TEXT                 null,
    constraint PK_FLAG primary key (FLAG_ID)
 );
@@ -92,8 +92,10 @@ create table FLAG (
 /* Table : FORMATION                                            */
 /*==============================================================*/
 create table FORMATION (
-   FORMATION_ID         SERIAL                 not null,
+   FORMATION_ID         SERIAL               not null,
    NAME                 TEXT                 null,
+   SEMESTRE_MIN         INTEGER              not null,
+   SEMESTRE_MAX         INTEGER              not null,
    constraint PK_FORMATION primary key (FORMATION_ID)
 );
 
