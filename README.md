@@ -30,7 +30,6 @@
             - Consultation des notes et du bulletin
         - Gestion des stages
             - Consultation des offres
-            - Inscription à une offre
             - Consultation des inscriptions aux offres de stage
 - Documentation technique
     - Présentation de l'architecture de l'application
@@ -60,7 +59,7 @@ Lup1 est un système de gestion des licences professionnelles initialement prév
 
 Il a été conçu dans le cadre d'un projet de fin d'étude en licence pro DA2I, promotion 2015-2016.
 
-TODO : étoffer la présentation
+Ce projet a pour objectifs de permettre aux responsables de formations de licences professionnelles une gestion aisée de ces dernières. Mais aussi un accès aux notes et offres de stages centralisé pour les étudiants et enfin une gestion des évaluations et des notes des plus simples pour les responsables de cours.
 
 ## Fonctionnalités
 
@@ -76,8 +75,6 @@ Voici une liste des fonctionnalités principales de l'application :
     - [ ] Ajout et modification d'une offre de stage par le responsable de formation
     - [ ] Inscription et changement d'état d'un étudiant à une offre de stage
     - [ ] Consultation de l'état des différentes inscriptions d'un étudiant
-
-TODO : Ajouter des fonctionnalités
 
 ## Tutoriel de déploiement
 
@@ -113,13 +110,19 @@ Nous allons décrire, dans cette partie, tout ce que vous devez savoir pour util
 
 ## Authentification
 
-TODO : Description du login avec screens. Avec LDAP ? CAS ?
+L'application redirige toute personne non authentifié sur la page de login.
+
+Cette dernière est on ne peut plus simple, composée d'un champ *login* et un autre pour le *mot de passe*. Cette authentication se fait par la base de données mais pourra utiliser, à terme, un serveur LDAP.
+
+TODO : Screens.
 
 Une fois authentifié dans l'application, vous aurez accès à différentes parties de cette dernière selon votre rôle.
 
 ## Responsable de formation / de cours
 
-TODO : Présentation des rôles de responsable de formation et responsable de cours
+Un responsable de formation est, comme son nom l'indique, en charge de tous les aspects de la gestion d'une formation, pour une promotion donnée. Ce dernier à donc la possibilité d'ajouter, modifier et supprimer des membres d'une de ses promotions, gérer les bulletins ou encore administrer les offres de stages.
+
+Un responsable de cours, quant à lui, peut simplement gérer les évaluations et notes pour les matières qui lui sont attribuées
 
 ### Gestion des notes
 
@@ -127,15 +130,25 @@ TODO : Ajout d'un screen de la page d'accueil de la gestion des notes pour respo
 
 #### Consultation des notes des étudiants
 
-TODO : Screen + présentation de l'interface et liste des fonctionnalités de la page
+TODO : Screen
+
+La page de consultation des notes propose aux responsables une synthèse de toutes les évaluations, rangées par matière pour les responsables de formation. La consultation d'une de ces évaluations emmène l'utilisateur sur une nouvelle page de synthèse, cette fois-ci avec les notes des étudiants concernés.
+
+Le responsable peut alors modifier les notes comme bon lui semble, mais aussi modifier les informations de l'évaluation.
 
 #### Ajout d'un UE / d'une matière / d'une évaluation
 
-TODO : Screen + présentation de l'interface et liste des fonctionnalités de la page
+TODO : Screen
+
+L'ajout d'UEs ou de matières est réservée aux responsables de formation. Il peut y créer ses UEs, y affecter des matières déjà présentes dans la base ou en ajouter des nouvelles, choisir les coefficients et y affecter un responsable.
+
+L'ajout d'une évaluation est assez similaire. Le responsable, de cours comme de formation, peut ajouter une évaluation avec ses informations de base puis y ajouter les notes des étudiants concernés par cette dernière.
 
 #### Ajout de notes
 
-TODO : Screen + présentation de l'interface et liste des fonctionnalités de la page
+TODO : Screen
+
+L'ajout de note peut donc aussi se faire après la création de l'évaluation. Le responsable peut obtenir la liste des étudiants ayant réalisés l'évaluation et simplement leur attribuer leur note.
 
 ### Gestion des stages
 
@@ -143,19 +156,29 @@ TODO : Ajout d'un screen de la page d'accueil de la gestion des stages pour resp
 
 #### Ajout d'une offre
 
-TODO : Screen + présentation de l'interface et liste des fonctionnalités de la page
+TODO : Screen
+
+Seul le responsable de formation a accès à cette page qui permet de soumettre une offre de stage.
+
+L'entreprise proposant cette offre peut soit déjà être dans la base, auquel cas le responsable n'aura qu'à choisir cette dernière parmis les choix proposés, soit être nouvelle. Dans ce dernier cas, le responsable aura à remplir les informations de cette entreprise afin de l'insérer dans la base avant de poursuivre l'enregistrement de l'offre.
+
+Après le choix de l'entreprise, le responsable n'a plus qu'à indiquer les informations relatives à l'offre et valider son insertion. Les étudiants de la promotion pourront alors voir cette dernière et y postuler.
 
 #### Consultation des offres
 
-TODO : Screen + présentation de l'interface et liste des fonctionnalités de la page
+TODO : Screen
+
+Le responsable peut à tout moment consulter les offres en ligne et les administrer comme bon lui semble. Il peut en effet en modifier les informations ou les supprimer.
 
 #### Consultation des inscriptions aux offres de stage d'un étudiant
 
-TODO : Screen + présentation de l'interface et liste des fonctionnalités de la page
+TODO : Screen
+
+Les logs des étudiants concernants les offres de stage peuvent être consultés simplement par le responsable de formation. Ce dernier peut donc, après avoir choisi l'étudiant en question, vérifer l'êtat d'avancement de sa recherche de stage grâce à la journalisation datée des entrées dans la base.
 
 ## Étudiant
 
-TODO : Présentation du rôle d'étudiant
+Les étudiants ont assez peu de droits dans l'application, principalement car leur utilisation de l'application se concentrera sur la consultation (des notes comme des offres de stage).
 
 ### Gestion des notes
 
@@ -163,21 +186,32 @@ TODO : Ajout d'un screen de la page d'accueil de la gestion des notes pour étud
 
 #### Consultation des notes et du bulletin
 
+TODO : Screen
+
+Un étudiant souhaitant accéder à ses notes sera redirigé vers une synthèse de ses notes, rangées par matières et UEs, sous la forme d'un bulletin.
+
+Il pourra filtrer ces données afin de trouver au plus vite la note qui l'intéresse.
+
+
 ### Gestion des stages
 
 TODO : Ajout d'un screen de la page d'accueil de la gestion des stages pour étudiant
 
 #### Consultation des offres
 
-TODO : Screen + présentation de l'interface et liste des fonctionnalités de la page
+TODO : Screen
 
-#### Inscription à une offre
+La page de consultation des offres de stage se veut très sobre et efficace. Elle est présentée sous la forme d'un tableau d'affichage des différentes offres, toutes sous le même format.
 
-TODO : Screen + présentation de l'interface et liste des fonctionnalités de la page
+L'étudiant peut, sur cette page, voir toutes les offres qui sont proposées à sa promotion, filtrer ces offres afin de trouver ce qui l'intéresse au plus vite et bien sûr postuler à ces dernières.
 
 #### Consultation des inscriptions aux offres de stage
 
-TODO : Screen + présentation de l'interface et liste des fonctionnalités de la page
+TODO : Screen
+
+Une fois inscrit à une offre de stage, l'étudiant peut accéder à la page contenant toutes les modifications d'état concernant cette offre.
+
+Par exemple, si un entretien est convenu entre l'entreprise et l'étudiant, ce dernier pourra l'indiquer sur le site et ainsi ajouter une ligne au journal d'activité, et ce jusqu'à la signature de la convention.
 
 --------
 
@@ -193,13 +227,21 @@ TODO : Image architecture + explications
 
 ## Présentation de la base de données
 
-TODO : Screen MCD
+TODO : Screen MCD + MPD
 
 ## Technologies utilisées
 
 TODO : Tableau des technos comme pour le QuoiDNeuf
 
-
+| **Technologie** | **Raison de son utilisation** | **Dans quelle partie du projet** |
+| :---: | :---: | :---: |
+| J2EE | Servlets | Serveur |
+| Apache Maven | Automatisation de production du projet | Serveur |
+| OrmLite | Mappage de la base de données en Java | Serveur |
+| Jackson | Liaison objets JAVA/JSON | Serveur -> Client |
+| HTML/CSS | Standards du Web | Vues de l'application |
+| Bootstrap | Mise en page aisée pour desktop et mobile avec un design efficace | Vues de l'application |
+| AngularJS | Framework performant et adapté à nos besoin | Vues et liaison avec le modèle |
 
 ## Back-End
 
