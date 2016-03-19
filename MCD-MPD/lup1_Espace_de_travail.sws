@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?PowerDesigner signature="Workspace" version="11.1.0.1547 Evaluation"?>
+<!-- Veuillez ne pas modifier ce fichier -->
+
+<Workspace>
+	<Local Expanded="Yes">
+		<Model Expanded="Yes" ID="{B2272C90-B584-41FA-9251-E85BC8668AF5}" Name="ModeleConceptuelDonnees_2" Type="{1E597170-9350-11D1-AB3C-0020AF71E433}" URL="lup1_mcd.mcd"/>
+		<Model Expanded="Yes" ID="{8750574C-D61B-4935-9ACA-D3F754C96A60}" Name="ModeleConceptuelDonnees_2" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="lup1_mpd.mpd"/>
+	</Local>
+</Workspace>
