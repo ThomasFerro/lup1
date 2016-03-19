@@ -1,0 +1,66 @@
+.vue {
+  margin-top: 10px;
+}
+
+.internship-offers .panel-heading {
+  background-color: #444444 !important;
+  color: white !important;
+}
+
+.internship-offers .panel {
+  background-color: rgba(68, 68, 68, 0.24);
+}
+
+.internship-offers .panel ul {
+  margin: 20px;
+}
+
+.internship-offers .btn-success {
+}
+
+.moduleContainer {
+  margin-top: 10px;
+}
+
+.moduleContainer .panel {
+  margin : 2%;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.details-intership li {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.arrow {
+  line-height: 40px !important;
+}
+
+.steps-acceptation {
+  text-align: center;
+}
+
+.next-step {
+  text-align: center;
+}
+
+.add-stage-form .input-group-addon:first-child, .add-organization-form .input-group-addon:first-child {
+  width: 140px;
+  text-align: left;
+}
+
+.input-group {
+  width: 100%;
+}
+
+#accordion .panel-heading, .stage-offer .panel-heading {
+  background-color: #444444 !important;
+  color: white !important;
+}
+
+textarea {
+  resize: vertical;
+}

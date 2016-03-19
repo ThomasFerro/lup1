@@ -1,5 +1,5 @@
 <div class="moduleContainer">
-  <div class="test" ng-controller="InternshipOffersController as controller">
+  <div class="offre" ng-controller="InternshipOffersController as controller">
     <div class="internship-offers" ng-repeat="stage in controller.stages">
       <div class="block-internship col-lg-6">
         <div class="panel panel-default ">
@@ -16,7 +16,7 @@
               <li class="list-group-item"><span class="glyphicon glyphicon-time"/>&nbsp;{{stage.duration}} semaines</li>
               <li class="list-group-item"><span class="glyphicon glyphicon-console"/>&nbsp;{{stage.technology}}</li>
             </ul>
-            <a class="btn btn-success btn-block pull-right" href="#/stages/offres/{{stage.internship_id}}">Voir cette annonce</a>
+            <a class="btn btn-success btn-block" href="#/stages/offres/{{stage.internship_id}}">Voir cette annonce</a>
           </div>
         </div>
       </div>
