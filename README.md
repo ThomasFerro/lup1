@@ -13,7 +13,7 @@
     - Tutoriel de déploiement
         - Préparation de la base de données
             - Lancement des scripts SQL
-        - Lancement du serveur
+        - Démarrage du serveur
 - Documentation utilisateur
     - Authentification
     - Responsable de formation / de cours
@@ -36,6 +36,9 @@
     - Présentation de la base de données
     - Technologies utilisées
     - Authentification
+        - JSON Web Token (JWT)
+            - Exemple d'un JWT
+        - Les rôles
         - Par la base de données
         - Via LDAP / CAS
     - Back-End
@@ -81,27 +84,94 @@ Voici une liste des fonctionnalités principales de l'application :
 
 Nous détaillerons dans cette partie les différentes étapes du déploiement de l'application sur votre serveur. Cette installation se veut simple et rapide.
 
+En premier lieu, assurez-vous que les commande `git` et `mvn` soient installées ainsi qu'une version récente de JAVA (7 minimum, 8 conseillée).
+
+Récupérez ensuite le projet sur votre serveur à l'emplacement de votre choix via la commande suivante :
+
+```
+git clone https://github.com/ThomasFerro/lup1.git
+```
+
 ### Préparation de la base de données
 
 La première étape consiste en la préparation des différentes tables dans la base de données.
 
 Cette installation est prévue pour une base sour **PostgreSQL**, il est possible que les scripts ne fonctionnent pas sur votre SGBD. Si tel est le cas, nous vous conseillons de passer sous [PostgreSQL](http://www.postgresql.org/), SGBD simple d'utilisation, gratuit et puissant.
 
-Nous vous invitons à vérifier le nom des tables dans le premier script afin de ne pas écraser vos propres tables qui portent le même nom.
+Nous vous invitons à vérifier le nom des tables dans le premier script afin de ne pas écraser vos propres tables susceptibles de porter le même nom.
 
 #### Lancement des scripts SQL
 
-L'installation de la BDD se fait par l'execution d'un script pour les tables, un pour les vues et enfin un dernier, optionnel et pour tester votre installation, avec des données fictives.
+L'installation de la BDD se fait par l'éxecution de différents scripts dont le premier est prévu pour les tables, le second pour les vues et enfin le dernier, optionnel, pour tester votre installation, avec des données fictives.
 
 Vous pouvez lancer ces scripts de plusieurs façons :
 
-- En utilisant dans un terminal classique la commande suivante dans le même dossier que les scripts *SQL* : `psql -h <adresse de votre serveur> <nom de votre base> -f 01_init.sql -U <login>` puis changer le nom du fichier par `02_init.sql` et enfin `03_init.sql` si vous voulez inscrire les données de tests dans la base.
+- En utilisant dans un terminal classique la commande suivante dans le même dossier que les scripts *SQL* : `psql -h <adresse de votre serveur> <nom de votre base> -f 01_init.sql -U <login>` puis changer le nom du fichier par `02_init.sql` et enfin `03_init.sql`.
 
 - Depuis une invite de commande *PostgreSQL* : `\i '<chemin vers le fichier>'` pour les scripts qui vous intéresse.
 
-### Lancement du serveur
+### Démarrage du serveur
 
-TODO : Description du lancement du serveur (Docker ?)
+Afin de faciliter au mieux l'installation, nous avons fait le choix d'utiliser Maven. Son rôle est tout d'abord de gérer les dépendances des différentes librairies utilisée dans l'application. Dans un second temps, il permet de déployer toute l'application dans un serveur embarqué Jetty.
+
+Assurez-vous toutefois que le proxy soit correctement défini dans le fichier ~/.m2/settings. Dans le cas contraire, les dépendances ne pourront être téléchargées.
+
+```
+<settings>
+  .
+  .
+  <proxies>
+   <proxy>
+      <id>iut-proxy-http</id>
+      <active>true</active>
+      <protocol>http</protocol>
+      <host>cache.univ-lille1.fr</host>
+      <port>3128</port>
+    </proxy>
+    <proxy>
+      <id>iut-proxy-https</id>
+      <active>true</active>
+      <protocol>https</protocol>
+      <host>cache.univ-lille1.fr</host>
+      <port>3128</port>
+    </proxy>
+  </proxies>
+  .
+  .
+</settings>
+```
+
+Vous pouvez désormais déployer l'application via l'unique commande :
+
+```
+mvn jetty:run
+```
+
+Si tout se déroule comme prévu, vous devriez avoir accés en local à l'application à l'url `http://localhost:8080/`.
+
+Notez que le port peut être modifié directement dans le fichier `pom.xml` :
+
+```
+<build>
+  .
+  .
+  <plugins>
+    <plugin>
+      <groupId>org.eclipse.jetty</groupId>
+	    <artifactId>jetty-maven-plugin</artifactId>
+		<version>${jetty.version}</version>
+		<configuration>
+		  <httpConnector>
+		    <port>8080</port>
+		  </httpConnector>
+		  <scanIntervalSeconds>10</scanIntervalSeconds>
+		</configuration>
+    </plugin>
+  </plugins>
+  .
+  .
+</build>
+```
 
 --------
 
@@ -236,10 +306,11 @@ TODO : Tableau des technos comme pour le QuoiDNeuf
 
 | **Technologie** | **Raison de son utilisation** | **Dans quelle partie du projet** |
 | :---: | :---: | :---: |
-| J2EE | Servlets | Serveur |
+| J2EE | Webservices en REST | Serveur |
+| JWT | Authentification et sécurité de l' application | Client <-> Serveur |
 | Apache Maven | Automatisation de production du projet | Serveur |
 | OrmLite | Mappage de la base de données en Java | Serveur |
-| Jackson | Liaison objets JAVA/JSON | Serveur -> Client |
+| Jackson | Liaison objets JAVA/JSON | Serveur <-> Client |
 | HTML/CSS | Standards du Web | Vues de l'application |
 | Bootstrap | Mise en page aisée pour desktop et mobile avec un design efficace | Vues de l'application |
 | AngularJS | Framework performant et adapté à nos besoins | Vues et liaison avec le modèle |
@@ -248,15 +319,49 @@ TODO : Tableau des technos comme pour le QuoiDNeuf
 
 ### Authentification...
 
-TODO : Présentation principe + système token
+La sécurité de l'application repose sur deux éléments :
+- le JSON Web Token (JWT)
+- les rôles
+
+#### JSON Web Token (JWT)
+
+Le JWT est un système très puissant car il assure l'identité du client vis à vis du serveur. Ce token est (re)généré et **signé** côté serveur et est envoyé dans l'en-tête HTTP du client. Le client s'assure ensuite d'envoyer le token dans l'en-tête de chaque requête HTTP qu'il est susceptible de faire. Ainsi, le token sera vérifié par le serveur avant toute opération.
+
+La génération du token est réalisée à l'authentification première (identifiant + mot de passe) qui vérifie l'existence en base de l'utilisateur désirant se connecter. Le token est regénéré lorsque sa date d'expiration est dépassée.
+
+La signature du token se fait par l'intermédiaire du clé sérialisée. Ainsi, le rechargement du serveur, s'il a lieu d'être, est totalement transparent pour le client.
+
+Le token est séparé en 3 parties, chacune délimitée par un '.' :
+- le header qui représente le type du token et l'algorithme utilisé pour le générer
+- le payload qui représente les données que l'on souhaite stocker chez le client
+- la vérification de la signature
+
+##### Exemple d'un JWT
+
+**Encodé**
+
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjYXR0ZXplIiwiaXNzIjoibHVwMSIsImV4cCI6MTQ1ODQ4NjgxMiwicm9sZXMiOlsiZXR1ZGlhbnQiXX0.6_U-nUsP59qnFFqmVSeyJHL4S7Q45-T1oy4tSEQZAVb6sqfnwQ5nECjYUWA01oohQTACxP-XMvQTU8DRBhQRxw
+
+**Décodé**
+
+Header: { "typ": "JWT", "alg": "HS512" }
+Payload: { "sub": "catteze", "iss": "lup1", "exp": 1458486812, "roles": ["etudiant"] }
+
+Plus d'informations sur le JWT sont disponibles à l'adresse [http://jwt.io/](http://jwt.io/)
+
+#### Les rôles
+
+Les rôles quant à eux sont gérés côté serveur. Ils sont définis en base pour chaque utilisateur. Un utilisateur peut avoir 0 à n rôles (exemples: responsable_formation, responsable_cours, etudiant, admin...).
+
+L'accès à certaines ressources du serveur dépend de chacun de ses rôles. Pour exemple, un étudiant peut consulter son bulletin mais pas celui des autres, tandis que le responsable de formation peut consulter le bulletin de tous les étudiants de sa formation.
 
 #### ... par la base de données
 
-TODO : Description principe
+L'authentification première (identifiant + mot de passe) se fait par l'intermédiaire d'un webservice dédié. Via le système de DAO mis en place, ce service effectue les vérifications d'existence dans la table `credential` et génère le JWT en conséquence.
 
 #### ... via LDAP / CAS
 
-TODO : Description principe
+Actuellement, l'application n'est pas prévue pour fonctionner avec un LDAP. En revanche et à terme, le webservice d'authentification pourra disposer d'un pool de connexion relié au LDAP de l'IUT. Ainsi, tout comme avec la base de données, le service établiera les vérifications souhaitées et générera le JWT en conséquence.
 
 ### Gestion des notes
 
@@ -272,7 +377,7 @@ Les adresses des ressources suivantes commencent par **/api/{version}**
 | :-------: | :-----: | :-----: | :------: | :--------: |
 | */formations* | Retourne la liste des promotions | Remplace toute la collection de promotions par une autre | Créer une nouvelle promotion | Supprime toutes les promotions |
 | */formations/{formation_id}* | Retourne la liste des promotions de cette formation | Remplace les informations de cette formation ou la créer si elle n'existe pas | X | Supprime la formation à cette adresse |
-| */formations/{formation_id}/{annee}* | Retourne les informations de la promotion | Remplace les informations de la promotion ou l'ajouter si il n'existe pas | X | Supprime la promotion |
+| */formations/{formation_id}/annees/{annee}* | Retourne les informations de la promotion | Remplace les informations de la promotion ou l'ajouter si il n'existe pas | X | Supprime la promotion |
 
 ##### API pour les étudiants
 
@@ -340,6 +445,15 @@ Les adresses des ressources suivantes commencent par **/api/{version}/formations
 | */notes* | Retourne la liste des notes de l'évaluation | Remplace toute la collection des notes de l'évaluation par une autre | Ajouter une nouvelle liste de notes | Supprime toutes les notes |
 | */notes/{etudiant_id}* | Retourne les informations de la note pour un étudiant | Remplace les informations de cette note ou l'ajoute si elle n'existe pas | X | Supprime la note de l'étudiant à cette adresse pour cette évaluation |
 
+##### API pour les bulletins
+
+Les adresses des ressources suivantes commencent par **/api/{version}/formations/{formation_id}/annees/{annee}/semestres/{semestre_id}/**
+
+| Ressource | **GET** | **PUT** | **POST** | **DELETE** |
+| :-------: | :-----: | :-----: | :------: | :--------: |
+| */* | Retourne le bulletin de chaque étudiant | X | Télécharge une archive contenant les bulletin de chaque étudiant au format pdf |
+| */{etudiant_id}* | Retourne le bulletin d'un étudiant | X | Télécharge le bulletin d'un étudiant au format pdf
+
 ### Gestion des stages
 
 #### Présentation de l'API
@@ -368,7 +482,7 @@ Les adresses des ressources suivantes commencent par **/api/{version}**
 
 ## Front-End
 
-Pour le *Front-End*, nous avons principalement utilisé **Angular.js**, un framework *Javascript* permettant de facilité grandement le développement d'application "*One Page*" et offrant de nombreuses fonctionnalités que nous développerons plus loin de cette documentation.
+Pour le *Front-End*, nous avons principalement utilisé **Angular.js**, un framework *Javascript* permettant de faciliter grandement le développement d'application "*One Page*" et offrant de nombreuses fonctionnalités que nous développerons plus loin dans cette documentation.
 
 ### Authentification
 
@@ -398,7 +512,7 @@ Notre gestion de projet s'est faite en suivant des principes de méthodes Agile,
 
 En effet, nous avons décomposé le problème dès le début du projet. Nous avons ensuite constitué notre *Backlog* afin d'avoir une idée précise de la quantité de travail à accomplir. Puis nous avons intégré ce *Backlog* à notre projet **Trello**, chaque tâche étant représentée par une carte.  
 
-Cette décomposition nous a aussi donné l'occasion de répartir efficacement les tâches entre le *Back-End*, le *Front-End* et la *BDD* (Base de Données) et d'y assigner les différents membres du groupe.  
+Cette décomposition nous a aussi donné l'occasion de répartir efficacement les tâches entre le *Back-End*, le *Front-End* et la *BDD* et d'y assigner les différents membres du groupe de manière optimale. En effet, nous avons choisi de tirer partie des qualités de chacun pour réaliser ce projet dans les meilleures conditions possibles.  
 
 --------
 
