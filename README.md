@@ -44,6 +44,7 @@
         - Gestion des stages
             - Présentation de l'API
     - Front-End
+        - Authentification
         - Gestion des notes
         - Gestion des stages
 - Gestion de projet
@@ -92,7 +93,7 @@ Nous vous invitons à vérifier le nom des tables dans le premier script afin de
 
 L'installation de la BDD se fait par l'execution d'un script pour les tables, un pour les vues et enfin un dernier, optionnel et pour tester votre installation, avec des données fictives.
 
-Vous pouvez lancer ces scripts de plusieurs façon :
+Vous pouvez lancer ces scripts de plusieurs façons :
 
 - En utilisant dans un terminal classique la commande suivante dans le même dossier que les scripts *SQL* : `psql -h <adresse de votre serveur> <nom de votre base> -f 01_init.sql -U <login>` puis changer le nom du fichier par `02_init.sql` et enfin `03_init.sql` si vous voulez inscrire les données de tests dans la base.
 
@@ -120,7 +121,7 @@ Une fois authentifié dans l'application, vous aurez accès à différentes part
 
 ## Responsable de formation / de cours
 
-Un responsable de formation est, comme son nom l'indique, en charge de tous les aspects de la gestion d'une formation, pour une promotion donnée. Ce dernier à donc la possibilité d'ajouter, modifier et supprimer des membres d'une de ses promotions, gérer les bulletins ou encore administrer les offres de stages.
+Un responsable de formation est, comme son nom l'indique, en charge de tous les aspects de la gestion d'une formation, pour une promotion donnée. Ce dernier a donc la possibilité d'ajouter, modifier et supprimer des membres d'une de ses promotions, gérer les bulletins ou encore administrer les offres de stages.
 
 Un responsable de cours, quant à lui, peut simplement gérer les évaluations et notes pour les matières qui lui sont attribuées
 
@@ -160,7 +161,7 @@ TODO : Screen
 
 Seul le responsable de formation a accès à cette page qui permet de soumettre une offre de stage.
 
-L'entreprise proposant cette offre peut soit déjà être dans la base, auquel cas le responsable n'aura qu'à choisir cette dernière parmis les choix proposés, soit être nouvelle. Dans ce dernier cas, le responsable aura à remplir les informations de cette entreprise afin de l'insérer dans la base avant de poursuivre l'enregistrement de l'offre.
+L'entreprise proposant cette offre peut soit déjà être dans la base, auquel cas le responsable n'aura qu'à choisir cette dernière parmi les choix proposés, soit être nouvelle. Dans ce dernier cas, le responsable aura à remplir les informations de cette entreprise afin de l'insérer dans la base avant de poursuivre l'enregistrement de l'offre.
 
 Après le choix de l'entreprise, le responsable n'a plus qu'à indiquer les informations relatives à l'offre et valider son insertion. Les étudiants de la promotion pourront alors voir cette dernière et y postuler.
 
@@ -174,7 +175,7 @@ Le responsable peut à tout moment consulter les offres en ligne et les administ
 
 TODO : Screen
 
-Les logs des étudiants concernants les offres de stage peuvent être consultés simplement par le responsable de formation. Ce dernier peut donc, après avoir choisi l'étudiant en question, vérifer l'êtat d'avancement de sa recherche de stage grâce à la journalisation datée des entrées dans la base.
+Les logs des étudiants concernants les offres de stage peuvent être consultées simplement par le responsable de formation. Ce dernier peut donc, après avoir choisi l'étudiant en question, vérifier l'état d'avancement de sa recherche de stage grâce à la journalisation datée des entrées dans la base.
 
 ## Étudiant
 
@@ -219,7 +220,7 @@ Par exemple, si un entretien est convenu entre l'entreprise et l'étudiant, ce d
 
 Cette partie de la documentation s'attarde sur l'aspect technique de l'application.
 
-Vous trouverez des détails sur la conception de cette dernière et en apprendrez plus sur les technologies mises en oeuvre.
+Vous trouverez des détails sur la conception de cette dernière et en apprendrez plus sur les technologies mises en œuvre.
 
 ## Présentation de l'architecture de l'application
 
@@ -241,7 +242,7 @@ TODO : Tableau des technos comme pour le QuoiDNeuf
 | Jackson | Liaison objets JAVA/JSON | Serveur -> Client |
 | HTML/CSS | Standards du Web | Vues de l'application |
 | Bootstrap | Mise en page aisée pour desktop et mobile avec un design efficace | Vues de l'application |
-| AngularJS | Framework performant et adapté à nos besoin | Vues et liaison avec le modèle |
+| AngularJS | Framework performant et adapté à nos besoins | Vues et liaison avec le modèle |
 
 ## Back-End
 
@@ -343,7 +344,7 @@ Les adresses des ressources suivantes commencent par **/api/{version}/formations
 
 #### Présentation de l'API
 
-Pour la partie *Gestion des stages*, nous avons eu besoin de resources pour les offres disponibles mais aussi pour les *logs* et pour les entreprises. Voici donc un résumé de notre *API* :
+Pour la partie *Gestion des stages*, nous avons eu besoin de ressources pour les offres disponibles mais aussi pour les *logs* et pour les entreprises. Voici donc un résumé de notre *API* :
 
 ##### API pour les stages
 
@@ -373,7 +374,7 @@ Pour le *Front-End*, nous avons principalement utilisé **Angular.js**, un frame
 
 L'authentification se déroule en plusieurs étapes, côté *Front-End*.
 
-Premièrement, nous allons utilisé le module **http** d'*Angular* afin de consommer le service */api/authentication* en **POST**. Cette requête côté serveur est décrite dans la partie *Back-End* de cette documentation technique.
+Premièrement, nous allons utiliser le module **http** d'*Angular* afin de consommer le service */api/authentication* en **POST**. Cette requête côté serveur est décrite dans la partie *Back-End* de cette documentation technique.
 
 Si la requête n'a pas échouée, l'application place le token dans le *localStorage*, après l'avoir extrait du *header* renvoyé par le serveur.
 
