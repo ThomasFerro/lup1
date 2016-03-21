@@ -1,0 +1,68 @@
+<div class="col-md-4 col-lg-3 hidden-xs hidden-sm col-without-padding panel-filter" ng-controller="PanelMenuController as panelCtrl" ng-init="panelCtrl.selectPanel('stages','stages')">
+  <panel-menu></panel-menu>
+</div>
+<div class="col-lg-9 col-xs-12 col-sm-12 col-md-8 container-fluid">
+  <div class="contrainer-fluid">
+    <div class="row">
+      <h4>Suivi des stages</h4>
+    </div>
+    <div class="row">
+      <select class="col-lg-12">
+        <option>CGIR</option>
+        <option>DA2I</option>
+        <option>DUT Informatique</option>
+      </select>
+    </div>
+    <div class="row">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>Stage</th>
+              <th>Date</th>
+              <th>Etat d'avancement</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Deplanque</td>
+              <td>Tony</td>
+              <td><a href="#">#43</a></td>
+              <td>24/01/2016</td>
+              <td>terminé</td>
+              <td>
+                <button class="btn btn-xs" data-toggle="collapse" href=".test2"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
+              </td>
+            </tr>
+            <tr class="collapse test">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>21/11/2015</td>
+              <td>
+                Attente de signature
+              </td>
+              <td>
+              </td>
+              <td>
+              </td>
+            </tr>
+            <tr>
+              <td>Ferro</td>
+              <td>Thomas</td>
+              <td><a href="#">#22</a></td>
+              <td>21/02/2016</td>
+              <td>attente signature</td>
+              <td>
+                <button class="btn btn-xs" data-toggle="collapse" href=".test2"><span class="glyphicon glyphicon-triangle-bottom"></span></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div
+    </div>
+  </div>
+</div>

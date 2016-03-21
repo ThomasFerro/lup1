@@ -1,0 +1,31 @@
+.logo{
+  margin-bottom: 10%;
+}
+
+.login{
+background: rgba(68,68,68,1);
+background: -moz-linear-gradient(left, rgba(68,68,68,1) 0%, rgba(43,43,43,1) 50%, rgba(43,43,43,1) 51%, rgba(68,68,68,1) 100%);
+background: -webkit-gradient(left top, right top, color-stop(0%, rgba(68,68,68,1)), color-stop(50%, rgba(43,43,43,1)), color-stop(51%, rgba(43,43,43,1)), color-stop(100%, rgba(68,68,68,1)));
+background: -webkit-linear-gradient(left, rgba(68,68,68,1) 0%, rgba(43,43,43,1) 50%, rgba(43,43,43,1) 51%, rgba(68,68,68,1) 100%);
+background: -o-linear-gradient(left, rgba(68,68,68,1) 0%, rgba(43,43,43,1) 50%, rgba(43,43,43,1) 51%, rgba(68,68,68,1) 100%);
+background: -ms-linear-gradient(left, rgba(68,68,68,1) 0%, rgba(43,43,43,1) 50%, rgba(43,43,43,1) 51%, rgba(68,68,68,1) 100%);
+background: linear-gradient(to right, rgba(68,68,68,1) 0%, rgba(43,43,43,1) 50%, rgba(43,43,43,1) 51%, rgba(68,68,68,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#444444', endColorstr='#444444', GradientType=1 );
+}
+
+/* .input-block .input-group-addon{
+	color:white;
+}
+
+.input-block .input-group-addon,.input-block input {
+	background:transparent;
+	border:none;
+}
+
+.input-block input{
+	border-bottom:1px solid #cdcdcd!important;
+	-webkit-border-radius: 0!important;
+	-moz-border-radius: 0!important;
+	border-radius: 0!important;
+} */
+

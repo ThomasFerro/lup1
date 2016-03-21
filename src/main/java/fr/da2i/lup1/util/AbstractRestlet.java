@@ -20,8 +20,8 @@ package fr.da2i.lup1.util;
 
 import java.io.Serializable;
 import java.net.URI;
-import java.util.Collection;
-import java.util.Map;
+import java.security.Principal;
+import java.sql.SQLException;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -32,55 +32,45 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 
-public abstract class AbstractRestlet<ID extends Serializable, T> implements Restlet<ID, T> {
+import com.j256.ormlite.dao.Dao;
+
+public abstract class AbstractRestlet<ID extends Serializable, T extends Identifiable<ID>> extends SimpleResource implements Restlet<ID, T> {
 	
-	@Context
-	private UriInfo uriInfo;
+	protected Dao<T,ID> dao;
 	
-	private Map<ID, T> dao;
-	
-	public AbstractRestlet(Class<? extends Dao<ID,T>> daoClass) {
-		this.dao = DaoProvider.getDao(daoClass);
+	public AbstractRestlet(Class<T> clazz) {
+		this.dao = DaoProvider.getDao(clazz);
 	}
 	
-	/**
-	 * Génère un nouvel identifiant pour le prochain objet à insérer en base
-	 * 
-	 * @return	une instance de <ID>
-	 */
-	public abstract ID generate();
-
+	protected String getAuthenticatedLogin() {
+		Principal principal = securityContext.getUserPrincipal();
+		if (principal == null) {
+			return "";
+		}
+		return principal.getName();
+	}
+	
 	@Override
 	@POST
 	@Consumes("application/json")
-	public Response create(T entity) {
-		if (dao.containsValue(entity)) {
+	public Response create(T entity) throws SQLException {
+		if (dao.idExists(entity.getId())) {
 			return Response.status(Response.Status.CONFLICT).build();
 		}
-		ID newId = generate();
-		dao.put(newId, entity);
-		URI instanceURI = uriInfo.getAbsolutePathBuilder().path(newId.toString()).build();
+		dao.create(entity);
+		URI instanceURI = uriInfo.getAbsolutePathBuilder().path(entity.getId().toString()).build();
 		return Response.created(instanceURI).build();
-	}
-	
-	@Override
-	@GET
-	@Produces("application/json")
-	public Collection<T> list() {
-		return dao.values();
 	}
 
 	@Override
 	@GET
 	@Path("{id}")
 	@Produces("application/json")
-	public Response get(@PathParam("id") ID id) {
-		if (dao.containsKey(id)) {
-			return Response.ok(dao.get(id)).build();
+	public Response get(@PathParam("id") ID id) throws SQLException {
+		if (dao.idExists(id)) {
+			return Response.ok(dao.queryForId(id)).build();
 		}
 		throw new NotFoundException();
 	}
@@ -89,20 +79,21 @@ public abstract class AbstractRestlet<ID extends Serializable, T> implements Res
 	@PUT
 	@Path("{id}")
 	@Consumes("application/json")
-	public Response update(@PathParam("id") ID id, T entity) {
-		if (dao.containsKey(id)) {
-			dao.put(id, entity);
-			return Response.noContent().build();
+	public Response update(@PathParam("id") ID id, T entity) throws SQLException {
+		if (dao.idExists(id)) {
+			throw new NotFoundException();
 		}
-		throw new NotFoundException();
+		entity.setId(id);
+		dao.update(entity);
+		return Response.noContent().build();
 	}
 
 	@Override
 	@DELETE
 	@Path("{id}")
-	public Response delete(@PathParam("id") ID id) {
-		if (dao.containsKey(id)) {
-			dao.remove(id);
+	public Response delete(@PathParam("id") ID id) throws SQLException {
+		if (dao.idExists(id)) {
+			dao.deleteById(id);
 			return Response.noContent().build();
 		}
 		throw new NotFoundException();

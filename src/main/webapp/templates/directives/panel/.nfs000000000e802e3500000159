@@ -1,0 +1,25 @@
+<div class="panel-menu-wrapper">
+  <div class="panel-menu-header">
+     <h3>{{panelCtrl.panel.title}}</h3>
+   <div class="list-group" ng-repeat="button in panelCtrl.panel.buttons">
+      <a ng-href="{{button.href}}" class="list-group-item">{{button.name}}</a>
+    </div>
+  </div>
+  <div class="panel-menu-body">
+    <fieldset>
+      <legend>Filtres:</legend>
+        <div class="form-group" ng-repeat="filter in panelCtrl.panel.filters">
+          <div class="input-group">
+            <div class="input-group-addon label-filter">{{filter.label}} :</div>
+            <input type="{{filter.type}}" name="{{filter.name}}" id="{{filter.id}}" class="form-control" placeholder="{{filter.placeholder}}" autofocus>
+          </div>
+        </div> 
+    </fieldset>
+  </div>
+</div>
+<script>
+$(document).ready(function(){
+  var height = $(window).height();
+  $('.panel-filter-wrapper').css('height', height);
+});
+</script>

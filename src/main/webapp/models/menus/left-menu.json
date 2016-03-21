@@ -1,0 +1,30 @@
+[{
+  "index":0,
+  "name":"home",
+  "url":"home",
+  "img":"fa-home"
+},
+{
+  "index":1,
+  "name":"notes",
+  "url":"formations",
+  "img":"fa-graduation-cap"
+},
+{
+  "index":2,
+  "name":"stages",
+  "url":"stages",
+  "img":"fa-briefcase"
+},
+{
+  "index":3,
+  "name":"absences",
+  "url":"",
+  "img":"fa-clock-o"
+},
+{
+  "index":4,
+  "name":"paramètres",
+  "url":"parametres",
+  "img":"fa-gear"
+}]

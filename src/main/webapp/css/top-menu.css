@@ -1,0 +1,41 @@
+.top-menu{
+  margin-bottom:0!important;
+  border-radius: 0!important;
+}
+
+.logo{
+  margin-left: 0!important;
+  padding-left: 2%!important;
+}
+
+.log-x{
+  margin-right: 5%!important;
+  text-align: right;
+}
+.log-x a{
+  margin-left: 5%!important;
+}
+
+.responsive-menu{
+  margin-top:0!important;
+  margin-bottom:0!important;
+}
+
+.responsive-menu-wrapper ul li{
+  max-width: 20%;
+  min-width: 20%;
+}
+
+.responsive-menu-wrapper{
+  margin-top: 4%;
+  overflow-x: overlay;
+}
+
+.responsive-menu-wrapper .menu{
+  margin-left: 0!important;
+  white-space: nowrap;
+}
+
+.label-glyphicon{
+  display: inline-block !important;
+}

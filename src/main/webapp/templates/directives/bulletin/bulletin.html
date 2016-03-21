@@ -1,0 +1,108 @@
+<div class="row">
+	<div class="col-lg-12 col-xs-12">
+		<div class="row ">
+			<div class="row">
+				<h1 class="text-center">Lille 1 "IUT A"</h1>
+				<h2 class="text-center">BULLETIN</h2>
+			</div>
+			<div class="row ">
+				<div class="col-lg-12 col-xs-12">
+					<div class="hidden-xs hidden-sm panel panel-default">
+						<div class="panel-heading">
+							Informations personnelles :
+						</div>
+						<div class="panel-body">
+							<table
+								class="bulletin-header table table-bordred table-striped table-hover table-list-search">
+								<thead>
+									<tr>
+										<th>Titulaire</th>
+										<th>Formation</th>
+										<th>Semestre</th>
+										<th>Année</th>
+										<th>Rang</th>
+										<th>Moyenne</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Thomas Ferrot</td>
+										<td>DA2I</td>
+										<td>5</td>
+										<td>2015-2016</td>
+										<td>8/19</td>
+										<td>{{bulletin.avg | limitTo:4}}/20</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="hidden-lg panel panel-default">
+						<div class="panel-heading">
+							<h5>Informations personnelles :</h5>
+						</div>
+						<div class="panel-body">
+							<table
+								class="bulletin-header table table-bordred table-striped table-hover table-list-search">
+								<tbody>
+									<tr>
+										<th>Titulaire</th>
+										<td>Thomas Ferrot</td>
+									</tr>
+									<tr>
+										<th>Formation</th>
+										<td>DA2I</td>
+									</tr>
+									<tr>
+										<th>Semestre</th>
+										<td>5</td>
+									</tr>
+									<tr>
+										<th>Année</th>
+										<td>2015-2016</td>
+									</tr>
+									<tr>
+										<th>Rang</th>
+										<td>8/19</td>
+									</tr>
+									<tr>
+										<th>Moyenne</th>
+										<td>{{bulletin.avg}}/20</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-12 col-xs-12">
+					<ul class="bulletin list-group">
+						<ul class="bulletin list-group">
+							<li class="list-group-item active"> Bulletin
+							 <span class="badge badge-mark">note</span> 
+							 <span class="badge badge-coeff">coefficient</span>
+							</li>
+							<ul class="list-group ue" ng-repeat="ue in bulletin.ues">
+								<li class="list-group-item active"> UE {{ue.name}}
+								 <span class="badge badge-mark">{{ue.avg | limitTo:4}}</span> 
+								 <span class="badge badge-coeff">{{ue.coeff}}</span>
+								</li>
+								<ul class="list-group subject" ng-repeat="subject in ue.subjects">
+									<li class="list-group-item" data-toggle="collapse"
+										data-target="#{{subject.name | nospace}}">{{subject.name}} 
+										<i class="glyphicon glyphicon-menu-down"></i> 
+										 <span class="badge badge-mark">{{subject.avg | limitTo:4}}</span> 
+										 <span class="badge badge-coeff">{{subject.coeff}}</span>									</li>
+									<ul id="{{subject.name | nospace}}" class="list-group collapse marks">
+										<li ng-repeat="mark in subject.marks" class="list-group-item">DS1
+											<span class="badge badge-mark">{{mark.mark | limitTo:4}}</span>
+											<span class="badge badge-coeff">{{mark.coeffEval}}</span>
+										</li>
+									</ul>
+								</ul>
+							</ul>
+						</ul>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>

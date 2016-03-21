@@ -1,0 +1,55 @@
+body{
+  overflow-x: hidden;
+}
+
+.col-without-padding{
+  padding-left: 0!important;
+  padding-right: 0!important;
+}
+
+.panel-body{
+  padding: 0!important;
+}
+
+.panel-ue{
+	margin-bottom:0!important;
+}
+
+
+.table{
+  margin: 0!important;
+  table-layout: fixed!important;
+  word-wrap: break-word!important;
+}
+
+h3.logo{
+	margin:0!important;
+	color:black!important;
+}
+
+.login .panel .panel-body{
+	padding:15px!important;
+}
+
+.panel-login{
+	margin-top:40%!important;
+}
+
+.breadcrumb{
+	margin-top:10px!important;
+}
+.undo-edit{
+	margin-left:5px;
+}
+
+.mark-buttons{
+    white-space: nowrap;
+}
+
+.form-header-addEval{
+	vertical-align:middle!important;
+}
+
+.label-table{
+	    padding: 10px!important;
+}

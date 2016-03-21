@@ -1,0 +1,21 @@
+{
+	 "title":"Gestion des stages",
+	 "buttons":[
+     {
+       "name":"Ajouter une offre de stage",
+       "href":"#/stages/ajouter/offre"
+     },
+     {
+       "name":"Ajouter une entreprise",
+       "href":"#/stages/ajouter/entreprise"
+     },
+     {
+       "name":"Suivi des stages",
+       "href":"#/stages/suivi/etudiant"
+     },
+     {
+       "name":"Liste des offres",
+       "href":"#/stages"
+     }
+    ]
+ }
