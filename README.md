@@ -494,11 +494,15 @@ Si la requête n'a pas échouée, l'application place le token dans le *localSto
 
 Il est ensuite possible, grâce à l'**authentication-factory**, de vérifier si l'utilisateur est connecté, retourner ses rôles ou encore de le déconnecter.
 
-Enfin, l'application redirige l'utilisateur selon le résultat de la requête et informe l'utilisateur de toute erreur dans le processus d'authentification.
+**access-factory** est le service qui vérifie le status de connexion du visiteur.Lié avec **route.js**, il permet de sécuriser les pages en fonction des roles de chacun.
+
+Enfin, par l'utilisation du module **$rootscope** présent dans le fichier **app.js**, l'application redirige l'utilisateur selon le résultat de la requête et informe l'utilisateur de toute erreur dans le processus d'authentification.
+
 
 ### Gestion des notes
 
-TODO : Description utilisation Angular pour liaison modèle
+Pour lier, le back-end avec le front-end, l'utilisation de contrôleurs dédiés à une url ou à une directive précise a été faite.
+Le contrôleur a pour rôle d'appeler l'api correspondante à l'aide du module **http** et de sa méthode **Get** pour récupérer les données sous forme de json. Par la suite, nous manipulons ce json à l'aide d'attribut propre à angularjs tels que **ng-repeat** qui permet de boucler sur des tableaux json ou encore **{{expressoin}}** permettant l'affichage des données.
 
 ### Gestion des stages
 
