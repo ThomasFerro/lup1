@@ -50,11 +50,11 @@
 		.when('/stages/suivi/enseignant', {
 			templateUrl: 'templates/pages/stages/suivi/enseignant/index.html',
 			resolve: {
-						access: ["Access", function(Access) { return Access.hasRoles("etudiant"); }],
+						access: ["Access", function(Access) { return Access.hasRoles("responsable_formation"); }],
 			}
 		})
 		.when('/stages/suivi/etudiant', {
-			templateUrl: 'templates/pages/stages/suivi/etudiant/index.html',
+			templateUrl: 'templates/pages/stages/suivi/enseignant/index.html',
 			resolve: {
 						access: ["Access", function(Access) { return Access.hasRoles("responsable_formation"); }],
 			}

@@ -7,7 +7,7 @@
     /*$http.get('models/stages/offres/internship-offers.json').success(function(data) {
       controller.stages = data;
     });*/
-    $http.get('/models/panels/stages/stages-offres.json').success(function(data) {
+    $http.get('/models/stages/stages-offres.json').success(function(data) {
       controller.stages = data;
     });
   }])
