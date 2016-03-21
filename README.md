@@ -506,7 +506,7 @@ Le contrôleur a pour rôle d'appeler l'api correspondante à l'aide du module *
 
 ### Gestion des stages
 
-TODO : Description utilisation Angular pour liaison modèle
+Comme pour la gestion des notes, c'est la librairie AngularJS qui est au coeur du fonctionnement de la partie "Gestion des stages". Ces pages intègrent également la librairie CSS bootstrap notamment pour le rendu visuel. Cette dernière nous a permi de rendre le site facilement responsible, et donc utilisable aisément sur ordinateur comme sur tablette. Par manque de temps, la liaison Modele-Vue n'a pas encore été réalisée.
 
 --------
 
