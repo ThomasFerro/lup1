@@ -28,6 +28,9 @@ import fr.da2i.lup1.resource.formation.AnnualResource;
 import fr.da2i.lup1.security.Authenticated;
 import fr.da2i.lup1.util.DaoProvider;
 
+/**
+ * @author Thomas FERRO
+ */
 @Authenticated
 @PromotionAccess
 public class StudentByFormationResource extends AnnualResource {
@@ -35,63 +38,63 @@ public class StudentByFormationResource extends AnnualResource {
 	private Dao<Member, Integer> daoMember;
 	private Dao<Register, Integer> daoRegister;
 	private Dao<Credential, String> daoCredential;
-	
+
 	public StudentByFormationResource() {
 		daoMember = DaoProvider.getDao(Member.class);
 		daoRegister = DaoProvider.getDao(Register.class);
 		daoCredential = DaoProvider.getDao(Credential.class);
 	}
-	
+
 	/**
 	 * Retourne la liste des étudiants de la promotion
-	 * 
+	 *
 	 * @return	La liste des étudiants de cette promotion ou un code d'erreur <404> si la promotion n'existe pas ou si aucun étudiant n'y est inscrit
 	 *
-	 * @throws	SQLException 
+	 * @throws	SQLException
 	 */
 	@GET
 	@RolesAllowed({ "responsable_formation", "etudiant" })
 	@Produces("application/json")
 	public Response getStudents() throws SQLException {
-		List<Member> students = studentsInPromotion();
-		
+		List<Credential> students = credentialStudents();
+
 		if (students.isEmpty()) {
 			return Response.status(Status.NOT_FOUND).build();
 		}
-		
+
 		return Response.ok(students).build();
 	}
-	
+
 	/**
 	 * Retourne les informations de l'étudiant correspondant à l'ID passé en paramètre
-	 * 
+	 *
 	 * @param	studentId
 	 * 				L'ID de l'étudiant à rechercher
-	 * 
+	 *
 	 * @return	Les informations de cet étudiant ou un code d'erreur <404> si il n'existe pas ou n'est pas étudiant dans cette promotion
-	 * 
-	 * @throws	SQLException 
+	 *
+	 * @throws	SQLException
 	 */
 	@GET
 	@RolesAllowed({ "responsable_formation", "etudiant" })
 	@Produces("application/json")
 	@Path("{studentId: [0-9]+}")
 	public Response getStudent(@PathParam("studentId") int studentId) throws SQLException {
-		Member student = studentInPromotion(studentId);
-		
+		Credential student = credentialStudent(studentId);
+
 		if (student == null) {
-			return Response.status(Status.NOT_FOUND).build(); 
+			return Response.status(Status.NOT_FOUND).build();
 		}
-		
+
 		return Response.ok(student).build();
 	}
-	
+
 	/**
 	 * Remplace les informations de l'étudiant correspondant à l'ID passé en paramètre dans cette promotion ou l'y ajouter si il n'existe pas
-	 * 
+	 *
 	 * @param	studentId
 	 * 				L'ID de l'étudiant à modifier / ajouter à la promotion
-	 * 
+	 *
 	 * @return	Le code de retour correspondant au résultat de la requête
 	 */
 	@PUT
@@ -100,88 +103,88 @@ public class StudentByFormationResource extends AnnualResource {
 	public Response putStudent(@PathParam("studentId") int studentId) {
 		return Response.status(Status.NOT_IMPLEMENTED).build();
 	}
-	
+
 	/**
 	 * Ajoute un étudiant à la promotion actuelle
-	 * 
+	 *
 	 * @param	student
 	 * 				L'étudiant à ajouter
-	 * 
+	 *
 	 * @return	Le code de retour correspondant au résultat de la requête d'ajout à la promotion
-	 * 
-	 * @throws	SQLException 
+	 *
+	 * @throws	SQLException
 	 */
 	@POST
 	@RolesAllowed("responsable_formation")
 	public Response postStudent(Member student) throws SQLException {
-		
+
 		if (student(student.getId()) == null) {
-			return Response.status(Status.NOT_FOUND).build(); 
+			return Response.status(Status.NOT_FOUND).build();
 		}
 		if (studentInPromotion(student.getId()) != null) {
-			return Response.status(Status.CONFLICT).build(); 
+			return Response.status(Status.CONFLICT).build();
 		}
-		
+
 		Register r = new Register(student, new Formation(formationId, ""), annee);
-		
+
 		daoRegister.create(r);
-		
+
 		URI uri = uriInfo.getAbsolutePathBuilder().path(String.valueOf(student.getId())).build();
-		
+
 		return Response.created(uri).build();
 	}
-	
+
 	/**
 	 * Retire tous les étudiants de cette promotion
-	 * 
+	 *
 	 * @return	Le code de retour des suppressions
-	 * 
-	 * @throws	SQLException 
+	 *
+	 * @throws	SQLException
 	 */
 	@DELETE
 	@RolesAllowed("responsable_formation")
 	public Response deleteStudents() throws SQLException {
 		List<Register> registers = daoRegister.queryBuilder().where().eq("formation_id", formationId).and().eq("year", annee).query();
-		
+
 		if (registers.isEmpty()) {
-			return Response.status(Status.NOT_FOUND).build(); 
+			return Response.status(Status.NOT_FOUND).build();
 		}
-		
+
 		DeleteBuilder<Register, Integer> delete = daoRegister.deleteBuilder();
 		delete.where().eq("formation_id", formationId).and().eq("year", annee);
 		delete.delete();
-		
-		
+
+
 		return Response.status(Status.NO_CONTENT).build();
 	}
-	
+
 	/**
 	 * Retire un étudiant de la promotion
-	 * 
+	 *
 	 * @param	studentId
 	 * 				L'ID de l'étudiant à retirer
-	 * 
+	 *
 	 * @return	Le code de retour de la suppression
-	 * 
-	 * @throws	SQLException 
+	 *
+	 * @throws	SQLException
 	 */
 	@DELETE
 	@RolesAllowed("responsable_formation")
 	@Path("{studentId: [0-9]+}")
 	public Response deleteStudent(@PathParam("studentId") int studentId) throws SQLException {
 		List<Register> registers = daoRegister.queryBuilder().where().eq("formation_id", formationId).and().eq("year", annee).query();
-		
+
 		if (registers.isEmpty()) {
-			return Response.status(Status.NOT_FOUND).build(); 
+			return Response.status(Status.NOT_FOUND).build();
 		}
-		
+
 		DeleteBuilder<Register, Integer> delete = daoRegister.deleteBuilder();
 		delete.where().eq("formation_id", formationId).and().eq("year", annee).and().eq("student_id", studentId);
 		delete.delete();
-		
+
 		return Response.status(Status.NO_CONTENT).build();
 	}
-	
+
 	private List<Member> studentsInPromotion() throws SQLException {
 		List<Credential> creds = daoCredential.queryForAll();
 		List<Member> m = new ArrayList<Member>();
@@ -196,7 +199,7 @@ public class StudentByFormationResource extends AnnualResource {
 		}
 		return m;
 	}
-	
+
 	private Member studentInPromotion(int id) throws SQLException {
 		List<Credential> creds = daoCredential.queryBuilder().where().eq("member_id", id).query();
 		List<Register> r = null;
@@ -210,12 +213,43 @@ public class StudentByFormationResource extends AnnualResource {
 		}
 		return null;
 	}
-	
+
 	private Member student(int id) throws SQLException {
 		List<Credential> creds = daoCredential.queryBuilder().where().eq("member_id", id).query();
 		for (Credential c : creds) {
 			if (c.getRoles().contains("etudiant")) {
 				return c.getMember();
+			}
+		}
+		return null;
+	}
+
+	private List<Credential> credentialStudents() throws SQLException {
+		List<Credential> creds = daoCredential.queryForAll();
+		List<Credential> m = new ArrayList<>();
+		List<Register> r = null;
+		for (Credential c : creds) {
+			if (c.getRoles().contains("etudiant")) {
+				r = daoRegister.queryBuilder().where().eq("student_id", c.getMember().getId()).and().eq("formation_id", formationId).and().eq("year", annee).query();
+				if (!r.isEmpty()) {
+					c.setPassword("");
+					m.add(c);
+				}
+			}
+		}
+		return m;
+	}
+
+	private Credential credentialStudent(int id) throws SQLException {
+		List<Credential> creds = daoCredential.queryBuilder().where().eq("member_id", id).query();
+		List<Register> r = null;
+		for (Credential c : creds) {
+			if (c.getRoles().contains("etudiant")) {
+				r = daoRegister.queryBuilder().where().eq("student_id", c.getMember().getId()).and().eq("formation_id", formationId).and().eq("year", annee).query();
+				if (! r.isEmpty()) {
+					c.setPassword("");
+					return c;
+				}
 			}
 		}
 		return null;

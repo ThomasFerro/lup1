@@ -25,6 +25,9 @@ import fr.da2i.lup1.security.Authenticated;
 import fr.da2i.lup1.util.DaoProvider;
 import fr.da2i.lup1.util.SimpleResource;
 
+/**
+ * @author Thomas FERRO
+ */
 @Path("etudiants")
 @Authenticated
 public class StudentResource extends SimpleResource {
@@ -32,7 +35,7 @@ public class StudentResource extends SimpleResource {
 	private Dao<Member, Integer> dao;
 	private Dao<Credential, String> daoCredential;
 	private Dao<Role, String> daoRole;
-	
+
 	/**
 	 * Initialise le DAO en utilisant le provider
 	 */
@@ -41,13 +44,13 @@ public class StudentResource extends SimpleResource {
 		daoCredential = DaoProvider.getDao(Credential.class);
 		daoRole = DaoProvider.getDao(Role.class);
 	}
-	
+
 	/**
 	 * Retourne la liste des étudiants
-	 * 
+	 *
 	 * @return	La liste des étudiants de la base
-	 * 
-	 * @throws	SQLException 
+	 *
+	 * @throws	SQLException
 	 */
 	@GET
 	@Produces("application/json")
@@ -59,16 +62,16 @@ public class StudentResource extends SimpleResource {
 		}
 		return Response.ok(students).build();
 	}
-	
+
 	/**
 	 * Retourne les informations d'un étudiant
-	 * 
+	 *
 	 * @param	studentId
 	 * 				L'ID de l'étudiant à rechercher
-	 * 
+	 *
 	 * @return	Les informations de l'étudiant ou un code <404> si il n'existe pas
-	 * 
-	 * @throws	SQLException 
+	 *
+	 * @throws	SQLException
 	 */
 	@GET
 	@Produces("application/json")
@@ -81,19 +84,19 @@ public class StudentResource extends SimpleResource {
 		}
 		return Response.ok(m).build();
 	}
-	
+
 	/**
 	 * Remplace les informations d'un étudiant ou l'ajoute si il n'existe pas
-	 * 
+	 *
 	 * @param	studentId
 	 * 				L'ID de l'étudiant à modifier ou ajouter
-	 * 
+	 *
 	 * @param	student
 	 * 				Les informations sur l'étudiant, mappé sur l'objet Member
-	 * 
+	 *
 	 * @return	Le code de retour de la modification ou de l'ajout à la base
-	 * 
-	 * @throws	SQLException 
+	 *
+	 * @throws	SQLException
 	 */
 	@PUT
 	@Path("{studentId: [0-9]+}")
@@ -112,63 +115,63 @@ public class StudentResource extends SimpleResource {
 			return addStudent(student, false);
 		}
 	}
-	
+
 	/**
 	 * Créer un nouvel étudiant
-	 * 
+	 *
 	 * @param	student
 	 * 				L'étudiant à créer
-	 * 
+	 *
 	 * @return	Le code de retour de l'ajout à la base
-	 * 
-	 * @throws	SQLException 
+	 *
+	 * @throws	SQLException
 	 */
 	@POST
 	@RolesAllowed({ "responsable_formation", "responsable_stage", "etudiant" })
 	public Response postStudent(Member student) throws SQLException {
 		return addStudent(student, true);
 	}
-	
+
 	private Response addStudent(Member student, boolean post) throws SQLException {
 		if (Strings.isNullOrEmpty(student.getLastName()) || Strings.isNullOrEmpty(student.getFirstName())) {
 			return Response.status(Status.BAD_REQUEST).build();
 		}
-		
+
 		String login;
-		
+
 		if (student.getLastName().length() < 7) {
-			login = student.getLastName().substring(0, student.getLastName().length()).toLowerCase() + student.getFirstName().substring(0, 1).toLowerCase();	
+			login = student.getLastName().substring(0, student.getLastName().length()).toLowerCase() + student.getFirstName().substring(0, 1).toLowerCase();
 		}
 		else {
-			login = student.getLastName().substring(0, 7).toLowerCase() + student.getFirstName().substring(0, 1).toLowerCase();			
+			login = student.getLastName().substring(0, 7).toLowerCase() + student.getFirstName().substring(0, 1).toLowerCase();
 		}
-		
+
 		List<Role> r = daoRole.queryBuilder().where().eq("login", login).and().eq("role", "etudiant").query();
-		
+
 		if (!r.isEmpty() || daoCredential.idExists(login)) {
 			return Response.status(Status.CONFLICT).build();
 		}
-		
+
 		dao.create(student);
-		
+
 		Credential cred = new Credential(login, login, student);
 		daoCredential.createIfNotExists(cred);
-		
+
 		Role role = new Role(cred, "etudiant");
 		daoRole.create(role);
-		
+
 		URI uri;
-		
+
 		if (post) {
 			uri = uriInfo.getAbsolutePathBuilder().path(String.valueOf(student.getId())).build();
 		}
 		else {
 			uri = uriInfo.getAbsolutePathBuilder().build();
 		}
-		
+
 		return Response.created(uri).build();
 	}
-	
+
 	private List<Member> students() throws SQLException {
 		List<Credential> creds = daoCredential.queryForAll();
 		List<Member> m = new ArrayList<Member>();
@@ -179,7 +182,7 @@ public class StudentResource extends SimpleResource {
 		}
 		return m;
 	}
-	
+
 	private Member student(int id) throws SQLException {
 		List<Credential> creds = daoCredential.queryBuilder().where().eq("member_id", id).query();
 		for (Credential c : creds) {

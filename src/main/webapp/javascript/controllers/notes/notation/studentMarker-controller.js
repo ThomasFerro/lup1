@@ -6,7 +6,6 @@
 		controller.annee = $routeParams.annee;
 		studentFactory.getByPromotion(controller.formation,controller.annee).then(function(data) {
 			controller.students = data;
-			console.log(controller.students);
 		});
 	}]);
 })();

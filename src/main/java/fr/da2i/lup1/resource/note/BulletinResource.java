@@ -5,15 +5,15 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * lup1 is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.				 
- * 
+ * GNU General Public License for more details.
+ *
  * You should have received a copy of the GNU General Public License
  * along with lup1.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
 package fr.da2i.lup1.resource.note;
@@ -21,6 +21,7 @@ package fr.da2i.lup1.resource.note;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.ForbiddenException;
@@ -49,22 +50,22 @@ import fr.da2i.lup1.util.DaoProvider;
 @SemesterAccess
 @Authenticated
 public class BulletinResource extends AnnualResource {
-	
+
 	private Dao<Promotion, Integer> promoDao;
 	private Dao<Credential, String> credentialDao;
 	private Dao<Mark, Integer> markDao;
 	private Dao<Register, Integer> registerDao;
-	
+
 	@PathParam("semestre")
 	private int semester;
-	
+
 	public BulletinResource() {
 		this.promoDao = DaoProvider.getDao(Promotion.class);
 		this.markDao = DaoProvider.getDao(Mark.class);
 		this.registerDao = DaoProvider.getDao(Register.class);
 		this.credentialDao = DaoProvider.getDao(Credential.class);
 	}
-	
+
 	private Bulletin getBulletin(Member student, Integer semester) throws SQLException {
 		Bulletin bulletin = new Bulletin();
 		List<Mark> marks = findFromPromotion(markDao.queryBuilder()).and().eq("student_id", student.getId()).and().eq("semester", semester).query();
@@ -74,7 +75,7 @@ public class BulletinResource extends AnnualResource {
 		bulletin.setStudent(student);
 		return bulletin;
 	}
-	
+
 	@GET
 	@Produces("application/json")
 	@RolesAllowed("responsable_formation")
@@ -92,7 +93,7 @@ public class BulletinResource extends AnnualResource {
 			return Response.ok(bulletins).build();
 		}
 	}
-	
+
 	@GET
 	@Path("{user}")
 	@Produces("application/json")
@@ -113,7 +114,7 @@ public class BulletinResource extends AnnualResource {
 			if (findFromPromotion(registerDao.queryBuilder()).and().eq("student_id", student.getId()).countOf() == 0) {
 				throw new ForbiddenException();
 			}
-			return Response.ok(getBulletin(student, semester)).build();
+			return Response.ok(Arrays.asList(getBulletin(student, semester))).build();
 		}
 		throw new ForbiddenException();
 	}

@@ -7,7 +7,12 @@
 			controller:'AuthenticationController',
 			controllerAs: 'authCtrl',
 			link: function(scope, element, attrs) {
-		        angular.element(document).ready(function() {
+				angular.element(document).ready(function() {
+					var height = $(window).height();
+					element.children(".left-menu").css('height', height);
+				});
+
+				$(window).resize(function(){
 					var height = $(window).height();
 					element.children(".left-menu").css('height', height);
 				});

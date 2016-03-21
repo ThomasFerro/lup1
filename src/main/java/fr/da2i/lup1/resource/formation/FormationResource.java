@@ -17,6 +17,7 @@ import com.j256.ormlite.dao.Dao;
 
 import fr.da2i.lup1.entity.formation.Formation;
 import fr.da2i.lup1.entity.formation.Promotion;
+import fr.da2i.lup1.entity.formation.Register;
 import fr.da2i.lup1.security.Authenticated;
 import fr.da2i.lup1.util.DaoProvider;
 import fr.da2i.lup1.util.SimpleResource;
@@ -24,28 +25,31 @@ import fr.da2i.lup1.util.SimpleResource;
 @Path("formations")
 @Authenticated
 public class FormationResource extends SimpleResource {
-	
+
 	private Dao<Formation, Integer> formationDao;
 	private Dao<Promotion, Integer> promoDao;
-	
+	private Dao<Register, Integer> registerDao;
+
 	public FormationResource() {
-		formationDao = DaoProvider.getDao(Formation.class);
-		promoDao = DaoProvider.getDao(Promotion.class);
+		this.formationDao = DaoProvider.getDao(Formation.class);
+		this.promoDao = DaoProvider.getDao(Promotion.class);
+		this.registerDao = DaoProvider.getDao(Register.class);
 	}
-	
+
 	@GET
 	@Produces("application/json")
 	@RolesAllowed("admin")
 	public Response list() throws SQLException {
 		return Response.ok(formationDao.queryForAll()).build();
 	}
-	
+
 	@GET
 	@Path("{formationId: [0-9]+}")
 	@Produces("application/json")
-	@RolesAllowed("responsable_formation")
+	@RolesAllowed({ "responsable_formation", "etudiant" })
 	public Response get(@PathParam("formationId") Integer formationId) throws SQLException {
-		if (promoDao.queryBuilder().where().eq("formation_id", formationId).and().eq("responsable_id", getMemberId()).countOf() == 0) {
+		if (promoDao.queryBuilder().where().eq("formation_id", formationId).and().eq("responsable_id", getMemberId()).countOf() == 0
+					&& registerDao.queryBuilder().where().eq("formation_id", formationId).and().eq("student_id", getMemberId()).countOf() == 0) {
 			throw new ForbiddenException();
 		}
 		if (formationDao.idExists(formationId)) {
@@ -53,7 +57,7 @@ public class FormationResource extends SimpleResource {
 		}
 		throw new NotFoundException();
 	}
-	
+
 	@Path("{formationId: [0-9]+}/annees/{annee: [0-9]{4}-[0-9]{4}}")
 	public Resource getPromotionResource() {
 		return Resource.from(PromotionResource.class);

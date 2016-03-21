@@ -26,11 +26,11 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>Thomas Ferrot</td>
-										<td>DA2I</td>
-										<td>5</td>
-										<td>2015-2016</td>
-										<td>8/19</td>
+										<td>{{bulletin.student.firstName +" "+ bulletin.student.lastName}}</td>
+										<td>{{bulletinCtrl.formation.name}}</td>
+										<td>{{bulletinCtrl.semestre}}</td>
+										<td>{{bulletinCtrl.annee}}</td>
+										<td>?/19</td>
 										<td>{{bulletin.avg | limitTo:4}}/20</td>
 									</tr>
 								</tbody>
@@ -47,23 +47,23 @@
 								<tbody>
 									<tr>
 										<th>Titulaire</th>
-										<td>Thomas Ferrot</td>
+										<td>{{bulletin.student.firstName}}</td>
 									</tr>
 									<tr>
 										<th>Formation</th>
-										<td>DA2I</td>
+										<td>{{bulletinCtrl.formation.name}}</td>
 									</tr>
 									<tr>
 										<th>Semestre</th>
-										<td>5</td>
+										<td>{{bulletinCtrl.semestre}}</td>
 									</tr>
 									<tr>
 										<th>Année</th>
-										<td>2015-2016</td>
+										<td>{{bulletinCtrl.annee}}</td>
 									</tr>
 									<tr>
 										<th>Rang</th>
-										<td>8/19</td>
+										<td>?/19</td>
 									</tr>
 									<tr>
 										<th>Moyenne</th>

@@ -5,15 +5,15 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * lup1 is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.				 
- * 
+ * GNU General Public License for more details.
+ *
  * You should have received a copy of the GNU General Public License
  * along with lup1.  If not, see <http://www.gnu.org/licenses/>.
- * 
+ *
  * @author Edouard CATTEZ <edouard.cattez@sfr.fr> (La 7 Production)
  */
 package fr.da2i.lup1.entity.security;
@@ -44,20 +44,20 @@ public class Credential extends Identifiable<String> implements Principal {
 	private Member member;
 	@ForeignCollectionField @JsonIgnore
 	private ForeignCollection<Role> roles;
-	
+
 	public Credential(String login, String password, Member member) {
 		this.login = login;
 		this.password = password;
 		this.member = member;
 	}
-	
+
 	public Credential() {}
-	
+
 	@Override
 	public String getName() {
 		return getId();
 	}
-	
+
 	@Override
 	public String getId() {
 		return Strings.nullToEmpty(login);
@@ -83,15 +83,15 @@ public class Credential extends Identifiable<String> implements Principal {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public Member getMember() {
 		return member;
 	}
-	
+
 	public void setMember(Member member) {
 		this.member = member;
 	}
-	
+
 	public List<String> getRoles() {
 		List<String> roleNames = new ArrayList<>();
 		if (roles != null) {
@@ -107,5 +107,5 @@ public class Credential extends Identifiable<String> implements Principal {
 	public String toString() {
 		return "Credential [login=" + getLogin() + ", member=" + getMember() + ", roles=" + getRoles() + "]";
 	}
-	
+
 }

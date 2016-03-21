@@ -2,10 +2,6 @@
   <panel-menu></panel-menu>
 </div>
 <div class="col-lg-9 col-xs-12 col-sm-12 col-md-8">
-	<ol class="breadcrumb">
-	  <li><a href="#/home">Home</a></li>
-	  <li class="active"><a href="#/formations">formations</a></li>
-	</ol>
   <h3>Formations : </h3>
   <div class="col-lg-12 col-xs-12 col-without-padding">
     <div class="panel panel-default" ng-repeat="formation in formationsCtrl.formations">
@@ -34,8 +30,8 @@
               <td>{{promotion.responsable.firstName}}</td>
               <td>{{promotion.year}}</td>
               <td>
-              	<a ng-href="#/notes/formations/{{formation.id}}/annees/{{promotion.annee}}/semestres/5/" class="btn btn-success btn-sm">S5</a>
-              	<a ng-href="#/notes/formations/{{formation.id}}/annees/{{promotion.annee}}/semestres/6/" class="btn btn-success btn-sm">S6</a>
+              	<a ng-href="#/notes/formations/{{formation.id}}/annees/{{promotion.year}}/semestres/5/" class="btn btn-success btn-sm">S5</a>
+              	<a ng-href="#/notes/formations/{{formation.id}}/annees/{{promotion.year}}/semestres/6/" class="btn btn-success btn-sm">S6</a>
               </td>
               <td><a class="btn btn-warning btn-sm editButton"><span class="glyphicon glyphicon glyphicon-pencil"></span></a></td>
               <td><a class="btn btn-danger btn-sm deleteButton"><span class="glyphicon glyphicon-trash"></span></a></td>
