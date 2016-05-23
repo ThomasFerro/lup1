@@ -112,7 +112,7 @@ Vous pouvez lancer ces scripts de plusieurs façons :
 
 ### Démarrage du serveur
 
-Afin de faciliter au mieux l'installation, nous avons fait le choix d'utiliser Maven. Son rôle est tout d'abord de gérer les dépendances des différentes librairies utilisée dans l'application. Dans un second temps, il permet de déployer toute l'application dans un serveur embarqué Jetty.
+Afin de faciliter au mieux l'installation, nous avons fait le choix d'utiliser Maven. Son rôle est tout d'abord de gérer les dépendances des différentes tlibrairies utilisée dans l'application. Dans un second temps, il permet de déployer toute l'application dans un serveur embarqué Jetty.
 
 Assurez-vous toutefois que le proxy soit correctement défini dans le fichier ~/.m2/settings. Dans le cas contraire, les dépendances ne pourront être téléchargées.
 
@@ -185,7 +185,7 @@ L'application redirige toute personne non authentifié sur la page de login.
 
 Cette dernière est on ne peut plus simple, composée d'un champ *login* et un autre pour le *mot de passe*. Cette authentication se fait par la base de données mais pourra utiliser, à terme, un serveur LDAP.
 
-TODO : Screens.
+![alt tag](https://raw.githubusercontent.com/ThomasFerro/lup1/master/img/authentification.jpg)
 
 Une fois authentifié dans l'application, vous aurez accès à différentes parties de cette dernière selon votre rôle.
 
@@ -197,11 +197,11 @@ Un responsable de cours, quant à lui, peut simplement gérer les évaluations e
 
 ### Gestion des notes
 
-TODO : Ajout d'un screen de la page d'accueil de la gestion des notes pour responsable
+![alt tag](https://raw.githubusercontent.com/ThomasFerro/lup1/master/img/gestion_note_accueil_resp.jpg)
 
 #### Consultation des notes des étudiants
 
-TODO : Screen
+![alt-tag](https://raw.githubusercontent.com/ThomasFerro/lup1/master/img/gestion_note_accueil_etu.jpg)
 
 La page de consultation des notes propose aux responsables une synthèse de toutes les évaluations, rangées par matière pour les responsables de formation. La consultation d'une de ces évaluations emmène l'utilisateur sur une nouvelle page de synthèse, cette fois-ci avec les notes des étudiants concernés.
 
@@ -209,25 +209,21 @@ Le responsable peut alors modifier les notes comme bon lui semble, mais aussi mo
 
 #### Ajout d'un UE / d'une matière / d'une évaluation
 
-TODO : Screen
-
 L'ajout d'UEs ou de matières est réservée aux responsables de formation. Il peut y créer ses UEs, y affecter des matières déjà présentes dans la base ou en ajouter des nouvelles, choisir les coefficients et y affecter un responsable.
 
 L'ajout d'une évaluation est assez similaire. Le responsable, de cours comme de formation, peut ajouter une évaluation avec ses informations de base puis y ajouter les notes des étudiants concernés par cette dernière.
 
 #### Ajout de notes
 
-TODO : Screen
+![alt-tag](https://raw.githubusercontent.com/ThomasFerro/lup1/master/img/gestion_note_eval_resp.jpg)
 
 L'ajout de note peut donc aussi se faire après la création de l'évaluation. Le responsable peut obtenir la liste des étudiants ayant réalisés l'évaluation et simplement leur attribuer leur note.
 
 ### Gestion des stages
 
-TODO : Ajout d'un screen de la page d'accueil de la gestion des stages pour responsable
-
 #### Ajout d'une offre
 
-TODO : Screen
+![alt-tag](https://raw.githubusercontent.com/ThomasFerro/lup1/master/img/gestion_stage_ajout_offre_infos.jpg)
 
 Seul le responsable de formation a accès à cette page qui permet de soumettre une offre de stage.
 
@@ -237,13 +233,13 @@ Après le choix de l'entreprise, le responsable n'a plus qu'à indiquer les info
 
 #### Consultation des offres
 
-TODO : Screen
+![alt-tag](https://raw.githubusercontent.com/ThomasFerro/lup1/master/img/gestion_stage_ajout_offre_infos.jpg)
 
 Le responsable peut à tout moment consulter les offres en ligne et les administrer comme bon lui semble. Il peut en effet en modifier les informations ou les supprimer.
 
 #### Consultation des inscriptions aux offres de stage d'un étudiant
 
-TODO : Screen
+![alt-tag](https://raw.githubusercontent.com/ThomasFerro/lup1/master/img/gestion_stage_offres.jpg)
 
 Les logs des étudiants concernants les offres de stage peuvent être consultées simplement par le responsable de formation. Ce dernier peut donc, après avoir choisi l'étudiant en question, vérifier l'état d'avancement de sa recherche de stage grâce à la journalisation datée des entrées dans la base.
 
@@ -253,11 +249,11 @@ Les étudiants ont assez peu de droits dans l'application, principalement car le
 
 ### Gestion des notes
 
-TODO : Ajout d'un screen de la page d'accueil de la gestion des notes pour étudiant
-
 #### Consultation des notes et du bulletin
 
-TODO : Screen
+![alt-tag](https://raw.githubusercontent.com/ThomasFerro/lup1/master/img/gestion_stage_suivi_resp.jpg)
+
+![alt-tag](https://raw.githubusercontent.com/ThomasFerro/lup1/master/img/gestion_stage_suivi_etat.jpg)
 
 Un étudiant souhaitant accéder à ses notes sera redirigé vers une synthèse de ses notes, rangées par matières et UEs, sous la forme d'un bulletin.
 
@@ -266,11 +262,7 @@ Il pourra filtrer ces données afin de trouver au plus vite la note qui l'intér
 
 ### Gestion des stages
 
-TODO : Ajout d'un screen de la page d'accueil de la gestion des stages pour étudiant
-
 #### Consultation des offres
-
-TODO : Screen
 
 La page de consultation des offres de stage se veut très sobre et efficace. Elle est présentée sous la forme d'un tableau d'affichage des différentes offres, toutes sous le même format.
 
@@ -278,7 +270,7 @@ L'étudiant peut, sur cette page, voir toutes les offres qui sont proposées à 
 
 #### Consultation des inscriptions aux offres de stage
 
-TODO : Screen
+![alt-tag](https://raw.githubusercontent.com/ThomasFerro/lup1/master/img/gestion_stage_suivi_etat.jpg)
 
 Une fois inscrit à une offre de stage, l'étudiant peut accéder à la page contenant toutes les modifications d'état concernant cette offre.
 
@@ -294,15 +286,15 @@ Vous trouverez des détails sur la conception de cette dernière et en apprendre
 
 ## Présentation de l'architecture de l'application
 
-TODO : Image architecture + explications
+![alt-tag](https://raw.githubusercontent.com/ThomasFerro/lup1/master/img/Sch%C3%A9ma_Architecture.png)
 
 ## Présentation de la base de données
 
-TODO : Screen MCD + MPD
+![alt-tag](https://raw.githubusercontent.com/ThomasFerro/lup1/master/img/MCD.jpg)
+
+![alt-tag](https://raw.githubusercontent.com/ThomasFerro/lup1/master/img/MPD.jpg)
 
 ## Technologies utilisées
-
-TODO : Tableau des technos comme pour le QuoiDNeuf
 
 | **Technologie** | **Raison de son utilisation** | **Dans quelle partie du projet** |
 | :---: | :---: | :---: |
