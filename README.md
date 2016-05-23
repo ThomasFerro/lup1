@@ -521,3 +521,18 @@ Cette décomposition nous a aussi donné l'occasion de répartir efficacement le
 --------
 
 # Conclusion
+
+Pour conclure, on peut dire que ce projet est bien plus vaste qu’il n’y parait.
+Nous avons eu l’occasion d’utiliser de nombreuses technologies, certaines nouvelles comme
+AngularJS et d’autres plus anciennes.
+
+Il reste cependant des points à revoir. D’un point de vue gestion de projet, la séparation en deux
+groupes nous a plus handicapé qu’aidé. En effet, il aurait été préférable de se concentrer sur la gestion
+des notes avant de se lancer tous ensemble dans la gestion des stages. Cela nous aurait permis de finir
+dans les temps malgré les nombreuses maladies au sein du groupe.
+Notre travail pourrait aisément servir pour un prochain groupe qui voudrait prendre notre suite. La
+documentation pourrait en effet permettre de reprendre facilement là où nous étions avec une base
+solide et des vues presque fonctionnelles.
+
+En quelques mots, nous avons appris de nombreuses choses lors de ce projet, certaines par l’échec,
+malheureusement.
