@@ -1,0 +1,87 @@
+[
+  {
+    "title":"Gestion des matieres",
+    "buttons":[
+      {
+        "name":"Ajouter une matières",
+        "href":"#"
+      }
+    ],
+    "filters":[
+      {
+        "label":"Nom",
+        "name":"subject",
+        "type":"text",
+        "id":"name-subject",
+        "placeholder":"Nom de la matière"
+      },
+      {
+        "label":"UE",
+        "name":"ue",
+        "type":"text",
+        "id":"ue-subject",
+        "placeholder":"UE de la matière"
+      },
+      {
+        "label":"Semestre",
+        "name":"semester",
+        "type":"text",
+        "id":"semester-subject",
+        "placeholder":"Semestre de la matière"
+      },
+      {
+        "label":"Coeff",
+        "name":"coeff",
+        "type":"text",
+        "id":"coeff-subject",
+        "placeholder":"Coeff de la matière"
+      },
+      {
+        "label":"Responsable",
+        "name":"manager",
+        "type":"text",
+        "id":"manager-subject",
+        "placeholder":"Responsable de la matière"
+      }
+    ]
+  },
+  {
+    "title":"Gestion des évaluations",
+    "buttons":[
+      {
+        "name":"Ajouter une évaluation",
+        "href":"#"
+      }
+    ],
+    "filters":[
+      {
+        "label":"Nom",
+        "name":"subject",
+        "type":"text",
+        "id":"name-subject",
+        "placeholder":"Nom de la matière"
+      },
+      {
+        "label":"UE",
+        "name":"ue",
+        "type":"text",
+        "id":"ue-subject",
+        "placeholder":"UE de la matière"
+      },
+      {
+        "label":"Coeff",
+        "name":"coeff",
+        "type":"text",
+        "id":"coeff-subject",
+        "placeholder":"Coeff de la matière"
+      },
+      {
+        "label":"Responsable",
+        "name":"manager",
+        "type":"text",
+        "id":"manager-subject",
+        "placeholder":"Responsable de la matière"
+      }
+    ]
+  }
+]

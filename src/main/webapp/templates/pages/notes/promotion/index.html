@@ -1,0 +1,80 @@
+<div class="col-md-4 col-lg-3 hidden-xs hidden-sm col-without-padding panel-filter" ng-controller="PanelMenuController as panelCtrl" ng-init="panelCtrl.selectPanel('notes','promotions')">
+  <panel-menu></panel-menu>
+</div>
+<div class="col-lg-9 col-xs-12 col-sm-12 col-md-8">
+	<h3>{{promotionCtrl.data.formation}} - {{promotionCtrl.data.annee}} : Evaluations du semestre {{promotionCtrl.data.semestre}}</h3>
+		<div class="panel-body">
+			<div class="panel panel-default panel-ue" ng-repeat="ue in promotionCtrl.data.ues">
+				<div class="panel-heading">UE : {{ue.name}}</div>
+				<div class="panel-body">
+					<div class="panel panel-default panel-subject" ng-repeat="subject in ue.subjects">
+						<div class="panel-heading" data-toggle="collapse" data-target="#{{subject.name | nospace | noquote}}">
+							<div class="btn-group pull-right">
+                <ul class="list-inline">
+                  <li><span class="badge badge-default">{{subject.avg}}</span></li>
+                  <li>
+                    <a class="btn btn-default btn-xs" data-toggle="collapse" data-target="#{{subject.name | nospace | noquote}}">
+                      <span class="glyphicon glyphicon-menu-down"></span>
+    								</a>
+                  </li>
+                </ul>
+							</div>
+							{{subject.name}}
+						</div>
+						<div id="{{subject.name | nospace | noquote}}" class="panel-collapse collapse">
+							<div class="panel-body">
+								<table id="mytable"
+									class="table table-bordred table-striped table-hover">
+									<thead>
+										<tr>
+											<th>Nom</th>
+											<th>Créateur</th>
+											<th>Date</th>
+											<th>Coeff</th>
+											<th>Moyenne</th>
+											<th>Noter</th>
+											<th>Editer</th>
+											<th>Sup.</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="evaluation in subject.evaluations">
+											<td>{{evaluation.name}}</td>
+											<td>{{evaluation.createur}}</td>
+											<td>{{evaluation.date}}</td>
+											<td>{{evaluation.coeff}}</td>
+											<td>{{evaluation.avg}}</td>
+											<td><a href="#/notes/formations/{{promotionCtrl.data.id}}/annees/{{promotionCtrl.data.annee}}/semestres/{{promotionCtrl.data.semestre}}/evaluations/{{evaluation.id}}" class="btn btn-success btn-sm editButton">
+													<span class="fa fa-gavel"></span>
+												</a></td>
+											<td><button
+													class="btn btn-warning btn-sm editButton">
+													<span class="glyphicon glyphicon-pencil"></span>
+												</button></td>
+											<td><button
+													class="btn btn-danger btn-sm deleteButton">
+													<span class="glyphicon glyphicon-trash"></span>
+												</button></td>
+										</tr>
+										<tr>
+											<td colspan="2" class="form-header-addEval"><label class="label label-default label-table" for="nameEval">Ajouter une évaluation <span class="fa fa-arrow-right"></span></label></td>
+											<td colspan="2"></td>
+											<td><input type="text"class="form-control" placeholder="Nom" id="nameEval"></td>
+											<td><input type="date"class="form-control" placeholder="Date" id="dateEval"></td>
+											<td><input type="number"class="form-control" placeholder="Coefficient" id="coeffEval"></td>
+											<td>
+												<button class="btn btn-success btn-sm editButton">
+													<span class="fa fa-check-circle-o fa-1x"></span>
+												</button>
+											</td>
+
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+</div>

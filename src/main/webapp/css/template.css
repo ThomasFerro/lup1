@@ -1,0 +1,67 @@
+/*top menu*/
+
+.logo{
+  color:#FF8C00!important;
+}
+
+.log-x, .log-x a{
+  color: white;
+}
+
+.left-menu{
+  background-color: #1e2124;
+}
+/*menu decoration*/
+
+.menu a.home{
+  background: #FF8C00;
+  border-color:black;
+  color:white!important;
+}
+
+.menu a:hover{
+  background-color:#C0C0C0 !important;
+  border:1px solid black;
+}
+
+.menu a.home:hover{
+  background-color:#FF8C00 !important;
+}
+
+.menu a.active{
+  background-color: #008080 !important;
+  border-color:#008080 !important;
+}
+
+/*panel lenu*/
+
+.panel-menu-wrapper{
+  background-color: #444444;
+  color:white;
+}
+
+.panel-menu-body legend{
+  color:white;
+}
+
+/* table buttons */
+
+.btn-success {
+    color: #fff!important;
+    background-color: #038181!important;
+    border-color: #008080!important;
+}
+
+.btn-warning {
+    color: #fff!important;
+    background-color: #FF8C00!important;
+    border-color: #FF8C00!important;
+}
+
+/* login */
+
+.submit_login{
+	color:white!important;
+	background:#FF8C00!important;
+
+}

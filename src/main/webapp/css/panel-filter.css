@@ -1,0 +1,23 @@
+.panel-menu{
+  padding-left: 0!important;
+}
+
+.panel-menu-wrapper h3{
+  margin:0;
+  padding-top: 5px;
+  text-align: center;
+  font-size: 1.2em!important;
+}
+
+.panel-menu-wrapper .panel-menu-header .list-group a{
+  margin: 10px!important;
+}
+
+.panel-menu-body{
+  margin: 10px;
+}
+
+.label-filter{
+  text-align: left!important;
+  min-width: 115px;
+}

@@ -1,0 +1,9 @@
+@media print {
+  .collapse {
+      display: table-row!important;
+  }
+
+  .collapse-button{
+    display:none!important;
+  }
+}
